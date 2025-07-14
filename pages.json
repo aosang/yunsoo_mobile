@@ -32,6 +32,7 @@
 		"borderStyle": "black",
 		"selectedColor": "#2a6fff",
 		"color": "#cdcdcd",
+		"fontSize": 14,
 
 		"list": [{
 			"pagePath": "pages/index/index",

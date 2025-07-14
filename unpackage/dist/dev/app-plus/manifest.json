@@ -104,7 +104,7 @@
       "selectedColor": "#2a6fff",
       "borderStyle": "rgba(0,0,0,0.4)",
       "blurEffect": "none",
-      "fontSize": "10px",
+      "fontSize": 14,
       "iconWidth": "24px",
       "spacing": "3px",
       "height": "50px",
