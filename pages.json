@@ -1,0 +1,53 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "uni-app",
+			"navigationStyle": "custom"
+		}
+	}, {
+		"path": "pages/workorder/workorder",
+		"style": {
+			"navigationBarTitleText": "我的工单",
+			"navigationBarBackgroundColor": "#2a6fff",
+			"navigationBarTextStyle": "#ffffff"
+		}
+	}, {
+		"path": "pages/profile/profile",
+		"style": {
+			"navigationBarTitleText": "个人中心",
+			"navigationBarBackgroundColor": "#2a6fff",
+			"navigationBarTextStyle": "#ffffff"
+		}
+	}],
+	"globalStyle": {
+		"navigationBarTextStyle": "#ffffff",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+
+	"tabBar": {
+		"backgroundColor": "#eeeeee",
+		"borderStyle": "black",
+		"selectedColor": "#2a6fff",
+		"color": "#cdcdcd",
+
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/images/iconimages/statistics.png",
+			"selectedIconPath": "static/images/iconimages/statistics_o.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/workorder/workorder",
+			"iconPath": "static/images/iconimages/workorder.png",
+			"selectedIconPath": "static/images/iconimages/workorder_o.png",
+			"text": "工单"
+		}, {
+			"pagePath": "pages/profile/profile",
+			"iconPath": "static/images/iconimages/user.png",
+			"selectedIconPath": "static/images/iconimages/user_o.png",
+			"text": "我的"
+		}]
+	}
+}
