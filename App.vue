@@ -13,5 +13,13 @@
 </script>
 
 <style>
-  
+@font-face {
+	font-family: 'hongmeng';
+	src: url('./static/fonts/HarmonyOS_Sans.woff2') format('woff2'),
+	url('./static/fonts/HarmonyOS_Sans.woff') format('woff');
+	}
+
+body, html {
+	font-family: hongmeng;
+}
 </style>
