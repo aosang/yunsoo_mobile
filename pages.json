@@ -16,14 +16,13 @@
 		"style": {
 			"navigationBarTitleText": "我的工单",
 			"navigationBarBackgroundColor": "#2a6fff",
-			"navigationBarTextStyle": "#ffffff"
+			"navigationBarTextStyle": "#ffffff",
+			"enablePullDownRefresh": true
 		}
 	}, {
 		"path": "pages/profile/profile",
 		"style": {
-			"navigationBarTitleText": "个人中心",
-			"navigationBarBackgroundColor": "#2a6fff",
-			"navigationBarTextStyle": "#ffffff"
+			"navigationStyle": "custom"
 		}
 	}],
 	"globalStyle": {

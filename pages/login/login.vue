@@ -1,5 +1,6 @@
 <template>
 	<Navigation />
+	<wd-toast />
 	<view class="login">
 		<image src="/static/images/common/system_logo_white.png" mode="widthFix" />
 	</view>
@@ -31,6 +32,9 @@
 	import { reactive, ref } from 'vue';
 	import Navigation from '@/components/navigation_header.vue'
 	
+	import { useToast } from '@/uni_modules/wot-design-uni'
+	const toast = useToast()
+	
 	const loginFormText = reactive({
 		email: '',
 		password: ''
@@ -39,10 +43,14 @@
 	const isError = ref(false)
 	
 	const handleCheckForm = () => {
-		if(!loginFormText.email || !loginFormText.password) {
-			console.log('表单错误')
-		}else {
-			console.log('表单通过')
+		if(!loginFormText.email) {
+			toast.error('请输入正确邮箱')
+		}else if(!loginFormText.password) {
+			toast.error('密码错误')
+		} else {
+			uni.reLaunch({
+				url: '/pages/index/index'
+			})
 		}
 	}
 </script>
@@ -50,7 +58,7 @@
 <style lang="scss">
 	.login {
 		width: 100%;
-		height: 260rpx;
+		// height: 260rpx;
 		background: #2a6fff;
 		display: flex;
 		align-items: center;
@@ -58,14 +66,14 @@
 
 		image {
 			display: block;
-			width: 350rpx;
+			width: 100%;
 			margin: 70rpx auto 0 auto;
 		}
 	}
 	
 	.login_form {
 		width: 660rpx;
-		margin: 70rpx auto 0 auto;
+		margin: 60rpx auto 0 auto;
 		
 		:deep() {
 			.custom-submit {
@@ -78,7 +86,7 @@
 		.login_form_item {
 			margin-bottom: 30rpx;
 			.login_form_label {
-				font-size: 28rpx;
+				font-size: 30rpx;
 				color: #333;
 				margin-bottom: 10rpx;
 			}
@@ -86,6 +94,7 @@
 			.commonInput {
 				height: 80rpx;
 				box-shadow: none;
+				font-size: 30rpx;
 			}
 		}
 	}
