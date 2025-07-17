@@ -22,6 +22,7 @@
 				placeholder="请输入密码" 
 				v-model="loginFormText.password"
 				clearable
+				show-password
 			/>
 		</view>
 		<wd-button size="large" custom-class="custom-submit" @click="handleCheckForm">立即登录</wd-button>
@@ -43,7 +44,9 @@
 	const isError = ref(false)
 	
 	const handleCheckForm = () => {
-		if(!loginFormText.email) {
+		let emailReg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+	
+		if(!loginFormText.email || !emailReg.test(loginFormText.email)) {
 			toast.error('请输入正确邮箱')
 		}else if(!loginFormText.password) {
 			toast.error('密码错误')
@@ -95,6 +98,7 @@
 				height: 80rpx;
 				box-shadow: none;
 				font-size: 30rpx;
+				border-bottom: 1px solid #eee;
 			}
 		}
 	}

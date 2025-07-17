@@ -13,13 +13,7 @@
 </script>
 
 <style>
-@font-face {
-	font-family: 'hongmeng';
-	src: url('./static/fonts/HarmonyOS_Sans.woff2') format('woff2'),
-	url('./static/fonts/HarmonyOS_Sans.woff') format('woff');
-	}
-
 body, html {
-	font-family: hongmeng;
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;;
 }
 </style>

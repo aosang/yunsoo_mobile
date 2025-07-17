@@ -15,8 +15,7 @@
 		"path": "pages/workorder/workorder",
 		"style": {
 			"navigationBarTitleText": "我的工单",
-			"navigationBarBackgroundColor": "#2a6fff",
-			"navigationBarTextStyle": "#ffffff",
+			"navigationStyle": "custom",
 			"enablePullDownRefresh": true
 		}
 	}, {

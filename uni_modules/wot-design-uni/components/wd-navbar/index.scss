@@ -39,16 +39,16 @@
     max-width: 60%;
     height: 100%;
     margin: 0 auto;
-    color: $-navbar-color;
+    color: #fff;
     font-weight: $-navbar-title-font-weight;
-    font-size: $-navbar-title-font-size;
+    font-size: 30rpx;
     @include lineEllipsis();
   }
 
   @include e(text) {
     display: inline-block;
     vertical-align: middle;
-    color: $-navbar-desc-font-color;
+    color: #fff;
   }
 
   @include e(left, right, capsule) {

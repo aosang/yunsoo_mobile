@@ -52,6 +52,12 @@ if (uni.restoreGlobal) {
       return this.promise.catch(onrejected);
     }
   }
+  function uuid() {
+    return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4();
+  }
+  function s4() {
+    return Math.floor((1 + Math.random()) * 65536).toString(16).substring(1);
+  }
   function addUnit(num) {
     return Number.isNaN(Number(num)) ? `${num}` : `${num}px`;
   }
@@ -65,6 +71,11 @@ if (uni.restoreGlobal) {
     return type;
   }
   const isDef = (value) => value !== void 0 && value !== null;
+  const checkNumRange = (num, label = "value") => {
+    if (num < 0) {
+      throw new Error(`${label} shouldn't be less than zero`);
+    }
+  };
   function rgbToHex(r, g, b) {
     const hex = (r << 16 | g << 8 | b).toString(16);
     const paddedHex = "#" + "0".repeat(Math.max(0, 6 - hex.length)) + hex;
@@ -157,6 +168,9 @@ if (uni.restoreGlobal) {
   function isString(value) {
     return getType(value) === "string";
   }
+  function isNumber(value) {
+    return getType(value) === "number";
+  }
   function isPromise(value) {
     if (isObj(value) && isDef(value)) {
       return isFunction(value.then) && isFunction(value.catch);
@@ -244,6 +258,49 @@ if (uni.restoreGlobal) {
     });
     return target;
   }
+  function debounce(func, wait, options = {}) {
+    let timeoutId = null;
+    let lastArgs;
+    let lastThis;
+    let result;
+    const leading = isDef(options.leading) ? options.leading : false;
+    const trailing = isDef(options.trailing) ? options.trailing : true;
+    function invokeFunc() {
+      if (lastArgs !== void 0) {
+        result = func.apply(lastThis, lastArgs);
+        lastArgs = void 0;
+      }
+    }
+    function startTimer() {
+      timeoutId = setTimeout(() => {
+        timeoutId = null;
+        if (trailing) {
+          invokeFunc();
+        }
+      }, wait);
+    }
+    function cancelTimer() {
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+    }
+    function debounced(...args) {
+      lastArgs = args;
+      lastThis = this;
+      if (timeoutId === null) {
+        if (leading) {
+          invokeFunc();
+        }
+        startTimer();
+      } else if (trailing) {
+        cancelTimer();
+        startTimer();
+      }
+      return result;
+    }
+    return debounced;
+  }
   const getPropByPath = (obj, path) => {
     const keys = path.split(".");
     try {
@@ -307,7 +364,7 @@ if (uni.restoreGlobal) {
      */
     classPrefix: makeStringProp("wd-icon")
   };
-  const __default__$a = {
+  const __default__$h = {
     name: "wd-icon",
     options: {
       virtualHost: true,
@@ -315,8 +372,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$g = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$a,
+  const _sfc_main$n = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$h,
     props: iconProps,
     emits: ["click", "touch"],
     setup(__props, { expose: __expose, emit: __emit }) {
@@ -355,7 +412,7 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -374,7 +431,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const wdIcon = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-24906af6"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue"]]);
+  const wdIcon = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-24906af6"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue"]]);
   const _b64chars = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"];
   const _mkUriSafe = (src) => src.replace(/[+/]/g, (m0) => m0 === "+" ? "-" : "_").replace(/=+\$/m, "");
   const fromUint8Array = (src, rfc4648 = false) => {
@@ -415,7 +472,7 @@ if (uni.restoreGlobal) {
      */
     size: makeNumericProp("")
   };
-  const __default__$9 = {
+  const __default__$g = {
     name: "wd-loading",
     options: {
       virtualHost: true,
@@ -423,8 +480,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$f = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$9,
+  const _sfc_main$m = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$g,
     props: loadingProps,
     setup(__props, { expose: __expose }) {
       __expose();
@@ -486,7 +543,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -511,7 +568,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const wdLoading = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-f2b508ee"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-loading/wd-loading.vue"]]);
+  const wdLoading = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-f2b508ee"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-loading/wd-loading.vue"]]);
   const transitionProps = {
     ...baseProps,
     /**
@@ -579,7 +636,7 @@ if (uni.restoreGlobal) {
      */
     leaveToClass: makeStringProp("")
   };
-  const __default__$8 = {
+  const __default__$f = {
     name: "wd-transition",
     options: {
       addGlobalClass: true,
@@ -587,8 +644,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$8,
+  const _sfc_main$l = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$f,
     props: transitionProps,
     emits: ["click", "before-enter", "enter", "before-leave", "leave", "after-leave", "after-enter"],
     setup(__props, { expose: __expose, emit: __emit }) {
@@ -748,7 +805,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     return !_ctx.lazyRender || $setup.inited ? (vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -765,7 +822,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE, NEED_HYDRATION */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const wdTransition = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-af59a128"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-transition/wd-transition.vue"]]);
+  const wdTransition = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-af59a128"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-transition/wd-transition.vue"]]);
   const overlayProps = {
     ...baseProps,
     /**
@@ -788,7 +845,7 @@ if (uni.restoreGlobal) {
      */
     zIndex: makeNumberProp(10)
   };
-  const __default__$7 = {
+  const __default__$e = {
     name: "wd-overlay",
     options: {
       virtualHost: true,
@@ -796,8 +853,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$7,
+  const _sfc_main$k = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$e,
     props: overlayProps,
     emits: ["click"],
     setup(__props, { expose: __expose, emit: __emit }) {
@@ -814,7 +871,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createBlock($setup["wdTransition"], {
       show: _ctx.show,
       name: "fade",
@@ -831,7 +888,7 @@ if (uni.restoreGlobal) {
       /* FORWARDED */
     }, 8, ["show", "duration", "custom-style"]);
   }
-  const wdOverlay = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-6e0d1141"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-overlay/wd-overlay.vue"]]);
+  const wdOverlay = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-6e0d1141"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-overlay/wd-overlay.vue"]]);
   const toastDefaultOptionKey = "__TOAST_OPTION__";
   const defaultOptions = {
     duration: 2e3,
@@ -1021,7 +1078,7 @@ if (uni.restoreGlobal) {
      */
     closed: Function
   };
-  const __default__$6 = {
+  const __default__$d = {
     name: "wd-toast",
     options: {
       addGlobalClass: true,
@@ -1029,8 +1086,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$6,
+  const _sfc_main$j = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$d,
     props: toastProps,
     setup(__props, { expose: __expose }) {
       __expose();
@@ -1154,7 +1211,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -1240,7 +1297,7 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT */
     );
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-fce8c80a"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-toast/wd-toast.vue"]]);
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-fce8c80a"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-toast/wd-toast.vue"]]);
   const ON_LOAD = "onLoad";
   const ON_PULL_DOWN_REFRESH = "onPullDownRefresh";
   function formatAppLog(type, filename, ...args) {
@@ -1285,6 +1342,25 @@ if (uni.restoreGlobal) {
     };
   }
   const CELL_GROUP_KEY = Symbol("wd-cell-group");
+  ({
+    ...baseProps,
+    /**
+     * 分组标题
+     */
+    title: String,
+    /**
+     * 分组右侧内容
+     */
+    value: String,
+    /**
+     * 分组启用插槽
+     */
+    useSlot: makeBooleanProp(false),
+    /**
+     * 是否展示边框线
+     */
+    border: makeBooleanProp(false)
+  });
   function useCell() {
     const { parent: cellGroup, index } = useParent(CELL_GROUP_KEY);
     const border = vue.computed(() => {
@@ -1293,6 +1369,31 @@ if (uni.restoreGlobal) {
     return { border };
   }
   const FORM_KEY = Symbol("wd-form");
+  ({
+    ...baseProps,
+    /**
+     * 表单数据对象
+     */
+    model: makeRequiredProp(Object),
+    /**
+     * 表单验证规则
+     */
+    rules: {
+      type: Object,
+      default: () => ({})
+    },
+    /**
+     * 是否在输入时重置表单校验信息
+     */
+    resetOnChange: makeBooleanProp(true),
+    /**
+     * 错误提示类型
+     */
+    errorType: {
+      type: String,
+      default: "message"
+    }
+  });
   const zhCN = {
     calendar: {
       placeholder: "请选择",
@@ -1620,7 +1721,7 @@ if (uni.restoreGlobal) {
      */
     inputmode: makeStringProp("text")
   };
-  const __default__$5 = {
+  const __default__$c = {
     name: "wd-input",
     options: {
       virtualHost: true,
@@ -1628,8 +1729,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$5,
+  const _sfc_main$i = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$c,
     props: inputProps,
     emits: [
       "update:modelValue",
@@ -1792,7 +1893,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -1954,7 +2055,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-4e0c9774"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-input/wd-input.vue"]]);
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-4e0c9774"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-input/wd-input.vue"]]);
   const buttonProps = {
     ...baseProps,
     /**
@@ -2047,7 +2148,7 @@ if (uni.restoreGlobal) {
      */
     scope: String
   };
-  const __default__$4 = {
+  const __default__$b = {
     name: "wd-button",
     options: {
       addGlobalClass: true,
@@ -2055,8 +2156,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$4,
+  const _sfc_main$h = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$b,
     props: buttonProps,
     emits: [
       "click",
@@ -2158,7 +2259,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("button", {
       id: _ctx.buttonId,
       "hover-class": `${_ctx.disabled || _ctx.loading ? "" : "wd-button--active"}`,
@@ -2225,12 +2326,12 @@ if (uni.restoreGlobal) {
       ])
     ], 46, ["id", "hover-class", "hover-start-time", "hover-stay-time", "open-type", "send-message-title", "send-message-path", "send-message-img", "app-parameter", "show-message-card", "session-from", "lang", "hover-stop-propagation", "scope"]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-d858c170"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-button/wd-button.vue"]]);
-  const _sfc_main$9 = {};
-  function _sfc_render$8(_ctx, _cache) {
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-d858c170"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-button/wd-button.vue"]]);
+  const _sfc_main$g = {};
+  function _sfc_render$f(_ctx, _cache) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "navigation_bar" });
   }
-  const Navigation = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-6082cd98"], ["__file", "F:/yunsoo_mobile/components/navigation_header.vue"]]);
+  const Navigation = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-6082cd98"], ["__file", "F:/yunsoo_mobile/components/navigation_header.vue"]]);
   const queueKey = "__QUEUE_KEY__";
   function useTouch() {
     const direction = vue.ref("");
@@ -2287,7 +2388,7 @@ if (uni.restoreGlobal) {
     });
   }
   const _imports_0$2 = "/static/images/common/system_logo_white.png";
-  const _sfc_main$8 = {
+  const _sfc_main$f = {
     __name: "login",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -2298,7 +2399,8 @@ if (uni.restoreGlobal) {
       });
       const isError = vue.ref(false);
       const handleCheckForm = () => {
-        if (!loginFormText.email) {
+        let emailReg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+        if (!loginFormText.email || !emailReg.test(loginFormText.email)) {
           toast.error("请输入正确邮箱");
         } else if (!loginFormText.password) {
           toast.error("密码错误");
@@ -2315,10 +2417,10 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$3);
-    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_1$2);
-    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_1$1);
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$4);
+    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_1$3);
+    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -2350,7 +2452,8 @@ if (uni.restoreGlobal) {
               placeholder: "请输入密码",
               modelValue: $setup.loginFormText.password,
               "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.loginFormText.password = $event),
-              clearable: ""
+              clearable: "",
+              "show-password": ""
             }, null, 8, ["modelValue"])
           ]),
           vue.createVNode(_component_wd_button, {
@@ -2370,7 +2473,7 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "F:/yunsoo_mobile/pages/login/login.vue"]]);
+  const PagesLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__file", "F:/yunsoo_mobile/pages/login/login.vue"]]);
   const ROW_KEY = Symbol("wd-row");
   const rowProps = {
     ...baseProps,
@@ -2390,7 +2493,7 @@ if (uni.restoreGlobal) {
      */
     offset: makeNumberProp(0)
   };
-  const __default__$3 = {
+  const __default__$a = {
     name: "wd-col",
     options: {
       addGlobalClass: true,
@@ -2398,8 +2501,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$3,
+  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$a,
     props: colProps,
     setup(__props, { expose: __expose }) {
       __expose();
@@ -2425,7 +2528,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2440,7 +2543,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-2afa91f2"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-col/wd-col.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-2afa91f2"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-col/wd-col.vue"]]);
   function isVNode(value) {
     return value ? value.__v_isVNode === true : false;
   }
@@ -2518,7 +2621,7 @@ if (uni.restoreGlobal) {
       linkChildren
     };
   }
-  const __default__$2 = {
+  const __default__$9 = {
     name: "wd-row",
     options: {
       virtualHost: true,
@@ -2526,8 +2629,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$2,
+  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$9,
     props: rowProps,
     setup(__props, { expose: __expose }) {
       __expose();
@@ -2550,7 +2653,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2565,7 +2668,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-88acc730"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-row/wd-row.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-88acc730"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-row/wd-row.vue"]]);
   const _imports_0$1 = "/static/images/nav_icon/receive.svg";
   const _imports_1$1 = "/static/images/nav_icon/checklist.svg";
   const _imports_2$1 = "/static/images/nav_icon/book.svg";
@@ -2584,7 +2687,7 @@ if (uni.restoreGlobal) {
   const _imports_15 = "/static/images/device_icon/laptop.svg";
   const _imports_16 = "/static/images/device_icon/printer.svg";
   const _imports_17 = "/static/images/device_icon/other.svg";
-  const _sfc_main$5 = {
+  const _sfc_main$c = {
     __name: "index",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -2596,9 +2699,9 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_col = resolveEasycom(vue.resolveDynamicComponent("wd-col"), __easycom_0$2);
-    const _component_wd_row = resolveEasycom(vue.resolveDynamicComponent("wd-row"), __easycom_1);
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_wd_col = resolveEasycom(vue.resolveDynamicComponent("wd-col"), __easycom_0$3);
+    const _component_wd_row = resolveEasycom(vue.resolveDynamicComponent("wd-row"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -2846,7 +2949,233 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "F:/yunsoo_mobile/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "F:/yunsoo_mobile/pages/index/index.vue"]]);
+  const navbarProps = {
+    ...baseProps,
+    /**
+     * 标题文字
+     */
+    title: String,
+    /**
+     * 左侧文案
+     */
+    leftText: String,
+    /**
+     * 右侧文案
+     */
+    rightText: String,
+    /**
+     * 是否显示左侧箭头
+     */
+    leftArrow: makeBooleanProp(false),
+    /**
+     * 是否显示下边框
+     */
+    bordered: makeBooleanProp(true),
+    /**
+     * 是否固定到顶部
+     */
+    fixed: makeBooleanProp(false),
+    /**
+     * 固定在顶部时，是否在标签位置生成一个等高的占位元素
+     */
+    placeholder: makeBooleanProp(false),
+    /**
+     * 导航栏 z-index
+     */
+    zIndex: makeNumberProp(500),
+    /**
+     * 是否开启顶部安全区适配
+     */
+    safeAreaInsetTop: makeBooleanProp(false),
+    /**
+     * 是否禁用左侧按钮，禁用时透明度降低，且无法点击
+     */
+    leftDisabled: makeBooleanProp(false),
+    /**
+     * 是否禁用右侧按钮，禁用时透明度降低，且无法点击
+     */
+    rightDisabled: makeBooleanProp(false)
+  };
+  const __default__$8 = {
+    name: "wd-navbar",
+    options: {
+      virtualHost: true,
+      addGlobalClass: true,
+      styleIsolation: "shared"
+    }
+  };
+  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$8,
+    props: navbarProps,
+    emits: ["click-left", "click-right"],
+    setup(__props, { expose: __expose, emit: __emit }) {
+      __expose();
+      const props = __props;
+      const emit = __emit;
+      const height = vue.ref("");
+      const { statusBarHeight } = uni.getSystemInfoSync();
+      vue.watch(
+        [() => props.fixed, () => props.placeholder],
+        () => {
+          setPlaceholderHeight();
+        },
+        { deep: true, immediate: false }
+      );
+      const rootStyle = vue.computed(() => {
+        const style = {};
+        if (props.fixed && isDef(props.zIndex)) {
+          style["z-index"] = props.zIndex;
+        }
+        if (props.safeAreaInsetTop) {
+          style["padding-top"] = addUnit(statusBarHeight || 0);
+        }
+        return `${objToStyle(style)}${props.customStyle}`;
+      });
+      vue.onMounted(() => {
+        if (props.fixed && props.placeholder) {
+          vue.nextTick(() => {
+            setPlaceholderHeight();
+          });
+        }
+      });
+      function handleClickLeft() {
+        if (!props.leftDisabled) {
+          emit("click-left");
+        }
+      }
+      function handleClickRight() {
+        if (!props.rightDisabled) {
+          emit("click-right");
+        }
+      }
+      const { proxy } = vue.getCurrentInstance();
+      function setPlaceholderHeight() {
+        if (!props.fixed || !props.placeholder) {
+          return;
+        }
+        getRect(".wd-navbar", false, proxy).then((res) => {
+          height.value = res.height;
+        });
+      }
+      const __returned__ = { props, emit, height, statusBarHeight, rootStyle, handleClickLeft, handleClickRight, proxy, setPlaceholderHeight, wdIcon, get addUnit() {
+        return addUnit;
+      } };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        style: vue.normalizeStyle({ height: $setup.addUnit($setup.height) })
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(`wd-navbar ${_ctx.customClass} ${_ctx.fixed ? "is-fixed" : ""} ${_ctx.bordered ? "is-border" : ""}`),
+            style: vue.normalizeStyle($setup.rootStyle)
+          },
+          [
+            vue.createElementVNode("view", { class: "wd-navbar__content" }, [
+              _ctx.$slots.capsule ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "wd-navbar__capsule"
+              }, [
+                vue.renderSlot(_ctx.$slots, "capsule", {}, void 0, true)
+              ])) : !_ctx.$slots.left ? (vue.openBlock(), vue.createElementBlock(
+                "view",
+                {
+                  key: 1,
+                  class: vue.normalizeClass(`wd-navbar__left ${_ctx.leftDisabled ? "is-disabled" : ""}`),
+                  onClick: $setup.handleClickLeft
+                },
+                [
+                  _ctx.leftArrow ? (vue.openBlock(), vue.createBlock($setup["wdIcon"], {
+                    key: 0,
+                    name: "arrow-left",
+                    "custom-class": "wd-navbar__arrow"
+                  })) : vue.createCommentVNode("v-if", true),
+                  _ctx.leftText ? (vue.openBlock(), vue.createElementBlock(
+                    "view",
+                    {
+                      key: 1,
+                      class: "wd-navbar__text"
+                    },
+                    vue.toDisplayString(_ctx.leftText),
+                    1
+                    /* TEXT */
+                  )) : vue.createCommentVNode("v-if", true)
+                ],
+                2
+                /* CLASS */
+              )) : (vue.openBlock(), vue.createElementBlock(
+                "view",
+                {
+                  key: 2,
+                  class: vue.normalizeClass(`wd-navbar__left ${_ctx.leftDisabled ? "is-disabled" : ""}`),
+                  onClick: $setup.handleClickLeft
+                },
+                [
+                  vue.renderSlot(_ctx.$slots, "left", {}, void 0, true)
+                ],
+                2
+                /* CLASS */
+              )),
+              vue.createElementVNode("view", { class: "wd-navbar__title" }, [
+                vue.renderSlot(_ctx.$slots, "title", {}, void 0, true),
+                !_ctx.$slots.title && _ctx.title ? (vue.openBlock(), vue.createElementBlock(
+                  vue.Fragment,
+                  { key: 0 },
+                  [
+                    vue.createTextVNode(
+                      vue.toDisplayString(_ctx.title),
+                      1
+                      /* TEXT */
+                    )
+                  ],
+                  64
+                  /* STABLE_FRAGMENT */
+                )) : vue.createCommentVNode("v-if", true)
+              ]),
+              _ctx.$slots.right || _ctx.rightText ? (vue.openBlock(), vue.createElementBlock(
+                "view",
+                {
+                  key: 3,
+                  class: vue.normalizeClass(`wd-navbar__right ${_ctx.rightDisabled ? "is-disabled" : ""}`),
+                  onClick: $setup.handleClickRight
+                },
+                [
+                  vue.renderSlot(_ctx.$slots, "right", {}, void 0, true),
+                  !_ctx.$slots.right && _ctx.rightText ? (vue.openBlock(), vue.createElementBlock(
+                    "view",
+                    {
+                      key: 0,
+                      class: "wd-navbar__text",
+                      "hover-class": "wd-navbar__text--hover",
+                      "hover-stay-time": 70
+                    },
+                    vue.toDisplayString(_ctx.rightText),
+                    1
+                    /* TEXT */
+                  )) : vue.createCommentVNode("v-if", true)
+                ],
+                2
+                /* CLASS */
+              )) : vue.createCommentVNode("v-if", true)
+            ])
+          ],
+          6
+          /* CLASS, STYLE */
+        )
+      ],
+      4
+      /* STYLE */
+    );
+  }
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-089e80c4"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-navbar/wd-navbar.vue"]]);
   const swipeActionProps = {
     ...baseProps,
     /**
@@ -2870,7 +3199,7 @@ if (uni.restoreGlobal) {
      */
     beforeClose: Function
   };
-  const __default__$1 = {
+  const __default__$7 = {
     name: "wd-swipe-action",
     options: {
       addGlobalClass: true,
@@ -2878,8 +3207,8 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
-    ...__default__$1,
+  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$7,
     props: swipeActionProps,
     emits: ["click", "update:modelValue"],
     setup(__props, { expose: __expose, emit: __emit }) {
@@ -3065,7 +3394,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -3120,11 +3449,1407 @@ if (uni.restoreGlobal) {
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-af66e359"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-swipe-action/wd-swipe-action.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-af66e359"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-swipe-action/wd-swipe-action.vue"]]);
+  const TABS_KEY = Symbol("wd-tabs");
+  const tabsProps = {
+    ...baseProps,
+    /**
+     * 绑定值
+     */
+    modelValue: makeNumericProp(0),
+    /**
+     * 标签数超过阈值可滑动
+     */
+    slidableNum: makeNumberProp(6),
+    /**
+     * 标签数超过阈值显示导航地图
+     */
+    mapNum: makeNumberProp(10),
+    /**
+     * 导航地图的标题
+     */
+    mapTitle: String,
+    /**
+     * 粘性布局
+     */
+    sticky: makeBooleanProp(false),
+    /**
+     * 粘性布局吸顶位置
+     */
+    offsetTop: makeNumberProp(0),
+    /**
+     * 开启手势滑动
+     */
+    swipeable: makeBooleanProp(false),
+    /**
+     * 自动调整底部条宽度，设置了 lineWidth 后无效
+     */
+    autoLineWidth: makeBooleanProp(false),
+    /**
+     * 底部条宽度，单位像素
+     */
+    lineWidth: numericProp,
+    /**
+     * 底部条高度，单位像素
+     */
+    lineHeight: numericProp,
+    /**
+     * 颜色
+     */
+    color: makeStringProp(""),
+    /**
+     * 非活动状态颜色
+     */
+    inactiveColor: makeStringProp(""),
+    /**
+     * 是否开启切换标签内容时的过渡动画
+     */
+    animated: makeBooleanProp(false),
+    /**
+     * 切换动画过渡时间，单位毫秒
+     */
+    duration: makeNumberProp(300),
+    /**
+     * 是否开启滚动导航
+     * 可选值：'auto' | 'always'
+     * @default auto
+     */
+    slidable: makeStringProp("auto")
+  };
+  const tabProps = {
+    ...baseProps,
+    /**
+     * 唯一标识符
+     */
+    name: numericProp,
+    /**
+     * tab的标题
+     */
+    title: String,
+    /**
+     *  是否禁用，无法点击
+     */
+    disabled: makeBooleanProp(false),
+    /**
+     * 是否懒加载，切换到该tab时才加载内容
+     * @default true
+     */
+    lazy: makeBooleanProp(true),
+    /**
+     * 徽标属性，透传给 Badge 组件
+     */
+    badgeProps: Object
+  };
+  const __default__$6 = {
+    name: "wd-tab",
+    options: {
+      addGlobalClass: true,
+      virtualHost: true,
+      styleIsolation: "shared"
+    }
+  };
+  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$6,
+    props: tabProps,
+    setup(__props, { expose: __expose }) {
+      __expose();
+      const props = __props;
+      const { proxy } = vue.getCurrentInstance();
+      const { parent: tabs, index } = useParent(TABS_KEY);
+      const active = vue.computed(() => {
+        return isDef(tabs) ? tabs.state.activeIndex === index.value : false;
+      });
+      const painted = vue.ref(active.value);
+      const tabBodyStyle = vue.computed(() => {
+        const style = {};
+        if (!active.value && (!isDef(tabs) || !tabs.props.animated)) {
+          style.display = "none";
+        }
+        return objToStyle(style);
+      });
+      const shouldBeRender = vue.computed(() => !props.lazy || painted.value || active.value);
+      vue.watch(active, (val) => {
+        if (val)
+          painted.value = true;
+      });
+      vue.watch(
+        () => props.name,
+        (newValue) => {
+          if (isDef(newValue) && !isNumber(newValue) && !isString(newValue)) {
+            formatAppLog("error", "at uni_modules/wot-design-uni/components/wd-tab/wd-tab.vue:56", "[wot ui] error(wd-tab): the type of name should be number or string");
+            return;
+          }
+          if (tabs) {
+            checkName(proxy);
+          }
+        },
+        {
+          deep: true,
+          immediate: true
+        }
+      );
+      function checkName(self) {
+        const { name: myName } = props;
+        if (myName === void 0 || myName === null || myName === "") {
+          return;
+        }
+        tabs && tabs.children.forEach((child) => {
+          if (child.$.uid !== self.$.uid && child.name === myName) {
+            formatAppLog("error", "at uni_modules/wot-design-uni/components/wd-tab/wd-tab.vue:81", `The tab's bound value: ${myName} has been used`);
+          }
+        });
+      }
+      const __returned__ = { props, proxy, tabs, index, active, painted, tabBodyStyle, shouldBeRender, checkName };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(`wd-tab ${_ctx.customClass}`),
+        style: vue.normalizeStyle(_ctx.customStyle)
+      },
+      [
+        $setup.shouldBeRender ? (vue.openBlock(), vue.createElementBlock(
+          "view",
+          {
+            key: 0,
+            class: vue.normalizeClass(["wd-tab__body", { "wd-tab__body--inactive": !$setup.active }]),
+            style: vue.normalizeStyle($setup.tabBodyStyle)
+          },
+          [
+            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ],
+          6
+          /* CLASS, STYLE */
+        )) : vue.createCommentVNode("v-if", true)
+      ],
+      6
+      /* CLASS, STYLE */
+    );
+  }
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-0ac60957"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-tab/wd-tab.vue"]]);
+  const badgeProps = {
+    ...baseProps,
+    /**
+     * 显示值
+     */
+    modelValue: numericProp,
+    /** 当数值为 0 时，是否展示徽标 */
+    showZero: makeBooleanProp(false),
+    bgColor: String,
+    /**
+     * 最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型
+     */
+    max: Number,
+    /**
+     * 是否为红色点状标注
+     */
+    isDot: Boolean,
+    /**
+     * 是否隐藏 badge
+     */
+    hidden: Boolean,
+    /**
+     * badge类型，可选值primary / success / warning / danger / info
+     */
+    type: makeStringProp(void 0),
+    /**
+     * 为正时，角标向下偏移对应的像素
+     */
+    top: numericProp,
+    /**
+     * 为正时，角标向左偏移对应的像素
+     */
+    right: numericProp
+  };
+  const __default__$5 = {
+    name: "wd-badge",
+    options: {
+      addGlobalClass: true,
+      virtualHost: true,
+      styleIsolation: "shared"
+    }
+  };
+  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$5,
+    props: badgeProps,
+    setup(__props, { expose: __expose }) {
+      __expose();
+      const props = __props;
+      const content = vue.computed(() => {
+        const { modelValue, max, isDot } = props;
+        if (isDot)
+          return "";
+        let value = modelValue;
+        if (value && max && isNumber(value) && !Number.isNaN(value) && !Number.isNaN(max)) {
+          value = max < value ? `${max}+` : value;
+        }
+        return value;
+      });
+      const contentStyle = vue.computed(() => {
+        const style = {};
+        if (isDef(props.bgColor)) {
+          style.backgroundColor = props.bgColor;
+        }
+        if (isDef(props.top)) {
+          style.top = addUnit(props.top);
+        }
+        if (isDef(props.right)) {
+          style.right = addUnit(props.right);
+        }
+        return objToStyle(style);
+      });
+      const shouldShowBadge = vue.computed(() => !props.hidden && (content.value || content.value === 0 && props.showZero || props.isDot));
+      const __returned__ = { props, content, contentStyle, shouldShowBadge };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["wd-badge", _ctx.customClass]),
+        style: vue.normalizeStyle(_ctx.customStyle)
+      },
+      [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+        $setup.shouldShowBadge ? (vue.openBlock(), vue.createElementBlock(
+          "view",
+          {
+            key: 0,
+            class: vue.normalizeClass(["wd-badge__content", "is-fixed", _ctx.type ? "wd-badge__content--" + _ctx.type : "", _ctx.isDot ? "is-dot" : ""]),
+            style: vue.normalizeStyle($setup.contentStyle)
+          },
+          vue.toDisplayString($setup.content),
+          7
+          /* TEXT, CLASS, STYLE */
+        )) : vue.createCommentVNode("v-if", true)
+      ],
+      6
+      /* CLASS, STYLE */
+    );
+  }
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-6ea9b0eb"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-badge/wd-badge.vue"]]);
+  const resizeProps = {
+    ...baseProps,
+    customContainerClass: makeStringProp("")
+  };
+  const __default__$4 = {
+    name: "wd-resize",
+    options: {
+      virtualHost: true,
+      addGlobalClass: true,
+      styleIsolation: "shared"
+    }
+  };
+  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$4,
+    props: resizeProps,
+    emits: ["resize"],
+    setup(__props, { expose: __expose, emit: __emit }) {
+      __expose();
+      const props = __props;
+      const emit = __emit;
+      const expandScrollTop = vue.ref(0);
+      const shrinkScrollTop = vue.ref(0);
+      const expandScrollLeft = vue.ref(0);
+      const shrinkScrollLeft = vue.ref(0);
+      const height = vue.ref(0);
+      const width = vue.ref(0);
+      const scrollEventCount = vue.ref(0);
+      const rootStyle = vue.computed(() => {
+        const style = {
+          width: addUnit(width.value),
+          height: addUnit(height.value)
+        };
+        return `${objToStyle(style)}${props.customStyle}`;
+      });
+      let onScrollHandler = () => {
+      };
+      const { proxy } = vue.getCurrentInstance();
+      const resizeId = vue.ref(`resize${uuid()}`);
+      vue.onMounted(() => {
+        const query = uni.createSelectorQuery().in(proxy).select(`#${resizeId.value}`).boundingClientRect();
+        query.exec(([res]) => {
+          let lastHeight = res.height;
+          let lastWidth = res.width;
+          height.value = lastHeight;
+          width.value = lastWidth;
+          onScrollHandler = () => {
+            const query2 = uni.createSelectorQuery().in(proxy).select(`#${resizeId.value}`).boundingClientRect();
+            query2.exec(([res2]) => {
+              if (scrollEventCount.value++ === 0) {
+                const result = {};
+                ["bottom", "top", "left", "right", "height", "width"].forEach((propName) => {
+                  result[propName] = res2[propName];
+                });
+                emit("resize", result);
+              }
+              if (scrollEventCount.value < 3)
+                return;
+              const newHeight = res2.height;
+              const newWidth = res2.width;
+              height.value = newHeight;
+              width.value = newWidth;
+              const emitStack = [];
+              if (newHeight !== lastHeight) {
+                lastHeight = newHeight;
+                emitStack.push(1);
+              }
+              if (newWidth !== lastWidth) {
+                lastWidth = newWidth;
+                emitStack.push(1);
+              }
+              if (emitStack.length !== 0) {
+                const result = {};
+                ["bottom", "top", "left", "right", "height", "width"].forEach((propName) => {
+                  result[propName] = res2[propName];
+                });
+                emit("resize", result);
+              }
+              scrollToBottom({
+                lastWidth,
+                lastHeight
+              });
+            });
+          };
+          scrollToBottom({
+            lastWidth,
+            lastHeight
+          });
+        });
+      });
+      function scrollToBottom({ lastWidth, lastHeight }) {
+        expandScrollTop.value = 1e5 + lastHeight;
+        shrinkScrollTop.value = 3 * height.value + lastHeight;
+        expandScrollLeft.value = 1e5 + lastWidth;
+        shrinkScrollLeft.value = 3 * width.value + lastWidth;
+      }
+      const __returned__ = { props, emit, expandScrollTop, shrinkScrollTop, expandScrollLeft, shrinkScrollLeft, height, width, scrollEventCount, rootStyle, get onScrollHandler() {
+        return onScrollHandler;
+      }, set onScrollHandler(v) {
+        onScrollHandler = v;
+      }, proxy, resizeId, scrollToBottom };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(`wd-resize ${_ctx.customClass}`),
+        style: vue.normalizeStyle($setup.rootStyle)
+      },
+      [
+        vue.createCommentVNode("插槽需要脱离父容器文档流，防止父容器固宽固高，进而导致插槽大小被被父容器限制"),
+        vue.createElementVNode("view", {
+          id: $setup.resizeId,
+          class: vue.normalizeClass(`wd-resize__container ${_ctx.customContainerClass}`)
+        }, [
+          vue.createCommentVNode("被监听的插槽"),
+          vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+          vue.createCommentVNode("监听插槽变大"),
+          vue.createElementVNode("scroll-view", {
+            class: "wd-resize__wrapper",
+            "scroll-y": true,
+            "scroll-top": $setup.expandScrollTop,
+            "scroll-x": true,
+            "scroll-left": $setup.expandScrollLeft,
+            onScroll: _cache[0] || (_cache[0] = (...args) => $setup.onScrollHandler && $setup.onScrollHandler(...args))
+          }, [
+            vue.createElementVNode("view", {
+              class: "wd-resize__wrapper--placeholder",
+              style: { "height": "100000px", "width": "100000px" }
+            })
+          ], 40, ["scroll-top", "scroll-left"]),
+          vue.createCommentVNode("监听插槽变小"),
+          vue.createElementVNode("scroll-view", {
+            class: "wd-resize__wrapper",
+            "scroll-y": true,
+            "scroll-top": $setup.shrinkScrollTop,
+            "scroll-x": true,
+            "scroll-left": $setup.shrinkScrollLeft,
+            onScroll: _cache[1] || (_cache[1] = (...args) => $setup.onScrollHandler && $setup.onScrollHandler(...args))
+          }, [
+            vue.createElementVNode("view", {
+              class: "wd-resize__wrapper--placeholder",
+              style: { "height": "250%", "width": "250%" }
+            })
+          ], 40, ["scroll-top", "scroll-left"])
+        ], 10, ["id"])
+      ],
+      6
+      /* CLASS, STYLE */
+    );
+  }
+  const wdResize = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-3d3c1eae"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-resize/wd-resize.vue"]]);
+  const stickyProps = {
+    ...baseProps,
+    /**
+     * 层级
+     */
+    zIndex: makeNumberProp(1),
+    /**
+     * 吸顶距离
+     */
+    offsetTop: makeNumberProp(0)
+  };
+  const STICKY_BOX_KEY = Symbol("wd-sticky-box");
+  const __default__$3 = {
+    name: "wd-sticky",
+    options: {
+      addGlobalClass: true,
+      virtualHost: true,
+      styleIsolation: "shared"
+    }
+  };
+  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$3,
+    props: stickyProps,
+    setup(__props, { expose: __expose }) {
+      const props = __props;
+      const styckyId = vue.ref(`wd-sticky${uuid()}`);
+      const observerList = vue.ref([]);
+      const stickyState = vue.reactive({
+        position: "absolute",
+        boxLeaved: false,
+        top: 0,
+        height: 0,
+        width: 0,
+        state: ""
+      });
+      const { parent: stickyBox } = useParent(STICKY_BOX_KEY);
+      const { proxy } = vue.getCurrentInstance();
+      const rootStyle = vue.computed(() => {
+        const style = {
+          "z-index": props.zIndex,
+          height: addUnit(stickyState.height),
+          width: addUnit(stickyState.width)
+        };
+        if (!stickyState.boxLeaved) {
+          style["position"] = "relative";
+        }
+        return `${objToStyle(style)}${props.customStyle}`;
+      });
+      const stickyStyle = vue.computed(() => {
+        const style = {
+          "z-index": props.zIndex,
+          height: addUnit(stickyState.height),
+          width: addUnit(stickyState.width)
+        };
+        if (!stickyState.boxLeaved) {
+          style["position"] = "relative";
+        }
+        return `${objToStyle(style)}`;
+      });
+      const containerStyle = vue.computed(() => {
+        const style = {
+          position: stickyState.position,
+          top: addUnit(stickyState.top)
+        };
+        return objToStyle(style);
+      });
+      const innerOffsetTop = vue.computed(() => {
+        let top = 0;
+        return top + props.offsetTop;
+      });
+      function clearObserver() {
+        while (observerList.value.length !== 0) {
+          observerList.value.pop().disconnect();
+        }
+      }
+      function createObserver() {
+        const observer = uni.createIntersectionObserver(proxy, { thresholds: [0, 0.5] });
+        observerList.value.push(observer);
+        return observer;
+      }
+      async function handleResize(detail) {
+        stickyState.width = detail.width;
+        stickyState.height = detail.height;
+        await pause();
+        observerContentScroll();
+        if (!stickyBox || !stickyBox.observerForChild)
+          return;
+        stickyBox.observerForChild(proxy);
+      }
+      function observerContentScroll() {
+        if (stickyState.height === 0 && stickyState.width === 0)
+          return;
+        const offset = innerOffsetTop.value + stickyState.height;
+        clearObserver();
+        createObserver().relativeToViewport({
+          top: -offset
+        }).observe(`#${styckyId.value}`, (result) => {
+          handleRelativeTo(result);
+        });
+        getRect(`#${styckyId.value}`, false, proxy).then((res) => {
+          if (Number(res.bottom) <= offset)
+            handleRelativeTo({ boundingClientRect: res });
+        });
+      }
+      function handleRelativeTo({ boundingClientRect }) {
+        if (stickyBox && stickyBox.boxStyle && stickyState.height >= stickyBox.boxStyle.height) {
+          stickyState.position = "absolute";
+          stickyState.top = 0;
+          return;
+        }
+        let isStycky = boundingClientRect.top <= innerOffsetTop.value;
+        isStycky = boundingClientRect.top < innerOffsetTop.value;
+        if (isStycky) {
+          stickyState.state = "sticky";
+          stickyState.boxLeaved = false;
+          stickyState.position = "fixed";
+          stickyState.top = innerOffsetTop.value;
+        } else {
+          stickyState.state = "normal";
+          stickyState.boxLeaved = false;
+          stickyState.position = "absolute";
+          stickyState.top = 0;
+        }
+      }
+      function setPosition(boxLeaved, position, top) {
+        stickyState.boxLeaved = boxLeaved;
+        stickyState.position = position;
+        stickyState.top = top;
+      }
+      __expose({
+        setPosition,
+        stickyState,
+        offsetTop: props.offsetTop
+      });
+      const __returned__ = { props, styckyId, observerList, stickyState, stickyBox, proxy, rootStyle, stickyStyle, containerStyle, innerOffsetTop, clearObserver, createObserver, handleResize, observerContentScroll, handleRelativeTo, setPosition, wdResize };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        style: vue.normalizeStyle(`${$setup.rootStyle};display: inline-block;`)
+      },
+      [
+        vue.createElementVNode("view", {
+          class: vue.normalizeClass(`wd-sticky ${_ctx.customClass}`),
+          style: vue.normalizeStyle($setup.stickyStyle),
+          id: $setup.styckyId
+        }, [
+          vue.createElementVNode(
+            "view",
+            {
+              class: "wd-sticky__container",
+              style: vue.normalizeStyle($setup.containerStyle)
+            },
+            [
+              vue.createVNode($setup["wdResize"], {
+                onResize: $setup.handleResize,
+                "custom-style": "display: inline-block;"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+                ]),
+                _: 3
+                /* FORWARDED */
+              })
+            ],
+            4
+            /* STYLE */
+          )
+        ], 14, ["id"])
+      ],
+      4
+      /* STYLE */
+    );
+  }
+  const wdSticky = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-2722b5fd"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-sticky/wd-sticky.vue"]]);
+  const __default__$2 = {
+    name: "wd-sticky-box",
+    options: {
+      addGlobalClass: true,
+      // virtualHost: true,
+      styleIsolation: "shared"
+    }
+  };
+  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$2,
+    props: baseProps,
+    setup(__props, { expose: __expose }) {
+      __expose();
+      const props = __props;
+      const styckyBoxId = vue.ref(`wd-sticky-box${uuid()}`);
+      const observerMap = vue.ref(/* @__PURE__ */ new Map());
+      const boxStyle = vue.reactive({
+        height: 0,
+        width: 0
+      });
+      const { proxy } = vue.getCurrentInstance();
+      const { children: stickyList, linkChildren } = useChildren(STICKY_BOX_KEY);
+      linkChildren({
+        boxStyle,
+        observerForChild
+      });
+      vue.onBeforeMount(() => {
+        observerMap.value = /* @__PURE__ */ new Map();
+      });
+      function handleResize(detail) {
+        boxStyle.width = detail.width;
+        boxStyle.height = detail.height;
+        const temp = observerMap.value;
+        observerMap.value = /* @__PURE__ */ new Map();
+        for (const [uid] of temp) {
+          const child = stickyList.find((sticky) => {
+            return sticky.$.uid === uid;
+          });
+          observerForChild(child);
+        }
+        temp.forEach((observer) => {
+          observer.disconnect();
+        });
+        temp.clear();
+      }
+      function deleteObserver(child) {
+        const observer = observerMap.value.get(child.$.uid);
+        if (!observer)
+          return;
+        observer.disconnect();
+        observerMap.value.delete(child.$.uid);
+      }
+      function createObserver(child) {
+        const observer = uni.createIntersectionObserver(proxy, { thresholds: [0, 0.5] });
+        observerMap.value.set(child.$.uid, observer);
+        return observer;
+      }
+      function observerForChild(child) {
+        deleteObserver(child);
+        const observer = createObserver(child);
+        const exposed = child.$.exposed;
+        let offset = exposed.stickyState.height + exposed.offsetTop;
+        if (boxStyle.height <= exposed.stickyState.height) {
+          exposed.setPosition(false, "absolute", 0);
+        }
+        observer.relativeToViewport({ top: -offset }).observe(`#${styckyBoxId.value}`, (result) => {
+          handleRelativeTo(exposed, result);
+        });
+        getRect(`#${styckyBoxId.value}`, false, proxy).then((res) => {
+          if (Number(res.bottom) <= offset)
+            handleRelativeTo(exposed, { boundingClientRect: res });
+        }).catch((res) => {
+          formatAppLog("log", "at uni_modules/wot-design-uni/components/wd-sticky-box/wd-sticky-box.vue:125", res);
+        });
+      }
+      function handleRelativeTo(exposed, { boundingClientRect }) {
+        let childOffsetTop = exposed.offsetTop;
+        const offset = exposed.stickyState.height + childOffsetTop;
+        let isAbsolute = boundingClientRect.bottom <= offset;
+        isAbsolute = boundingClientRect.bottom < offset;
+        if (isAbsolute) {
+          exposed.setPosition(true, "absolute", boundingClientRect.height - exposed.stickyState.height);
+        } else if (boundingClientRect.top <= offset && !isAbsolute) {
+          if (exposed.stickyState.state === "normal")
+            return;
+          exposed.setPosition(false, "fixed", childOffsetTop);
+        }
+      }
+      const __returned__ = { props, styckyBoxId, observerMap, boxStyle, proxy, stickyList, linkChildren, handleResize, deleteObserver, createObserver, observerForChild, handleRelativeTo, wdResize };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { style: { "position": "relative" } }, [
+      vue.createElementVNode("view", {
+        class: vue.normalizeClass(`wd-sticky-box ${$setup.props.customClass}`),
+        style: vue.normalizeStyle(_ctx.customStyle),
+        id: $setup.styckyBoxId
+      }, [
+        vue.createVNode($setup["wdResize"], { onResize: $setup.handleResize }, {
+          default: vue.withCtx(() => [
+            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ]),
+          _: 3
+          /* FORWARDED */
+        })
+      ], 14, ["id"])
+    ]);
+  }
+  const wdStickyBox = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-0667b36f"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-sticky-box/wd-sticky-box.vue"]]);
+  const __default__$1 = {
+    name: "wd-tabs",
+    options: {
+      addGlobalClass: true,
+      virtualHost: true,
+      styleIsolation: "shared"
+    }
+  };
+  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+    ...__default__$1,
+    props: tabsProps,
+    emits: ["change", "disabled", "click", "update:modelValue"],
+    setup(__props, { expose: __expose, emit: __emit }) {
+      const $item = ".wd-tabs__nav-item";
+      const $itemText = ".wd-tabs__nav-item-text";
+      const $container = ".wd-tabs__nav-container";
+      const props = __props;
+      const emit = __emit;
+      const { translate } = useTranslate("tabs");
+      const state = vue.reactive({
+        activeIndex: 0,
+        // 选中值的索引，默认第一个
+        lineStyle: "display:none;",
+        // 激活项边框线样式
+        useInnerLine: false,
+        // 是否使用内部激活项边框线，当外部激活下划线未成功渲染时显示内部定位的
+        inited: false,
+        // 是否初始化
+        animating: false,
+        // 是否动画中
+        mapShow: false,
+        // map的开关
+        scrollLeft: 0
+        // scroll-view偏移量
+      });
+      const { children, linkChildren } = useChildren(TABS_KEY);
+      linkChildren({ state, props });
+      const { proxy } = vue.getCurrentInstance();
+      const touch = useTouch();
+      const innerSlidable = vue.computed(() => {
+        return props.slidable === "always" || children.length > props.slidableNum;
+      });
+      const bodyStyle = vue.computed(() => {
+        if (!props.animated) {
+          return "";
+        }
+        return objToStyle({
+          left: -100 * state.activeIndex + "%",
+          "transition-duration": props.duration + "ms",
+          "-webkit-transition-duration": props.duration + "ms"
+        });
+      });
+      const getTabName = (tab, index) => {
+        return isDef(tab.name) ? tab.name : index;
+      };
+      const updateActive = (value = 0, init = false, setScroll = true) => {
+        if (children.length === 0)
+          return;
+        value = getActiveIndex(value);
+        if (children[value].disabled)
+          return;
+        state.activeIndex = value;
+        if (setScroll) {
+          updateLineStyle(init === false);
+          scrollIntoView();
+        }
+        setActiveTab();
+      };
+      const setActive = debounce(updateActive, 100, { leading: true });
+      vue.watch(
+        () => props.modelValue,
+        (newValue) => {
+          if (!isNumber(newValue) && !isString(newValue)) {
+            formatAppLog("error", "at uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue:228", "[wot ui] error(wd-tabs): the type of value should be number or string");
+          }
+          if (newValue === "" || !isDef(newValue)) {
+            formatAppLog("error", "at uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue:233", "[wot ui] error(wd-tabs): tabs's value cannot be '' null or undefined");
+          }
+          if (typeof newValue === "number" && newValue < 0) {
+            formatAppLog("error", "at uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue:237", "[wot ui] error(wd-tabs): tabs's value cannot be less than zero");
+          }
+        },
+        {
+          immediate: true,
+          deep: true
+        }
+      );
+      vue.watch(
+        () => props.modelValue,
+        (newValue) => {
+          const index = getActiveIndex(newValue);
+          setActive(newValue, false, index !== state.activeIndex);
+        },
+        {
+          immediate: false,
+          deep: true
+        }
+      );
+      vue.watch(
+        () => children.length,
+        () => {
+          if (state.inited) {
+            vue.nextTick(() => {
+              setActive(props.modelValue);
+            });
+          }
+        }
+      );
+      vue.watch(
+        () => props.slidableNum,
+        (newValue) => {
+          checkNumRange(newValue, "slidableNum");
+        }
+      );
+      vue.watch(
+        () => props.mapNum,
+        (newValue) => {
+          checkNumRange(newValue, "mapNum");
+        }
+      );
+      vue.onMounted(() => {
+        state.inited = true;
+        vue.nextTick(() => {
+          updateActive(props.modelValue, true);
+          state.useInnerLine = true;
+        });
+      });
+      function toggleMap() {
+        if (state.mapShow) {
+          state.animating = false;
+          setTimeout(() => {
+            state.mapShow = false;
+          }, 300);
+        } else {
+          state.mapShow = true;
+          setTimeout(() => {
+            state.animating = true;
+          }, 100);
+        }
+      }
+      async function updateLineStyle(animation = true) {
+        if (!state.inited)
+          return;
+        const { autoLineWidth, lineWidth, lineHeight } = props;
+        try {
+          const lineStyle = {};
+          if (isDef(lineWidth)) {
+            lineStyle.width = addUnit(lineWidth);
+          } else {
+            if (autoLineWidth) {
+              const textRects = await getRect($itemText, true, proxy);
+              const textWidth = Number(textRects[state.activeIndex].width);
+              lineStyle.width = addUnit(textWidth);
+            }
+          }
+          if (isDef(lineHeight)) {
+            lineStyle.height = addUnit(lineHeight);
+            lineStyle.borderRadius = `calc(${addUnit(lineHeight)} / 2)`;
+          }
+          const rects = await getRect($item, true, proxy);
+          const rect = rects[state.activeIndex];
+          let left = rects.slice(0, state.activeIndex).reduce((prev, curr) => prev + Number(curr.width), 0) + Number(rect.width) / 2;
+          if (left) {
+            lineStyle.transform = `translateX(${left}px) translateX(-50%)`;
+            if (animation) {
+              lineStyle.transition = "width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);";
+            }
+            state.useInnerLine = false;
+            state.lineStyle = objToStyle(lineStyle);
+          }
+        } catch (error) {
+          formatAppLog("error", "at uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue:339", "[wot ui] error(wd-tabs): update line style failed", error);
+        }
+      }
+      function setActiveTab() {
+        if (!state.inited)
+          return;
+        const name = getTabName(children[state.activeIndex], state.activeIndex);
+        if (name !== props.modelValue) {
+          emit("change", {
+            index: state.activeIndex,
+            name
+          });
+          emit("update:modelValue", name);
+        }
+      }
+      function scrollIntoView() {
+        if (!state.inited)
+          return;
+        Promise.all([getRect($item, true, proxy), getRect($container, false, proxy)]).then(([navItemsRects, navRect]) => {
+          const selectItem = navItemsRects[state.activeIndex];
+          const offsetLeft = navItemsRects.slice(0, state.activeIndex).reduce((prev, curr) => prev + curr.width, 0);
+          const left = offsetLeft - (navRect.width - Number(selectItem.width)) / 2;
+          if (left === state.scrollLeft) {
+            state.scrollLeft = left + Math.random() / 1e4;
+          } else {
+            state.scrollLeft = left;
+          }
+        });
+      }
+      function handleSelect(index) {
+        if (index === void 0)
+          return;
+        const { disabled } = children[index];
+        const name = getTabName(children[index], index);
+        if (disabled) {
+          emit("disabled", {
+            index,
+            name
+          });
+          return;
+        }
+        state.mapShow && toggleMap();
+        setActive(index);
+        emit("click", {
+          index,
+          name
+        });
+      }
+      function onTouchStart(event) {
+        if (!props.swipeable)
+          return;
+        touch.touchStart(event);
+      }
+      function onTouchMove(event) {
+        if (!props.swipeable)
+          return;
+        touch.touchMove(event);
+      }
+      function onTouchEnd() {
+        if (!props.swipeable)
+          return;
+        const { direction, deltaX, offsetX } = touch;
+        const minSwipeDistance = 50;
+        if (direction.value === "horizontal" && offsetX.value >= minSwipeDistance) {
+          if (deltaX.value > 0 && state.activeIndex !== 0) {
+            setActive(state.activeIndex - 1);
+          } else if (deltaX.value < 0 && state.activeIndex !== children.length - 1) {
+            setActive(state.activeIndex + 1);
+          }
+        }
+      }
+      function getActiveIndex(value) {
+        if (isNumber(value) && value >= children.length) {
+          formatAppLog("error", "at uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue:419", "[wot ui] warning(wd-tabs): the type of tabs' value is Number shouldn't be less than its children");
+          value = 0;
+        }
+        if (isString(value)) {
+          const index = children.findIndex((item) => item.name === value);
+          value = index === -1 ? 0 : index;
+        }
+        return value;
+      }
+      __expose({
+        setActive,
+        scrollIntoView,
+        updateLineStyle
+      });
+      const __returned__ = { $item, $itemText, $container, props, emit, translate, state, children, linkChildren, proxy, touch, innerSlidable, bodyStyle, getTabName, updateActive, setActive, toggleMap, updateLineStyle, setActiveTab, scrollIntoView, handleSelect, onTouchStart, onTouchMove, onTouchEnd, getActiveIndex, wdIcon, wdSticky, wdStickyBox };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_wd_badge = resolveEasycom(vue.resolveDynamicComponent("wd-badge"), __easycom_0$1);
+    return _ctx.sticky ? (vue.openBlock(), vue.createBlock($setup["wdStickyBox"], { key: 0 }, {
+      default: vue.withCtx(() => [
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(`wd-tabs ${_ctx.customClass} ${$setup.innerSlidable ? "is-slide" : ""} ${_ctx.mapNum < $setup.children.length && _ctx.mapNum !== 0 ? "is-map" : ""}`),
+            style: vue.normalizeStyle(_ctx.customStyle)
+          },
+          [
+            vue.createVNode($setup["wdSticky"], { "offset-top": _ctx.offsetTop }, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("view", { class: "wd-tabs__nav wd-tabs__nav--sticky" }, [
+                  vue.createElementVNode("view", { class: "wd-tabs__nav--wrap" }, [
+                    vue.createElementVNode("scroll-view", {
+                      "scroll-x": $setup.innerSlidable,
+                      "scroll-with-animation": "",
+                      "scroll-left": $setup.state.scrollLeft
+                    }, [
+                      vue.createElementVNode("view", { class: "wd-tabs__nav-container" }, [
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList($setup.children, (item, index) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              onClick: ($event) => $setup.handleSelect(index),
+                              key: index,
+                              class: vue.normalizeClass(`wd-tabs__nav-item  ${$setup.state.activeIndex === index ? "is-active" : ""} ${item.disabled ? "is-disabled" : ""}`),
+                              style: vue.normalizeStyle($setup.state.activeIndex === index ? _ctx.color ? "color:" + _ctx.color : "" : _ctx.inactiveColor ? "color:" + _ctx.inactiveColor : "")
+                            }, [
+                              item.badgeProps ? (vue.openBlock(), vue.createBlock(
+                                _component_wd_badge,
+                                vue.normalizeProps(vue.mergeProps({ key: 0 }, item.badgeProps)),
+                                {
+                                  default: vue.withCtx(() => [
+                                    vue.createElementVNode(
+                                      "text",
+                                      { class: "wd-tabs__nav-item-text" },
+                                      vue.toDisplayString(item.title),
+                                      1
+                                      /* TEXT */
+                                    )
+                                  ]),
+                                  _: 2
+                                  /* DYNAMIC */
+                                },
+                                1040
+                                /* FULL_PROPS, DYNAMIC_SLOTS */
+                              )) : (vue.openBlock(), vue.createElementBlock(
+                                "text",
+                                {
+                                  key: 1,
+                                  class: "wd-tabs__nav-item-text"
+                                },
+                                vue.toDisplayString(item.title),
+                                1
+                                /* TEXT */
+                              )),
+                              $setup.state.activeIndex === index && $setup.state.useInnerLine ? (vue.openBlock(), vue.createElementBlock("view", {
+                                key: 2,
+                                class: "wd-tabs__line wd-tabs__line--inner"
+                              })) : vue.createCommentVNode("v-if", true)
+                            ], 14, ["onClick"]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        )),
+                        vue.createElementVNode(
+                          "view",
+                          {
+                            class: "wd-tabs__line",
+                            style: vue.normalizeStyle($setup.state.lineStyle)
+                          },
+                          null,
+                          4
+                          /* STYLE */
+                        )
+                      ])
+                    ], 8, ["scroll-x", "scroll-left"])
+                  ]),
+                  _ctx.mapNum < $setup.children.length && _ctx.mapNum !== 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+                    key: 0,
+                    class: "wd-tabs__map"
+                  }, [
+                    vue.createElementVNode(
+                      "view",
+                      {
+                        class: vue.normalizeClass(`wd-tabs__map-btn  ${$setup.state.animating ? "is-open" : ""}`),
+                        onClick: $setup.toggleMap
+                      },
+                      [
+                        vue.createElementVNode(
+                          "view",
+                          {
+                            class: vue.normalizeClass(`wd-tabs__map-arrow  ${$setup.state.animating ? "is-open" : ""}`)
+                          },
+                          [
+                            vue.createVNode($setup["wdIcon"], { name: "arrow-down" })
+                          ],
+                          2
+                          /* CLASS */
+                        )
+                      ],
+                      2
+                      /* CLASS */
+                    ),
+                    vue.createElementVNode(
+                      "view",
+                      {
+                        class: "wd-tabs__map-header",
+                        style: vue.normalizeStyle(`${$setup.state.mapShow ? "" : "display:none;"}  ${$setup.state.animating ? "opacity:1;" : ""}`)
+                      },
+                      vue.toDisplayString(_ctx.mapTitle || $setup.translate("all")),
+                      5
+                      /* TEXT, STYLE */
+                    ),
+                    vue.createElementVNode(
+                      "view",
+                      {
+                        class: vue.normalizeClass(`wd-tabs__map-body  ${$setup.state.animating ? "is-open" : ""}`),
+                        style: vue.normalizeStyle($setup.state.mapShow ? "" : "display:none")
+                      },
+                      [
+                        (vue.openBlock(true), vue.createElementBlock(
+                          vue.Fragment,
+                          null,
+                          vue.renderList($setup.children, (item, index) => {
+                            return vue.openBlock(), vue.createElementBlock("view", {
+                              class: "wd-tabs__map-nav-item",
+                              key: index,
+                              onClick: ($event) => $setup.handleSelect(index)
+                            }, [
+                              vue.createElementVNode(
+                                "view",
+                                {
+                                  class: vue.normalizeClass(`wd-tabs__map-nav-btn ${$setup.state.activeIndex === index ? "is-active" : ""}  ${item.disabled ? "is-disabled" : ""}`),
+                                  style: vue.normalizeStyle(
+                                    $setup.state.activeIndex === index ? _ctx.color ? "color:" + _ctx.color + ";border-color:" + _ctx.color : "" : _ctx.inactiveColor ? "color:" + _ctx.inactiveColor : ""
+                                  )
+                                },
+                                vue.toDisplayString(item.title),
+                                7
+                                /* TEXT, CLASS, STYLE */
+                              )
+                            ], 8, ["onClick"]);
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ],
+                      6
+                      /* CLASS, STYLE */
+                    )
+                  ])) : vue.createCommentVNode("v-if", true)
+                ])
+              ]),
+              _: 1
+              /* STABLE */
+            }, 8, ["offset-top"]),
+            vue.createElementVNode(
+              "view",
+              {
+                class: "wd-tabs__container",
+                onTouchstart: $setup.onTouchStart,
+                onTouchmove: $setup.onTouchMove,
+                onTouchend: $setup.onTouchEnd,
+                onTouchcancel: $setup.onTouchEnd
+              },
+              [
+                vue.createElementVNode(
+                  "view",
+                  {
+                    class: vue.normalizeClass(["wd-tabs__body", _ctx.animated ? "is-animated" : ""]),
+                    style: vue.normalizeStyle($setup.bodyStyle)
+                  },
+                  [
+                    vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+                  ],
+                  6
+                  /* CLASS, STYLE */
+                )
+              ],
+              32
+              /* NEED_HYDRATION */
+            ),
+            vue.createElementVNode(
+              "view",
+              {
+                class: "wd-tabs__mask",
+                style: vue.normalizeStyle(`${$setup.state.mapShow ? "" : "display:none;"} ${$setup.state.animating ? "opacity:1;" : ""}`),
+                onClick: $setup.toggleMap
+              },
+              null,
+              4
+              /* STYLE */
+            )
+          ],
+          6
+          /* CLASS, STYLE */
+        )
+      ]),
+      _: 3
+      /* FORWARDED */
+    })) : (vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        key: 1,
+        class: vue.normalizeClass(`wd-tabs ${_ctx.customClass} ${$setup.innerSlidable ? "is-slide" : ""} ${_ctx.mapNum < $setup.children.length && _ctx.mapNum !== 0 ? "is-map" : ""}`)
+      },
+      [
+        vue.createElementVNode("view", { class: "wd-tabs__nav" }, [
+          vue.createElementVNode("view", { class: "wd-tabs__nav--wrap" }, [
+            vue.createElementVNode("scroll-view", {
+              "scroll-x": $setup.innerSlidable,
+              "scroll-with-animation": "",
+              "scroll-left": $setup.state.scrollLeft
+            }, [
+              vue.createElementVNode("view", { class: "wd-tabs__nav-container" }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($setup.children, (item, index) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      onClick: ($event) => $setup.handleSelect(index),
+                      key: index,
+                      class: vue.normalizeClass(`wd-tabs__nav-item ${$setup.state.activeIndex === index ? "is-active" : ""} ${item.disabled ? "is-disabled" : ""}`),
+                      style: vue.normalizeStyle($setup.state.activeIndex === index ? _ctx.color ? "color:" + _ctx.color : "" : _ctx.inactiveColor ? "color:" + _ctx.inactiveColor : "")
+                    }, [
+                      item.badgeProps ? (vue.openBlock(), vue.createBlock(
+                        _component_wd_badge,
+                        vue.mergeProps({
+                          key: 0,
+                          "custom-class": "wd-tabs__nav-item-badge"
+                        }, item.badgeProps),
+                        {
+                          default: vue.withCtx(() => [
+                            vue.createElementVNode(
+                              "text",
+                              { class: "wd-tabs__nav-item-text" },
+                              vue.toDisplayString(item.title),
+                              1
+                              /* TEXT */
+                            )
+                          ]),
+                          _: 2
+                          /* DYNAMIC */
+                        },
+                        1040
+                        /* FULL_PROPS, DYNAMIC_SLOTS */
+                      )) : (vue.openBlock(), vue.createElementBlock(
+                        "text",
+                        {
+                          key: 1,
+                          class: "wd-tabs__nav-item-text"
+                        },
+                        vue.toDisplayString(item.title),
+                        1
+                        /* TEXT */
+                      )),
+                      $setup.state.activeIndex === index && $setup.state.useInnerLine ? (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 2,
+                        class: "wd-tabs__line wd-tabs__line--inner"
+                      })) : vue.createCommentVNode("v-if", true)
+                    ], 14, ["onClick"]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                )),
+                vue.createElementVNode(
+                  "view",
+                  {
+                    class: "wd-tabs__line",
+                    style: vue.normalizeStyle($setup.state.lineStyle)
+                  },
+                  null,
+                  4
+                  /* STYLE */
+                )
+              ])
+            ], 8, ["scroll-x", "scroll-left"])
+          ]),
+          _ctx.mapNum < $setup.children.length && _ctx.mapNum !== 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "wd-tabs__map"
+          }, [
+            vue.createElementVNode("view", {
+              class: "wd-tabs__map-btn",
+              onClick: $setup.toggleMap
+            }, [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass(`wd-tabs__map-arrow ${$setup.state.animating ? "is-open" : ""}`)
+                },
+                [
+                  vue.createVNode($setup["wdIcon"], { name: "arrow-down" })
+                ],
+                2
+                /* CLASS */
+              )
+            ]),
+            vue.createElementVNode(
+              "view",
+              {
+                class: "wd-tabs__map-header",
+                style: vue.normalizeStyle(`${$setup.state.mapShow ? "" : "display:none;"}  ${$setup.state.animating ? "opacity:1;" : ""}`)
+              },
+              vue.toDisplayString(_ctx.mapTitle || $setup.translate("all")),
+              5
+              /* TEXT, STYLE */
+            ),
+            vue.createElementVNode(
+              "view",
+              {
+                class: vue.normalizeClass(`wd-tabs__map-body ${$setup.state.animating ? "is-open" : ""}`),
+                style: vue.normalizeStyle($setup.state.mapShow ? "" : "display:none")
+              },
+              [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($setup.children, (item, index) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      class: "wd-tabs__map-nav-item",
+                      key: index,
+                      onClick: ($event) => $setup.handleSelect(index)
+                    }, [
+                      vue.createElementVNode(
+                        "view",
+                        {
+                          class: vue.normalizeClass(`wd-tabs__map-nav-btn ${$setup.state.activeIndex === index ? "is-active" : ""}  ${item.disabled ? "is-disabled" : ""}`)
+                        },
+                        vue.toDisplayString(item.title),
+                        3
+                        /* TEXT, CLASS */
+                      )
+                    ], 8, ["onClick"]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ],
+              6
+              /* CLASS, STYLE */
+            )
+          ])) : vue.createCommentVNode("v-if", true)
+        ]),
+        vue.createElementVNode(
+          "view",
+          {
+            class: "wd-tabs__container",
+            onTouchstart: $setup.onTouchStart,
+            onTouchmove: $setup.onTouchMove,
+            onTouchend: $setup.onTouchEnd,
+            onTouchcancel: $setup.onTouchEnd
+          },
+          [
+            vue.createElementVNode(
+              "view",
+              {
+                class: vue.normalizeClass(["wd-tabs__body", _ctx.animated ? "is-animated" : ""]),
+                style: vue.normalizeStyle($setup.bodyStyle)
+              },
+              [
+                vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+              ],
+              6
+              /* CLASS, STYLE */
+            )
+          ],
+          32
+          /* NEED_HYDRATION */
+        ),
+        vue.createElementVNode(
+          "view",
+          {
+            class: "wd-tabs__mask",
+            style: vue.normalizeStyle(`${$setup.state.mapShow ? "" : "display:none;"}  ${$setup.state.animating ? "opacity:1" : ""}`),
+            onClick: $setup.toggleMap
+          },
+          null,
+          4
+          /* STYLE */
+        )
+      ],
+      2
+      /* CLASS */
+    ));
+  }
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-4388d15d"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue"]]);
   const _sfc_main$3 = {
     __name: "workorder",
     setup(__props, { expose: __expose }) {
       __expose();
+      const tabNum = vue.ref(0);
+      const tabText = vue.reactive([{
+        id: 1,
+        text: "全部"
+      }, {
+        id: 2,
+        text: "已完成"
+      }, {
+        id: 3,
+        text: "处理中"
+      }, {
+        id: 4,
+        text: "待处理"
+      }]);
       onLoad(() => {
         onPullDownRefresh(() => {
           setTimeout(() => {
@@ -3132,7 +4857,7 @@ if (uni.restoreGlobal) {
           }, 1500);
         });
       });
-      const __returned__ = { onMounted: vue.onMounted, get onLoad() {
+      const __returned__ = { tabNum, tabText, Navigation, onMounted: vue.onMounted, reactive: vue.reactive, ref: vue.ref, get onLoad() {
         return onLoad;
       }, get onPullDownRefresh() {
         return onPullDownRefresh;
@@ -3142,21 +4867,97 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_0$1);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "workorder_list" }, [
-      vue.createVNode(_component_wd_swipe_action, { style: { "box-shadow": "0 0 20px rgba(0, 0, 0, 0.3)" } }, {
-        right: vue.withCtx(() => [
-          vue.createElementVNode("view", { class: "action" }, [
-            vue.createElementVNode("view", { class: "button" }, "删除")
-          ])
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$2);
+    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_1);
+    const _component_wd_tab = resolveEasycom(vue.resolveDynamicComponent("wd-tab"), __easycom_2);
+    const _component_wd_tabs = resolveEasycom(vue.resolveDynamicComponent("wd-tabs"), __easycom_3);
+    return vue.openBlock(), vue.createElementBlock(
+      vue.Fragment,
+      null,
+      [
+        vue.createVNode($setup["Navigation"]),
+        vue.createElementVNode("view", { class: "workorder_list" }, [
+          vue.createVNode(_component_wd_navbar, {
+            title: "我的工单",
+            fixed: "",
+            "custom-class": "custom",
+            "right-text": "添加"
+          })
         ]),
-        default: vue.withCtx(() => [
-          vue.createElementVNode("view", { class: "workorder_list_item" })
-        ]),
-        _: 1
-        /* STABLE */
-      })
-    ]);
+        vue.createElementVNode("view", { class: "workorder_tab" }, [
+          vue.createVNode(_component_wd_tabs, {
+            modelValue: $setup.tabNum,
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.tabNum = $event),
+            autoLineWidth: "",
+            color: "#2a6fff",
+            sticky: "",
+            "offset-top": 90,
+            inactiveColor: "#333",
+            "custom-class": "custom-tabs"
+          }, {
+            default: vue.withCtx(() => [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($setup.tabText, (item) => {
+                  return vue.openBlock(), vue.createBlock(_component_wd_tab, {
+                    key: item.id,
+                    title: item.text
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createElementVNode("view", { class: "workorder_box" }, [
+                        vue.createVNode(_component_wd_swipe_action, { class: "workorder_item" }, {
+                          right: vue.withCtx(() => [
+                            vue.createElementVNode("view", { class: "device_action" }, [
+                              vue.createElementVNode("view", { class: "device_button" }, "删除")
+                            ])
+                          ]),
+                          default: vue.withCtx(() => [
+                            vue.createElementVNode("view", { class: "workorder_list_item" }, [
+                              vue.createElementVNode("view", { class: "device_status" }, "已完成"),
+                              vue.createElementVNode("view", { class: "device_box" }, [
+                                vue.createElementVNode("text", { class: "device_box_title" }, "设备名称："),
+                                vue.createElementVNode("text", { class: "device_box_text" }, "MacBook Air 14")
+                              ]),
+                              vue.createElementVNode("view", { class: "device_box" }, [
+                                vue.createElementVNode("text", { class: "device_box_title" }, "设备类型："),
+                                vue.createElementVNode("text", { class: "device_box_text" }, "笔记本")
+                              ]),
+                              vue.createElementVNode("view", { class: "device_box" }, [
+                                vue.createElementVNode("text", { class: "device_box_title" }, "设备品牌："),
+                                vue.createElementVNode("text", { class: "device_box_text" }, "苹果")
+                              ]),
+                              vue.createElementVNode("view", { class: "device_box" }, [
+                                vue.createElementVNode("text", { class: "device_box_title" }, "更新时间："),
+                                vue.createElementVNode("text", { class: "device_box_text" }, "2025-07-10 16:39:23")
+                              ]),
+                              vue.createElementVNode("view", { class: "device_box" }, [
+                                vue.createElementVNode("text", { class: "device_box_title" }, "问题描述："),
+                                vue.createElementVNode("text", { class: "device_box_text" }, "在页面的vue文件中，我们需要自己编写一个导航栏组件，通常放在页面顶部。在页面的vue文件中，我们需要自己编写一个导航栏组件，通常放在页面顶部。")
+                              ])
+                            ])
+                          ]),
+                          _: 1
+                          /* STABLE */
+                        })
+                      ])
+                    ]),
+                    _: 2
+                    /* DYNAMIC */
+                  }, 1032, ["title"]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["modelValue"])
+        ])
+      ],
+      64
+      /* STABLE_FRAGMENT */
+    );
   }
   const PagesWorkorderWorkorder = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "F:/yunsoo_mobile/pages/workorder/workorder.vue"]]);
   const imgProps = {
@@ -3300,7 +5101,7 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_img = resolveEasycom(vue.resolveDynamicComponent("wd-img"), __easycom_0);
-    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_1$1);
+    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,

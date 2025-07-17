@@ -3079,4 +3079,5 @@ to {
   height: 2.5rem;
   box-shadow: none;
   font-size: 0.9375rem;
+  border-bottom: 1px solid #eee;
 }
