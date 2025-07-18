@@ -31,6 +31,31 @@ if (uni.restoreGlobal) {
 }
 (function(vue) {
   "use strict";
+  const ON_LOAD = "onLoad";
+  const ON_PULL_DOWN_REFRESH = "onPullDownRefresh";
+  function formatAppLog(type, filename, ...args) {
+    if (uni.__log__) {
+      uni.__log__(type, filename, ...args);
+    } else {
+      console[type].apply(console, [...args, filename]);
+    }
+  }
+  function resolveEasycom(component, easycom) {
+    return typeof component === "string" ? easycom : component;
+  }
+  const createLifeCycleHook = (lifecycle, flag = 0) => (hook, target = vue.getCurrentInstance()) => {
+    !vue.isInSSRComponentSetup && vue.injectHook(lifecycle, hook, target);
+  };
+  const onLoad = /* @__PURE__ */ createLifeCycleHook(
+    ON_LOAD,
+    2
+    /* HookFlags.PAGE */
+  );
+  const onPullDownRefresh = /* @__PURE__ */ createLifeCycleHook(
+    ON_PULL_DOWN_REFRESH,
+    2
+    /* HookFlags.PAGE */
+  );
   class AbortablePromise {
     constructor(executor) {
       this._reject = null;
@@ -1298,31 +1323,6 @@ if (uni.restoreGlobal) {
     );
   }
   const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-fce8c80a"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-toast/wd-toast.vue"]]);
-  const ON_LOAD = "onLoad";
-  const ON_PULL_DOWN_REFRESH = "onPullDownRefresh";
-  function formatAppLog(type, filename, ...args) {
-    if (uni.__log__) {
-      uni.__log__(type, filename, ...args);
-    } else {
-      console[type].apply(console, [...args, filename]);
-    }
-  }
-  function resolveEasycom(component, easycom) {
-    return typeof component === "string" ? easycom : component;
-  }
-  const createLifeCycleHook = (lifecycle, flag = 0) => (hook, target = vue.getCurrentInstance()) => {
-    !vue.isInSSRComponentSetup && vue.injectHook(lifecycle, hook, target);
-  };
-  const onLoad = /* @__PURE__ */ createLifeCycleHook(
-    ON_LOAD,
-    2
-    /* HookFlags.PAGE */
-  );
-  const onPullDownRefresh = /* @__PURE__ */ createLifeCycleHook(
-    ON_PULL_DOWN_REFRESH,
-    2
-    /* HookFlags.PAGE */
-  );
   function useParent(key) {
     const parent = vue.inject(key, null);
     if (parent) {
@@ -2387,6 +2387,39 @@ if (uni.restoreGlobal) {
       }
     });
   }
+  const baseUrl$1 = "http://192.168.8.5:3000";
+  const requetsMethods = (url, method, data = {}) => {
+    return new Promise((resolve, reject) => {
+      uni.request({
+        url: baseUrl$1 + url,
+        method,
+        data,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        // 请求响应
+        success: (res) => {
+          const { statusCode, data: data2 } = res;
+          if (statusCode === 200) {
+            resolve(data2);
+          } else {
+            uni.showToast({
+              title: (data2 == null ? void 0 : data2.message) || "请求失败",
+              icon: "none"
+            });
+            reject(data2);
+          }
+        },
+        fail: (err) => {
+          uni.showToast({
+            title: "网络请求失败",
+            icon: "none"
+          });
+          reject(err);
+        }
+      });
+    });
+  };
   const _imports_0$2 = "/static/images/common/system_logo_white.png";
   const _sfc_main$f = {
     __name: "login",
@@ -2398,20 +2431,21 @@ if (uni.restoreGlobal) {
         password: ""
       });
       const isError = vue.ref(false);
-      const handleCheckForm = () => {
+      const handleCheckForm = async () => {
         let emailReg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
         if (!loginFormText.email || !emailReg.test(loginFormText.email)) {
           toast.error("请输入正确邮箱");
         } else if (!loginFormText.password) {
           toast.error("密码错误");
         } else {
-          uni.reLaunch({
-            url: "/pages/index/index"
-          });
+          let data = await requetsMethods("/login", "POST", loginFormText);
+          formatAppLog("log", "at pages/login/login.vue:55", data);
         }
       };
       const __returned__ = { toast, loginFormText, isError, handleCheckForm, reactive: vue.reactive, ref: vue.ref, Navigation, get useToast() {
         return useToast;
+      }, get requetsMethods() {
+        return requetsMethods;
       } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;

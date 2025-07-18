@@ -32,9 +32,9 @@
 <script setup>
 	import { reactive, ref } from 'vue';
 	import Navigation from '@/components/navigation_header.vue'
-	
 	import { useToast } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
+	import { requetsMethods } from '@/request/request.js'
 	
 	const loginFormText = reactive({
 		email: '',
@@ -43,17 +43,19 @@
 	
 	const isError = ref(false)
 	
-	const handleCheckForm = () => {
+	const handleCheckForm = async () => {
 		let emailReg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
-	
 		if(!loginFormText.email || !emailReg.test(loginFormText.email)) {
 			toast.error('请输入正确邮箱')
 		}else if(!loginFormText.password) {
 			toast.error('密码错误')
 		} else {
-			uni.reLaunch({
-				url: '/pages/index/index'
-			})
+			// console.log(loginFormText);
+			let data = await requetsMethods('/login', 'POST', loginFormText)
+			console.log(data)
+			// uni.reLaunch({
+			// 	url: '/pages/index/index'
+			// })
 		}
 	}
 </script>

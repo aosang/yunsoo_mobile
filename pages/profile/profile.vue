@@ -42,6 +42,7 @@
 <script setup>
 	import Navigation from '@/components/navigation_header.vue'
 	const baseUrl = 'https://www.wangle.run/company_icon/public_image/pub_avatar.jpg'
+	
 </script>
 
 <style lang="scss">
