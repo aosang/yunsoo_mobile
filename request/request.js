@@ -1,6 +1,6 @@
 const baseUrl = 'http://192.168.8.5:3000'
 
-export const requetsMethods = (url, method, data = {} ) => {
+export const requestMethods = (url, method, data = {} ) => {
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: baseUrl + url,
@@ -8,6 +8,8 @@ export const requetsMethods = (url, method, data = {} ) => {
 			data: data,
 			header: {
 				'Content-Type': 'application/x-www-form-urlencoded',
+				'authorization': uni.getStorageSync('loginToken')?  uni.getStorageSync('loginToken') : null,
+				// 'authorization': null
 			},
 			// 请求响应
 			success: (res) => {

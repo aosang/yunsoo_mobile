@@ -1,6 +1,5 @@
 {
-	"pages": [
-	{
+	"pages": [{
 		"path": "pages/login/login",
 		"style": {
 			"navigationStyle": "custom"
@@ -22,6 +21,11 @@
 		"path": "pages/profile/profile",
 		"style": {
 			"navigationStyle": "custom"
+		}
+	}, {
+		"path": "pages/test/test",
+		"style": {
+			"navigationBarTitleText": "测试页面"
 		}
 	}],
 	"globalStyle": {

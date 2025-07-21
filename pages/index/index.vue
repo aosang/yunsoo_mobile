@@ -168,26 +168,26 @@
 
 <script setup>
 	import Navigation from '@/components/navigation_header.vue'
-	import {
-		ref,
-		onMounted
-	} from 'vue'
-
-	onMounted(() => {
+	import { onLoad } from '@dcloudio/uni-app'
+	import { ref, onMounted } from 'vue'
+	import { requestMethods } from '@/request/request.js'
+	import { useToast } from '@/uni_modules/wot-design-uni'
+	const toast = useToast()
+	
+	
+	onLoad(() => {
 		// getMyData()
 	})
 
 	const myData = ref([])
-
-	// const getMyData = () => {
-	// 	uni.request({
-	// 		url: 'http://192.168.8.5:3000/message',
-	// 		method: 'GET',
-	// 		success: (res) => {
-	// 			myData.value = res.data
-	// 			// console.log(res)
-	// 		}
-	// 	})
+	
+	const clickEvent = () => {
+		toast.success('123')
+	}
+	
+	// const getMyData = async () => {
+	// 	let res = await requestMethods('/message', 'GET')
+	// 	console.log(res)
 	// }
 </script>
 

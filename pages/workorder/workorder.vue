@@ -1,10 +1,10 @@
 <template>
 	<Navigation />
+	<wd-toast></wd-toast>
 	<view class="workorder_list">
 		<wd-navbar title="我的工单" fixed custom-class="custom" right-text="添加">
 		</wd-navbar>
 	</view>
-
 	<view class="workorder_tab">
 		<wd-tabs 
 			v-model="tabNum"  
@@ -18,29 +18,33 @@
 			<block v-for="item in tabText" :key="item.id">
 				<wd-tab :title="item.text">
 					<view class="workorder_box">
-						<wd-swipe-action class="workorder_item">
-							<view class="workorder_list_item">
+						<wd-swipe-action 
+							class="workorder_item"
+							v-for="item in workOrderListData"
+							:key="item.created_id"
+						>
+							<view class="workorder_list_item" >
 								<view class="device_status">已完成</view>
 								<view class="device_box">
 									<text class="device_box_title">设备名称：</text>
-									<text class="device_box_text">MacBook Air 14</text>
+									<text class="device_box_text">{{item.created_product}}</text>
 								</view>
 								<view class="device_box">
 									<text class="device_box_title">设备类型：</text>
-									<text class="device_box_text">笔记本</text>
+									<text class="device_box_text">{{item.created_type}}</text>
 								</view>
 								<view class="device_box">
 									<text class="device_box_title">设备品牌：</text>
-									<text class="device_box_text">苹果</text>
+									<text class="device_box_text">{{item.created_brand}}</text>
 								</view>
 								<view class="device_box">
 									<text class="device_box_title">更新时间：</text>
-									<text class="device_box_text">2025-07-10 16:39:23</text>
+									<text class="device_box_text">{{item.created_update}}</text>
 								</view>
 								<view class="device_box">
 									<text class="device_box_title">问题描述：</text>
 									<text
-										class="device_box_text">在页面的vue文件中，我们需要自己编写一个导航栏组件，通常放在页面顶部。在页面的vue文件中，我们需要自己编写一个导航栏组件，通常放在页面顶部。</text>
+										class="device_box_text">{{item.created_text}}</text>
 								</view>
 							</view>
 							<template #right>
@@ -54,22 +58,19 @@
 			</block>
 		</wd-tabs>
 	</view>
-
 </template>
 
 <script setup>
 	import Navigation from '@/components/navigation_header.vue'
-	import {
-		onMounted,
-		reactive,
-		ref
-	} from 'vue';
-	import {
-		onLoad,
-		onPullDownRefresh
-	} from '@dcloudio/uni-app'
+	import { onMounted, reactive, ref } from 'vue';
+	import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app'
+	import { requestMethods } from '@/request/request.js'
+	import { useToast } from '@/uni_modules/wot-design-uni'
+	const toast = useToast()
 
 	const tabNum = ref(0)
+	const workOrderListData = ref([])
+	let userId = ref('123')
 	const tabText = reactive([{
 		id: 1,
 		text: '全部'
@@ -85,13 +86,31 @@
 	}])
 
 	onLoad(() => {
+		getMyUserInfo()
+		// getWorkorderData()
 		onPullDownRefresh(() => {
 			setTimeout(() => {
 				uni.stopPullDownRefresh()
 			}, 1500)
 		})
 	})
-
+	
+	const getWorkorderData = async (id) => {
+		let res = await requestMethods('/GetWorkorder', 'GET', {
+			userId: id
+		})
+		if(res.code === 200) {
+			workOrderListData.value = res.data || []
+		}else {
+			toast.error('获取数据失败')
+		}
+	}
+	
+	const getMyUserInfo = async () => {
+		let res = await requestMethods('/GetSession', 'GET')
+		userId.value = res.data.session.user.id || ''
+		getWorkorderData(userId.value)
+	}
 	// onMounted(() => {
 
 	// })

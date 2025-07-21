@@ -25,16 +25,22 @@
 				show-password
 			/>
 		</view>
-		<wd-button size="large" custom-class="custom-submit" @click="handleCheckForm">立即登录</wd-button>
+		<wd-button 
+			size="large" 
+			custom-class="custom-submit" 
+			@click="handleCheckForm"
+		>
+			立即登录
+		</wd-button>
 	</view>
 </template>
 
 <script setup>
-	import { reactive, ref } from 'vue';
+	import { reactive, ref, onMounted } from 'vue';
 	import Navigation from '@/components/navigation_header.vue'
 	import { useToast } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
-	import { requetsMethods } from '@/request/request.js'
+	import { requestMethods } from '@/request/request.js'
 	
 	const loginFormText = reactive({
 		email: '',
@@ -43,6 +49,11 @@
 	
 	const isError = ref(false)
 	
+	onMounted(async () => {
+		// let res2 = await requetsMethods('/getSession', 'GET')
+		// console.log(res2)
+	})
+	
 	const handleCheckForm = async () => {
 		let emailReg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
 		if(!loginFormText.email || !emailReg.test(loginFormText.email)) {
@@ -50,12 +61,22 @@
 		}else if(!loginFormText.password) {
 			toast.error('密码错误')
 		} else {
-			// console.log(loginFormText);
-			let data = await requetsMethods('/login', 'POST', loginFormText)
-			console.log(data)
-			// uni.reLaunch({
-			// 	url: '/pages/index/index'
-			// })
+			let res = await requestMethods('/Login', 'POST', loginFormText)
+			if(res.code === 200) {
+				uni.setStorageSync('loginToken', res.data.session.access_token)
+				toast.show({
+					iconName: 'success',
+					msg: '登录成功',
+					duration: 600,
+					closed: () => {
+						uni.reLaunch({
+							url: '/pages/index/index'
+						})
+					}
+				})
+			}else if(res.code === 400) {
+				toast.error('邮箱或密码错误')
+			}
 		}
 	}
 </script>
@@ -63,7 +84,6 @@
 <style lang="scss">
 	.login {
 		width: 100%;
-		// height: 260rpx;
 		background: #2a6fff;
 		display: flex;
 		align-items: center;

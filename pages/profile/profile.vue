@@ -1,5 +1,6 @@
 <template>
 	<Navigation />
+	<wd-toast />
 	<view class="profile_box">
 		<view class="profile_box_avatar">
 			<wd-img
@@ -35,14 +36,40 @@
 			</view>
 			<view class="profile_value">v1.0.0</view>
 		</view>
-		<wd-button size="large" custom-class="custom-logout">退出登录</wd-button>
+		<wd-button 
+			size="large" 
+			custom-class="custom-logout"
+			@click="logoutHandler"
+		>
+			退出登录
+		</wd-button>
 	</view>
 </template>
 
 <script setup>
 	import Navigation from '@/components/navigation_header.vue'
 	const baseUrl = 'https://www.wangle.run/company_icon/public_image/pub_avatar.jpg'
-	
+	import { useToast } from '@/uni_modules/wot-design-uni'
+	const toast = useToast()
+	import { requestMethods } from '@/request/request.js'
+
+	const logoutHandler = async () => {
+		let res = await requestMethods('/Logout', 'POST')
+		if(res.code === 200) {
+			toast.show({
+				iconName: 'success',
+				msg: '已退出!',
+				duration: 600,
+				closed: () => {
+					uni.reLaunch({
+						url: '/pages/login/login'
+					})
+				}
+			})
+		}else {
+			toast.error('退出异常!')
+		}
+	}
 </script>
 
 <style lang="scss">
