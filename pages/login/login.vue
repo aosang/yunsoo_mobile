@@ -4,6 +4,7 @@
 	<view class="login">
 		<image src="/static/images/common/system_logo_white.png" mode="widthFix" />
 	</view>
+	
 	<!-- form -->
 	<view class="login_form">
 		<view class="login_form_item">
@@ -40,7 +41,10 @@
 	import Navigation from '@/components/navigation_header.vue'
 	import { useToast } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
-	import { requestMethods } from '@/request/request.js'
+	import { requestMethods } from '@/request/request'
+	import { userInfoStore } from '@/stores/userInfo'
+	
+	const userStore = userInfoStore()
 	
 	const loginFormText = reactive({
 		email: '',
@@ -49,11 +53,7 @@
 	
 	const isError = ref(false)
 	
-	onMounted(async () => {
-		// let res2 = await requetsMethods('/getSession', 'GET')
-		// console.log(res2)
-	})
-	
+
 	const handleCheckForm = async () => {
 		let emailReg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
 		if(!loginFormText.email || !emailReg.test(loginFormText.email)) {
@@ -62,8 +62,9 @@
 			toast.error('密码错误')
 		} else {
 			let res = await requestMethods('/Login', 'POST', loginFormText)
+
 			if(res.code === 200) {
-				uni.setStorageSync('loginToken', res.data.session.access_token)
+				// uni.setStorageSync('loginToken', res.data.session.access_token)
 				toast.show({
 					iconName: 'success',
 					msg: '登录成功',

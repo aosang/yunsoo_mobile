@@ -176,19 +176,15 @@
 	
 	
 	onLoad(() => {
-		// getMyData()
+		// getProfileInfo()
 	})
 
 	const myData = ref([])
 	
-	const clickEvent = () => {
-		toast.success('123')
+	const getProfileInfo = async () => {
+		let res = await requestMethods('/Profile', 'GET')
+		console.log(res)
 	}
-	
-	// const getMyData = async () => {
-	// 	let res = await requestMethods('/message', 'GET')
-	// 	console.log(res)
-	// }
 </script>
 
 <style lang="scss">

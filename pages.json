@@ -25,7 +25,8 @@
 	}, {
 		"path": "pages/test/test",
 		"style": {
-			"navigationBarTitleText": "测试页面"
+			"navigationBarTitleText": "测试页面",
+			"navigationBarTextStyle": "#000000"
 		}
 	}],
 	"globalStyle": {

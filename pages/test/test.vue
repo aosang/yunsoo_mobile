@@ -1,7 +1,5 @@
 <template>
-	<view>
-		
-	</view>
+	<view>11223</view>
 </template>
 
 <script setup>	

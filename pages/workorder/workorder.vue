@@ -1,6 +1,6 @@
 <template>
 	<Navigation />
-	<wd-toast></wd-toast>
+	<wd-toast />
 	<view class="workorder_list">
 		<wd-navbar title="我的工单" fixed custom-class="custom" right-text="添加">
 		</wd-navbar>
@@ -14,17 +14,45 @@
 			:offset-top="90"
 			inactiveColor="#333"
 			custom-class="custom-tabs"
+			@click="changeGetWorkorderList"
 		>
+			<view class="workorder_loading" v-if="isLoading">
+				<wd-loading v-if="isLoading" />
+			</view>
 			<block v-for="item in tabText" :key="item.id">
 				<wd-tab :title="item.text">
 					<view class="workorder_box">
-						<wd-swipe-action 
+						<view class="empty_data" v-show="!isLoading && workOrderListData.length === 0">
+							<wd-status-tip image="content" tip="暂无工单" />
+						</view>
+						<wd-swipe-action
+							v-show="!isLoading && workOrderListData.length !== 0"
 							class="workorder_item"
 							v-for="item in workOrderListData"
 							:key="item.created_id"
 						>
-							<view class="workorder_list_item" >
-								<view class="device_status">已完成</view>
+							<view class="workorder_list_item">
+								<view 
+									class="device_status" 
+									:class="item.created_status === '已完成'? 'device_finish' : ''"
+									v-show="item.created_status === '已完成'"
+								>
+									已完成
+								</view>
+								<view
+									class="device_status" 
+									:class="item.created_status === '待处理'? 'device_wait' : ''"
+									v-show="item.created_status === '待处理'"
+								>
+									待处理
+								</view>
+								<view
+									class="device_status" 
+									:class="item.created_status === '处理中'? 'device_process' : ''"
+									v-show="item.created_status === '处理中'"
+								>
+									处理中
+								</view>
 								<view class="device_box">
 									<text class="device_box_title">设备名称：</text>
 									<text class="device_box_text">{{item.created_product}}</text>
@@ -69,8 +97,10 @@
 	const toast = useToast()
 
 	const tabNum = ref(0)
+	const isLoading = ref(true)
+	
 	const workOrderListData = ref([])
-	let userId = ref('123')
+	let userId = ref('')
 	const tabText = reactive([{
 		id: 1,
 		text: '全部'
@@ -95,12 +125,18 @@
 		})
 	})
 	
+	const changeGetWorkorderList = () => {
+		getWorkorderData(userId.value, tabNum.value)
+	}
+	
 	const getWorkorderData = async (id) => {
 		let res = await requestMethods('/GetWorkorder', 'GET', {
-			userId: id
+			userId: id,
+			tabId: tabNum.value
 		})
 		if(res.code === 200) {
 			workOrderListData.value = res.data || []
+			isLoading.value = false
 		}else {
 			toast.error('获取数据失败')
 		}
@@ -111,9 +147,7 @@
 		userId.value = res.data.session.user.id || ''
 		getWorkorderData(userId.value)
 	}
-	// onMounted(() => {
-
-	// })
+	
 </script>
 
 <style lang="scss">
@@ -122,6 +156,13 @@
 			.custom-tabs {
 				margin-top: 128rpx;
 			}
+		}
+		
+		.workorder_loading {
+			display: flex;
+			padding-top: 200rpx;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 	
@@ -175,13 +216,25 @@
 				right: 24rpx;
 				width: 130rpx;
 				padding: 6rpx 0;
-				background: #34d19d;
+				// background: #34d19d;
 				// background: #fa4350;
 				// background: #f0883a;
 				font-size: 28rpx;
 				color: #fff;
 				border-radius: 4rpx;
 				text-align: center;
+			}
+			
+			.device_wait {
+				background: #f0883a;
+			}
+			
+			.device_finish {
+				background: #34d19d;
+			}
+			
+			.device_process {
+				background: #fa4350;
 			}
 
 			.device_box {

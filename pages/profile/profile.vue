@@ -52,6 +52,17 @@
 	import { useToast } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
 	import { requestMethods } from '@/request/request.js'
+	import { onLoad } from '@dcloudio/uni-app'
+	
+	
+	onLoad(() => {
+		// getProfileInfo()
+	})
+	
+	const getProfileInfo = async () => {
+		// let res = await requestMethods('/Profile', 'GET')
+		// console.log(res)
+	}
 
 	const logoutHandler = async () => {
 		let res = await requestMethods('/Logout', 'POST')

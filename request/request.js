@@ -1,4 +1,5 @@
 const baseUrl = 'http://192.168.8.5:3000'
+// const baseUrl = 'http://5dzb8cgi.beesnat.com'
 
 export const requestMethods = (url, method, data = {} ) => {
 	return new Promise((resolve, reject) => {
@@ -20,6 +21,9 @@ export const requestMethods = (url, method, data = {} ) => {
 					uni.showToast({
 						title: data?.message || '请求失败',
 						icon: 'none'
+					})
+					uni.reLaunch({
+						url: '/pages/login/login'
 					})
 					reject(data)
 				}
