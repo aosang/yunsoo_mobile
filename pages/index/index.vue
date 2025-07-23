@@ -173,7 +173,8 @@
 	import { requestMethods } from '@/request/request.js'
 	import { useToast } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
-	
+	import { userInfoStore } from '@/stores/userInfo'
+	const userStore = userInfoStore()
 	
 	onLoad(() => {
 		// getProfileInfo()
@@ -181,10 +182,15 @@
 
 	const myData = ref([])
 	
-	const getProfileInfo = async () => {
-		let res = await requestMethods('/Profile', 'GET')
-		console.log(res)
-	}
+	// 判断token是否过期
+	// const isTokenExpired = (time) => {
+	// 	const now = Math.floor(Date.now() / 1000)
+	// 	return time <= now
+	// }
+	// const getProfileInfo = async () => {
+	// 	let res = await requestMethods('/Profile', 'GET')
+	// 	console.log(res)
+	// }
 </script>
 
 <style lang="scss">

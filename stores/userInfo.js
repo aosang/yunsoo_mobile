@@ -2,15 +2,24 @@ import { defineStore } from "pinia"
 
 export const userInfoStore = defineStore('user', {
 	state: () => ({
-		userInfo: {}
+		id: 'user',
+		token: '',
+		tokenTime: 0,
+		userId: ''
 	}),
 	actions: {
-		setUser(data) {
-			this.userInfo = data.userInfo
+		setUser(token, time, userid) {
+			this.token = token
+			this.tokenTime = time //token有效期
+			this.userId = userid
 		},
 		clearUser() {
-			this.userInfo = null
+			this.token = ''
+			this.tokeTime = 0
+			this.userId = ''
 		}
 	},
-	persist: true, //开启持久化存储
+	persist: {
+		enabled: true
+	}
 })

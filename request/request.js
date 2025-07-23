@@ -1,7 +1,9 @@
 const baseUrl = 'http://192.168.8.5:3000'
 // const baseUrl = 'http://5dzb8cgi.beesnat.com'
+import { userInfoStore } from "@/stores/userInfo"
 
-export const requestMethods = (url, method, data = {} ) => {
+export const requestMethods = (url, method, data = {}) => {
+	const userStore = userInfoStore()
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: baseUrl + url,
@@ -9,7 +11,7 @@ export const requestMethods = (url, method, data = {} ) => {
 			data: data,
 			header: {
 				'Content-Type': 'application/x-www-form-urlencoded',
-				'authorization': uni.getStorageSync('loginToken')?  uni.getStorageSync('loginToken') : null,
+				'authorization': userStore.token ? userStore.token : null
 				// 'authorization': null
 			},
 			// 请求响应
@@ -32,8 +34,8 @@ export const requestMethods = (url, method, data = {} ) => {
 				uni.showToast({
 					title: '网络请求失败',
 					icon: 'none'
-				});
-				reject(err);
+				})
+				reject(err)
 			}
 		})
 	})

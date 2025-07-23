@@ -117,9 +117,9 @@
 
 	onLoad(() => {
 		getMyUserInfo()
-		// getWorkorderData()
 		onPullDownRefresh(() => {
 			setTimeout(() => {
+				getMyUserInfo()
 				uni.stopPullDownRefresh()
 			}, 1500)
 		})
@@ -129,10 +129,10 @@
 		getWorkorderData(userId.value, tabNum.value)
 	}
 	
-	const getWorkorderData = async (id) => {
+	const getWorkorderData = async (id, num) => {
 		let res = await requestMethods('/GetWorkorder', 'GET', {
 			userId: id,
-			tabId: tabNum.value
+			tabId: num
 		})
 		if(res.code === 200) {
 			workOrderListData.value = res.data || []
@@ -145,7 +145,7 @@
 	const getMyUserInfo = async () => {
 		let res = await requestMethods('/GetSession', 'GET')
 		userId.value = res.data.session.user.id || ''
-		getWorkorderData(userId.value)
+		getWorkorderData(userId.value, 0)
 	}
 	
 </script>

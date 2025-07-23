@@ -53,14 +53,15 @@
 	const toast = useToast()
 	import { requestMethods } from '@/request/request.js'
 	import { onLoad } from '@dcloudio/uni-app'
-	
+	import { userInfoStore } from '@/stores/userInfo'
+	const userStore = userInfoStore()
 	
 	onLoad(() => {
-		// getProfileInfo()
+		getProfileInfo()
 	})
 	
 	const getProfileInfo = async () => {
-		// let res = await requestMethods('/Profile', 'GET')
+		let res = await requestMethods('/Profile', 'GET')
 		// console.log(res)
 	}
 
@@ -72,6 +73,7 @@
 				msg: '已退出!',
 				duration: 600,
 				closed: () => {
+					userStore.clearUser()
 					uni.reLaunch({
 						url: '/pages/login/login'
 					})
