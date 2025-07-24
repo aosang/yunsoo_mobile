@@ -5,18 +5,21 @@ export const userInfoStore = defineStore('user', {
 		id: 'user',
 		token: '',
 		tokenTime: 0,
-		userId: ''
+		userId: '',
+		userName: ''
 	}),
 	actions: {
-		setUser(token, time, userid) {
+		setUser(token, time, userid, name) {
 			this.token = token
 			this.tokenTime = time //token有效期
 			this.userId = userid
+			this.userName = name
 		},
 		clearUser() {
 			this.token = ''
-			this.tokeTime = 0
+			this.tokenTime = 0
 			this.userId = ''
+			this.userName = ''
 		}
 	},
 	persist: {

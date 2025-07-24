@@ -2,7 +2,13 @@
 	<Navigation />
 	<wd-toast />
 	<view class="workorder_list">
-		<wd-navbar title="我的工单" fixed custom-class="custom" right-text="添加">
+		<wd-navbar 
+			title="我的工单" 
+			fixed 
+			custom-class="custom" 
+			right-text="添加"
+			@click-right="goToCreateWorkorder"
+		>
 		</wd-navbar>
 	</view>
 	<view class="workorder_tab">
@@ -22,11 +28,11 @@
 			<block v-for="item in tabText" :key="item.id">
 				<wd-tab :title="item.text">
 					<view class="workorder_box">
-						<view class="empty_data" v-show="!isLoading && workOrderListData.length === 0">
+						<view class="empty_data" v-if="!isLoading && workOrderListData.length === 0">
 							<wd-status-tip image="content" tip="暂无工单" />
 						</view>
 						<wd-swipe-action
-							v-show="!isLoading && workOrderListData.length !== 0"
+							v-if="!isLoading && workOrderListData.length !== 0"
 							class="workorder_item"
 							v-for="item in workOrderListData"
 							:key="item.created_id"
@@ -35,21 +41,21 @@
 								<view 
 									class="device_status" 
 									:class="item.created_status === '已完成'? 'device_finish' : ''"
-									v-show="item.created_status === '已完成'"
+									v-if="item.created_status === '已完成'"
 								>
 									已完成
 								</view>
 								<view
 									class="device_status" 
 									:class="item.created_status === '待处理'? 'device_wait' : ''"
-									v-show="item.created_status === '待处理'"
+									v-if="item.created_status === '待处理'"
 								>
 									待处理
 								</view>
 								<view
 									class="device_status" 
 									:class="item.created_status === '处理中'? 'device_process' : ''"
-									v-show="item.created_status === '处理中'"
+									v-if="item.created_status === '处理中'"
 								>
 									处理中
 								</view>
@@ -90,11 +96,13 @@
 
 <script setup>
 	import Navigation from '@/components/navigation_header.vue'
-	import { onMounted, reactive, ref } from 'vue';
-	import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app'
+	import { nextTick, onMounted, reactive, ref } from 'vue';
+	import { onPullDownRefresh } from '@dcloudio/uni-app'
 	import { requestMethods } from '@/request/request.js'
 	import { useToast } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
+	import { userInfoStore } from '@/stores/userInfo';
+	const userStore = userInfoStore()
 
 	const tabNum = ref(0)
 	const isLoading = ref(true)
@@ -115,18 +123,20 @@
 		text: '待处理'
 	}])
 
-	onLoad(() => {
-		getMyUserInfo()
-		onPullDownRefresh(() => {
-			setTimeout(() => {
-				getMyUserInfo()
-				uni.stopPullDownRefresh()
-			}, 1500)
-		})
+	onMounted(() => {
+		nextTick(() => {
+			getWorkorderData(userStore.userId ,tabNum.value)
+		})		
+	})
+	
+	onPullDownRefresh(() => {
+		getWorkorderData(userStore.userId ,tabNum.value)
 	})
 	
 	const changeGetWorkorderList = () => {
-		getWorkorderData(userId.value, tabNum.value)
+		if(!isLoading.value) {
+			getWorkorderData(userStore.userId, tabNum.value)
+		}
 	}
 	
 	const getWorkorderData = async (id, num) => {
@@ -137,17 +147,20 @@
 		if(res.code === 200) {
 			workOrderListData.value = res.data || []
 			isLoading.value = false
+			uni.stopPullDownRefresh()
 		}else {
 			toast.error('获取数据失败')
+			isLoading.value = false
+			uni.stopPullDownRefresh()
 		}
 	}
 	
-	const getMyUserInfo = async () => {
-		let res = await requestMethods('/GetSession', 'GET')
-		userId.value = res.data.session.user.id || ''
-		getWorkorderData(userId.value, 0)
+	const goToCreateWorkorder = () => {
+		uni.navigateTo({
+			url: '/pages/createWorkorder/createWorkorder'
+		})
 	}
-	
+		
 </script>
 
 <style lang="scss">

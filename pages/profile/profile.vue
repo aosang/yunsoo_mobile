@@ -7,10 +7,10 @@
 				round 
 				:width="68" 
 				:height="68" 
-				:src="baseUrl" 
+				:src="userInfo.userAvatarUrl? userInfo.userAvatarUrl : baseUrl " 
 				:enable-preview="true" 
 			/>
-			<text>MilesWang</text>
+			<text>{{ userInfo.userMyName }}</text>
 		</view>
 	</view>
 	
@@ -20,14 +20,21 @@
 				<image src="/static/images/profile/profile_email.svg" mode="widthFix" />
 				<text>电子邮箱</text>
 			</view>
-			<view class="profile_value">wangle2071@163.com</view>
+			<view class="profile_value">{{ userInfo.userEmail }}</view>
 		</view>
 		<view class="profile_info_item">
 			<view class="profile_name">
 				<image src="/static/images/profile/profile_company.svg" mode="widthFix" />
 				<text>公司名称</text>
 			</view>
-			<view class="profile_value">AAC</view>
+			<view class="profile_value">{{ userInfo.userCompany }}</view>
+		</view>
+		<view class="profile_info_item">
+			<view class="profile_name">
+				<image src="/static/images/profile/profile_time.svg" mode="widthFix" />
+				<text>注册时间</text>
+			</view>
+			<view class="profile_value">{{ userInfo.userTime }}</view>
 		</view>
 		<view class="profile_info_item">
 			<view class="profile_name">
@@ -47,6 +54,7 @@
 </template>
 
 <script setup>
+	import { reactive, ref, onMounted, nextTick } from 'vue'
 	import Navigation from '@/components/navigation_header.vue'
 	const baseUrl = 'https://www.wangle.run/company_icon/public_image/pub_avatar.jpg'
 	import { useToast } from '@/uni_modules/wot-design-uni'
@@ -56,13 +64,32 @@
 	import { userInfoStore } from '@/stores/userInfo'
 	const userStore = userInfoStore()
 	
-	onLoad(() => {
-		getProfileInfo()
+	const userInfo = reactive({
+		userEmail: '',
+		userCompany: '',
+		userAvatarUrl: '',
+		userMyName: '',
+		userTime: ''
+	})
+		
+	onMounted(() => {
+		nextTick(() => {
+			getProfileInfo()
+		})
 	})
 	
 	const getProfileInfo = async () => {
-		let res = await requestMethods('/Profile', 'GET')
-		// console.log(res)
+		let res = await requestMethods('/Profile', 'GET', {
+			user_id: userStore.userId
+		})
+		
+		if(res.code === 200) {
+			userInfo.userEmail = res.data[0].email || '--'
+			userInfo.userCompany = res.data[0].company || '--'
+			userInfo.userAvatarUrl = res.data[0].avatar_url || '--'
+			userInfo.userMyName = res.data[0].username || '--'
+			userInfo.userTime = res.data[0].created_at || '--'
+		}
 	}
 
 	const logoutHandler = async () => {

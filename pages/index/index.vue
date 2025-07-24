@@ -4,18 +4,24 @@
 		<view class="home_bg">
 			<view class="home_info">
 				<text>Yunsoo云梳</text>
-				<text>xiaole2071</text>
+				<text>{{ userName || '--'}}</text>
 			</view>
 		</view>
 		<view class="home_bg_banner">
-			<image src="https://www.wangle.run/yunsoo_wrap/yunsoo_banner.png" mode="widthFix" />
+			<image 
+				src="https://www.wangle.run/yunsoo_wrap/yunsoo_banner.png" 
+				mode="widthFix"
+			/>
 		</view>
 		<!-- nav -->
 		<view class="home_nav">
 			<wd-row>
 				<wd-col :span="6">
 					<view class="home_nav_item home_nav_inventory">
-						<image src="/static/images/nav_icon/receive.svg" mode="widthFix">
+						<image 
+							src="/static/images/nav_icon/receive.svg" 
+							mode="widthFix"
+						>
 						</image>
 					</view>
 					<text class="home_nav_text">库存管理</text>
@@ -176,21 +182,30 @@
 	import { userInfoStore } from '@/stores/userInfo'
 	const userStore = userInfoStore()
 	
+	const userName = ref('')
+	
 	onLoad(() => {
-		// getProfileInfo()
+		// console.log(userStore.token);
+		if(!userStore.token || isTokenExpired(userStore.tokenTime)) {
+			uni.showToast({
+				title: '请重新登录',
+				duration: 1500,
+				icon: 'none'
+			})
+			uni.redirectTo({
+				url: '/pages/login/login'
+			})
+		}
+		
+		// 获取用户昵称
+		userName.value = userStore.userName || '--'
 	})
 
-	const myData = ref([])
-	
 	// 判断token是否过期
-	// const isTokenExpired = (time) => {
-	// 	const now = Math.floor(Date.now() / 1000)
-	// 	return time <= now
-	// }
-	// const getProfileInfo = async () => {
-	// 	let res = await requestMethods('/Profile', 'GET')
-	// 	console.log(res)
-	// }
+	const isTokenExpired = (time) => {
+		const now = Math.floor(Date.now() / 1000)
+		return time <= now
+	}
 </script>
 
 <style lang="scss">

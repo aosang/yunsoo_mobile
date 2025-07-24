@@ -60,7 +60,7 @@
 			toast.error('密码错误')
 		} else {
 			let res = await requestMethods('/Login', 'POST', loginFormText)
-			
+		
 			if(res.code === 200) {
 				// uni.setStorageSync('loginToken', res.data.session.access_token)
 				toast.show({
@@ -69,8 +69,10 @@
 					duration: 600,
 					closed: () => {
 						let { access_token, expires_at } = res.data.session
-						let { id } = res.data.session.user.id
-						userStore.setUser(access_token, expires_at, id)
+						let { id } = res.data.session.user
+						let { username } = res.data.session.user.user_metadata
+						
+						userStore.setUser(access_token, expires_at, id, username)
 						uni.reLaunch({
 							url: '/pages/index/index'
 						})
