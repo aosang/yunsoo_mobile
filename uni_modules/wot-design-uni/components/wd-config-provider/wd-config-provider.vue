@@ -79,4 +79,6 @@ const mapThemeVarsToCSSVars = (themeVars: Record<string, string>) => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+	
+</style>

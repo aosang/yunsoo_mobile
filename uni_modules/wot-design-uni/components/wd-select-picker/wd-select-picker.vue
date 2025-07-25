@@ -89,7 +89,7 @@
                   </block>
                 </block>
                 <block v-else>
-                  {{ item[labelKey] }}
+                  <text style="font-size: 30rpx;">{{ item[labelKey] }}</text>
                 </block>
               </wd-radio>
             </view>

@@ -598,7 +598,7 @@ $-tabs-nav-arrow-fs: var(--wot-tabs-nav-arrow-fs, 18px) !default; // 全部Icon�
 $-tabs-nav-arrow-open-fs: var(--wot-tabs-nav-arrow-open-fs, 14px) !default; // 展开Icon字号
 $-tabs-nav-width: var(--wot-tabs-nav-width, 100vw) !default; // tabs 头部切换宽度
 $-tabs-nav-height: var(--wot-tabs-nav-height, 42px) !default; // 头部切换高度
-$-tabs-nav-fs: var(--wot-tabs-nav-fs, $-fs-content) !default; // 头部切换文字大小
+$-tabs-nav-fs: var(--wot-tabs-nav-fs, 15px) !default; // 头部切换文字大小
 $-tabs-nav-color: var(--wot-tabs-nav-color, rgba(0, 0, 0, 0.85)) !default; // 头部切换文字颜色
 $-tabs-nav-bg: var(--wot-tabs-nav-bg, $-color-white) !default; // 背景颜色
 $-tabs-nav-active-color: var(--wot-tabs-nav-active-color, $-color-theme) !default; // 头部高亮颜色
@@ -817,7 +817,7 @@ $-navbar-background: var(--wot-navbar-background, $-color-white) !default; // na
 $-navbar-arrow-size: var(--wot-navbar-arrow-size, 24px) !default; // navbar左箭头图标大小
 $-navbar-desc-font-size: var(--wot-navbar-desc-font-size, 16px); // navbar 左箭头字体大小
 $-navbar-desc-font-color: var(--wot-navbar-desc-font-color, $-font-gray-1) !default; // navbar左右两侧字体颜色
-$-navbar-title-font-size: var(--wot-navbar-title-font-size, 18px); // navbar title字体大小
+$-navbar-title-font-size: var(--wot-navbar-title-font-size, 15px) !default; // navbar title字体大小
 $-navbar-title-font-weight: var(--wot-navbar-title-font-weight, 600); // navbar title字重
 $-navbar-disabled-opacity: var(--wot-navbar-disabled-opacity, 0.6) !default; // navbar左右两侧字体禁用
 $-navbar-hover-color: var(--wot-navbar-hover-color, #eee) !default; // navbar hover样式
