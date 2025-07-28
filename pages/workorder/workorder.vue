@@ -77,8 +77,7 @@
 								</view>
 								<view class="device_box">
 									<text class="device_box_title">问题描述：</text>
-									<text
-										class="device_box_text">{{item.created_text}}</text>
+									<text class="device_box_text">{{item.created_text}}</text>
 								</view>
 							</view>
 							<template #right>

@@ -18,67 +18,49 @@
 	
 	<view class="workorder_form">
 		<wd-divider class="workorder_name">
-			<view style="display: block;">aosang2071</view>
+			<view style="display: block;">{{userStore.userName || '--'}}</view>
 		</wd-divider>
 		<view class="workorder_form_item">
 			<wd-select-picker
 				label="选择设备" 
-				v-model="value" 
-				:columns="columns" 
+				v-model="workorderForm.created_product" 
+				:columns="workorderDevice"
 				:z-index="1000"
 				type="radio" 
 				@change="handleChange"
+				label-key="value"
+				value-key="value"
 				custom-class="custom_select"
 				custom-label-class="custom_label"
 				custom-value-class="custom_value"
 				custom-content-class="custom_content"
 				placeholder="请选择设备"
 				clearable
+				@confirm="confirmSelectDevice"
 			>
 			</wd-select-picker>
 		</view>
-		<view class="workorder_form_item">
-			<wd-select-picker
-				label="设备类型" 
-				v-model="value" 
-				:columns="columns" 
-				:z-index="1000"
-				type="radio" 
-				@change="handleChange"
-				custom-class="custom_select"
-				custom-label-class="custom_label"
-				custom-value-class="custom_value"
-				custom-content-class="custom_content"
-				placeholder="请选择设备类型"
-				clearable
-			>
-			</wd-select-picker>
+		<view class="workorder_form_item" v-if="workorderForm.created_product">
+			<view class="workorder_form_time">
+				<view>设备类型</view>
+				<view class="workorder_form_value">{{ workorderForm.created_type }}</view>
+			</view>
 		</view>
-		<view class="workorder_form_item">
-			<wd-select-picker
-				label="设备品牌" 
-				v-model="value" 
-				:columns="columns" 
-				:z-index="1000"
-				type="radio" 
-				@change="handleChange"
-				custom-class="custom_select"
-				custom-label-class="custom_label"
-				custom-value-class="custom_value"
-				custom-content-class="custom_content"
-				placeholder="请选择设备品牌"
-				clearable
-			>
-			</wd-select-picker>
+		<view class="workorder_form_item" v-if="workorderForm.created_product">
+			<view class="workorder_form_time">
+				<view>设备品牌</view>
+				<view class="workorder_form_value">{{ workorderForm.created_brand }}</view>
+			</view>
 		</view>
 		<view class="workorder_form_item">
 			<wd-select-picker
 				label="当前状态" 
-				v-model="value" 
-				:columns="columns" 
+				v-model="workorderForm.created_status" 
+				:columns="workorderStatus" 
 				:z-index="1000"
 				type="radio" 
-				@change="handleChange"
+				label-key="value"
+				value-key="value"
 				custom-class="custom_select"
 				custom-label-class="custom_label"
 				custom-value-class="custom_value"
@@ -100,48 +82,147 @@
 				<view class="workorder_form_value">{{ createTime }}</view>
 			</view>
 		</view>
-		<view class="created_textarea">
-			<view class="created_textarea_label">问题描述：</view>
-			<wd-textarea :adjust-position="false" placeholder="请填写评价" />
-		</view>
 	</view>
-	<view style="width: 100%; height: 1000rpx;"></view>
-
+	<!-- 问题描述 -->
+	<view class="created_textarea">
+		<view class="created_textarea_label">问题描述</view>
+		<wd-textarea
+			:adjust-position="false"
+			:maxlength="260"
+			v-model="workorderForm.created_text"
+			placeholder="填写问题描述"
+			custom-textarea-class="custom-desc"
+			clearable 
+			show-word-limit
+		/>
+	</view>
+	<!-- 解决方案 -->
+	<view class="created_textarea">
+		<view class="created_textarea_label">解决方案</view>
+		<wd-textarea
+			:adjust-position="false"
+			:maxlength="260"
+			v-model="workorderForm.created_solved"
+			placeholder="填写解决方案"
+			custom-textarea-class="custom-desc"
+			clearable 
+			show-word-limit
+		/>
+	</view>
+	<!-- 备注 -->
+	<view class="created_textarea">
+		<view class="created_textarea_label">备注信息</view>
+		<wd-textarea
+			:adjust-position="false"
+			:maxlength="120"
+			v-model="workorderForm.created_remark"
+			placeholder="填写备注"
+			custom-textarea-class="custom-desc"
+			clearable 
+			show-word-limit
+			@keyboardheightchange="handlerChange"
+		/>
+	</view>
+	<view 
+		class="whiteBox" 
+		style="height: 500rpx;"
+		v-show="isScroll"
+	>
+	</view>
 </template>
 
 <script setup lang="ts">
 	import Navigation from '@/components/navigation_header.vue'
 	import { useToast } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
-	import { ref } from 'vue'
+	import { ref, onMounted, nextTick, reactive } from 'vue'
+	import { requestMethods } from '@/request/request'
+	import { workOrderFormProps } from '@/utils/dataType.js'
+	import { userInfoStore } from "@/stores/userInfo"
+	const userStore = userInfoStore()
+	
+	onMounted(() => {
+		nextTick(() => {
+			getWorkorderDevice()
+			getWorkorderStatus()
+		})
+	})
 	
 	const backToWorkorderList = () => {
 		uni.navigateBack()
 	}
 	
 	const createWorkorderSubmit = () => {
-		console.log('提交表单事件')
+		const {created_product, created_solved, created_status, created_text} = workorderForm
+		if(!created_product || !created_solved || !created_status || !created_text) {
+			toast.error('请填写完整信息')
+		}else {
+			toast.success('验证已通过')
+		}
 	}
 	
-	const columns = ref<Record<string, any>>([
-	  {
-	    value: '101',
-	    label: '男装'
-	  },
-	  {
-	    value: '102',
-	    label: '奢侈品'
-	  },
-	  {
-	    value: '103',
-	    label: '女装'
-	  }
-	])
-	const value = ref<string>('123')
+	const workorderForm = reactive<workOrderFormProps>({
+		created_product:'',
+		created_name: '',
+		created_time: '',
+		created_update: '',
+		created_solved: '',
+		created_type: '',
+		created_brand: '',
+		created_status:'',
+		created_text:'',
+		created_remark:''
+	})
+	const workorderDevice = ref<Record<string, any>>([])
+	const workorderStatus = ref<Record<string, any>>([])
+	const device = ref<string>('')
 	const createTime = ref<string>('2025-07-25 16:35')
+	const isScroll = ref<boolean>(false)
 	
-	const handleChange = ({ value }) => {
-	  toast.show('选择了' + value)
+	const handleChange = () => {
+	  // toast.show('选择了' + workorderForm.created_product)
+	}
+	
+	const confirmSelectDevice = (event: any) => {
+		workorderForm.created_product = event.selectedItems.product_name
+		workorderForm.created_type = event.selectedItems.product_type
+		workorderForm.created_brand = event.selectedItems.product_brand
+	}
+	
+	const getWorkorderDevice = async () => {
+		let res = await requestMethods('/GetDevice', 'GET')
+		workorderDevice.value = res.data
+	}
+	
+	const getWorkorderStatus = async () => {
+		let res = await requestMethods('/GetStatus', 'GET')
+		workorderStatus.value = res.data
+	}
+
+	// 处理键盘弹出遮挡输入框的问题
+	const handlerChange = (event: any) => {
+		const height:number = event.height
+		if(height > 0) {
+			isScroll.value = true
+			setTimeout(() => {
+				uni.createSelectorQuery().select('.whiteBox').boundingClientRect((rect:any) => {
+					uni.pageScrollTo({
+						scrollTop: rect.top,
+						duration: 50,
+					})
+				}).exec()
+			}, 100)
+		}else if( height === 0) {
+			isScroll.value = false
+			setTimeout(() => {
+				uni.createSelectorQuery().select('.workorder_form').boundingClientRect((rect:any) => {
+					uni.pageScrollTo({
+						scrollTop: rect.top,
+						duration: 50,
+					})
+				}).exec()
+			}, 100)
+		}
 	}
 </script>
 
@@ -197,4 +278,20 @@ html, body {
 		}
 	}
 }
+
+.created_textarea {
+		margin-top: 24rpx;
+		background: #fff;
+		.created_textarea_label {
+			padding: 28rpx 28rpx 0 28rpx;
+			color: #333;
+			font-size: 30rpx;
+		}
+		:deep() {
+			.custom-desc {
+				max-height: 140rpx;
+				box-sizing: border-box;
+			}
+		}
+	}
 </style>
