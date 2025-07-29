@@ -1,6 +1,6 @@
 <template>
 	<Navigation />
-	<wd-toast></wd-toast>
+	<wd-toast />
 	<view class="create_workorder">
 		<wd-navbar
 			title="创建工单" 
@@ -17,6 +17,12 @@
 	</view>
 	
 	<view class="workorder_form">
+		<wd-notice-bar 
+			text="除备注信息外，其它均为必填项" 
+			prefix="warn-bold"
+			:scrollable="false"
+		>
+		</wd-notice-bar>
 		<wd-divider class="workorder_name">
 			<view style="display: block;">{{userStore.userName || '--'}}</view>
 		</wd-divider>
@@ -27,7 +33,6 @@
 				:columns="workorderDevice"
 				:z-index="1000"
 				type="radio" 
-				@change="handleChange"
 				label-key="value"
 				value-key="value"
 				custom-class="custom_select"
@@ -67,19 +72,20 @@
 				custom-content-class="custom_content"
 				placeholder="请选择当前状态"
 				clearable
+				@confirm="confirmSelectStatus"
 			>
 			</wd-select-picker>
 		</view>
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>创建时间</view>
-				<view class="workorder_form_value">{{ createTime }}</view>
+				<view class="workorder_form_value">{{ workorderForm.created_time }}</view>
 			</view>
 		</view>
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>更新时间</view>
-				<view class="workorder_form_value">{{ createTime }}</view>
+				<view class="workorder_form_value">{{ workorderForm.created_update }}</view>
 			</view>
 		</view>
 	</view>
@@ -97,7 +103,7 @@
 		/>
 	</view>
 	<!-- 解决方案 -->
-	<view class="created_textarea">
+	<view class="created_textarea" v-if="workorderForm.created_status === '已解决'">
 		<view class="created_textarea_label">解决方案</view>
 		<wd-textarea
 			:adjust-position="false"
@@ -107,6 +113,7 @@
 			custom-textarea-class="custom-desc"
 			clearable 
 			show-word-limit
+			@keyboardheightchange="handlerChange"
 		/>
 	</view>
 	<!-- 备注 -->
@@ -140,8 +147,16 @@
 	import { workOrderFormProps } from '@/utils/dataType.js'
 	import { userInfoStore } from "@/stores/userInfo"
 	const userStore = userInfoStore()
+	import dayjs from 'dayjs'
+	import { formatTime, getTimenumber } from '@/request/formatTime'
 	
 	onMounted(() => {
+		workorderForm.id = userStore.userId
+		workorderForm.created_name = userStore.userName
+		workorderForm.created_time = formatTime()
+		workorderForm.created_update = formatTime()
+		workorderForm.created_id = getTimenumber()
+			
 		nextTick(() => {
 			getWorkorderDevice()
 			getWorkorderStatus()
@@ -154,14 +169,19 @@
 	
 	const createWorkorderSubmit = () => {
 		const {created_product, created_solved, created_status, created_text} = workorderForm
-		if(!created_product || !created_solved || !created_status || !created_text) {
+		if(!created_product || !created_status || !created_text) {
 			toast.error('请填写完整信息')
-		}else {
-			toast.success('验证已通过')
+		}else if(created_status === '已解决' && !created_solved) {
+			toast.error('请填写完整信息')
+		}
+		else {
+			addWorkorderform()
 		}
 	}
 	
 	const workorderForm = reactive<workOrderFormProps>({
+		id: '',
+		created_id: '',
 		created_product:'',
 		created_name: '',
 		created_time: '',
@@ -179,14 +199,14 @@
 	const createTime = ref<string>('2025-07-25 16:35')
 	const isScroll = ref<boolean>(false)
 	
-	const handleChange = () => {
-	  // toast.show('选择了' + workorderForm.created_product)
-	}
-	
 	const confirmSelectDevice = (event: any) => {
 		workorderForm.created_product = event.selectedItems.product_name
 		workorderForm.created_type = event.selectedItems.product_type
 		workorderForm.created_brand = event.selectedItems.product_brand
+	}
+	
+	const confirmSelectStatus = (event: any) => {
+		workorderForm.created_status = event.value
 	}
 	
 	const getWorkorderDevice = async () => {
@@ -197,6 +217,27 @@
 	const getWorkorderStatus = async () => {
 		let res = await requestMethods('/GetStatus', 'GET')
 		workorderStatus.value = res.data
+	}
+	
+	// 新增工单
+	const addWorkorderform = async () => {
+		let res = await requestMethods('/AddWorkorder', 'POST', workorderForm)
+		if(res.code === 200) {
+			toast.show({
+				iconName: 'success',
+				msg: '新增工单成功',
+				duration: 800,
+				closed: () => {
+					uni.switchTab({
+						url: '/pages/workorder/workorder?refresh=true' 
+					})
+					uni.$emit('refreshData')
+				}
+			})
+		}else {
+			toast.error('新增工单失败')
+			console.log(res)
+		}
 	}
 
 	// 处理键盘弹出遮挡输入框的问题
@@ -280,18 +321,18 @@ html, body {
 }
 
 .created_textarea {
-		margin-top: 24rpx;
-		background: #fff;
-		.created_textarea_label {
-			padding: 28rpx 28rpx 0 28rpx;
-			color: #333;
-			font-size: 30rpx;
-		}
-		:deep() {
-			.custom-desc {
-				max-height: 140rpx;
-				box-sizing: border-box;
-			}
+	margin-top: 24rpx;
+	background: #fff;
+	.created_textarea_label {
+		padding: 28rpx 28rpx 0 28rpx;
+		color: #333;
+		font-size: 30rpx;
+	}
+	:deep() {
+		.custom-desc {
+			max-height: 140rpx;
+			box-sizing: border-box;
 		}
 	}
+}
 </style>

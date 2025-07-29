@@ -1,6 +1,7 @@
 <template>
 	<Navigation />
 	<wd-toast />
+	<wd-message-box />
 	<view class="workorder_list">
 		<wd-navbar 
 			title="我的工单" 
@@ -37,13 +38,13 @@
 							v-for="item in workOrderListData"
 							:key="item.created_id"
 						>
-							<view class="workorder_list_item">
+							<view class="workorder_list_item" @click="goToWorkorderDetails(item.created_id)">
 								<view 
 									class="device_status" 
-									:class="item.created_status === '已完成'? 'device_finish' : ''"
-									v-if="item.created_status === '已完成'"
+									:class="item.created_status === '已解决'? 'device_finish' : ''"
+									v-if="item.created_status === '已解决'"
 								>
-									已完成
+									已解决
 								</view>
 								<view
 									class="device_status" 
@@ -82,7 +83,7 @@
 							</view>
 							<template #right>
 								<view class="device_action">
-									<view class="device_button">删除</view>
+									<view class="device_button" @click="deleteWorkorderData(item.created_id)">删除</view>
 								</view>
 							</template>
 						</wd-swipe-action>
@@ -95,11 +96,12 @@
 
 <script setup>
 	import Navigation from '@/components/navigation_header.vue'
-	import { nextTick, onMounted, reactive, ref } from 'vue';
-	import { onPullDownRefresh } from '@dcloudio/uni-app'
+	import { nextTick, onMounted, reactive, ref, watch } from 'vue';
+	import { onPullDownRefresh, onShow } from '@dcloudio/uni-app'
 	import { requestMethods } from '@/request/request.js'
-	import { useToast } from '@/uni_modules/wot-design-uni'
+	import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
+	const message = useMessage()
 	import { userInfoStore } from '@/stores/userInfo';
 	const userStore = userInfoStore()
 
@@ -113,7 +115,7 @@
 		text: '全部'
 	}, {
 		id: 2,
-		text: '已完成'
+		text: '已解决'
 	}, {
 		id: 3,
 		text: '处理中'
@@ -121,8 +123,12 @@
 		id: 4,
 		text: '待处理'
 	}])
-
+	
 	onMounted(() => {
+		// 新增工单成功后自动刷新数据
+		uni.$on('refreshData', () => {
+			getWorkorderData(userStore.userId ,tabNum.value)
+		})
 		nextTick(() => {
 			getWorkorderData(userStore.userId ,tabNum.value)
 		})		
@@ -154,12 +160,46 @@
 		}
 	}
 	
+	// 跳转工单详情页
+	const goToWorkorderDetails = (id) => {
+		uni.navigateTo({
+			url: `/pages/workorderDetails/workorderDetails?workId=${id}`
+		})
+	}
+	
+	// 删除工单
+	const deleteWorkorderData = (id) => {
+		message.confirm({
+			title: '提示',
+			msg: '确认要删除此工单吗',
+		})
+		.then(async () => {
+			let res = await requestMethods('/DeleteWorkorder', 'POST', {
+				delId: id
+			})
+			if(res.code === 200) {
+				toast.show({
+					msg: '工单已删除',
+					duration: 800,
+					iconName: 'success',
+					closed: () => {
+						getWorkorderData(userStore.userId, tabNum.value)
+					}
+				})
+			}else {
+				toast.error('删除失败')
+			}
+		})
+		.catch(() => {
+			console.log('取消')
+		})
+	}
+	
 	const goToCreateWorkorder = () => {
 		uni.navigateTo({
 			url: '/pages/createWorkorder/createWorkorder'
 		})
-	}
-		
+	}	
 </script>
 
 <style lang="scss">

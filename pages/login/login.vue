@@ -62,7 +62,6 @@
 			let res = await requestMethods('/Login', 'POST', loginFormText)
 		
 			if(res.code === 200) {
-				// uni.setStorageSync('loginToken', res.data.session.access_token)
 				toast.show({
 					iconName: 'success',
 					msg: '登录成功',

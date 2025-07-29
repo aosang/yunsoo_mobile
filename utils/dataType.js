@@ -1,4 +1,6 @@
 export interface workOrderFormProps {
+	id: string,
+	created_id: string
   created_product: null | string
   created_name: string
   created_time: string

@@ -32,8 +32,12 @@
 		{
 			"path": "pages/createWorkorder/createWorkorder",
 			"style": {
-				// "navigationBarTitleText": "创建工单",
-				// "navigationBarTextStyle": "#ffffff",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/workorderDetails/workorderDetails",
+			"style": {
 				"navigationStyle": "custom"
 			}
 		}
