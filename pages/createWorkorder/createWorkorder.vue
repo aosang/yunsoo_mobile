@@ -229,7 +229,7 @@
 				duration: 800,
 				closed: () => {
 					uni.switchTab({
-						url: '/pages/workorder/workorder?refresh=true' 
+						url: '/pages/workorder/workorder' 
 					})
 					uni.$emit('refreshData')
 				}

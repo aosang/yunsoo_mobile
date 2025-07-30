@@ -1,5 +1,6 @@
 <template>
 	<Navigation/>
+	<wd-toast />
 	<view class="workorder_details">
 		<wd-navbar
 			title="工单详情" 
@@ -7,9 +8,10 @@
 			custom-class="custom"
 			left-arrow
 			left-text="返回"
-			right-text="确认编辑"
+			:right-text="isUpdate? '确认更新' : ''"
 			custom-style="color: #fff"
 			@click-left="backToWorkorderList"
+			@click-right="updateWorkorderData"
 		>
 		</wd-navbar>
 	</view>
@@ -17,7 +19,7 @@
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>设备名称</view>
-				<view class="workorder_form_value"></view>
+				<view class="workorder_form_value">{{workorderEditForm.created_product}}</view>
 			</view>
 		</view>
 		<view class="workorder_form_item">
@@ -42,25 +44,25 @@
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>设备类型</view>
-				<view class="workorder_form_value"></view>
+				<view class="workorder_form_value">{{workorderEditForm.created_type}}</view>
 			</view>
 		</view>
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>设备品牌</view>
-				<view class="workorder_form_value"></view>
+				<view class="workorder_form_value">{{workorderEditForm.created_brand}}</view>
 			</view>
 		</view>
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>创建时间</view>
-				<view class="workorder_form_value"></view>
+				<view class="workorder_form_value">{{workorderEditForm.created_time}}</view>
 			</view>
 		</view>
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>更新时间</view>
-				<view class="workorder_form_value"></view>
+				<view class="workorder_form_value">{{workorderEditForm.created_update}}</view>
 			</view>
 		</view>
 	</view>
@@ -75,7 +77,45 @@
 			custom-textarea-class="custom-desc"
 			clearable 
 			show-word-limit
+			@input="checkUpdateValue"
 		/>
+	</view>
+	<view 
+		class="created_textarea" 
+		v-if="workorderEditForm.created_status === '已解决'"
+	>
+		<view class="created_textarea_label">解决方案</view>
+		<wd-textarea
+			:adjust-position="false"
+			:maxlength="260"
+			v-model="workorderEditForm.created_solved"
+			placeholder="填写解决方案"
+			custom-textarea-class="custom-desc"
+			clearable 
+			show-word-limit
+			@input="checkUpdateValue"
+		/>
+	</view>
+	<view class="created_textarea">
+		<view class="created_textarea_label">备注信息</view>
+		<wd-textarea
+			:adjust-position="false"
+			:maxlength="120"
+			v-model="workorderEditForm.created_remark"
+			placeholder="填写备注"
+			custom-textarea-class="custom-desc"
+			clearable 
+			show-word-limit
+			@keyboardheightchange="handlerChange"
+			@input="checkUpdateValue"
+		/>
+	</view>
+
+	<view
+		class="whiteBox" 
+		style="height: 500rpx;"
+		v-show="isScroll"
+	>
 	</view>
 </template>
 
@@ -83,34 +123,146 @@
 	import Navigation from '@/components/navigation_header.vue'
 	import { onLoad } from '@dcloudio/uni-app'
 	import { requestMethods } from '@/request/request'
-	import { reactive, ref } from 'vue'
+	import { reactive, ref, onMounted, nextTick, watch } from 'vue'
+	import { useToast } from '@/uni_modules/wot-design-uni'
+	const toast = useToast()
+	import { formatTime } from '@/request/formatTime'
 	
 	const workorderStatus = ref<Record<string, any>> ([])
+	const updateId = ref('')
+	const isUpdate = ref<boolean>(false)
+	const isScroll = ref<boolean>(false)
 	const workorderEditForm = reactive({
-		created_status: '',
-		created_text: ''
+		created_id: '',
+		created_product:'',
+		created_name: '',
+		created_time: '',
+		created_update: '',
+		created_solved: '',
+		created_type: '',
+		created_brand: '',
+		created_status:'',
+		created_text:'',
+		created_remark:''
 	})
 
 	onLoad((options) => {
 		getWorkorderDatailsData(options.workId)
+		workorderEditForm.created_id = options.workId
+	})
+	
+	onMounted(() => {
+		nextTick(() => {
+			getWorkorderStatus()
+		})
 	})
 	
 	const confirmSelectStatus = (event: any) => {
-		
+		workorderEditForm.created_status = event.value
+		if(event.value !== '已解决') {
+			workorderEditForm.created_solved = ''
+		}
+		checkUpdateValue()
+	}
+	
+	const handlerChange = (event: any) => {
+		const height:number = event.height
+		if(height > 0) {
+			isScroll.value = true
+			setTimeout(() => {
+				uni.createSelectorQuery().select('.whiteBox').boundingClientRect((rect:any) => {
+					uni.pageScrollTo({
+						scrollTop: rect.top,
+						duration: 50,
+					})
+				}).exec()
+			}, 100)
+		}else if( height === 0) {
+			isScroll.value = false
+			setTimeout(() => {
+				uni.createSelectorQuery().select('.workorder_details_form').boundingClientRect((rect:any) => {
+					uni.pageScrollTo({
+						scrollTop: rect.top,
+						duration: 50,
+					})
+				}).exec()
+			}, 100)
+		}
+	}
+	
+	const getWorkorderStatus = async () => {
+		let res = await requestMethods('/GetStatus', 'GET')
+		workorderStatus.value = res.data
 	}
 	
 	// 获取工单详情数据
-	const getWorkorderDatailsData = async (id) => {
+	const getWorkorderDatailsData = async (id: string) => {
 		let res = await requestMethods('/GetWorkorderDetail', 'GET', {
 			workDetailId: id
 		})
-		// console.log(res)
+		if(res.code === 200) {
+			workorderEditForm.created_product = res.data[0].created_product
+			workorderEditForm.created_status = res.data[0].created_status
+			workorderEditForm.created_type = res.data[0].created_type
+			workorderEditForm.created_brand = res.data[0].created_brand
+			workorderEditForm.created_time = res.data[0].created_time
+			workorderEditForm.created_update = formatTime()
+			workorderEditForm.created_text = res.data[0].created_text
+			workorderEditForm.created_solved = res.data[0].created_solved
+			workorderEditForm.created_remark = res.data[0].created_remark
+			
+			uni.setStorageSync('saveData', res.data[0])
+		}else {
+			toast.error('获取数据失败')
+		}
+	}
+	
+	const updateWorkorderData = async () => {
+		const {created_text, created_solved, created_status} = workorderEditForm
+		if(!created_text || !created_status) {
+			toast.error('请填写完整信息')
+		}else if(created_status === '已解决' && !created_solved) {
+			toast.error('请填写完整信息')
+		}else {
+			let res = await requestMethods('/UpdateWorkorder', 'POST', workorderEditForm)
+			if(res.code === 200) {
+				toast.show({
+					iconName: 'success',
+					msg: '更新成功',
+					duration: 800,
+					closed: () => {
+						uni.switchTab({
+							url: '/pages/workorder/workorder' 
+						})
+						uni.$emit('refreshData')
+					}
+				})
+			}else {
+				toast.error('新增工单失败')
+				console.log(res)
+			}
+		}
+	}
+	
+	const checkUpdateValue = () => {
+		let saveData = uni.getStorageSync('saveData')
+		const {created_status, created_text, created_solved, created_remark} = workorderEditForm
+		
+		if(saveData.created_status === created_status && saveData.created_text === created_text && saveData.created_solved === created_solved && saveData.created_remark === created_remark) {
+			isUpdate.value = false
+		}else {
+			isUpdate.value = true
+		}
 	}
 	
 	const backToWorkorderList = () => {
-		uni.navigateBack()
+		uni.navigateBack({
+			success: () => {
+				workorderEditForm.created_remark = ''
+			}
+		})
 	}
-
+	
 </script>
 
 <style lang="scss">
