@@ -114,7 +114,7 @@
 		.login_form_item {
 			margin-bottom: 30rpx;
 			.login_form_label {
-				font-size: 30rpx;
+				font-size: 28rpx;
 				color: #333;
 				margin-bottom: 10rpx;
 			}
@@ -122,7 +122,7 @@
 			.commonInput {
 				height: 80rpx;
 				box-shadow: none;
-				font-size: 30rpx;
+				font-size: 28rpx;
 				border-bottom: 1px solid #eee;
 			}
 		}

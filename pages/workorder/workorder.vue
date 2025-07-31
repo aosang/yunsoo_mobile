@@ -1,7 +1,7 @@
 <template>
 	<Navigation />
 	<wd-toast />
-	<wd-message-box />
+	<wd-message-box :zIndex="1000" />
 	<view class="workorder_list">
 		<wd-navbar 
 			title="我的工单" 
@@ -9,6 +9,7 @@
 			custom-class="custom" 
 			right-text="添加"
 			@click-right="goToCreateWorkorder"
+			:zIndex="10"
 		>
 		</wd-navbar>
 	</view>
@@ -191,7 +192,7 @@
 			}
 		})
 		.catch(() => {
-			console.log('取消')
+			// console.log('取消')
 		})
 	}
 	
@@ -307,7 +308,6 @@
 					overflow: hidden;
 					text-overflow: ellipsis;
 				}
-
 			}
 		}
 	}

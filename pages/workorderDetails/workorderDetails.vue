@@ -8,7 +8,7 @@
 			custom-class="custom"
 			left-arrow
 			left-text="返回"
-			:right-text="isUpdate? '确认更新' : ''"
+			right-text="确认更新"
 			custom-style="color: #fff"
 			@click-left="backToWorkorderList"
 			@click-right="updateWorkorderData"
@@ -77,7 +77,6 @@
 			custom-textarea-class="custom-desc"
 			clearable 
 			show-word-limit
-			@input="checkUpdateValue"
 		/>
 	</view>
 	<view 
@@ -93,7 +92,6 @@
 			custom-textarea-class="custom-desc"
 			clearable 
 			show-word-limit
-			@input="checkUpdateValue"
 		/>
 	</view>
 	<view class="created_textarea">
@@ -107,7 +105,6 @@
 			clearable 
 			show-word-limit
 			@keyboardheightchange="handlerChange"
-			@input="checkUpdateValue"
 		/>
 	</view>
 
@@ -162,7 +159,6 @@
 		if(event.value !== '已解决') {
 			workorderEditForm.created_solved = ''
 		}
-		checkUpdateValue()
 	}
 	
 	const handlerChange = (event: any) => {
@@ -224,22 +220,24 @@
 		}else if(created_status === '已解决' && !created_solved) {
 			toast.error('请填写完整信息')
 		}else {
-			let res = await requestMethods('/UpdateWorkorder', 'POST', workorderEditForm)
-			if(res.code === 200) {
-				toast.show({
-					iconName: 'success',
-					msg: '更新成功',
-					duration: 800,
-					closed: () => {
-						uni.switchTab({
-							url: '/pages/workorder/workorder' 
-						})
-						uni.$emit('refreshData')
-					}
-				})
-			}else {
-				toast.error('新增工单失败')
-				console.log(res)
+			if(checkUpdateValue()) {
+				let res = await requestMethods('/UpdateWorkorder', 'POST', workorderEditForm)
+				if(res.code === 200) {
+					toast.show({
+						iconName: 'success',
+						msg: '更新成功',
+						duration: 800,
+						closed: () => {
+							uni.switchTab({
+								url: '/pages/workorder/workorder' 
+							})
+							uni.$emit('refreshData')
+						}
+					})
+				}else {
+					toast.error('新增工单失败')
+					console.log(res)
+				}
 			}
 		}
 	}
@@ -249,9 +247,10 @@
 		const {created_status, created_text, created_solved, created_remark} = workorderEditForm
 		
 		if(saveData.created_status === created_status && saveData.created_text === created_text && saveData.created_solved === created_solved && saveData.created_remark === created_remark) {
-			isUpdate.value = false
+			toast.show('内容未修改，请修改后提交')
+			return isUpdate.value = false
 		}else {
-			isUpdate.value = true
+			return isUpdate.value = true
 		}
 	}
 	
@@ -284,21 +283,24 @@ html, body {
 .workorder_details_form {
 	background: #fff;
 	padding-top: 190rpx;
+	
 	:deep() {
 		.custom_label {
-			font-size: 30rpx;
+			font-size: 28rpx;
+			margin-top: 4rpx;
 		}
 		.custom_value {
-			font-size: 30rpx;
+			font-size: 28rpx;
+			margin-top: 4rpx;
 		}
 		.custom_select {
-			height: 88rpx;
+			height: 90rpx;
 			border-bottom: 1px solid #eee;
 		}
 	}
 	.workorder_form_time {
-		height: 88rpx;
-		font-size: 30rpx;
+		height: 90rpx;
+		font-size: 28rpx;
 		color: #333;
 		display: flex;
 		align-items: center;
@@ -307,6 +309,7 @@ html, body {
 		
 		.workorder_form_value {
 			margin-left: 138rpx;
+			font-size: 28rpx;
 		}
 	}
 }
@@ -314,15 +317,17 @@ html, body {
 .created_textarea {
 	margin-top: 24rpx;
 	background: #fff;
+	
 	.created_textarea_label {
 		padding: 28rpx 28rpx 0 28rpx;
 		color: #333;
-		font-size: 30rpx;
+		font-size: 28rpx;
 	}
 	:deep() {
 		.custom-desc {
 			max-height: 140rpx;
 			box-sizing: border-box;
+			font-size: 28rpx;
 		}
 	}
 }

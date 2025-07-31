@@ -21,6 +21,7 @@
 			text="除备注信息外，其它均为必填项" 
 			prefix="warn-bold"
 			:scrollable="false"
+			class="notice-bar"
 		>
 		</wd-notice-bar>
 		<wd-divider class="workorder_name">
@@ -286,28 +287,35 @@ html, body {
 .workorder_form {
 	background: #fff;
 	padding-top: 190rpx;
+	
+	.notice-bar {
+		font-size: 28rpx;
+	}
+	
 	:deep() {
 		.custom_label {
-			font-size: 30rpx;
+			font-size: 28rpx;
+			margin-top: 4rpx;
 		}
 		.custom_value {
-			font-size: 30rpx;
+			font-size: 28rpx;
+			margin-top: 4rpx;
 		}
 		.custom_select {
-			height: 88rpx;
+			height: 90rpx;
 			border-bottom: 1px solid #eee;
 		}
 	}
 	
 	.workorder_name {
-		font-size: 36rpx;
+		font-size: 32rpx;
 		font-weight: 600;
 		color: #2a6fff;
 	}
 	
 	.workorder_form_time {
-		height: 88rpx;
-		font-size: 30rpx;
+		height: 90rpx;
+		font-size: 28rpx;
 		color: #333;
 		display: flex;
 		align-items: center;
@@ -323,15 +331,17 @@ html, body {
 .created_textarea {
 	margin-top: 24rpx;
 	background: #fff;
+	
 	.created_textarea_label {
 		padding: 28rpx 28rpx 0 28rpx;
 		color: #333;
-		font-size: 30rpx;
+		font-size: 28rpx;
 	}
 	:deep() {
 		.custom-desc {
 			max-height: 140rpx;
 			box-sizing: border-box;
+			font-size: 28rpx;
 		}
 	}
 }
