@@ -114,7 +114,6 @@
 			custom-textarea-class="custom-desc"
 			clearable 
 			show-word-limit
-			@keyboardheightchange="handlerChange"
 		/>
 	</view>
 	<!-- 备注 -->
@@ -128,13 +127,11 @@
 			custom-textarea-class="custom-desc"
 			clearable 
 			show-word-limit
-			@keyboardheightchange="handlerChange"
 		/>
 	</view>
 	<view 
 		class="whiteBox" 
 		style="height: 500rpx;"
-		v-show="isScroll"
 	>
 	</view>
 </template>
@@ -241,31 +238,6 @@
 		}
 	}
 
-	// 处理键盘弹出遮挡输入框的问题
-	const handlerChange = (event: any) => {
-		const height:number = event.height
-		if(height > 0) {
-			isScroll.value = true
-			setTimeout(() => {
-				uni.createSelectorQuery().select('.whiteBox').boundingClientRect((rect:any) => {
-					uni.pageScrollTo({
-						scrollTop: rect.top,
-						duration: 50,
-					})
-				}).exec()
-			}, 100)
-		}else if( height === 0) {
-			isScroll.value = false
-			setTimeout(() => {
-				uni.createSelectorQuery().select('.workorder_form').boundingClientRect((rect:any) => {
-					uni.pageScrollTo({
-						scrollTop: rect.top,
-						duration: 50,
-					})
-				}).exec()
-			}, 100)
-		}
-	}
 </script>
 
 <style lang="scss" >

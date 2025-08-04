@@ -104,7 +104,6 @@
 			custom-textarea-class="custom-desc"
 			clearable 
 			show-word-limit
-			@keyboardheightchange="handlerChange"
 		/>
 	</view>
 
