@@ -33,7 +33,7 @@
 					</view>
 					<text class="home_nav_text">巡检记录</text>
 				</wd-col>
-				<wd-col :span="6">
+				<wd-col :span="6" @click="goToLibrary">
 					<view class="home_nav_item home_nav_library">
 						<image src="/static/images/nav_icon/book.svg" mode="widthFix">
 						</image>
@@ -205,6 +205,12 @@
 	const isTokenExpired = (time) => {
 		const now = Math.floor(Date.now() / 1000)
 		return time <= now
+	}
+	
+	const goToLibrary = () => {
+		uni.navigateTo({
+			url: '/pages/library/library'
+		})
 	}
 </script>
 

@@ -40,6 +40,15 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/library/library",
+			"style": {
+				"navigationBarTitleText": "知识库",
+				"navigationBarBackgroundColor": "#2a6fff",
+				"navigationBarTextStyle": "#ffffff",
+				"backgroundColor": "#2a6fff"
+			}
 		}
 	],
 	"globalStyle": {
