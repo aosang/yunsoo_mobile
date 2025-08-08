@@ -42,12 +42,18 @@
 			}
 		},
 		{
-			"path": "pages/library/library",
+			"path": "pages/createLibrary/createLibrary",
 			"style": {
 				"navigationBarTitleText": "知识库",
 				"navigationBarBackgroundColor": "#2a6fff",
 				"navigationBarTextStyle": "#ffffff",
 				"backgroundColor": "#2a6fff"
+			}
+		},
+		{
+			"path": "pages/libraryList/libraryList",
+			"style": {
+				"navigationStyle": "custom"
 			}
 		}
 	],

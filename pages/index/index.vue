@@ -209,7 +209,7 @@
 	
 	const goToLibrary = () => {
 		uni.navigateTo({
-			url: '/pages/library/library'
+			url: '/pages/libraryList/libraryList'
 		})
 	}
 </script>
