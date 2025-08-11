@@ -39,7 +39,10 @@
 							v-for="item in workOrderListData"
 							:key="item.created_id"
 						>
-							<view class="workorder_list_item" @click="goToWorkorderDetails(item.created_id)">
+							<view 
+								class="workorder_list_item"
+								@click="goToWorkorderDetails(item.created_id)"
+							>
 								<view 
 									class="device_status" 
 									:class="item.created_status === '已解决'? 'device_finish' : ''"
@@ -84,7 +87,12 @@
 							</view>
 							<template #right>
 								<view class="device_action">
-									<view class="device_button" @click="deleteWorkorderData(item.created_id)">删除</view>
+									<view 
+										class="device_button" 
+										@click="deleteWorkorderData(item.created_id)"
+									>
+										删除
+									</view>
 								</view>
 							</template>
 						</wd-swipe-action>

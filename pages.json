@@ -53,7 +53,8 @@
 		{
 			"path": "pages/libraryList/libraryList",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 		}
 	],
