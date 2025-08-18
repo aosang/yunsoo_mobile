@@ -19,7 +19,9 @@
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>设备名称</view>
-				<view class="workorder_form_value">{{workorderEditForm.created_product}}</view>
+				<view class="workorder_form_value">
+					{{workorderEditForm.created_product}}
+				</view>
 			</view>
 		</view>
 		<view class="workorder_form_item">
@@ -44,7 +46,9 @@
 		<view class="workorder_form_item">
 			<view class="workorder_form_time">
 				<view>设备类型</view>
-				<view class="workorder_form_value">{{workorderEditForm.created_type}}</view>
+				<view class="workorder_form_value">
+					{{workorderEditForm.created_type}}
+				</view>
 			</view>
 		</view>
 		<view class="workorder_form_item">

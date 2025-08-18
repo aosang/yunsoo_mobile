@@ -10,7 +10,10 @@
 						show-img-size 
 						show-img-toolbar 
 						show-img-resize
-						@statuschange="onStatusChange" :read-only="readOnly" @ready="onEditorReady">
+						@statuschange="onStatusChange" 
+						:read-only="readOnly" 
+						@ready="onEditorReady"
+					>
 					</editor>
 				</view>
 

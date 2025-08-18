@@ -2,10 +2,18 @@
 	<Navigation />
 	<wd-toast />
 	<view class="library_list">
-		<wd-navbar title="知识库" fixed custom-class="custom" left-arrow left-text="返回" right-text="新增"
-			custom-style="color: #fff" @click-left="goToBackEvent">
+		<wd-navbar 
+			title="知识库" 
+			fixed 
+			custom-class="custom" 
+			left-arrow 
+			left-text="返回" 
+			right-text="新增"
+			custom-style="color: #fff" 
+			@click-left="goToBackEvent"
+			@click-right="goToCreateLibrary"
+		>
 		</wd-navbar>
-
 		<view class="library_box">
 			<view class="library_loading" v-if="isLoading">
 				<wd-loading></wd-loading>
@@ -14,8 +22,8 @@
 				<wd-status-tip image="content" tip="暂无知识库" />
 			</view>
 			<block v-for="(item, index) in libraryData" :key="index">
-				<wd-swipe-action class="library_item">
-					<view class="library_list_item">
+				<wd-swipe-action class="library_item" >
+					<view class="library_list_item" @click="goToLibraryDetails(item.created_id)">
 						<view class="library_list_icon" v-show="item.type === '笔记本'">
 							<image src="/static/images/library_icon/laptop.png" mode="widthFix"></image>
 						</view>
@@ -104,6 +112,18 @@
 			isLoading.value = false
 			uni.stopPullDownRefresh()
 		}
+	}
+	
+	const goToCreateLibrary = () => {
+		uni.navigateTo({
+			url: '/pages/createLibrary/createLibrary'
+		})
+	}
+	
+	const goToLibraryDetails = (lId) => {
+		uni.navigateTo({
+			url: `/pages/libraryDetails/libraryDetails?libraryId=${lId}`
+		})
 	}
 
 	const goToBackEvent = () => {
