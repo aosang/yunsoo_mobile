@@ -120,7 +120,7 @@
 			}
 			
 			.commonInput {
-				height: 80rpx;
+				display: block;
 				box-shadow: none;
 				font-size: 28rpx;
 				border-bottom: 1px solid #eee;

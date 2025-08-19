@@ -66,7 +66,12 @@
 					</view>
 					<template #right>
 						<view class="library_action">
-							<view class="library_button">删除</view>
+							<view 
+								class="library_button"
+								@click="deleteLibraryListData(item.created_id)"
+							>
+								删除
+							</view>
 						</view>
 					</template>
 				</wd-swipe-action>
@@ -112,6 +117,13 @@
 			isLoading.value = false
 			uni.stopPullDownRefresh()
 		}
+	}
+	
+	// 删除知识库
+	const deleteLibraryListData = async () => {
+		let res = await requestMethods('/deleteLibrary', 'POST', {
+			
+		})
 	}
 	
 	const goToCreateLibrary = () => {
