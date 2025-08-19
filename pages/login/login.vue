@@ -10,7 +10,7 @@
 		<view class="login_form_item">
 			<view class="login_form_label">电子邮箱</view>
 			<wd-input 
-				class="commonInput" 
+				custom-input-class="commonInput"
 				placeholder="请输入邮箱"  
 				v-model="loginFormText.email"
 				clearable
@@ -19,7 +19,7 @@
 		<view class="login_form_item">
 			<view class="login_form_label">登录密码</view>
 			<wd-input 
-				class="commonInput" 
+				custom-input-class="commonInput"
 				placeholder="请输入密码" 
 				v-model="loginFormText.password"
 				clearable
