@@ -60,7 +60,6 @@
 			toast.error('密码错误')
 		} else {
 			let res = await requestMethods('/Login', 'POST', loginFormText)
-		
 			if(res.code === 200) {
 				toast.show({
 					iconName: 'success',

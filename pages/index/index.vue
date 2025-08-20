@@ -187,11 +187,13 @@
 	onLoad(() => {
 		// console.log(userStore.token);
 		if(!userStore.token || isTokenExpired(userStore.tokenTime)) {
-			uni.showToast({
-				title: '请重新登录',
-				duration: 1500,
-				icon: 'none'
-			})
+			if(!isTokenExpired(userStore.tokenTime)) {
+				return uni.showToast({
+					title: '请重新登录',
+					duration: 1500,
+					icon: 'none'
+				})
+			}
 			uni.redirectTo({
 				url: '/pages/login/login'
 			})

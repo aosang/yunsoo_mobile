@@ -1,6 +1,7 @@
 <template>
 	<Navigation />
 	<wd-toast />
+	<wd-message-box :zIndex="1000" />
 	<view class="library_list">
 		<wd-navbar 
 			title="知识库" 
@@ -85,12 +86,14 @@
 	import Navigation from '@/components/navigation_header.vue'
 	import { onMounted, nextTick, ref } from "vue"
 	import dayjs from 'dayjs'
-	import { useToast } from '@/uni_modules/wot-design-uni'
+	import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
 	import { onPullDownRefresh } from '@dcloudio/uni-app'
+	const message = useMessage()
+	const toast = useToast()
 	
 	const libraryData = ref([])
 	const isLoading = ref(true)
-	const toast = useToast()
+	
 	
 	// 获取知识库列表
 	onMounted(() => {
@@ -120,9 +123,30 @@
 	}
 	
 	// 删除知识库
-	const deleteLibraryListData = async () => {
-		let res = await requestMethods('/deleteLibrary', 'POST', {
-			
+	const deleteLibraryListData = (id) => {
+		message.confirm({
+			title: '提示',
+			msg: '要删除这个知识库吗',
+		})
+		.then(async () => {
+			let res = await requestMethods('/deleteLibrary', 'POST', {
+				libraryId: id
+			})
+			if(res.code === 200) {
+				toast.show({
+					msg: '知识库已删除',
+					duration: 800,
+					iconName: 'success',
+					closed: () => {
+						getLibraryListData()
+					}
+				})
+			}else {
+				toast.error('删除失败')
+			}
+		})
+		.catch(() => {
+			// console.log('取消')
 		})
 	}
 	

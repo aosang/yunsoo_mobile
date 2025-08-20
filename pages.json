@@ -44,10 +44,7 @@
 		{
 			"path": "pages/createLibrary/createLibrary",
 			"style": {
-				"navigationBarTitleText": "知识库",
-				"navigationBarBackgroundColor": "#2a6fff",
-				"navigationBarTextStyle": "#ffffff",
-				"backgroundColor": "#2a6fff"
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -64,6 +61,7 @@
 			}
 		}
 	],
+	
 	"globalStyle": {
 		"navigationBarTextStyle": "#ffffff",
 		"navigationBarTitleText": "uni-app",

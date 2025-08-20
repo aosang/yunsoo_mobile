@@ -1,5 +1,5 @@
-// const baseUrl = 'http://192.168.8.5:3000'
-const baseUrl = 'http://192.168.1.109:3000'
+const baseUrl = 'http://192.168.8.5:3000'
+// const baseUrl = 'http://192.168.1.109:3000'
 // const baseUrl = 'http://5dzb8cgi.beesnat.com'
 import { userInfoStore } from "@/stores/userInfo"
 
@@ -13,7 +13,6 @@ export const requestMethods = (url, method, data = {}) => {
 			header: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'authorization': userStore.token ? userStore.token : null
-				// 'authorization': null
 			},
 			// 请求响应
 			success: (res) => {

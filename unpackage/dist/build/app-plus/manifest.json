@@ -29,7 +29,7 @@
     "splashscreen": {
       "target": "id:1",
       "autoclose": true,
-      "waiting": true,
+      "waiting": false,
       "delay": 0
     },
     "popGesture": "close",
@@ -78,9 +78,9 @@
         "iosStyle": "common",
         "androidStyle": "default",
         "android": {
-          "hdpi": "unpackage/launch/480_762.png",
-          "xhdpi": "unpackage/launch/720_1242.png",
-          "xxhdpi": "unpackage/launch/1080_1882.png"
+          "hdpi": "unpackage/launch/drawable-hdpi/yunsoo_android.png",
+          "xhdpi": "unpackage/launch/drawable-xhdpi/yunsoo_android.png",
+          "xxhdpi": "unpackage/launch/drawable-xxhdpi/yunsoo_android.png"
         }
       },
       "google": {
