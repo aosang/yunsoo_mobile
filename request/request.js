@@ -12,7 +12,7 @@ export const requestMethods = (url, method, data = {}) => {
 			data: data,
 			header: {
 				'Content-Type': 'application/x-www-form-urlencoded',
-				'authorization': userStore.token ? userStore.token : null
+				'authorization': userStore.token? userStore.token : null
 			},
 			// 请求响应
 			success: (res) => {

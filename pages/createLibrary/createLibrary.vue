@@ -6,6 +6,7 @@
 			fixed 
 			custom-class="custom" 
 			left-text="返回"
+			right-text="确认"
 			left-arrow
 			:zIndex="10"
 			@click-left="backToLibraryList"
@@ -14,8 +15,48 @@
 	</view>
 	<view class="container">
 		<view class="page-body">
+		
+			<wd-cell-group>
+			  <wd-input
+			  	custom-class="commonInputWidth"
+			  	custom-input-class="commonInput"
+			  	placeholder="请输入标题"  
+			  	clearable
+			  	:maxlength="70"
+			  	showWordLimit
+			  />
+				<wd-input
+					custom-class="commonInputWidth"
+					custom-input-class="commonInput"
+					placeholder="请输入描述"  
+					clearable
+					:maxlength="70"
+					showWordLimit
+				/>
+				<wd-select-picker
+					custom-class="custom_select"
+					type="radio"
+					:z-index="1000"
+					:columns="libraryType"
+					v-model="libraryTypeValue"
+					use-default-slot
+					label-key="value"
+					value-key="value"
+				>
+					<view>123</view>
+					<!-- <wd-input
+						custom-class="commonInputWidth"
+						custom-input-class="commonInput"
+						placeholder="请选择类型"  
+						clearable
+						readonly
+						v-model="libraryTypeValue"
+					/> -->
+				</wd-select-picker>
+			</wd-cell-group>
+			
 			<view class='wrapper'>
-				<view class="editor-wrapper">
+				<!-- <view class="editor-wrapper">
 					<editor 
 						id="editor" 
 						class="ql-container" 
@@ -23,53 +64,84 @@
 						show-img-size 
 						show-img-toolbar 
 						show-img-resize
+						:read-only="readOnly"
 						@statuschange="onStatusChange" 
-						:read-only="readOnly" 
 						@ready="onEditorReady"
 						@blur="getLibraryText"
 					>
 					</editor>
-				</view>
+				</view> -->
 
 				<!-- 工具栏 -->
-				<view 
+				<!-- <view 
 					class='toolbar' 
 					@tap="format" 
 					style="height: 88rpx; 
 					overflow-y: auto"
 				>
 					<view 
-						:class="formats.bold ? 'ql-active' : ''" 
+						:class="formats.bold? 'ql-active' : ''" 
 						class="iconfont icon-zitijiacu" 
 						data-name="bold"
 					>
 					</view>
-					<view 
+					<view
 						:class="formats.underline ? 'ql-active' : ''" 
 						class="iconfont icon-zitixiahuaxian"
-						data-name="underline">
+						data-name="underline"
+					>
+					</view>
+					<view 
+						:class="formats.list === 'bullet' ? 'ql-active' : ''" 
+						class="iconfont icon-wuxupailie"
+						data-name="list" 
+						data-value="bullet"
+					>
 					</view>
 					<view 
 						:class="formats.list === 'ordered' ? 'ql-active' : ''" 
 						class="iconfont icon-youxupailie"
-						data-name="list" data-value="ordered">
+						data-name="list" 
+						data-value="ordered"
+					>
 					</view>
+					<view class="iconfont icon-undo" @tap="undo"></view>
+					<view class="iconfont icon-redo" @tap="redo"></view>
 					<view class="iconfont icon-charutupian" @tap="insertImage"></view>
 					<view class="iconfont icon-shanchu" @tap="clearEditor"></view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app'
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import Navigation from '@/components/navigation_header.vue'
+import { requestMethods } from '@/request/request'
+import { getTimenumber } from '@/request/formatTime'
+import { userInfoStore } from "@/stores/userInfo"
+const userStore = userInfoStore()
 
 const readOnly = ref(false)
-const formats = ref({})
+const formats = ref<Record<string, any>>({})
 const editorCtx = ref(null)
+const imgUrl = ref('')
+const libraryType = ref<Record<string, any>>([])
+const libraryTypeValue = ref<string>('')
+
+onMounted(() => {
+	nextTick(() => {
+		getLibraryTypeSelectData()
+	})
+})
+
+// 获取知识库类型
+const getLibraryTypeSelectData = async () => {
+	let res = await requestMethods('/getLibraryType', 'GET')
+	libraryType.value = res.data
+}
 
 const readOnlyChange = () => {
 	readOnly.value = !readOnly.value
@@ -78,7 +150,7 @@ const readOnlyChange = () => {
 const onEditorReady = () => {
 	// #ifdef APP-PLUS || MP-WEIXIN || H5
 	uni.createSelectorQuery().select('#editor').context((res) => {
-		editorCtx.value = res.context
+		editorCtx.value = res
 	}).exec()
 	// #endif
 }
@@ -123,22 +195,55 @@ const insertImage = () => {
 	uni.chooseImage({
 		count: 1,
 		success: (res) => {
-			editorCtx.value.insertImage({
-				src: res.tempFilePaths[0],
-				alt: '图像',
-				success: function() {
-					uni.showToast({
-						title: '图片添加成功',
-						icon: 'success'
-					})
+			const filePath = res.tempFilePaths[0];
+			const file = res.tempFiles[0]; // 获取文件类型
+			uni.getImageInfo({
+				src: filePath,
+				success: () => {
+					upLoadImageEvent(filePath, file);
 				},
-				fail: function(err) {
+				fail: () => {
+					// 如果失败，表示不是有效的图片文件
 					uni.showToast({
-						title: '图片添加失败',
+						title: '请选择有效的图片文件',
 						icon: 'none'
-					})
+					});
 				}
 			})
+		}
+	})
+}
+
+const upLoadImageEvent = (path: string, file: any) => {
+	uni.uploadFile({
+		url: 'http://192.168.8.5:3000/uploadLibraryImage',
+		filePath: path,
+		name: 'file',
+		header: {
+			'authorization': userStore.token? userStore.token : null
+		},
+		formData: {
+			'file': file
+		},
+		success: (upload) => {
+			let jsonData = JSON.parse(upload.data)
+			if(jsonData.code === 402) {
+				uni.redirectTo({
+					url: '/pages/login/login'
+				})
+			}else {
+				imgUrl.value = jsonData.data.url
+				editorCtx.value.insertImage({
+					src: imgUrl.value,
+					alt: '知识库图片',
+					fail: function() {
+						uni.showToast({
+							title: '图片添加失败',
+							icon: 'none'
+						})
+					},
+				})
+			}
 		}
 	})
 }
@@ -165,7 +270,7 @@ const redo = () => {
 	editorCtx.value.redo()
 }
 
-const format = (e) => {
+const format = (e: any) => {
 	if (!editorCtx.value) {
 		uni.showToast({
 			title: '编辑器未准备好',
@@ -179,7 +284,7 @@ const format = (e) => {
 	editorCtx.value.format(name, value)
 }
 
-const onStatusChange = (e) => {
+const onStatusChange = (e: any) => {
 	const newFormats = e.detail
 	formats.value = newFormats
 	// console.log(e.detail);
@@ -207,6 +312,21 @@ const backToLibraryList = () => {
 	.page-body {
 		height: calc(100vh - var(--window-top) - var(--status-bar-height));
 		margin-top: 200rpx;
+		
+		
+		.commonInput {
+			width: 100%;
+			display: block;
+			font-size: 28rpx;
+			margin: 0 auto;
+		}
+		
+		.commonInputWidth {
+			width: 100%;
+			padding: 10rpx 30rpx;
+			margin-bottom: 10rpx;
+			box-sizing: border-box;
+		}
 	}
 
 	.wrapper {
@@ -220,7 +340,7 @@ const backToLibraryList = () => {
 
 	.iconfont {
 		display: inline-block;
-		padding: 24rpx 48rpx;
+		padding: 24rpx 42rpx;
 		width: 24px;
 		height: 24px;
 		cursor: pointer;
@@ -230,18 +350,18 @@ const backToLibraryList = () => {
 
 	.toolbar {
 		width: 100%;
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 		box-sizing: border-box;
 		border-bottom: 0;
 		font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 		border-top: 1px solid #ccc;
-		background: #eee;
+		// background: #eee;
 	}
 
 	.ql-container {
 		box-sizing: border-box;
-		padding: 24rpx 30rpx;
+		padding: 24rpx 24rpx;
 		width: 100%;
 		min-height: 40vh;
 		height: 100%;
