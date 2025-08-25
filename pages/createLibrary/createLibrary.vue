@@ -10,6 +10,7 @@
 			left-arrow
 			:zIndex="10"
 			@click-left="backToLibraryList"
+			@click-right="submitLibraryFormEvent"
 		>
 		</wd-navbar>
 	</view>
@@ -38,25 +39,23 @@
 					type="radio"
 					:z-index="1000"
 					:columns="libraryType"
-					v-model="libraryTypeValue"
-					use-default-slot
+					v-model="libraryForm.libraryTypeValue"
 					label-key="value"
 					value-key="value"
+					use-default-slot
 				>
-					<view>123</view>
-					<!-- <wd-input
+					<wd-input
 						custom-class="commonInputWidth"
 						custom-input-class="commonInput"
 						placeholder="请选择类型"  
-						clearable
 						readonly
-						v-model="libraryTypeValue"
-					/> -->
+						v-model="libraryForm.libraryTypeValue"
+					/>
 				</wd-select-picker>
 			</wd-cell-group>
 			
 			<view class='wrapper'>
-				<!-- <view class="editor-wrapper">
+				<view class="editor-wrapper">
 					<editor 
 						id="editor" 
 						class="ql-container" 
@@ -70,10 +69,10 @@
 						@blur="getLibraryText"
 					>
 					</editor>
-				</view> -->
+				</view>
 
 				<!-- 工具栏 -->
-				<!-- <view 
+				<view 
 					class='toolbar' 
 					@tap="format" 
 					style="height: 88rpx; 
@@ -109,7 +108,7 @@
 					<view class="iconfont icon-redo" @tap="redo"></view>
 					<view class="iconfont icon-charutupian" @tap="insertImage"></view>
 					<view class="iconfont icon-shanchu" @tap="clearEditor"></view>
-				</view> -->
+				</view>
 			</view>
 		</view>
 	</view>
@@ -117,7 +116,7 @@
 
 <script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app'
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, reactive } from 'vue'
 import Navigation from '@/components/navigation_header.vue'
 import { requestMethods } from '@/request/request'
 import { getTimenumber } from '@/request/formatTime'
@@ -129,7 +128,14 @@ const formats = ref<Record<string, any>>({})
 const editorCtx = ref(null)
 const imgUrl = ref('')
 const libraryType = ref<Record<string, any>>([])
-const libraryTypeValue = ref<string>('')
+
+const libraryForm = reactive({
+	libraryTitle: '',
+	libraryText: '',
+	libraryTypeValue: '',
+	libraryTime: '',
+	libraryHtml: ''
+})
 
 onMounted(() => {
 	nextTick(() => {
@@ -179,8 +185,12 @@ const clearEditor = () => {
 	})
 }
 
-const getLibraryText = (e) => {
-	// console.log(e)
+const getLibraryText = (e: any) => {
+	libraryForm.libraryHtml = e.detail.html
+}
+
+const submitLibraryFormEvent = () => {
+	let {libraryHtml, libraryTypeValue, libraryText, libraryTitle} = libraryForm
 }
 
 const insertImage = () => {
@@ -298,6 +308,11 @@ const backToLibraryList = () => {
 <style lang="scss">
 	@import "@/static/css/editor-icon.css";
 	
+	html, body {
+		height: 100vh;
+		background: #f3f3f3;
+	}
+	
 	.created_library {
 		:deep() {
 			width: 100%;
@@ -310,9 +325,8 @@ const backToLibraryList = () => {
 	}
 
 	.page-body {
-		height: calc(100vh - var(--window-top) - var(--status-bar-height));
-		margin-top: 200rpx;
-		
+		// height: calc(100vh - var(--window-top) - var(--status-bar-height));
+		margin-top: 188rpx;
 		
 		.commonInput {
 			width: 100%;
@@ -323,14 +337,24 @@ const backToLibraryList = () => {
 		
 		.commonInputWidth {
 			width: 100%;
-			padding: 10rpx 30rpx;
+			padding: 6rpx 30rpx;
 			margin-bottom: 10rpx;
 			box-sizing: border-box;
+		}
+	
+		.custom_select {
+			font-size: 28rpx;
+			
+			.custom_select_value {
+				font-size: 28rpx;
+				padding: 0 30rpx;
+			}
 		}
 	}
 
 	.wrapper {
 		height: 100%;
+		margin-top: 20rpx;
 	}
 
 	.editor-wrapper {
@@ -356,7 +380,6 @@ const backToLibraryList = () => {
 		border-bottom: 0;
 		font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 		border-top: 1px solid #ccc;
-		// background: #eee;
 	}
 
 	.ql-container {
@@ -372,4 +395,9 @@ const backToLibraryList = () => {
 	.ql-active {
 		color: #06c;
 	}
+	
+	.active_style {
+		color: #808080;
+	}
+
 </style>

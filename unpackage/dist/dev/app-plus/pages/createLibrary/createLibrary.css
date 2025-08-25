@@ -5994,6 +5994,10 @@ to {
 .icon-Character-Spacing:before {
   content: "\e964";
 }
+html, body {
+  height: 100vh;
+  background: #f3f3f3;
+}
 .created_library  {
   width: 100%;
   margin: 1.25rem auto 0 auto;
@@ -6003,8 +6007,7 @@ to {
   margin-top: 2.75rem;
 }
 .page-body {
-  height: calc(100vh - var(--window-top) - var(--status-bar-height));
-  margin-top: 6.25rem;
+  margin-top: 5.875rem;
 }
 .page-body .commonInput {
   width: 100%;
@@ -6014,12 +6017,20 @@ to {
 }
 .page-body .commonInputWidth {
   width: 100%;
-  padding: 0.3125rem 0.9375rem;
+  padding: 0.1875rem 0.9375rem;
   margin-bottom: 0.3125rem;
   box-sizing: border-box;
 }
+.page-body .custom_select {
+  font-size: 0.875rem;
+}
+.page-body .custom_select .custom_select_value {
+  font-size: 0.875rem;
+  padding: 0 0.9375rem;
+}
 .wrapper {
   height: 100%;
+  margin-top: 0.625rem;
 }
 .editor-wrapper {
   height: calc(100vh - var(--window-top) - var(--status-bar-height) - 140px);
@@ -6054,4 +6065,7 @@ to {
 }
 .ql-active {
   color: #06c;
+}
+.active_style {
+  color: #808080;
 }
