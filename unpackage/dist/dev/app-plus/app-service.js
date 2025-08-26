@@ -429,7 +429,7 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$H = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$L = /* @__PURE__ */ vue.defineComponent({
     ...__default__$v,
     props: colProps,
     setup(__props, { expose: __expose }) {
@@ -463,7 +463,7 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -478,7 +478,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-2afa91f2"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-col/wd-col.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-2afa91f2"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-col/wd-col.vue"]]);
   function isVNode(value) {
     return value ? value.__v_isVNode === true : false;
   }
@@ -564,7 +564,7 @@ if (uni.restoreGlobal) {
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$G = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$K = /* @__PURE__ */ vue.defineComponent({
     ...__default__$u,
     props: rowProps,
     setup(__props, { expose: __expose }) {
@@ -588,7 +588,7 @@ if (uni.restoreGlobal) {
       return __returned__;
     }
   });
-  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -603,12 +603,12 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-88acc730"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-row/wd-row.vue"]]);
-  const _sfc_main$F = {};
-  function _sfc_render$E(_ctx, _cache) {
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-88acc730"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-row/wd-row.vue"]]);
+  const _sfc_main$J = {};
+  function _sfc_render$I(_ctx, _cache) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "navigation_bar" });
   }
-  const Navigation = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-6082cd98"], ["__file", "E:/yunsoo_mobile/components/navigation_header.vue"]]);
+  const Navigation = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-6082cd98"], ["__file", "E:/yunsoo_mobile/components/navigation_header.vue"]]);
   var isVue2 = false;
   function set(target, key, val) {
     if (Array.isArray(target)) {
@@ -2482,7 +2482,7 @@ This will fail in production.`);
   const _imports_15 = "/static/images/device_icon/laptop.svg";
   const _imports_16 = "/static/images/device_icon/printer.svg";
   const _imports_17 = "/static/images/device_icon/other.svg";
-  const _sfc_main$E = {
+  const _sfc_main$I = {
     __name: "index",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -2526,9 +2526,9 @@ This will fail in production.`);
       return __returned__;
     }
   };
-  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_col = resolveEasycom(vue.resolveDynamicComponent("wd-col"), __easycom_0$3);
-    const _component_wd_row = resolveEasycom(vue.resolveDynamicComponent("wd-row"), __easycom_1$4);
+    const _component_wd_row = resolveEasycom(vue.resolveDynamicComponent("wd-row"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -2785,7 +2785,7 @@ This will fail in production.`);
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__file", "E:/yunsoo_mobile/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__file", "E:/yunsoo_mobile/pages/index/index.vue"]]);
   const iconProps = {
     ...baseProps,
     /**
@@ -2813,7 +2813,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$D = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$H = /* @__PURE__ */ vue.defineComponent({
     ...__default__$t,
     props: iconProps,
     emits: ["click", "touch"],
@@ -2846,7 +2846,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2865,7 +2865,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const wdIcon = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-24906af6"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue"]]);
+  const wdIcon = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-24906af6"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-icon/wd-icon.vue"]]);
   const _b64chars = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"];
   const _mkUriSafe = (src) => src.replace(/[+/]/g, (m0) => m0 === "+" ? "-" : "_").replace(/=+\$/m, "");
   const fromUint8Array = (src, rfc4648 = false) => {
@@ -2914,7 +2914,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$C = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$G = /* @__PURE__ */ vue.defineComponent({
     ...__default__$s,
     props: loadingProps,
     setup(__props, { expose: __expose }) {
@@ -2977,7 +2977,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -3002,7 +3002,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_3$3 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-f2b508ee"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-loading/wd-loading.vue"]]);
+  const __easycom_3$3 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-f2b508ee"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-loading/wd-loading.vue"]]);
   const transitionProps = {
     ...baseProps,
     /**
@@ -3078,7 +3078,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$B = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$F = /* @__PURE__ */ vue.defineComponent({
     ...__default__$r,
     props: transitionProps,
     emits: ["click", "before-enter", "enter", "before-leave", "leave", "after-leave", "after-enter"],
@@ -3239,7 +3239,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
     return !_ctx.lazyRender || $setup.inited ? (vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -3256,7 +3256,7 @@ This will fail in production.`);
       /* CLASS, STYLE, NEED_HYDRATION */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const wdTransition = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-af59a128"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-transition/wd-transition.vue"]]);
+  const wdTransition = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-af59a128"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-transition/wd-transition.vue"]]);
   const overlayProps = {
     ...baseProps,
     /**
@@ -3287,7 +3287,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$A = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$E = /* @__PURE__ */ vue.defineComponent({
     ...__default__$q,
     props: overlayProps,
     emits: ["click"],
@@ -3305,7 +3305,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createBlock($setup["wdTransition"], {
       show: _ctx.show,
       name: "fade",
@@ -3322,7 +3322,7 @@ This will fail in production.`);
       /* FORWARDED */
     }, 8, ["show", "duration", "custom-style"]);
   }
-  const wdOverlay = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-6e0d1141"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-overlay/wd-overlay.vue"]]);
+  const wdOverlay = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-6e0d1141"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-overlay/wd-overlay.vue"]]);
   const toastProps = {
     ...baseProps,
     /**
@@ -3446,7 +3446,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$z = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$D = /* @__PURE__ */ vue.defineComponent({
     ...__default__$p,
     props: toastProps,
     setup(__props, { expose: __expose }) {
@@ -3571,7 +3571,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -3657,7 +3657,7 @@ This will fail in production.`);
       /* STABLE_FRAGMENT */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-fce8c80a"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-toast/wd-toast.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-fce8c80a"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-toast/wd-toast.vue"]]);
   const CELL_GROUP_KEY = Symbol("wd-cell-group");
   const cellGroupProps = {
     ...baseProps,
@@ -3895,7 +3895,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$y = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$C = /* @__PURE__ */ vue.defineComponent({
     ...__default__$o,
     props: inputProps,
     emits: [
@@ -4059,7 +4059,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -4221,7 +4221,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-4e0c9774"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-input/wd-input.vue"]]);
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-4e0c9774"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-input/wd-input.vue"]]);
   const buttonProps = {
     ...baseProps,
     /**
@@ -4322,7 +4322,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$x = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$B = /* @__PURE__ */ vue.defineComponent({
     ...__default__$n,
     props: buttonProps,
     emits: [
@@ -4425,7 +4425,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("button", {
       id: _ctx.buttonId,
       "hover-class": `${_ctx.disabled || _ctx.loading ? "" : "wd-button--active"}`,
@@ -4492,9 +4492,9 @@ This will fail in production.`);
       ])
     ], 46, ["id", "hover-class", "hover-start-time", "hover-stay-time", "open-type", "send-message-title", "send-message-path", "send-message-img", "app-parameter", "show-message-card", "session-from", "lang", "hover-stop-propagation", "scope"]);
   }
-  const wdButton = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-d858c170"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-button/wd-button.vue"]]);
+  const wdButton = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-d858c170"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-button/wd-button.vue"]]);
   const _imports_0$2 = "/static/images/common/system_logo_white.png";
-  const _sfc_main$w = {
+  const _sfc_main$A = {
     __name: "login",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -4544,9 +4544,9 @@ This will fail in production.`);
       return __returned__;
     }
   };
-  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
-    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_1$3);
+    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_2$1);
     const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), wdButton);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -4600,7 +4600,7 @@ This will fail in production.`);
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__file", "E:/yunsoo_mobile/pages/login/login.vue"]]);
+  const PagesLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__file", "E:/yunsoo_mobile/pages/login/login.vue"]]);
   const popupProps = {
     ...baseProps,
     /**
@@ -4692,7 +4692,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$v = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$z = /* @__PURE__ */ vue.defineComponent({
     ...__default__$m,
     props: popupProps,
     emits: [
@@ -4765,7 +4765,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "wd-popup-wrapper" }, [
       _ctx.modal ? (vue.openBlock(), vue.createBlock($setup["wdOverlay"], {
         key: 0,
@@ -4806,7 +4806,7 @@ This will fail in production.`);
       }, 8, ["lazy-render", "custom-class", "custom-style", "duration", "show", "name", "destroy"])
     ]);
   }
-  const wdPopup = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-25a8a9f7"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-popup/wd-popup.vue"]]);
+  const wdPopup = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-25a8a9f7"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-popup/wd-popup.vue"]]);
   const messageBoxProps = {
     ...baseProps,
     /**
@@ -4822,7 +4822,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$u = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$y = /* @__PURE__ */ vue.defineComponent({
     ...__default__$l,
     props: messageBoxProps,
     setup(__props, { expose: __expose }) {
@@ -5015,12 +5015,12 @@ This will fail in production.`);
           messageState.cancelButtonProps = option.cancelButtonProps;
         }
       }
-      const __returned__ = { props, translate, rootClass, bodyClass, messageOptionKey, messageOption, messageState, customConfirmProps, customCancelProps, toggleModal, handleConfirm, handleCancel, validate, resetErr, inputValChange, reset, wdPopup, wdButton, wdInput: __easycom_1$3 };
+      const __returned__ = { props, translate, rootClass, bodyClass, messageOptionKey, messageOption, messageState, customConfirmProps, customCancelProps, toggleModal, handleConfirm, handleCancel, validate, resetErr, inputValChange, reset, wdPopup, wdButton, wdInput: __easycom_2$1 };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
   });
-  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode($setup["wdPopup"], {
         transition: "zoom-in",
@@ -5153,7 +5153,7 @@ This will fail in production.`);
       }, 8, ["modelValue", "close-on-click-modal", "lazy-render", "z-index"])
     ]);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-c8139c88"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-message-box/wd-message-box.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-c8139c88"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-message-box/wd-message-box.vue"]]);
   const navbarProps = {
     ...baseProps,
     /**
@@ -5209,7 +5209,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$t = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$x = /* @__PURE__ */ vue.defineComponent({
     ...__default__$k,
     props: navbarProps,
     emits: ["click-left", "click-right"],
@@ -5269,7 +5269,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -5379,7 +5379,7 @@ This will fail in production.`);
       /* STYLE */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-089e80c4"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-navbar/wd-navbar.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-089e80c4"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-navbar/wd-navbar.vue"]]);
   const imgProps = {
     ...baseProps,
     customImage: makeStringProp(""),
@@ -5432,7 +5432,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$s = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$w = /* @__PURE__ */ vue.defineComponent({
     ...__default__$j,
     props: imgProps,
     emits: ["error", "click", "load"],
@@ -5479,7 +5479,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -5505,7 +5505,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-cb0c5dbc"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-img/wd-img.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-cb0c5dbc"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-img/wd-img.vue"]]);
   const statusTipProps = {
     ...baseProps,
     /**
@@ -5551,7 +5551,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$r = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$v = /* @__PURE__ */ vue.defineComponent({
     ...__default__$i,
     props: statusTipProps,
     setup(__props, { expose: __expose }) {
@@ -5586,7 +5586,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -5616,7 +5616,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-f52470e5"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-status-tip/wd-status-tip.vue"]]);
+  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-f52470e5"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-status-tip/wd-status-tip.vue"]]);
   const swipeActionProps = {
     ...baseProps,
     /**
@@ -5648,7 +5648,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$q = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$u = /* @__PURE__ */ vue.defineComponent({
     ...__default__$h,
     props: swipeActionProps,
     emits: ["click", "update:modelValue"],
@@ -5835,7 +5835,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -5890,7 +5890,7 @@ This will fail in production.`);
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-af66e359"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-swipe-action/wd-swipe-action.vue"]]);
+  const __easycom_5$1 = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-af66e359"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-swipe-action/wd-swipe-action.vue"]]);
   const TABS_KEY = Symbol("wd-tabs");
   const tabsProps = {
     ...baseProps,
@@ -5989,7 +5989,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$p = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$t = /* @__PURE__ */ vue.defineComponent({
     ...__default__$g,
     props: tabProps,
     setup(__props, { expose: __expose }) {
@@ -6045,7 +6045,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -6071,7 +6071,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_6 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-0ac60957"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-tab/wd-tab.vue"]]);
+  const __easycom_6 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-0ac60957"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-tab/wd-tab.vue"]]);
   const badgeProps = {
     ...baseProps,
     /**
@@ -6114,7 +6114,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$o = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$s = /* @__PURE__ */ vue.defineComponent({
     ...__default__$f,
     props: badgeProps,
     setup(__props, { expose: __expose }) {
@@ -6149,7 +6149,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -6174,7 +6174,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-6ea9b0eb"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-badge/wd-badge.vue"]]);
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-6ea9b0eb"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-badge/wd-badge.vue"]]);
   const resizeProps = {
     ...baseProps,
     customContainerClass: makeStringProp("")
@@ -6187,7 +6187,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$n = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$r = /* @__PURE__ */ vue.defineComponent({
     ...__default__$e,
     props: resizeProps,
     emits: ["resize"],
@@ -6279,7 +6279,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -6328,7 +6328,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const wdResize = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-3d3c1eae"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-resize/wd-resize.vue"]]);
+  const wdResize = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-3d3c1eae"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-resize/wd-resize.vue"]]);
   const stickyProps = {
     ...baseProps,
     /**
@@ -6349,7 +6349,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$m = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$q = /* @__PURE__ */ vue.defineComponent({
     ...__default__$d,
     props: stickyProps,
     setup(__props, { expose: __expose }) {
@@ -6468,7 +6468,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -6507,7 +6507,7 @@ This will fail in production.`);
       /* STYLE */
     );
   }
-  const wdSticky = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-2722b5fd"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-sticky/wd-sticky.vue"]]);
+  const wdSticky = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-2722b5fd"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-sticky/wd-sticky.vue"]]);
   const __default__$c = {
     name: "wd-sticky-box",
     options: {
@@ -6516,7 +6516,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$l = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$p = /* @__PURE__ */ vue.defineComponent({
     ...__default__$c,
     props: baseProps,
     setup(__props, { expose: __expose }) {
@@ -6601,7 +6601,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { style: { "position": "relative" } }, [
       vue.createElementVNode("view", {
         class: vue.normalizeClass(`wd-sticky-box ${$setup.props.customClass}`),
@@ -6618,7 +6618,7 @@ This will fail in production.`);
       ], 14, ["id"])
     ]);
   }
-  const wdStickyBox = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-0667b36f"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-sticky-box/wd-sticky-box.vue"]]);
+  const wdStickyBox = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-0667b36f"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-sticky-box/wd-sticky-box.vue"]]);
   const __default__$b = {
     name: "wd-tabs",
     options: {
@@ -6627,7 +6627,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$k = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$o = /* @__PURE__ */ vue.defineComponent({
     ...__default__$b,
     props: tabsProps,
     emits: ["change", "disabled", "click", "update:modelValue"],
@@ -6882,7 +6882,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_badge = resolveEasycom(vue.resolveDynamicComponent("wd-badge"), __easycom_0);
     return _ctx.sticky ? (vue.openBlock(), vue.createBlock($setup["wdStickyBox"], { key: 0 }, {
       default: vue.withCtx(() => [
@@ -7272,8 +7272,8 @@ This will fail in production.`);
       /* CLASS */
     ));
   }
-  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-4388d15d"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue"]]);
-  const _sfc_main$j = {
+  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-4388d15d"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue"]]);
+  const _sfc_main$n = {
     __name: "workorder",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -7382,13 +7382,13 @@ This will fail in production.`);
       return __returned__;
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
     const _component_wd_message_box = resolveEasycom(vue.resolveDynamicComponent("wd-message-box"), __easycom_1$2);
     const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
     const _component_wd_loading = resolveEasycom(vue.resolveDynamicComponent("wd-loading"), __easycom_3$3);
-    const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_4);
-    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_5);
+    const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_4$1);
+    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_5$1);
     const _component_wd_tab = resolveEasycom(vue.resolveDynamicComponent("wd-tab"), __easycom_6);
     const _component_wd_tabs = resolveEasycom(vue.resolveDynamicComponent("wd-tabs"), __easycom_7);
     return vue.openBlock(), vue.createElementBlock(
@@ -7581,13 +7581,13 @@ This will fail in production.`);
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesWorkorderWorkorder = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__file", "E:/yunsoo_mobile/pages/workorder/workorder.vue"]]);
+  const PagesWorkorderWorkorder = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__file", "E:/yunsoo_mobile/pages/workorder/workorder.vue"]]);
   const _imports_0$1 = "/static/images/profile/profile_email.svg";
   const _imports_1$1 = "/static/images/profile/profile_company.svg";
   const _imports_2$1 = "/static/images/profile/profile_time.svg";
   const _imports_3$1 = "/static/images/profile/profile_version.svg";
   const baseUrl = "https://www.wangle.run/company_icon/public_image/pub_avatar.jpg";
-  const _sfc_main$i = {
+  const _sfc_main$m = {
     __name: "profile",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -7648,7 +7648,7 @@ This will fail in production.`);
       return __returned__;
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
     const _component_wd_img = resolveEasycom(vue.resolveDynamicComponent("wd-img"), __easycom_1$1);
     const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), wdButton);
@@ -7752,12 +7752,12 @@ This will fail in production.`);
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesProfileProfile = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__file", "E:/yunsoo_mobile/pages/profile/profile.vue"]]);
-  const _sfc_main$h = {};
-  function _sfc_render$g(_ctx, _cache) {
+  const PagesProfileProfile = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "E:/yunsoo_mobile/pages/profile/profile.vue"]]);
+  const _sfc_main$l = {};
+  function _sfc_render$k(_ctx, _cache) {
     return vue.openBlock(), vue.createElementBlock("view", null, "11223");
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "E:/yunsoo_mobile/pages/test/test.vue"]]);
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "E:/yunsoo_mobile/pages/test/test.vue"]]);
   const noticeBarProps = {
     ...baseProps,
     /**
@@ -7816,7 +7816,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$g = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$k = /* @__PURE__ */ vue.defineComponent({
     ...__default__$a,
     props: noticeBarProps,
     emits: ["close", "next", "click"],
@@ -8018,7 +8018,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     return $setup.show ? (vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -8094,7 +8094,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-e7a73070"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-notice-bar/wd-notice-bar.vue"]]);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-e7a73070"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-notice-bar/wd-notice-bar.vue"]]);
   const dividerProps = {
     ...baseProps,
     /**
@@ -8130,7 +8130,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$f = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$j = /* @__PURE__ */ vue.defineComponent({
     ...__default__$9,
     props: dividerProps,
     setup(__props, { expose: __expose }) {
@@ -8164,7 +8164,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -8178,7 +8178,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-86c73a37"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-divider/wd-divider.vue"]]);
+  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-86c73a37"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-divider/wd-divider.vue"]]);
   const searchProps = {
     ...baseProps,
     customInputClass: makeStringProp(""),
@@ -8266,7 +8266,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$i = /* @__PURE__ */ vue.defineComponent({
     ...__default__$8,
     props: searchProps,
     emits: ["update:modelValue", "change", "clear", "search", "focus", "blur", "cancel"],
@@ -8387,7 +8387,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -8472,7 +8472,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-cc0202be"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-search/wd-search.vue"]]);
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-cc0202be"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-search/wd-search.vue"]]);
   const actionSheetProps = {
     ...baseProps,
     /**
@@ -8554,7 +8554,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$h = /* @__PURE__ */ vue.defineComponent({
     ...__default__$7,
     props: actionSheetProps,
     emits: ["select", "click-modal", "cancel", "closed", "close", "open", "opened", "update:modelValue"],
@@ -8628,7 +8628,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode($setup["wdPopup"], {
         "custom-class": "wd-action-sheet__popup",
@@ -8783,7 +8783,7 @@ This will fail in production.`);
       }, 8, ["custom-style", "modelValue", "duration", "close-on-click-modal", "safe-area-inset-bottom", "lazy-render", "z-index"])
     ]);
   }
-  const wdActionSheet = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-03619ba9"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-action-sheet/wd-action-sheet.vue"]]);
+  const wdActionSheet = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-03619ba9"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-action-sheet/wd-action-sheet.vue"]]);
   const CHECKBOX_GROUP_KEY = Symbol("wd-checkbox-group");
   const checkboxGroupProps = {
     ...baseProps,
@@ -8887,7 +8887,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$g = /* @__PURE__ */ vue.defineComponent({
     ...__default__$6,
     props: checkboxProps,
     emits: ["change", "update:modelValue"],
@@ -8986,7 +8986,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -9048,7 +9048,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const wdCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-66fc790e"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-checkbox/wd-checkbox.vue"]]);
+  const wdCheckbox = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-66fc790e"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-checkbox/wd-checkbox.vue"]]);
   const __default__$5 = {
     name: "wd-checkbox-group",
     options: {
@@ -9057,7 +9057,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$f = /* @__PURE__ */ vue.defineComponent({
     ...__default__$5,
     props: checkboxGroupProps,
     emits: ["change", "update:modelValue"],
@@ -9123,7 +9123,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -9137,7 +9137,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const wdCheckboxGroup = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-395de5f2"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-checkbox-group/wd-checkbox-group.vue"]]);
+  const wdCheckboxGroup = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-395de5f2"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-checkbox-group/wd-checkbox-group.vue"]]);
   const RADIO_GROUP_KEY = Symbol("wd-radio-group");
   const radioGroupProps = {
     ...baseProps,
@@ -9201,7 +9201,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
     ...__default__$4,
     props: radioProps,
     setup(__props, { expose: __expose }) {
@@ -9271,7 +9271,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -9313,7 +9313,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const wdRadio = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-a54631cc"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-radio/wd-radio.vue"]]);
+  const wdRadio = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-a54631cc"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-radio/wd-radio.vue"]]);
   const __default__$3 = {
     name: "wd-radio-group",
     options: {
@@ -9322,7 +9322,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
     ...__default__$3,
     props: radioGroupProps,
     emits: ["change", "update:modelValue"],
@@ -9352,7 +9352,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -9366,7 +9366,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const wdRadioGroup = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-1a9e9b05"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-radio-group/wd-radio-group.vue"]]);
+  const wdRadioGroup = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-1a9e9b05"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-radio-group/wd-radio-group.vue"]]);
   const selectPickerProps = {
     ...baseProps,
     /** 选择器左侧文案 */
@@ -9460,7 +9460,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
     ...__default__$2,
     props: selectPickerProps,
     emits: ["change", "cancel", "confirm", "clear", "update:modelValue", "open", "close"],
@@ -9744,7 +9744,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_icon = resolveEasycom(vue.resolveDynamicComponent("wd-icon"), wdIcon);
     const _component_wd_search = resolveEasycom(vue.resolveDynamicComponent("wd-search"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock(
@@ -10067,7 +10067,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-b8ce50f5"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-select-picker/wd-select-picker.vue"]]);
+  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-b8ce50f5"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-select-picker/wd-select-picker.vue"]]);
   const textareaProps = {
     ...baseProps,
     /**
@@ -10319,7 +10319,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
     ...__default__$1,
     props: textareaProps,
     emits: [
@@ -10484,7 +10484,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -10615,7 +10615,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-7d71e04e"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-textarea/wd-textarea.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-7d71e04e"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-textarea/wd-textarea.vue"]]);
   var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
   function getDefaultExportFromCjs(x) {
     return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
@@ -10929,7 +10929,7 @@ This will fail in production.`);
     let timeNumber = y + "" + m + d + h + mm + s + number;
     return timeNumber;
   };
-  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
     __name: "createWorkorder",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -11018,13 +11018,13 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
     const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
-    const _component_wd_notice_bar = resolveEasycom(vue.resolveDynamicComponent("wd-notice-bar"), __easycom_2$1);
+    const _component_wd_notice_bar = resolveEasycom(vue.resolveDynamicComponent("wd-notice-bar"), __easycom_2);
     const _component_wd_divider = resolveEasycom(vue.resolveDynamicComponent("wd-divider"), __easycom_3$2);
-    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_2);
-    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_3$1);
+    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_3$1);
+    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_3);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -11211,8 +11211,8 @@ This will fail in production.`);
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesCreateWorkorderCreateWorkorder = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/yunsoo_mobile/pages/createWorkorder/createWorkorder.vue"]]);
-  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+  const PagesCreateWorkorderCreateWorkorder = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "E:/yunsoo_mobile/pages/createWorkorder/createWorkorder.vue"]]);
+  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
     __name: "workorderDetails",
     setup(__props, { expose: __expose }) {
       __expose();
@@ -11346,11 +11346,11 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
     const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
-    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_2);
-    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_3$1);
+    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_3$1);
+    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_3);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -11511,7 +11511,7 @@ This will fail in production.`);
       /* STABLE_FRAGMENT */
     );
   }
-  const PagesWorkorderDetailsWorkorderDetails = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "E:/yunsoo_mobile/pages/workorderDetails/workorderDetails.vue"]]);
+  const PagesWorkorderDetailsWorkorderDetails = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/yunsoo_mobile/pages/workorderDetails/workorderDetails.vue"]]);
   const __default__ = {
     name: "wd-cell-group",
     options: {
@@ -11520,7 +11520,7 @@ This will fail in production.`);
       styleIsolation: "shared"
     }
   };
-  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
     ...__default__,
     props: cellGroupProps,
     setup(__props, { expose: __expose }) {
@@ -11533,7 +11533,7 @@ This will fail in production.`);
       return __returned__;
     }
   });
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -11574,13 +11574,2034 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-55e5786b"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-cell-group/wd-cell-group.vue"]]);
-  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-55e5786b"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-cell-group/wd-cell-group.vue"]]);
+  const _sfc_main$7 = {
+    props: {
+      color: {
+        type: Object,
+        default: () => {
+          return {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0
+          };
+        }
+      },
+      spareColor: {
+        type: Array,
+        default() {
+          return [];
+        }
+      }
+    },
+    data() {
+      return {
+        show: false,
+        active: false,
+        // rgba 颜色
+        rgba: {
+          r: 0,
+          g: 0,
+          b: 0,
+          a: 1
+        },
+        // hsb 颜色
+        hsb: {
+          h: 0,
+          s: 0,
+          b: 0
+        },
+        site: [
+          {
+            top: 0,
+            left: 0
+          },
+          {
+            left: 0
+          },
+          {
+            left: 0
+          }
+        ],
+        index: 0,
+        bgcolor: {
+          r: 255,
+          g: 0,
+          b: 0,
+          a: 1
+        },
+        hex: "#000000",
+        mode: true,
+        colorList: [
+          {
+            r: 244,
+            g: 67,
+            b: 54,
+            a: 1
+          },
+          {
+            r: 233,
+            g: 30,
+            b: 99,
+            a: 1
+          },
+          {
+            r: 156,
+            g: 39,
+            b: 176,
+            a: 1
+          },
+          {
+            r: 103,
+            g: 58,
+            b: 183,
+            a: 1
+          },
+          {
+            r: 63,
+            g: 81,
+            b: 181,
+            a: 1
+          },
+          {
+            r: 33,
+            g: 150,
+            b: 243,
+            a: 1
+          },
+          {
+            r: 3,
+            g: 169,
+            b: 244,
+            a: 1
+          },
+          {
+            r: 0,
+            g: 188,
+            b: 212,
+            a: 1
+          },
+          {
+            r: 0,
+            g: 150,
+            b: 136,
+            a: 1
+          },
+          {
+            r: 76,
+            g: 175,
+            b: 80,
+            a: 1
+          },
+          {
+            r: 139,
+            g: 195,
+            b: 74,
+            a: 1
+          },
+          {
+            r: 205,
+            g: 220,
+            b: 57,
+            a: 1
+          },
+          {
+            r: 255,
+            g: 235,
+            b: 59,
+            a: 1
+          },
+          {
+            r: 255,
+            g: 193,
+            b: 7,
+            a: 1
+          },
+          {
+            r: 255,
+            g: 152,
+            b: 0,
+            a: 1
+          },
+          {
+            r: 255,
+            g: 87,
+            b: 34,
+            a: 1
+          },
+          {
+            r: 121,
+            g: 85,
+            b: 72,
+            a: 1
+          },
+          {
+            r: 158,
+            g: 158,
+            b: 158,
+            a: 1
+          },
+          {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0.5
+          },
+          {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0
+          }
+        ]
+      };
+    },
+    created() {
+      this.ready();
+    },
+    methods: {
+      ready() {
+        this.rgba = this.color;
+        if (this.spareColor.length !== 0) {
+          this.colorList = this.spareColor;
+        }
+      },
+      /**
+       * 初始化
+       */
+      init() {
+        this.hsb = this.rgbToHex(this.rgba);
+        this.setValue(this.rgba);
+      },
+      moveHandle() {
+      },
+      open() {
+        this.show = true;
+        this.$nextTick(() => {
+          this.init();
+          setTimeout(() => {
+            this.active = true;
+            setTimeout(() => {
+              this.getSelectorQuery();
+            }, 350);
+          }, 50);
+        });
+      },
+      close() {
+        this.active = false;
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.show = false;
+          }, 500);
+        });
+      },
+      confirm() {
+        this.close();
+        this.$emit("confirm", {
+          rgba: this.rgba,
+          hex: this.hex
+        });
+      },
+      // 选择模式
+      select() {
+        this.mode = !this.mode;
+      },
+      // 常用颜色选择
+      selectColor(item) {
+        this.setColorBySelect(item);
+      },
+      touchstart(e, index2) {
+        const { pageX, pageY, clientX, clientY } = e.touches[0];
+        this.moveX = clientX || pageX;
+        this.moveY = clientY || pageY;
+        this.setPosition(this.moveX, this.moveY, index2);
+      },
+      touchmove(e, index2) {
+        const { pageX, pageY, clientX, clientY } = e.touches[0];
+        this.moveX = clientX || pageX;
+        this.moveY = clientY || pageY;
+        this.setPosition(this.moveX, this.moveY, index2);
+      },
+      touchend(e, index2) {
+      },
+      /**
+       * 设置位置
+       */
+      setPosition(x, y, index2) {
+        this.index = index2;
+        const { top, left, width, height } = this.position[index2];
+        this.site[index2].left = Math.max(0, Math.min(parseInt(x - left), width));
+        if (index2 === 0) {
+          this.site[index2].top = Math.max(0, Math.min(parseInt(y - top), height));
+          this.hsb.s = parseInt(100 * this.site[index2].left / width);
+          this.hsb.b = parseInt(100 - 100 * this.site[index2].top / height);
+          this.setColor();
+          this.setValue(this.rgba);
+        } else {
+          this.setControl(index2, this.site[index2].left);
+        }
+      },
+      /**
+       * 设置 rgb 颜色
+       */
+      setColor() {
+        const rgb = this.HSBToRGB(this.hsb);
+        this.rgba.r = rgb.r;
+        this.rgba.g = rgb.g;
+        this.rgba.b = rgb.b;
+      },
+      /**
+       * 设置二进制颜色
+       * @param {Object} rgb
+       */
+      setValue(rgb) {
+        this.hex = "#" + this.rgbToHex(rgb);
+      },
+      setControl(index2, x) {
+        const { top, left, width, height } = this.position[index2];
+        if (index2 === 1) {
+          this.hsb.h = parseInt(360 * x / width);
+          this.bgcolor = this.HSBToRGB({
+            h: this.hsb.h,
+            s: 100,
+            b: 100
+          });
+          this.setColor();
+        } else {
+          this.rgba.a = (x / width).toFixed(1);
+        }
+        this.setValue(this.rgba);
+      },
+      /**
+       * rgb 转 二进制 hex
+       * @param {Object} rgb
+       */
+      rgbToHex(rgb) {
+        let hex = [rgb.r.toString(16), rgb.g.toString(16), rgb.b.toString(16)];
+        hex.map(function(str, i) {
+          if (str.length == 1) {
+            hex[i] = "0" + str;
+          }
+        });
+        return hex.join("");
+      },
+      setColorBySelect(getrgb) {
+        const { r, g, b, a } = getrgb;
+        let rgb = {};
+        rgb = {
+          r: r ? parseInt(r) : 0,
+          g: g ? parseInt(g) : 0,
+          b: b ? parseInt(b) : 0,
+          a: a ? a : 0
+        };
+        this.rgba = rgb;
+        this.hsb = this.rgbToHsb(rgb);
+        this.changeViewByHsb();
+      },
+      changeViewByHsb() {
+        const [a, b, c] = this.position;
+        this.site[0].left = parseInt(this.hsb.s * a.width / 100);
+        this.site[0].top = parseInt((100 - this.hsb.b) * a.height / 100);
+        this.setColor(this.hsb.h);
+        this.setValue(this.rgba);
+        this.bgcolor = this.HSBToRGB({
+          h: this.hsb.h,
+          s: 100,
+          b: 100
+        });
+        this.site[1].left = this.hsb.h / 360 * b.width;
+        this.site[2].left = this.rgba.a * c.width;
+      },
+      /**
+       * hsb 转 rgb
+       * @param {Object} 颜色模式  H(hues)表示色相，S(saturation)表示饱和度，B（brightness）表示亮度
+       */
+      HSBToRGB(hsb) {
+        let rgb = {};
+        let h = Math.round(hsb.h);
+        let s = Math.round(hsb.s * 255 / 100);
+        let v = Math.round(hsb.b * 255 / 100);
+        if (s == 0) {
+          rgb.r = rgb.g = rgb.b = v;
+        } else {
+          let t1 = v;
+          let t2 = (255 - s) * v / 255;
+          let t3 = (t1 - t2) * (h % 60) / 60;
+          if (h == 360)
+            h = 0;
+          if (h < 60) {
+            rgb.r = t1;
+            rgb.b = t2;
+            rgb.g = t2 + t3;
+          } else if (h < 120) {
+            rgb.g = t1;
+            rgb.b = t2;
+            rgb.r = t1 - t3;
+          } else if (h < 180) {
+            rgb.g = t1;
+            rgb.r = t2;
+            rgb.b = t2 + t3;
+          } else if (h < 240) {
+            rgb.b = t1;
+            rgb.r = t2;
+            rgb.g = t1 - t3;
+          } else if (h < 300) {
+            rgb.b = t1;
+            rgb.g = t2;
+            rgb.r = t2 + t3;
+          } else if (h < 360) {
+            rgb.r = t1;
+            rgb.g = t2;
+            rgb.b = t1 - t3;
+          } else {
+            rgb.r = 0;
+            rgb.g = 0;
+            rgb.b = 0;
+          }
+        }
+        return {
+          r: Math.round(rgb.r),
+          g: Math.round(rgb.g),
+          b: Math.round(rgb.b)
+        };
+      },
+      rgbToHsb(rgb) {
+        let hsb = {
+          h: 0,
+          s: 0,
+          b: 0
+        };
+        let min = Math.min(rgb.r, rgb.g, rgb.b);
+        let max = Math.max(rgb.r, rgb.g, rgb.b);
+        let delta = max - min;
+        hsb.b = max;
+        hsb.s = max != 0 ? 255 * delta / max : 0;
+        if (hsb.s != 0) {
+          if (rgb.r == max)
+            hsb.h = (rgb.g - rgb.b) / delta;
+          else if (rgb.g == max)
+            hsb.h = 2 + (rgb.b - rgb.r) / delta;
+          else
+            hsb.h = 4 + (rgb.r - rgb.g) / delta;
+        } else
+          hsb.h = -1;
+        hsb.h *= 60;
+        if (hsb.h < 0)
+          hsb.h = 0;
+        hsb.s *= 100 / 255;
+        hsb.b *= 100 / 255;
+        return hsb;
+      },
+      getSelectorQuery() {
+        const views = uni.createSelectorQuery().in(this);
+        views.selectAll(".boxs").boundingClientRect((data) => {
+          if (!data || data.length === 0) {
+            setTimeout(() => this.getSelectorQuery(), 20);
+            return;
+          }
+          this.position = data;
+          this.setColorBySelect(this.rgba);
+        }).exec();
+      },
+      hex2Rgb(hexColor, alpha = 1) {
+        const color = hexColor.slice(1);
+        const r = parseInt(color.slice(0, 2), 16);
+        const g = parseInt(color.slice(2, 4), 16);
+        const b = parseInt(color.slice(4, 6), 16);
+        return {
+          r,
+          g,
+          b,
+          a: alpha
+        };
+      }
+    },
+    watch: {
+      spareColor(newVal) {
+        this.colorList = newVal;
+      },
+      color(newVal) {
+        this.ready();
+      }
+    }
+  };
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+    return $data.show ? (vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        key: 0,
+        class: "t-wrapper",
+        onTouchmove: _cache[13] || (_cache[13] = vue.withModifiers((...args) => $options.moveHandle && $options.moveHandle(...args), ["stop", "prevent"]))
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(["t-mask", { active: $data.active }]),
+            onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => $options.close && $options.close(...args), ["stop"]))
+          },
+          null,
+          2
+          /* CLASS */
+        ),
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(["t-box", { active: $data.active }])
+          },
+          [
+            vue.createElementVNode("view", { class: "t-header" }, [
+              vue.createElementVNode("view", {
+                class: "t-header-button",
+                onClick: _cache[1] || (_cache[1] = (...args) => $options.close && $options.close(...args))
+              }, "取消"),
+              vue.createElementVNode("view", {
+                class: "t-header-button",
+                onClick: _cache[2] || (_cache[2] = (...args) => $options.confirm && $options.confirm(...args))
+              }, "确认")
+            ]),
+            vue.createElementVNode(
+              "view",
+              {
+                class: "t-color__box",
+                style: vue.normalizeStyle({ background: "rgb(" + $data.bgcolor.r + "," + $data.bgcolor.g + "," + $data.bgcolor.b + ")" })
+              },
+              [
+                vue.createElementVNode(
+                  "view",
+                  {
+                    class: "t-background boxs",
+                    onTouchstart: _cache[3] || (_cache[3] = ($event) => $options.touchstart($event, 0)),
+                    onTouchmove: _cache[4] || (_cache[4] = ($event) => $options.touchmove($event, 0)),
+                    onTouchend: _cache[5] || (_cache[5] = ($event) => $options.touchend($event, 0))
+                  },
+                  [
+                    vue.createElementVNode("view", { class: "t-color-mask" }),
+                    vue.createElementVNode(
+                      "view",
+                      {
+                        class: "t-pointer",
+                        style: vue.normalizeStyle({ top: $data.site[0].top - 8 + "px", left: $data.site[0].left - 8 + "px" })
+                      },
+                      null,
+                      4
+                      /* STYLE */
+                    )
+                  ],
+                  32
+                  /* NEED_HYDRATION */
+                )
+              ],
+              4
+              /* STYLE */
+            ),
+            vue.createElementVNode("view", { class: "t-control__box" }, [
+              vue.createElementVNode("view", { class: "t-control__color" }, [
+                vue.createElementVNode(
+                  "view",
+                  {
+                    class: "t-control__color-content",
+                    style: vue.normalizeStyle({ background: "rgba(" + $data.rgba.r + "," + $data.rgba.g + "," + $data.rgba.b + "," + $data.rgba.a + ")" })
+                  },
+                  null,
+                  4
+                  /* STYLE */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "t-control-box__item" }, [
+                vue.createElementVNode(
+                  "view",
+                  {
+                    class: "t-controller boxs",
+                    onTouchstart: _cache[6] || (_cache[6] = ($event) => $options.touchstart($event, 1)),
+                    onTouchmove: _cache[7] || (_cache[7] = ($event) => $options.touchmove($event, 1)),
+                    onTouchend: _cache[8] || (_cache[8] = ($event) => $options.touchend($event, 1))
+                  },
+                  [
+                    vue.createElementVNode("view", { class: "t-hue" }, [
+                      vue.createElementVNode(
+                        "view",
+                        {
+                          class: "t-circle",
+                          style: vue.normalizeStyle({ left: $data.site[1].left - 12 + "px" })
+                        },
+                        null,
+                        4
+                        /* STYLE */
+                      )
+                    ])
+                  ],
+                  32
+                  /* NEED_HYDRATION */
+                ),
+                vue.createElementVNode(
+                  "view",
+                  {
+                    class: "t-controller boxs",
+                    onTouchstart: _cache[9] || (_cache[9] = ($event) => $options.touchstart($event, 2)),
+                    onTouchmove: _cache[10] || (_cache[10] = ($event) => $options.touchmove($event, 2)),
+                    onTouchend: _cache[11] || (_cache[11] = ($event) => $options.touchend($event, 2))
+                  },
+                  [
+                    vue.createElementVNode("view", { class: "t-transparency" }, [
+                      vue.createElementVNode(
+                        "view",
+                        {
+                          class: "t-circle",
+                          style: vue.normalizeStyle({ left: $data.site[2].left - 12 + "px" })
+                        },
+                        null,
+                        4
+                        /* STYLE */
+                      )
+                    ])
+                  ],
+                  32
+                  /* NEED_HYDRATION */
+                )
+              ])
+            ]),
+            vue.createElementVNode("view", { class: "t-result__box" }, [
+              $data.mode ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "t-result__item"
+              }, [
+                vue.createElementVNode(
+                  "view",
+                  { class: "t-result__box-input" },
+                  vue.toDisplayString($data.hex),
+                  1
+                  /* TEXT */
+                ),
+                vue.createElementVNode("view", { class: "t-result__box-text" }, "HEX")
+              ])) : (vue.openBlock(), vue.createElementBlock(
+                vue.Fragment,
+                { key: 1 },
+                [
+                  vue.createElementVNode("view", { class: "t-result__item" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "t-result__box-input" },
+                      vue.toDisplayString($data.rgba.r),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode("view", { class: "t-result__box-text" }, "R")
+                  ]),
+                  vue.createElementVNode("view", { class: "t-result__item" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "t-result__box-input" },
+                      vue.toDisplayString($data.rgba.g),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode("view", { class: "t-result__box-text" }, "G")
+                  ]),
+                  vue.createElementVNode("view", { class: "t-result__item" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "t-result__box-input" },
+                      vue.toDisplayString($data.rgba.b),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode("view", { class: "t-result__box-text" }, "B")
+                  ]),
+                  vue.createElementVNode("view", { class: "t-result__item" }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "t-result__box-input" },
+                      vue.toDisplayString($data.rgba.a),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode("view", { class: "t-result__box-text" }, "A")
+                  ])
+                ],
+                64
+                /* STABLE_FRAGMENT */
+              )),
+              vue.createElementVNode("view", {
+                class: "t-result__item t-select",
+                onClick: _cache[12] || (_cache[12] = (...args) => $options.select && $options.select(...args))
+              }, [
+                vue.createElementVNode("view", { class: "t-result__box-input" }, [
+                  vue.createElementVNode("view", null, "切换"),
+                  vue.createElementVNode("view", null, "模式")
+                ])
+              ])
+            ]),
+            vue.createElementVNode("view", { class: "t-alternative" }, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($data.colorList, (item, index2) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    class: "t-alternative__item",
+                    key: index2
+                  }, [
+                    vue.createElementVNode("view", {
+                      class: "t-alternative__item-content",
+                      style: vue.normalizeStyle({ background: "rgba(" + item.r + "," + item.g + "," + item.b + "," + item.a + ")" }),
+                      onClick: ($event) => $options.selectColor(item)
+                    }, null, 12, ["onClick"])
+                  ]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
+          ],
+          2
+          /* CLASS */
+        )
+      ],
+      32
+      /* NEED_HYDRATION */
+    )) : vue.createCommentVNode("v-if", true);
+  }
+  const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-2eef75f4"], ["__file", "E:/yunsoo_mobile/uni_modules/sp-editor/components/sp-editor/color-picker.vue"]]);
+  const _sfc_main$6 = {
+    data() {
+      return {
+        showPopup: false,
+        descVal: "",
+        addrVal: ""
+      };
+    },
+    methods: {
+      open() {
+        this.showPopup = true;
+        this.$emit("open");
+      },
+      close() {
+        this.showPopup = false;
+        this.descVal = "";
+        this.addrVal = "";
+        this.$emit("close");
+      },
+      onConfirm() {
+        if (!this.descVal) {
+          uni.showToast({
+            title: "请输入链接描述",
+            icon: "none"
+          });
+          return;
+        }
+        if (!this.addrVal) {
+          uni.showToast({
+            title: "请输入链接地址",
+            icon: "none"
+          });
+          return;
+        }
+        this.$emit("confirm", {
+          text: this.descVal,
+          href: this.addrVal
+        });
+        this.close();
+      }
+    }
+  };
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+    return $data.showPopup ? (vue.openBlock(), vue.createElementBlock("view", {
+      key: 0,
+      class: "link-edit-container"
+    }, [
+      vue.createElementVNode("view", { class: "link-edit" }, [
+        vue.createElementVNode("view", { class: "title" }, "添加链接"),
+        vue.createElementVNode("view", { class: "edit" }, [
+          vue.createElementVNode("view", { class: "description" }, [
+            vue.createTextVNode(" 链接描述： "),
+            vue.withDirectives(vue.createElementVNode(
+              "input",
+              {
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.descVal = $event),
+                type: "text",
+                class: "input",
+                placeholder: "请输入链接描述"
+              },
+              null,
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, $data.descVal]
+            ])
+          ]),
+          vue.createElementVNode("view", { class: "address" }, [
+            vue.createTextVNode(" 链接地址： "),
+            vue.withDirectives(vue.createElementVNode(
+              "input",
+              {
+                "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.addrVal = $event),
+                type: "text",
+                class: "input",
+                placeholder: "请输入链接地址"
+              },
+              null,
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, $data.addrVal]
+            ])
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "control" }, [
+          vue.createElementVNode("view", {
+            class: "cancel",
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.close && $options.close(...args))
+          }, "取消"),
+          vue.createElementVNode("view", {
+            class: "confirm",
+            onClick: _cache[3] || (_cache[3] = (...args) => $options.onConfirm && $options.onConfirm(...args))
+          }, "确认")
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "mask" })
+    ])) : vue.createCommentVNode("v-if", true);
+  }
+  const LinkEdit = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-8dec0f4f"], ["__file", "E:/yunsoo_mobile/uni_modules/sp-editor/components/sp-editor/link-edit.vue"]]);
+  const _sfc_main$5 = {
+    props: {
+      visible: {
+        type: Boolean,
+        default: false
+      },
+      placement: {
+        type: String,
+        default: "auto"
+        // 'auto' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'
+      }
+    },
+    data() {
+      return {
+        placementHeight: "0",
+        placementType: ""
+      };
+    },
+    watch: {
+      visible(newVal) {
+        if (newVal) {
+          const { screenWidth } = uni.getSystemInfoSync();
+          this.$nextTick(() => {
+            let placementWidth = 0;
+            uni.createSelectorQuery().in(this).select("#placementfab").boundingClientRect((res) => {
+              this.placementHeight = -res.height + "px";
+              placementWidth = res.width;
+            }).exec();
+            if (this.placement == "auto") {
+              uni.createSelectorQuery().in(this).select("#toolfab").boundingClientRect((res) => {
+                let leftRemain = res.left;
+                let rightRemain = screenWidth - leftRemain;
+                if (rightRemain > placementWidth) {
+                  this.placementType = "bottom-start";
+                } else if (leftRemain > placementWidth) {
+                  this.placementType = "bottom-end";
+                } else {
+                  this.placementType = "bottom-center";
+                }
+              }).exec();
+            }
+          });
+        }
+      }
+    },
+    mounted() {
+      this.placementType = this.placement;
+    },
+    computed: {
+      placementStyle() {
+        let position = {};
+        switch (this.placementType) {
+          case "top-start":
+            position = {
+              top: this.placementHeight,
+              left: 0
+            };
+            break;
+          case "top-center":
+            position = {
+              top: this.placementHeight,
+              left: "50%",
+              transform: "translateX(-50%)"
+            };
+            break;
+          case "top-end":
+            position = {
+              top: this.placementHeight,
+              right: 0
+            };
+            break;
+          case "bottom-start":
+            position = {
+              bottom: this.placementHeight,
+              left: 0
+            };
+            break;
+          case "bottom-center":
+            position = {
+              bottom: this.placementHeight,
+              left: "50%",
+              transform: "translateX(-50%)"
+            };
+            break;
+          case "bottom-end":
+            position = {
+              bottom: this.placementHeight,
+              right: 0
+            };
+            break;
+        }
+        return position;
+      }
+    },
+    methods: {
+      //
+    }
+  };
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "fab-tool" }, [
+      vue.createElementVNode("view", { id: "toolfab" }, [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ]),
+      vue.createElementVNode(
+        "view",
+        {
+          class: "fab-tool-content",
+          style: vue.normalizeStyle($options.placementStyle),
+          id: "placementfab"
+        },
+        [
+          $props.visible ? vue.renderSlot(_ctx.$slots, "content", { key: 0 }, void 0, true) : vue.createCommentVNode("v-if", true)
+        ],
+        4
+        /* STYLE */
+      )
+    ]);
+  }
+  const FabTool = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-40828400"], ["__file", "E:/yunsoo_mobile/uni_modules/sp-editor/components/sp-editor/fab-tool.vue"]]);
+  const linkFlag = "#-*=*-*=*-*=*@-link超链接标识link-@*=*-*=*-*=*-#";
+  function addLink(editorCtx, attr, callback) {
+    editorCtx.insertText({
+      text: linkFlag
+    });
+    editorCtx.getContents({
+      success(res) {
+        let options = res.delta.ops;
+        const findex = options.findIndex((item) => {
+          var _a2;
+          return item.insert && typeof item.insert !== "object" && ((_a2 = item.insert) == null ? void 0 : _a2.indexOf(linkFlag)) !== -1;
+        });
+        if (findex > -1) {
+          const findOption = options[findex];
+          const findAttributes = findOption.attributes;
+          const [prefix, suffix] = findOption.insert.split(linkFlag);
+          const handleOps = [];
+          if (prefix) {
+            const prefixOps = findAttributes ? {
+              insert: prefix,
+              attributes: findAttributes
+            } : {
+              insert: prefix
+            };
+            handleOps.push(prefixOps);
+          }
+          const linkOps = {
+            insert: attr.text,
+            attributes: {
+              link: attr.href,
+              textDecoration: attr.textDecoration || "none",
+              // 下划线
+              color: attr.color || "#007aff"
+            }
+          };
+          handleOps.push(linkOps);
+          if (suffix) {
+            const suffixOps = findAttributes ? {
+              insert: suffix,
+              attributes: findAttributes
+            } : {
+              insert: suffix
+            };
+            handleOps.push(suffixOps);
+          }
+          options.splice(findex, 1);
+          options.splice(findex, 0, ...handleOps);
+          editorCtx.setContents({
+            delta: {
+              ops: options
+            }
+          });
+          editorCtx.blur();
+          if (callback)
+            callback();
+        }
+      }
+    });
+  }
+  const _sfc_main$4 = {
+    components: {
+      ColorPicker,
+      LinkEdit,
+      FabTool
+    },
+    props: {
+      // 编辑器id可传入，以便循环组件使用，防止id重复
+      editorId: {
+        type: String,
+        default: "editor"
+      },
+      placeholder: {
+        type: String,
+        default: "写点什么吧 ~"
+      },
+      // 是否只读
+      readOnly: {
+        type: Boolean,
+        default: false
+      },
+      // 最大字数限制，-1不限
+      maxlength: {
+        type: Number,
+        default: -1
+      },
+      // 工具栏配置
+      toolbarConfig: {
+        type: Object,
+        default: () => {
+          return {
+            keys: [],
+            // 要显示的工具，优先级最大
+            excludeKeys: [],
+            // 除这些指定的工具外，其他都显示
+            iconSize: "18px",
+            // 工具栏字体大小
+            iconColumns: 10
+            // 工具栏列数
+          };
+        }
+      }
+    },
+    watch: {
+      toolbarConfig: {
+        deep: true,
+        immediate: true,
+        handler(newToolbar) {
+          var _a2, _b2;
+          if (((_a2 = newToolbar.keys) == null ? void 0 : _a2.length) > 0) {
+            this.toolbarList = newToolbar.keys;
+          } else {
+            this.toolbarList = ((_b2 = newToolbar.excludeKeys) == null ? void 0 : _b2.length) > 0 ? this.toolbarAllList.filter((item) => !newToolbar.excludeKeys.includes(item)) : this.toolbarAllList;
+          }
+          this.iconSize = newToolbar.iconSize || "18px";
+          this.iconColumns = newToolbar.iconColumns || 10;
+        }
+      }
+    },
+    data() {
+      return {
+        formats: {},
+        curFab: "",
+        // 当前悬浮工具栏
+        fabXY: {},
+        textColor: "",
+        backgroundColor: "",
+        curColor: "",
+        defaultColor: { r: 0, g: 0, b: 0, a: 1 },
+        // 调色板默认颜色
+        iconSize: "20px",
+        // 工具栏图标字体大小
+        iconColumns: 10,
+        // 工具栏列数
+        toolbarList: [],
+        toolbarAllList: [
+          "header",
+          // 标题
+          "H1",
+          // 一级标题
+          "H2",
+          // 二级标题
+          "H3",
+          // 三级标题
+          "H4",
+          // 四级标题
+          "H5",
+          // 五级标题
+          "H6",
+          // 六级标题
+          "bold",
+          // 加粗
+          "italic",
+          // 斜体
+          "underline",
+          // 下划线
+          "strike",
+          // 删除线
+          "align",
+          // 对齐方式
+          "alignLeft",
+          // 左对齐
+          "alignCenter",
+          // 居中对齐
+          "alignRight",
+          // 右对齐
+          "alignJustify",
+          // 两端对齐
+          "lineHeight",
+          // 行间距
+          "letterSpacing",
+          // 字间距
+          "marginTop",
+          // 段前距
+          "marginBottom",
+          // 段后距
+          "fontFamily",
+          // 字体
+          "fontSize",
+          // 字号
+          "color",
+          // 文字颜色
+          "backgroundColor",
+          // 背景颜色
+          "date",
+          // 日期
+          "listCheck",
+          // 待办
+          "listOrdered",
+          // 有序列表
+          "listBullet",
+          // 无序列表
+          "indentInc",
+          // 增加缩进
+          "indentDec",
+          // 减少缩进
+          "divider",
+          // 分割线
+          "scriptSub",
+          // 下标
+          "scriptSuper",
+          // 上标
+          "direction",
+          // 文本方向
+          "image",
+          // 图片
+          "video",
+          // 视频
+          "link",
+          // 超链接
+          "undo",
+          // 撤销
+          "redo",
+          // 重做
+          "removeFormat",
+          // 清除格式
+          "clear",
+          // 清空
+          "export"
+          // 导出
+        ],
+        fabTools: {
+          header: [
+            { title: "一级标题", name: "H1", value: 1, icon: "icon-format-header-1" },
+            { title: "二级标题", name: "H2", value: 2, icon: "icon-format-header-2" },
+            { title: "三级标题", name: "H3", value: 3, icon: "icon-format-header-3" },
+            { title: "四级标题", name: "H4", value: 4, icon: "icon-format-header-4" },
+            { title: "五级标题", name: "H5", value: 5, icon: "icon-format-header-5" },
+            { title: "六级标题", name: "H6", value: 6, icon: "icon-format-header-6" }
+          ],
+          fontFamily: [
+            { title: "宋体", name: "宋", value: "宋体", icon: "" },
+            { title: "黑体", name: "黑", value: "黑体", icon: "" },
+            { title: "楷体", name: "楷", value: "楷体", icon: "" },
+            { title: "仿宋", name: "仿", value: "仿宋", icon: "" },
+            { title: "华文隶书", name: "隶", value: "STLiti", icon: "" },
+            { title: "华文行楷", name: "行", value: "STXingkai", icon: "" },
+            { title: "幼圆", name: "圆", value: "YouYuan", icon: "" }
+          ],
+          fontSize: [
+            { title: "12", name: "12", value: "12px", icon: "" },
+            { title: "14", name: "14", value: "14px", icon: "" },
+            { title: "16", name: "16", value: "16px", icon: "" },
+            { title: "18", name: "18", value: "18px", icon: "" },
+            { title: "20", name: "20", value: "20px", icon: "" },
+            { title: "22", name: "22", value: "22px", icon: "" },
+            { title: "24", name: "24", value: "24px", icon: "" }
+          ],
+          align: [
+            { title: "左对齐", name: "alignLeft", value: "left", icon: "icon-zuoduiqi" },
+            { title: "居中对齐", name: "alignCenter", value: "center", icon: "icon-juzhongduiqi" },
+            { title: "右对齐", name: "alignRight", value: "right", icon: "icon-youduiqi" },
+            { title: "两端对齐", name: "alignJustify", value: "justify", icon: "icon-zuoyouduiqi" }
+          ],
+          lineHeight: [
+            { title: "1倍", name: "1", value: "1", icon: "" },
+            { title: "1.5倍", name: "1.5", value: "1.5", icon: "" },
+            { title: "2倍", name: "2", value: "2", icon: "" },
+            { title: "2.5倍", name: "2.5", value: "2.5", icon: "" },
+            { title: "3倍", name: "3", value: "3", icon: "" }
+          ],
+          // 字间距/段前距/段后距
+          space: [
+            { title: "0.5倍", name: "0.5", value: "0.5em", icon: "" },
+            { title: "1倍", name: "1", value: "1em", icon: "" },
+            { title: "1.5倍", name: "1.5", value: "1.5em", icon: "" },
+            { title: "2倍", name: "2", value: "2em", icon: "" },
+            { title: "2.5倍", name: "2.5", value: "2.5em", icon: "" },
+            { title: "3倍", name: "3", value: "3em", icon: "" }
+          ]
+        }
+      };
+    },
+    methods: {
+      onEditorReady() {
+        uni.createSelectorQuery().in(this).select("#" + this.editorId).context((res) => {
+          this.editorCtx = res.context;
+          this.$emit("init", this.editorCtx, this.editorId);
+        }).exec();
+      },
+      undo() {
+        this.editorCtx.undo();
+      },
+      redo() {
+        this.editorCtx.redo();
+      },
+      format(e) {
+        let { name, value } = e.target.dataset;
+        if (!name)
+          return;
+        switch (name) {
+          case "color":
+          case "backgroundColor":
+            this.curColor = name;
+            this.showPicker();
+            break;
+          default:
+            this.editorCtx.format(name, value);
+            break;
+        }
+      },
+      // 悬浮工具点击
+      fabTap(fabType) {
+        if (this.curFab != fabType) {
+          this.curFab = fabType;
+        } else {
+          this.curFab = "";
+        }
+      },
+      // 悬浮工具子集点击
+      fabTapSub(e, fabType) {
+        this.format(e);
+        this.fabTap(fabType);
+      },
+      showPicker() {
+        switch (this.curColor) {
+          case "color":
+            this.defaultColor = this.textColor ? this.$refs.colorPickerRef.hex2Rgb(this.textColor) : { r: 0, g: 0, b: 0, a: 1 };
+            break;
+          case "backgroundColor":
+            this.defaultColor = this.backgroundColor ? this.$refs.colorPickerRef.hex2Rgb(this.backgroundColor) : { r: 0, g: 0, b: 0, a: 0 };
+            break;
+        }
+        this.$refs.colorPickerRef.open();
+      },
+      confirmColor(e) {
+        switch (this.curColor) {
+          case "color":
+            this.textColor = e.hex;
+            this.editorCtx.format("color", this.textColor);
+            break;
+          case "backgroundColor":
+            this.backgroundColor = e.hex;
+            this.editorCtx.format("backgroundColor", this.backgroundColor);
+            break;
+        }
+      },
+      onStatusChange(e) {
+        if (e.detail.color) {
+          this.textColor = e.detail.color;
+        }
+        if (e.detail.backgroundColor) {
+          this.backgroundColor = e.detail.backgroundColor;
+        }
+        this.formats = e.detail;
+      },
+      insertDivider() {
+        this.editorCtx.insertDivider();
+      },
+      clear() {
+        uni.showModal({
+          title: "清空编辑器",
+          content: "确定清空编辑器吗？",
+          success: ({ confirm }) => {
+            if (confirm) {
+              this.editorCtx.clear();
+            }
+          }
+        });
+      },
+      removeFormat() {
+        uni.showModal({
+          title: "文本格式化",
+          content: "确定要清除所选择部分文本块格式吗？",
+          showCancel: true,
+          success: ({ confirm }) => {
+            if (confirm) {
+              this.editorCtx.removeFormat();
+            }
+          }
+        });
+      },
+      insertDate() {
+        const date = /* @__PURE__ */ new Date();
+        const formatDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        this.editorCtx.insertText({ text: formatDate });
+      },
+      insertLink() {
+        this.$refs.linkEditRef.open();
+      },
+      /**
+       * 确认添加链接
+       * @param {Object} e { text: '链接描述', href: '链接地址' }
+       */
+      confirmLink(e) {
+        this.$refs.linkEditRef.close();
+        addLink(this.editorCtx, e, () => {
+          this.editorCtx.getContents({
+            success: (res) => {
+              this.$emit("input", { html: res.html, text: res.text }, this.editorId);
+            }
+          });
+        });
+        this.$emit("addLink", e, this.editorId);
+      },
+      insertImage() {
+        uni.chooseImage({
+          // count: 1, // 默认9
+          success: (res) => {
+            const { tempFiles } = res;
+            this.$emit("upinImage", tempFiles, this.editorCtx, this.editorId);
+          },
+          fail() {
+            uni.showToast({
+              title: "未授权访问相册权限，请授权后使用",
+              icon: "none"
+            });
+          }
+        });
+      },
+      insertVideo() {
+        uni.chooseVideo({
+          sourceType: ["camera", "album"],
+          success: (res) => {
+            const { tempFilePath } = res;
+            this.$emit("upinVideo", tempFilePath, this.editorCtx, this.editorId);
+          },
+          fail() {
+            uni.showToast({
+              title: "未授权访问媒体权限，请授权后使用",
+              icon: "none"
+            });
+          }
+        });
+      },
+      onEditorInput(e) {
+        if (Object.keys(e.detail).length <= 0)
+          return;
+        const { html, text } = e.detail;
+        if (text.indexOf(linkFlag) !== -1)
+          return;
+        const maxlength = parseInt(this.maxlength);
+        const textStr = text.replace(/[ \t\r\n]/g, "");
+        if (textStr.length > maxlength && maxlength != -1) {
+          uni.showModal({
+            content: `超过${maxlength}字数啦~`,
+            confirmText: "确定",
+            showCancel: false,
+            success: () => {
+              this.$emit("overMax", { html, text }, this.editorId);
+            }
+          });
+        } else {
+          this.$emit("input", { html, text }, this.editorId);
+        }
+      },
+      // 导出
+      exportHtml() {
+        this.editorCtx.getContents({
+          success: (res) => {
+            this.$emit("exportHtml", res.html, this.editorId);
+          }
+        });
+      },
+      eLongpress() {
+      }
+    }
+  };
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_fab_tool = vue.resolveComponent("fab-tool");
+    const _component_color_picker = vue.resolveComponent("color-picker");
+    const _component_link_edit = vue.resolveComponent("link-edit");
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "sp-editor",
+        style: vue.normalizeStyle({ "--icon-size": $data.iconSize, "--icon-columns": $data.iconColumns })
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            class: "sp-editor-wrapper",
+            onLongpress: _cache[3] || (_cache[3] = (...args) => $options.eLongpress && $options.eLongpress(...args))
+          },
+          [
+            vue.createElementVNode("editor", {
+              id: $props.editorId,
+              class: vue.normalizeClass(["ql-editor editor-container", { "ql-image-overlay-none": $props.readOnly }]),
+              "show-img-size": "",
+              "show-img-toolbar": "",
+              "show-img-resize": "",
+              placeholder: $props.placeholder,
+              "read-only": $props.readOnly,
+              onStatuschange: _cache[0] || (_cache[0] = (...args) => $options.onStatusChange && $options.onStatusChange(...args)),
+              onReady: _cache[1] || (_cache[1] = (...args) => $options.onEditorReady && $options.onEditorReady(...args)),
+              onInput: _cache[2] || (_cache[2] = (...args) => $options.onEditorInput && $options.onEditorInput(...args))
+            }, null, 42, ["id", "placeholder", "read-only"])
+          ],
+          32
+          /* NEED_HYDRATION */
+        ),
+        !$props.readOnly ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "sp-editor-toolbar",
+          onClick: _cache[30] || (_cache[30] = (...args) => $options.format && $options.format(...args))
+        }, [
+          vue.createCommentVNode(" 标题栏 "),
+          $data.toolbarList.includes("header") ? (vue.openBlock(), vue.createBlock(_component_fab_tool, {
+            key: 0,
+            visible: $data.curFab == "header"
+          }, {
+            content: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "fab-tools",
+                onClick: _cache[5] || (_cache[5] = vue.withModifiers(($event) => $options.fabTapSub($event, "header"), ["stop"]))
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.fabTools.header, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      key: item.value
+                    }, [
+                      $data.toolbarList.includes(item.name) ? (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 0,
+                        class: vue.normalizeClass(["fab-sub", [$data.formats.header === item.value ? "ql-active" : "", item.icon ? "iconfont" : "", item.icon]]),
+                        title: item.title,
+                        "data-name": "header",
+                        "data-value": item.value
+                      }, null, 10, ["title", "data-value"])) : vue.createCommentVNode("v-if", true)
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass([$data.formats.header ? "ql-active" : "", "iconfont icon-header"]),
+                  title: "标题",
+                  "data-name": "header",
+                  onClick: _cache[4] || (_cache[4] = vue.withModifiers(($event) => $options.fabTap("header"), ["stop"]))
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["visible"])) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("bold") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 1,
+              class: vue.normalizeClass([$data.formats.bold ? "ql-active" : "", "iconfont icon-zitijiacu"]),
+              title: "加粗",
+              "data-name": "bold"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("italic") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 2,
+              class: vue.normalizeClass([$data.formats.italic ? "ql-active" : "", "iconfont icon-zitixieti"]),
+              title: "斜体",
+              "data-name": "italic"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("underline") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 3,
+              class: vue.normalizeClass([$data.formats.underline ? "ql-active" : "", "iconfont icon-zitixiahuaxian"]),
+              title: "下划线",
+              "data-name": "underline"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("strike") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 4,
+              class: vue.normalizeClass([$data.formats.strike ? "ql-active" : "", "iconfont icon-zitishanchuxian"]),
+              title: "删除线",
+              "data-name": "strike"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(" 对齐方式 "),
+          $data.toolbarList.includes("align") ? (vue.openBlock(), vue.createBlock(_component_fab_tool, {
+            key: 5,
+            visible: $data.curFab == "align"
+          }, {
+            content: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "fab-tools",
+                onClick: _cache[7] || (_cache[7] = vue.withModifiers(($event) => $options.fabTapSub($event, "align"), ["stop"]))
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.fabTools.align, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      key: item.value
+                    }, [
+                      $data.toolbarList.includes(item.name) ? (vue.openBlock(), vue.createElementBlock("view", {
+                        key: 0,
+                        class: vue.normalizeClass(["fab-sub", [$data.formats.align === item.value ? "ql-active" : "", item.icon ? "iconfont" : "", item.icon]]),
+                        title: item.title,
+                        "data-name": "align",
+                        "data-value": item.value
+                      }, null, 10, ["title", "data-value"])) : vue.createCommentVNode("v-if", true)
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass([$data.formats.align ? "ql-active" : "", "iconfont icon-zuoyouduiqi"]),
+                  title: "对齐方式",
+                  "data-name": "align",
+                  onClick: _cache[6] || (_cache[6] = vue.withModifiers(($event) => $options.fabTap("align"), ["stop"]))
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["visible"])) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(" 行间距 "),
+          $data.toolbarList.includes("lineHeight") ? (vue.openBlock(), vue.createBlock(_component_fab_tool, {
+            key: 6,
+            visible: $data.curFab == "lineHeight"
+          }, {
+            content: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "fab-tools",
+                onClick: _cache[9] || (_cache[9] = vue.withModifiers(($event) => $options.fabTapSub($event, "lineHeight"), ["stop"]))
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.fabTools.lineHeight, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      key: item.value
+                    }, [
+                      vue.createElementVNode("view", {
+                        class: vue.normalizeClass(["fab-sub", [$data.formats.lineHeight === item.value ? "ql-active" : "", item.icon ? "iconfont" : "", item.icon]]),
+                        title: item.title,
+                        "data-name": "lineHeight",
+                        "data-value": item.value
+                      }, vue.toDisplayString(item.name), 11, ["title", "data-value"])
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass([$data.formats.lineHeight ? "ql-active" : "", "iconfont icon-line-height"]),
+                  title: "行间距",
+                  "data-name": "lineHeight",
+                  onClick: _cache[8] || (_cache[8] = vue.withModifiers(($event) => $options.fabTap("lineHeight"), ["stop"]))
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["visible"])) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(" 字间距 "),
+          $data.toolbarList.includes("letterSpacing") ? (vue.openBlock(), vue.createBlock(_component_fab_tool, {
+            key: 7,
+            visible: $data.curFab == "letterSpacing"
+          }, {
+            content: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "fab-tools",
+                onClick: _cache[11] || (_cache[11] = vue.withModifiers(($event) => $options.fabTapSub($event, "letterSpacing"), ["stop"]))
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.fabTools.space, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      key: item.value
+                    }, [
+                      vue.createElementVNode("view", {
+                        class: vue.normalizeClass(["fab-sub", [
+                          $data.formats.letterSpacing === item.value ? "ql-active" : "",
+                          item.icon ? "iconfont" : "",
+                          item.icon
+                        ]]),
+                        title: item.title,
+                        "data-name": "letterSpacing",
+                        "data-value": item.value
+                      }, vue.toDisplayString(item.name), 11, ["title", "data-value"])
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass([$data.formats.letterSpacing ? "ql-active" : "", "iconfont icon-Character-Spacing"]),
+                  title: "字间距",
+                  "data-name": "letterSpacing",
+                  onClick: _cache[10] || (_cache[10] = vue.withModifiers(($event) => $options.fabTap("letterSpacing"), ["stop"]))
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["visible"])) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(" 段前距 "),
+          $data.toolbarList.includes("marginTop") ? (vue.openBlock(), vue.createBlock(_component_fab_tool, {
+            key: 8,
+            visible: $data.curFab == "marginTop"
+          }, {
+            content: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "fab-tools",
+                onClick: _cache[13] || (_cache[13] = vue.withModifiers(($event) => $options.fabTapSub($event, "marginTop"), ["stop"]))
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.fabTools.space, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      key: item.value
+                    }, [
+                      vue.createElementVNode("view", {
+                        class: vue.normalizeClass(["fab-sub", [$data.formats.marginTop === item.value ? "ql-active" : "", item.icon ? "iconfont" : "", item.icon]]),
+                        title: item.title,
+                        "data-name": "marginTop",
+                        "data-value": item.value
+                      }, vue.toDisplayString(item.name), 11, ["title", "data-value"])
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass([$data.formats.marginTop ? "ql-active" : "", "iconfont icon-722bianjiqi_duanqianju"]),
+                  title: "段前距",
+                  "data-name": "marginTop",
+                  onClick: _cache[12] || (_cache[12] = vue.withModifiers(($event) => $options.fabTap("marginTop"), ["stop"]))
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["visible"])) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(" 段后距 "),
+          $data.toolbarList.includes("marginBottom") ? (vue.openBlock(), vue.createBlock(_component_fab_tool, {
+            key: 9,
+            visible: $data.curFab == "marginBottom"
+          }, {
+            content: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "fab-tools",
+                onClick: _cache[15] || (_cache[15] = vue.withModifiers(($event) => $options.fabTapSub($event, "marginBottom"), ["stop"]))
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.fabTools.space, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      key: item.value
+                    }, [
+                      vue.createElementVNode("view", {
+                        class: vue.normalizeClass(["fab-sub", [
+                          $data.formats.marginBottom === item.value ? "ql-active" : "",
+                          item.icon ? "iconfont" : "",
+                          item.icon
+                        ]]),
+                        title: item.title,
+                        "data-name": "marginBottom",
+                        "data-value": item.value
+                      }, vue.toDisplayString(item.name), 11, ["title", "data-value"])
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass([$data.formats.marginBottom ? "ql-active" : "", "iconfont icon-723bianjiqi_duanhouju"]),
+                  title: "段后距",
+                  "data-name": "marginBottom",
+                  onClick: _cache[14] || (_cache[14] = vue.withModifiers(($event) => $options.fabTap("marginBottom"), ["stop"]))
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["visible"])) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(" 字体栏 "),
+          $data.toolbarList.includes("fontFamily") ? (vue.openBlock(), vue.createBlock(_component_fab_tool, {
+            key: 10,
+            visible: $data.curFab == "fontFamily"
+          }, {
+            content: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "fab-tools",
+                onClick: _cache[17] || (_cache[17] = vue.withModifiers(($event) => $options.fabTapSub($event, "fontFamily"), ["stop"]))
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.fabTools.fontFamily, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      key: item.value
+                    }, [
+                      vue.createElementVNode("view", {
+                        class: vue.normalizeClass(["fab-sub", [$data.formats.fontFamily === item.value ? "ql-active" : "", item.icon ? "iconfont" : "", item.icon]]),
+                        title: item.title,
+                        "data-name": "fontFamily",
+                        "data-value": item.value
+                      }, vue.toDisplayString(item.name), 11, ["title", "data-value"])
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass([$data.formats.fontFamily ? "ql-active" : "", "iconfont icon-font"]),
+                  title: "字体",
+                  "data-name": "fontFamily",
+                  onClick: _cache[16] || (_cache[16] = vue.withModifiers(($event) => $options.fabTap("fontFamily"), ["stop"]))
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["visible"])) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(" 字体大小栏 "),
+          $data.toolbarList.includes("fontSize") ? (vue.openBlock(), vue.createBlock(_component_fab_tool, {
+            key: 11,
+            visible: $data.curFab == "fontSize"
+          }, {
+            content: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "fab-tools",
+                onClick: _cache[19] || (_cache[19] = vue.withModifiers(($event) => $options.fabTapSub($event, "fontSize"), ["stop"]))
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(
+                  vue.Fragment,
+                  null,
+                  vue.renderList($data.fabTools.fontSize, (item) => {
+                    return vue.openBlock(), vue.createElementBlock("view", {
+                      key: item.value
+                    }, [
+                      vue.createElementVNode("view", {
+                        class: vue.normalizeClass(["fab-sub", [$data.formats.fontSize === item.value ? "ql-active" : "", item.icon ? "iconfont" : "", item.icon]]),
+                        title: item.title,
+                        "data-name": "fontSize",
+                        "data-value": item.value
+                      }, vue.toDisplayString(item.name), 11, ["title", "data-value"])
+                    ]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass([$data.formats.fontSize ? "ql-active" : "", "iconfont icon-fontsize"]),
+                  title: "字号",
+                  "data-name": "fontSize",
+                  onClick: _cache[18] || (_cache[18] = vue.withModifiers(($event) => $options.fabTap("fontSize"), ["stop"]))
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["visible"])) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("color") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 12,
+            style: vue.normalizeStyle({ color: $data.formats.color ? $data.textColor : "initial" }),
+            class: "iconfont icon-text_color",
+            title: "文字颜色",
+            "data-name": "color",
+            "data-value": $data.textColor
+          }, null, 12, ["data-value"])) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("backgroundColor") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 13,
+            style: vue.normalizeStyle({ color: $data.formats.backgroundColor ? $data.backgroundColor : "initial" }),
+            class: "iconfont icon-fontbgcolor",
+            title: "背景颜色",
+            "data-name": "backgroundColor",
+            "data-value": $data.backgroundColor
+          }, null, 12, ["data-value"])) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("date") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 14,
+            class: "iconfont icon-date",
+            title: "日期",
+            onClick: _cache[20] || (_cache[20] = (...args) => $options.insertDate && $options.insertDate(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("listCheck") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 15,
+            class: "iconfont icon--checklist",
+            title: "待办",
+            "data-name": "list",
+            "data-value": "check"
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("listOrdered") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 16,
+              class: vue.normalizeClass([$data.formats.list === "ordered" ? "ql-active" : "", "iconfont icon-youxupailie"]),
+              title: "有序列表",
+              "data-name": "list",
+              "data-value": "ordered"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("listBullet") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 17,
+              class: vue.normalizeClass([$data.formats.list === "bullet" ? "ql-active" : "", "iconfont icon-wuxupailie"]),
+              title: "无序列表",
+              "data-name": "list",
+              "data-value": "bullet"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("divider") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 18,
+            class: "iconfont icon-fengexian",
+            title: "分割线",
+            onClick: _cache[21] || (_cache[21] = (...args) => $options.insertDivider && $options.insertDivider(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("indentDec") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 19,
+            class: "iconfont icon-outdent",
+            title: "减少缩进",
+            "data-name": "indent",
+            "data-value": "-1"
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("indentInc") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 20,
+            class: "iconfont icon-indent",
+            title: "增加缩进",
+            "data-name": "indent",
+            "data-value": "+1"
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("scriptSub") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 21,
+              class: vue.normalizeClass([$data.formats.script === "sub" ? "ql-active" : "", "iconfont icon-zitixiabiao"]),
+              title: "下标",
+              "data-name": "script",
+              "data-value": "sub"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("scriptSuper") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 22,
+              class: vue.normalizeClass([$data.formats.script === "super" ? "ql-active" : "", "iconfont icon-zitishangbiao"]),
+              title: "上标",
+              "data-name": "script",
+              "data-value": "super"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("direction") ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 23,
+              class: vue.normalizeClass([$data.formats.direction === "rtl" ? "ql-active" : "", "iconfont icon-direction-rtl"]),
+              title: "文本方向",
+              "data-name": "direction",
+              "data-value": "rtl"
+            },
+            null,
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("image") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 24,
+            class: "iconfont icon-charutupian",
+            title: "图片",
+            onClick: _cache[22] || (_cache[22] = (...args) => $options.insertImage && $options.insertImage(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("video") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 25,
+            class: "iconfont icon-video",
+            title: "视频",
+            onClick: _cache[23] || (_cache[23] = (...args) => $options.insertVideo && $options.insertVideo(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("link") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 26,
+            class: "iconfont icon-charulianjie",
+            title: "超链接",
+            onClick: _cache[24] || (_cache[24] = (...args) => $options.insertLink && $options.insertLink(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("undo") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 27,
+            class: "iconfont icon-undo",
+            title: "撤销",
+            onClick: _cache[25] || (_cache[25] = (...args) => $options.undo && $options.undo(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("redo") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 28,
+            class: "iconfont icon-redo",
+            title: "重做",
+            onClick: _cache[26] || (_cache[26] = (...args) => $options.redo && $options.redo(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("removeFormat") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 29,
+            class: "iconfont icon-clearedformat",
+            title: "清除格式",
+            onClick: _cache[27] || (_cache[27] = (...args) => $options.removeFormat && $options.removeFormat(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("clear") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 30,
+            class: "iconfont icon-shanchu",
+            title: "清空",
+            onClick: _cache[28] || (_cache[28] = (...args) => $options.clear && $options.clear(...args))
+          })) : vue.createCommentVNode("v-if", true),
+          $data.toolbarList.includes("export") ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 31,
+            class: "iconfont icon-baocun",
+            title: "导出",
+            onClick: _cache[29] || (_cache[29] = (...args) => $options.exportHtml && $options.exportHtml(...args))
+          })) : vue.createCommentVNode("v-if", true)
+        ])) : vue.createCommentVNode("v-if", true),
+        vue.createCommentVNode(" 自定义功能组件 "),
+        vue.createCommentVNode(" 调色板 "),
+        $data.toolbarList.includes("color") || $data.toolbarList.includes("backgroundColor") ? (vue.openBlock(), vue.createBlock(_component_color_picker, {
+          key: 1,
+          ref: "colorPickerRef",
+          color: $data.defaultColor,
+          onConfirm: $options.confirmColor
+        }, null, 8, ["color", "onConfirm"])) : vue.createCommentVNode("v-if", true),
+        vue.createCommentVNode(" 添加链接的操作弹窗 "),
+        $data.toolbarList.includes("link") && !$props.readOnly ? (vue.openBlock(), vue.createBlock(_component_link_edit, {
+          key: 2,
+          ref: "linkEditRef",
+          onConfirm: $options.confirmLink
+        }, null, 8, ["onConfirm"])) : vue.createCommentVNode("v-if", true)
+      ],
+      4
+      /* STYLE */
+    );
+  }
+  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-a4fa8f35"], ["__file", "E:/yunsoo_mobile/uni_modules/sp-editor/components/sp-editor/sp-editor.vue"]]);
+  const _sfc_main$3 = {
     __name: "createLibrary",
     setup(__props, { expose: __expose }) {
       __expose();
+      const toast = useToast();
       const userStore = userInfoStore();
-      const readOnly = vue.ref(false);
+      const editorIns = vue.ref(null);
       const formats = vue.ref({});
       const editorCtx = vue.ref(null);
       const imgUrl = vue.ref("");
@@ -11601,157 +13622,93 @@ This will fail in production.`);
         let res = await requestMethods("/getLibraryType", "GET");
         libraryType.value = res.data;
       };
-      const readOnlyChange = () => {
-        readOnly.value = !readOnly.value;
+      const inputContentHtml = (e) => {
+        libraryForm.libraryHtml = e.html;
       };
-      const onEditorReady = () => {
-        uni.createSelectorQuery().select("#editor").context((res) => {
-          editorCtx.value = res;
-        }).exec();
-      };
-      const clearEditor = () => {
-        if (!editorCtx.value) {
-          uni.showToast({
-            title: "编辑器未准备好",
-            icon: "none"
-          });
-          return;
-        }
-        uni.showModal({
-          title: "清空编辑器",
-          content: "确定清空编辑器全部内容？",
-          success: (res) => {
-            if (res.confirm) {
-              editorCtx.value.clear();
-              uni.showToast({
-                title: "编辑器已清空",
-                icon: "success"
-              });
-            }
-          }
-        });
-      };
-      const getLibraryText = (e) => {
-        libraryForm.libraryHtml = e.detail.html;
-      };
-      const submitLibraryFormEvent = () => {
-      };
-      const insertImage = () => {
-        if (!editorCtx.value) {
-          uni.showToast({
-            title: "编辑器未准备好",
-            icon: "none"
-          });
-          return;
-        }
-        uni.chooseImage({
-          count: 1,
-          success: (res) => {
-            const filePath = res.tempFilePaths[0];
-            const file = res.tempFiles[0];
-            uni.getImageInfo({
-              src: filePath,
-              success: () => {
-                upLoadImageEvent(filePath, file);
-              },
-              fail: () => {
+      const upinImage = (tempFiles, editorCtx2) => {
+        uni.uploadFile({
+          url: "http://192.168.8.5:3000/uploadLibraryImage",
+          filePath: tempFiles[0].path,
+          name: "file",
+          header: {
+            "authorization": userStore.token ? userStore.token : null
+          },
+          formData: {
+            "file": tempFiles
+          },
+          success: (upload) => {
+            let jsonData = JSON.parse(upload.data);
+            imgUrl.value = jsonData.data.url;
+            editorCtx2.insertImage({
+              src: imgUrl.value,
+              width: "90%",
+              // 默认不建议铺满宽度100%，预留一点空隙以便用户编辑
+              success: function() {
                 uni.showToast({
-                  title: "请选择有效的图片文件",
-                  icon: "none"
+                  icon: "none",
+                  title: "图片上传成功"
                 });
               }
             });
           }
         });
       };
-      const upLoadImageEvent = (path, file) => {
-        uni.uploadFile({
-          url: "http://192.168.8.5:3000/uploadLibraryImage",
-          filePath: path,
-          name: "file",
-          header: {
-            "authorization": userStore.token ? userStore.token : null
-          },
-          formData: {
-            "file": file
-          },
-          success: (upload) => {
-            let jsonData = JSON.parse(upload.data);
-            if (jsonData.code === 402) {
-              uni.redirectTo({
-                url: "/pages/login/login"
-              });
-            } else {
-              imgUrl.value = jsonData.data.url;
-              editorCtx.value.insertImage({
-                src: imgUrl.value,
-                alt: "知识库图片",
-                fail: function() {
-                  uni.showToast({
-                    title: "图片添加失败",
-                    icon: "none"
-                  });
-                }
-              });
-            }
-          }
-        });
+      const initEditor = (editor) => {
+        editorIns.value = editor;
+        preRender();
       };
-      const undo = () => {
-        if (!editorCtx.value) {
-          uni.showToast({
-            title: "编辑器未准备好",
-            icon: "none"
+      const preRender = () => {
+        setTimeout(() => {
+          editorIns.value.setContents({
+            html: ``
           });
-          return;
-        }
-        editorCtx.value.undo();
+        }, 1e3);
       };
-      const redo = () => {
-        if (!editorCtx.value) {
-          uni.showToast({
-            title: "编辑器未准备好",
-            icon: "none"
-          });
-          return;
+      const submitLibraryFormEvent = () => {
+        let { libraryTitle, libraryText, libraryTypeValue, libraryHtml } = libraryForm;
+        if (!libraryTitle) {
+          toast.info("请填写知识库标题");
+        } else if (!libraryText) {
+          toast.info("请填写知识库简介");
+        } else if (!libraryTypeValue) {
+          toast.info("请选择知识库类型");
+        } else if (!libraryHtml) {
+          toast.info("请填写知识库内容");
+        } else {
+          toast.info("验证通过");
         }
-        editorCtx.value.redo();
-      };
-      const format = (e) => {
-        if (!editorCtx.value) {
-          uni.showToast({
-            title: "编辑器未准备好",
-            icon: "none"
-          });
-          return;
-        }
-        let { name, value } = e.target.dataset;
-        if (!name)
-          return;
-        editorCtx.value.format(name, value);
-      };
-      const onStatusChange = (e) => {
-        const newFormats = e.detail;
-        formats.value = newFormats;
       };
       const backToLibraryList = () => {
         uni.navigateBack();
       };
-      const __returned__ = { userStore, readOnly, formats, editorCtx, imgUrl, libraryType, libraryForm, getLibraryTypeSelectData, readOnlyChange, onEditorReady, clearEditor, getLibraryText, submitLibraryFormEvent, insertImage, upLoadImageEvent, undo, redo, format, onStatusChange, backToLibraryList, Navigation };
+      const __returned__ = { toast, userStore, editorIns, formats, editorCtx, imgUrl, libraryType, libraryForm, getLibraryTypeSelectData, inputContentHtml, upinImage, initEditor, preRender, submitLibraryFormEvent, backToLibraryList, get onLoad() {
+        return onLoad;
+      }, ref: vue.ref, onMounted: vue.onMounted, nextTick: vue.nextTick, reactive: vue.reactive, Navigation, get requestMethods() {
+        return requestMethods;
+      }, get getTimenumber() {
+        return getTimenumber;
+      }, get useToast() {
+        return useToast;
+      }, get userInfoStore() {
+        return userInfoStore;
+      } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
-  });
+  };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
     const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
-    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_1$3);
-    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_2);
-    const _component_wd_cell_group = resolveEasycom(vue.resolveDynamicComponent("wd-cell-group"), __easycom_3);
+    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_2$1);
+    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_3$1);
+    const _component_wd_cell_group = resolveEasycom(vue.resolveDynamicComponent("wd-cell-group"), __easycom_4);
+    const _component_sp_editor = resolveEasycom(vue.resolveDynamicComponent("sp-editor"), __easycom_5);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
       [
         vue.createVNode($setup["Navigation"]),
+        vue.createVNode(_component_wd_toast),
         vue.createElementVNode("view", { class: "created_library" }, [
           vue.createVNode(_component_wd_navbar, {
             title: "创建知识库",
@@ -11775,23 +13732,27 @@ This will fail in production.`);
                   placeholder: "请输入标题",
                   clearable: "",
                   maxlength: 70,
-                  showWordLimit: ""
-                }),
+                  showWordLimit: "",
+                  modelValue: $setup.libraryForm.libraryTitle,
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.libraryForm.libraryTitle = $event)
+                }, null, 8, ["modelValue"]),
                 vue.createVNode(_component_wd_input, {
                   "custom-class": "commonInputWidth",
                   "custom-input-class": "commonInput",
-                  placeholder: "请输入描述",
+                  placeholder: "请输入简介",
                   clearable: "",
                   maxlength: 70,
-                  showWordLimit: ""
-                }),
+                  showWordLimit: "",
+                  modelValue: $setup.libraryForm.libraryText,
+                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.libraryForm.libraryText = $event)
+                }, null, 8, ["modelValue"]),
                 vue.createVNode(_component_wd_select_picker, {
                   "custom-class": "custom_select",
                   type: "radio",
                   "z-index": 1e3,
                   columns: $setup.libraryType,
                   modelValue: $setup.libraryForm.libraryTypeValue,
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.libraryForm.libraryTypeValue = $event),
+                  "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.libraryForm.libraryTypeValue = $event),
                   "label-key": "value",
                   "value-key": "value",
                   "use-default-slot": ""
@@ -11803,7 +13764,7 @@ This will fail in production.`);
                       placeholder: "请选择类型",
                       readonly: "",
                       modelValue: $setup.libraryForm.libraryTypeValue,
-                      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.libraryForm.libraryTypeValue = $event)
+                      "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.libraryForm.libraryTypeValue = $event)
                     }, null, 8, ["modelValue"])
                   ]),
                   _: 1
@@ -11814,85 +13775,16 @@ This will fail in production.`);
               /* STABLE */
             }),
             vue.createElementVNode("view", { class: "wrapper" }, [
-              vue.createElementVNode("view", { class: "editor-wrapper" }, [
-                vue.createElementVNode("editor", {
-                  id: "editor",
-                  class: "ql-container",
-                  placeholder: "输入您要分享的内容...",
-                  "show-img-size": "",
-                  "show-img-toolbar": "",
-                  "show-img-resize": "",
-                  "read-only": $setup.readOnly,
-                  onStatuschange: $setup.onStatusChange,
-                  onReady: $setup.onEditorReady,
-                  onBlur: $setup.getLibraryText
-                }, null, 40, ["read-only"])
-              ]),
-              vue.createCommentVNode(" 工具栏 "),
-              vue.createElementVNode("view", {
-                class: "toolbar",
-                onClick: $setup.format,
-                style: { "height": "88rpx", "overflow-y": "auto" }
-              }, [
-                vue.createElementVNode(
-                  "view",
-                  {
-                    class: vue.normalizeClass([$setup.formats.bold ? "ql-active" : "", "iconfont icon-zitijiacu"]),
-                    "data-name": "bold"
-                  },
-                  null,
-                  2
-                  /* CLASS */
-                ),
-                vue.createElementVNode(
-                  "view",
-                  {
-                    class: vue.normalizeClass([$setup.formats.underline ? "ql-active" : "", "iconfont icon-zitixiahuaxian"]),
-                    "data-name": "underline"
-                  },
-                  null,
-                  2
-                  /* CLASS */
-                ),
-                vue.createElementVNode(
-                  "view",
-                  {
-                    class: vue.normalizeClass([$setup.formats.list === "bullet" ? "ql-active" : "", "iconfont icon-wuxupailie"]),
-                    "data-name": "list",
-                    "data-value": "bullet"
-                  },
-                  null,
-                  2
-                  /* CLASS */
-                ),
-                vue.createElementVNode(
-                  "view",
-                  {
-                    class: vue.normalizeClass([$setup.formats.list === "ordered" ? "ql-active" : "", "iconfont icon-youxupailie"]),
-                    "data-name": "list",
-                    "data-value": "ordered"
-                  },
-                  null,
-                  2
-                  /* CLASS */
-                ),
-                vue.createElementVNode("view", {
-                  class: "iconfont icon-undo",
-                  onClick: $setup.undo
-                }),
-                vue.createElementVNode("view", {
-                  class: "iconfont icon-redo",
-                  onClick: $setup.redo
-                }),
-                vue.createElementVNode("view", {
-                  class: "iconfont icon-charutupian",
-                  onClick: $setup.insertImage
-                }),
-                vue.createElementVNode("view", {
-                  class: "iconfont icon-shanchu",
-                  onClick: $setup.clearEditor
-                })
-              ])
+              vue.createVNode(_component_sp_editor, {
+                "toolbar-config": {
+                  keys: ["bold", "underline", "listOrdered", "listBullet", "image", "undo", "redo", "clear"],
+                  iconSize: "18px"
+                },
+                placeholder: "想要分享的内容",
+                onInput: $setup.inputContentHtml,
+                onUpinImage: $setup.upinImage,
+                onInit: $setup.initEditor
+              })
             ])
           ])
         ])
@@ -11999,8 +13891,8 @@ This will fail in production.`);
     const _component_wd_message_box = resolveEasycom(vue.resolveDynamicComponent("wd-message-box"), __easycom_1$2);
     const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
     const _component_wd_loading = resolveEasycom(vue.resolveDynamicComponent("wd-loading"), __easycom_3$3);
-    const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_4);
-    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_5);
+    const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_4$1);
+    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_5$1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
