@@ -164,47 +164,36 @@ const upinImage = (tempFiles, editorCtx) => {
 		toast.error('图片上传参数错误')
 		return
 	}
-	
+	// console.log(tempFiles);
 	uni.uploadFile({
-		url: 'http://192.168.8.5:3000/uploadLibraryImage',
+		
+		url: 'http://192.168.1.113:3000/uploadLibraryImage',
 		filePath: tempFiles[0].path,
 		name: 'file',
 		header: {
 			'authorization': userStore.token ? userStore.token : null
 		},
-		formData: {
-			'file': tempFiles
-		},
+		// formData: {
+		// 	'file': JSON.stringify(tempFiles)
+		// },
 		success: (upload) => {
-			try {
-				let jsonData = JSON.parse(upload.data)
-				if (jsonData && jsonData.data && jsonData.data.url) {
-					imgUrl.value = jsonData.data.url
-					editorCtx.insertImage({
-						src: imgUrl.value,
-						width: '90%',
-						success: function () {
-							uni.showToast({
-								icon: 'none',
-								title: '图片上传成功'
-							})
-						},
-						fail: function (error) {
-							console.error('插入图片失败:', error)
-							toast.error('插入图片失败')
-						}
+			// console.log(upload);
+			let jsonData = JSON.parse(upload.data)
+			imgUrl.value = jsonData.data.url
+			editorCtx.insertImage({
+				src: imgUrl.value,
+				width: '90%',
+				success: function () {
+					uni.showToast({
+						icon: 'none',
+						title: '图片上传成功'
 					})
-				} else {
-					toast.error('图片上传响应数据格式错误')
+				},
+				fail: function (error) {
+					console.error('插入图片失败:', error)
+					toast.error('插入图片失败')
 				}
-			} catch (error) {
-				console.error('解析上传响应失败:', error)
-				toast.error('图片上传失败')
-			}
-		},
-		fail: (error) => {
-			console.error('图片上传失败:', error)
-			toast.error('图片上传失败')
+			})
 		}
 	})
 }
