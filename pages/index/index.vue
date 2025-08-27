@@ -185,7 +185,6 @@
 	const userName = ref('')
 	
 	onLoad(() => {
-		// console.log(userStore.token);
 		if(!userStore.token || isTokenExpired(userStore.tokenTime)) {
 			if(!isTokenExpired(userStore.tokenTime)) {
 				return uni.showToast({

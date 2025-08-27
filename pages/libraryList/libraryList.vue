@@ -97,6 +97,9 @@
 	
 	// 获取知识库列表
 	onMounted(() => {
+		uni.$on('refreshData', () => {
+			getLibraryListData()
+		})
 		nextTick(() => {
 			getLibraryListData()
 		})

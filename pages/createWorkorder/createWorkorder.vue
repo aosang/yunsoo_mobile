@@ -153,7 +153,7 @@
 		workorderForm.created_name = userStore.userName
 		workorderForm.created_time = formatTime()
 		workorderForm.created_update = formatTime()
-		workorderForm.created_id = getTimenumber()
+		workorderForm.created_id = getTimenumber()[0]
 			
 		nextTick(() => {
 			getWorkorderDevice()

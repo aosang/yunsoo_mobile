@@ -17,5 +17,6 @@ export const getTimenumber = () => {
 	let s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
 	
 	let timeNumber = y + '' + m + '' + d + '' + h + '' + mm + '' + s + number
-	return timeNumber
+	let currentTime = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s
+	return [timeNumber, currentTime]
 }

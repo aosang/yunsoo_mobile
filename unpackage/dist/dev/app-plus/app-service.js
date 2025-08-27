@@ -32,6 +32,8 @@ if (uni.restoreGlobal) {
 (function(vue) {
   "use strict";
   const ON_SHOW = "onShow";
+  const ON_HIDE = "onHide";
+  const ON_LAUNCH = "onLaunch";
   const ON_LOAD = "onLoad";
   const ON_PULL_DOWN_REFRESH = "onPullDownRefresh";
   function formatAppLog(type, filename, ...args) {
@@ -51,6 +53,16 @@ if (uni.restoreGlobal) {
     ON_SHOW,
     1 | 2
     /* HookFlags.PAGE */
+  );
+  const onHide = /* @__PURE__ */ createLifeCycleHook(
+    ON_HIDE,
+    1 | 2
+    /* HookFlags.PAGE */
+  );
+  const onLaunch = /* @__PURE__ */ createLifeCycleHook(
+    ON_LAUNCH,
+    1
+    /* HookFlags.APP */
   );
   const onLoad = /* @__PURE__ */ createLifeCycleHook(
     ON_LOAD,
@@ -4492,7 +4504,7 @@ This will fail in production.`);
       ])
     ], 46, ["id", "hover-class", "hover-start-time", "hover-stay-time", "open-type", "send-message-title", "send-message-path", "send-message-img", "app-parameter", "show-message-card", "session-from", "lang", "hover-stop-propagation", "scope"]);
   }
-  const wdButton = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-d858c170"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-button/wd-button.vue"]]);
+  const __easycom_6$1 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-d858c170"], ["__file", "E:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-button/wd-button.vue"]]);
   const _imports_0$2 = "/static/images/common/system_logo_white.png";
   const _sfc_main$A = {
     __name: "login",
@@ -4547,7 +4559,7 @@ This will fail in production.`);
   function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
     const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_2$1);
-    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), wdButton);
+    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_6$1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -5015,7 +5027,7 @@ This will fail in production.`);
           messageState.cancelButtonProps = option.cancelButtonProps;
         }
       }
-      const __returned__ = { props, translate, rootClass, bodyClass, messageOptionKey, messageOption, messageState, customConfirmProps, customCancelProps, toggleModal, handleConfirm, handleCancel, validate, resetErr, inputValChange, reset, wdPopup, wdButton, wdInput: __easycom_2$1 };
+      const __returned__ = { props, translate, rootClass, bodyClass, messageOptionKey, messageOption, messageState, customConfirmProps, customCancelProps, toggleModal, handleConfirm, handleCancel, validate, resetErr, inputValChange, reset, wdPopup, wdButton: __easycom_6$1, wdInput: __easycom_2$1 };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
@@ -7651,7 +7663,7 @@ This will fail in production.`);
   function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
     const _component_wd_img = resolveEasycom(vue.resolveDynamicComponent("wd-img"), __easycom_1$1);
-    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), wdButton);
+    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_6$1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -7753,11 +7765,155 @@ This will fail in production.`);
     );
   }
   const PagesProfileProfile = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__file", "E:/yunsoo_mobile/pages/profile/profile.vue"]]);
-  const _sfc_main$l = {};
-  function _sfc_render$k(_ctx, _cache) {
-    return vue.openBlock(), vue.createElementBlock("view", null, "11223");
+  const _sfc_main$l = {
+    __name: "test",
+    setup(__props, { expose: __expose }) {
+      __expose();
+      const count = vue.ref(0);
+      const vueVersion = vue.ref("3.x");
+      const currentTime = vue.ref("");
+      const testStatus = vue.ref("初始化中...");
+      let timer = null;
+      const reactiveData = vue.reactive({
+        message: "Hello Vue3!",
+        count: 0
+      });
+      const computedValue = vue.computed(() => {
+        return `计数: ${count.value}, 响应式计数: ${reactiveData.count}`;
+      });
+      onLoad(() => {
+        formatAppLog("log", "at pages/test/test.vue:47", "✅ 测试页面加载 - onLoad");
+        testStatus.value = "页面已加载";
+      });
+      vue.onMounted(() => {
+        formatAppLog("log", "at pages/test/test.vue:52", "✅ 测试页面挂载 - onMounted");
+        testStatus.value = "页面已挂载";
+        updateTime();
+        timer = setInterval(updateTime, 1e3);
+      });
+      vue.onUnmounted(() => {
+        formatAppLog("log", "at pages/test/test.vue:59", "✅ 测试页面卸载 - onUnmounted");
+        testStatus.value = "页面已卸载";
+        if (timer) {
+          clearInterval(timer);
+        }
+      });
+      const updateTime = () => {
+        currentTime.value = (/* @__PURE__ */ new Date()).toLocaleString();
+      };
+      const increment = () => {
+        count.value++;
+        formatAppLog("log", "at pages/test/test.vue:72", "✅ 计数增加:", count.value);
+      };
+      const decrement = () => {
+        count.value--;
+        formatAppLog("log", "at pages/test/test.vue:77", "✅ 计数减少:", count.value);
+      };
+      const updateReactiveData = () => {
+        reactiveData.count++;
+        reactiveData.message = `更新于 ${(/* @__PURE__ */ new Date()).toLocaleTimeString()}`;
+        formatAppLog("log", "at pages/test/test.vue:83", "✅ 响应式数据已更新");
+      };
+      const testComputed = () => {
+        formatAppLog("log", "at pages/test/test.vue:87", "✅ 计算属性值:", computedValue.value);
+        testStatus.value = "计算属性测试完成";
+      };
+      const __returned__ = { count, vueVersion, currentTime, testStatus, get timer() {
+        return timer;
+      }, set timer(v) {
+        timer = v;
+      }, reactiveData, computedValue, updateTime, increment, decrement, updateReactiveData, testComputed, ref: vue.ref, onMounted: vue.onMounted, onUnmounted: vue.onUnmounted, computed: vue.computed, reactive: vue.reactive, get onLoad() {
+        return onLoad;
+      } };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  };
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_6$1);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "test-container" }, [
+      vue.createElementVNode("view", { class: "test-title" }, "Vue3 测试页面"),
+      vue.createElementVNode("view", { class: "test-content" }, [
+        vue.createElementVNode(
+          "text",
+          null,
+          "当前计数: " + vue.toDisplayString($setup.count),
+          1
+          /* TEXT */
+        ),
+        vue.createVNode(_component_wd_button, { onClick: $setup.increment }, {
+          default: vue.withCtx(() => [
+            vue.createTextVNode("增加")
+          ]),
+          _: 1
+          /* STABLE */
+        }),
+        vue.createVNode(_component_wd_button, { onClick: $setup.decrement }, {
+          default: vue.withCtx(() => [
+            vue.createTextVNode("减少")
+          ]),
+          _: 1
+          /* STABLE */
+        })
+      ]),
+      vue.createElementVNode("view", { class: "test-info" }, [
+        vue.createElementVNode(
+          "text",
+          null,
+          "Vue版本: " + vue.toDisplayString($setup.vueVersion),
+          1
+          /* TEXT */
+        ),
+        vue.createElementVNode(
+          "text",
+          null,
+          "当前时间: " + vue.toDisplayString($setup.currentTime),
+          1
+          /* TEXT */
+        ),
+        vue.createElementVNode(
+          "text",
+          null,
+          "响应式数据测试: " + vue.toDisplayString($setup.reactiveData.message),
+          1
+          /* TEXT */
+        )
+      ]),
+      vue.createElementVNode("view", { class: "test-actions" }, [
+        vue.createVNode(_component_wd_button, { onClick: $setup.updateReactiveData }, {
+          default: vue.withCtx(() => [
+            vue.createTextVNode("更新响应式数据")
+          ]),
+          _: 1
+          /* STABLE */
+        }),
+        vue.createVNode(_component_wd_button, { onClick: $setup.testComputed }, {
+          default: vue.withCtx(() => [
+            vue.createTextVNode("测试计算属性")
+          ]),
+          _: 1
+          /* STABLE */
+        })
+      ]),
+      vue.createElementVNode("view", { class: "test-output" }, [
+        vue.createElementVNode(
+          "text",
+          null,
+          "计算属性结果: " + vue.toDisplayString($setup.computedValue),
+          1
+          /* TEXT */
+        ),
+        vue.createElementVNode(
+          "text",
+          null,
+          "测试状态: " + vue.toDisplayString($setup.testStatus),
+          1
+          /* TEXT */
+        )
+      ])
+    ]);
   }
-  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__file", "E:/yunsoo_mobile/pages/test/test.vue"]]);
+  const PagesTestTest = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-727d09f0"], ["__file", "E:/yunsoo_mobile/pages/test/test.vue"]]);
   const noticeBarProps = {
     ...baseProps,
     /**
@@ -9737,7 +9893,7 @@ This will fail in production.`);
         close,
         open: open2
       });
-      const __returned__ = { translate, props, emit, pickerShow, selectList, isConfirm, lastSelectList, filterVal, filterColumns, scrollTop, cell, showValue, form, errorMessage, isRequired, proxy, setScrollIntoView, noop: noop2, getSelectedItem, valueFormat, handleChange, close, open: open2, onConfirm, handleConfirm, getFilterText, handleFilterChange, formatFilterColumns, showConfirm, showClear, handleClear, showArrow, wdActionSheet, wdCheckbox, wdCheckboxGroup, wdRadio, wdRadioGroup, wdButton, wdLoading: __easycom_3$3, get isArray() {
+      const __returned__ = { translate, props, emit, pickerShow, selectList, isConfirm, lastSelectList, filterVal, filterColumns, scrollTop, cell, showValue, form, errorMessage, isRequired, proxy, setScrollIntoView, noop: noop2, getSelectedItem, valueFormat, handleChange, close, open: open2, onConfirm, handleConfirm, getFilterText, handleFilterChange, formatFilterColumns, showConfirm, showClear, handleClear, showArrow, wdActionSheet, wdCheckbox, wdCheckboxGroup, wdRadio, wdRadioGroup, wdButton: __easycom_6$1, wdLoading: __easycom_3$3, get isArray() {
         return isArray;
       } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
@@ -10927,7 +11083,8 @@ This will fail in production.`);
     let mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     let s = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
     let timeNumber = y + "" + m + d + h + mm + s + number;
-    return timeNumber;
+    let currentTime = y + "-" + m + "-" + d + " " + h + ":" + mm + ":" + s;
+    return [timeNumber, currentTime];
   };
   const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
     __name: "createWorkorder",
@@ -10940,7 +11097,7 @@ This will fail in production.`);
         workorderForm.created_name = userStore.userName;
         workorderForm.created_time = formatTime();
         workorderForm.created_update = formatTime();
-        workorderForm.created_id = getTimenumber();
+        workorderForm.created_id = getTimenumber()[0];
         vue.nextTick(() => {
           getWorkorderDevice();
           getWorkorderStatus();
@@ -13606,11 +13763,14 @@ This will fail in production.`);
       const editorCtx = vue.ref(null);
       const imgUrl = vue.ref("");
       const libraryType = vue.ref([]);
+      const isPreview = vue.ref(true);
       const libraryForm = vue.reactive({
+        libraryId: "",
         libraryTitle: "",
         libraryText: "",
         libraryTypeValue: "",
         libraryTime: "",
+        libraryAuthor: "",
         libraryHtml: ""
       });
       vue.onMounted(() => {
@@ -13619,13 +13779,26 @@ This will fail in production.`);
         });
       });
       const getLibraryTypeSelectData = async () => {
-        let res = await requestMethods("/getLibraryType", "GET");
-        libraryType.value = res.data;
+        try {
+          let res = await requestMethods("/getLibraryType", "GET");
+          if (res && res.data) {
+            libraryType.value = res.data;
+          }
+        } catch (error) {
+          formatAppLog("error", "at pages/createLibrary/createLibrary.vue:150", "获取知识库类型失败:", error);
+          toast.error("获取知识库类型失败");
+        }
       };
       const inputContentHtml = (e) => {
-        libraryForm.libraryHtml = e.html;
+        if (e && e.html) {
+          libraryForm.libraryHtml = e.html;
+        }
       };
       const upinImage = (tempFiles, editorCtx2) => {
+        if (!tempFiles || !tempFiles[0] || !editorCtx2) {
+          toast.error("图片上传参数错误");
+          return;
+        }
         uni.uploadFile({
           url: "http://192.168.8.5:3000/uploadLibraryImage",
           filePath: tempFiles[0].path,
@@ -13637,32 +13810,56 @@ This will fail in production.`);
             "file": tempFiles
           },
           success: (upload) => {
-            let jsonData = JSON.parse(upload.data);
-            imgUrl.value = jsonData.data.url;
-            editorCtx2.insertImage({
-              src: imgUrl.value,
-              width: "90%",
-              // 默认不建议铺满宽度100%，预留一点空隙以便用户编辑
-              success: function() {
-                uni.showToast({
-                  icon: "none",
-                  title: "图片上传成功"
+            try {
+              let jsonData = JSON.parse(upload.data);
+              if (jsonData && jsonData.data && jsonData.data.url) {
+                imgUrl.value = jsonData.data.url;
+                editorCtx2.insertImage({
+                  src: imgUrl.value,
+                  width: "90%",
+                  success: function() {
+                    uni.showToast({
+                      icon: "none",
+                      title: "图片上传成功"
+                    });
+                  },
+                  fail: function(error) {
+                    formatAppLog("error", "at pages/createLibrary/createLibrary.vue:193", "插入图片失败:", error);
+                    toast.error("插入图片失败");
+                  }
                 });
+              } else {
+                toast.error("图片上传响应数据格式错误");
               }
-            });
+            } catch (error) {
+              formatAppLog("error", "at pages/createLibrary/createLibrary.vue:201", "解析上传响应失败:", error);
+              toast.error("图片上传失败");
+            }
+          },
+          fail: (error) => {
+            formatAppLog("error", "at pages/createLibrary/createLibrary.vue:206", "图片上传失败:", error);
+            toast.error("图片上传失败");
           }
         });
       };
       const initEditor = (editor) => {
-        editorIns.value = editor;
-        preRender();
+        if (editor) {
+          editorIns.value = editor;
+          preRender();
+        }
       };
       const preRender = () => {
-        setTimeout(() => {
-          editorIns.value.setContents({
-            html: ``
-          });
-        }, 1e3);
+        if (editorIns.value && editorIns.value.setContents) {
+          setTimeout(() => {
+            try {
+              editorIns.value.setContents({
+                html: libraryForm.libraryHtml || ""
+              });
+            } catch (error) {
+              formatAppLog("error", "at pages/createLibrary/createLibrary.vue:229", "编辑器内容设置失败:", error);
+            }
+          }, 1e3);
+        }
       };
       const submitLibraryFormEvent = () => {
         let { libraryTitle, libraryText, libraryTypeValue, libraryHtml } = libraryForm;
@@ -13675,18 +13872,50 @@ This will fail in production.`);
         } else if (!libraryHtml) {
           toast.info("请填写知识库内容");
         } else {
-          toast.info("验证通过");
+          isPreview.value = false;
+          libraryForm.libraryTime = getTimenumber()[1];
+          libraryForm.libraryAuthor = userStore.userName;
+          libraryForm.libraryId = userStore.userId;
+        }
+      };
+      const backToEditLibrary = () => {
+        isPreview.value = true;
+      };
+      const addLibraryFormData = async () => {
+        try {
+          let res = await requestMethods("/addLibrary", "POST", libraryForm);
+          if (res.code === 200) {
+            toast.show({
+              iconName: "success",
+              msg: "新增知识库成功",
+              duration: 800,
+              closed: () => {
+                uni.navigateTo({
+                  url: "/pages/libraryList/libraryList"
+                });
+                uni.$emit("refreshData");
+              }
+            });
+          } else {
+            toast.error("新增知识库失败");
+            formatAppLog("log", "at pages/createLibrary/createLibrary.vue:276", res);
+          }
+        } catch (error) {
+          formatAppLog("error", "at pages/createLibrary/createLibrary.vue:279", "提交知识库失败:", error);
+          toast.error("提交知识库失败");
         }
       };
       const backToLibraryList = () => {
         uni.navigateBack();
       };
-      const __returned__ = { toast, userStore, editorIns, formats, editorCtx, imgUrl, libraryType, libraryForm, getLibraryTypeSelectData, inputContentHtml, upinImage, initEditor, preRender, submitLibraryFormEvent, backToLibraryList, get onLoad() {
+      const __returned__ = { toast, userStore, editorIns, formats, editorCtx, imgUrl, libraryType, isPreview, libraryForm, getLibraryTypeSelectData, inputContentHtml, upinImage, initEditor, preRender, submitLibraryFormEvent, backToEditLibrary, addLibraryFormData, backToLibraryList, get dayjs() {
+        return dayjs;
+      }, get onLoad() {
         return onLoad;
-      }, ref: vue.ref, onMounted: vue.onMounted, nextTick: vue.nextTick, reactive: vue.reactive, Navigation, get requestMethods() {
-        return requestMethods;
-      }, get getTimenumber() {
+      }, ref: vue.ref, nextTick: vue.nextTick, reactive: vue.reactive, onMounted: vue.onMounted, Navigation, get getTimenumber() {
         return getTimenumber;
+      }, get requestMethods() {
+        return requestMethods;
       }, get useToast() {
         return useToast;
       }, get userInfoStore() {
@@ -13703,90 +13932,172 @@ This will fail in production.`);
     const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_3$1);
     const _component_wd_cell_group = resolveEasycom(vue.resolveDynamicComponent("wd-cell-group"), __easycom_4);
     const _component_sp_editor = resolveEasycom(vue.resolveDynamicComponent("sp-editor"), __easycom_5);
+    const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_6$1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
       [
         vue.createVNode($setup["Navigation"]),
         vue.createVNode(_component_wd_toast),
-        vue.createElementVNode("view", { class: "created_library" }, [
-          vue.createVNode(_component_wd_navbar, {
-            title: "创建知识库",
-            fixed: "",
-            "custom-class": "custom",
-            "left-text": "返回",
-            "right-text": "确认",
-            "left-arrow": "",
-            zIndex: 10,
-            onClickLeft: $setup.backToLibraryList,
-            onClickRight: $setup.submitLibraryFormEvent
-          })
-        ]),
-        vue.createElementVNode("view", { class: "container" }, [
-          vue.createElementVNode("view", { class: "page-body" }, [
-            vue.createVNode(_component_wd_cell_group, null, {
-              default: vue.withCtx(() => [
-                vue.createVNode(_component_wd_input, {
-                  "custom-class": "commonInputWidth",
-                  "custom-input-class": "commonInput",
-                  placeholder: "请输入标题",
-                  clearable: "",
-                  maxlength: 70,
-                  showWordLimit: "",
-                  modelValue: $setup.libraryForm.libraryTitle,
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.libraryForm.libraryTitle = $event)
-                }, null, 8, ["modelValue"]),
-                vue.createVNode(_component_wd_input, {
-                  "custom-class": "commonInputWidth",
-                  "custom-input-class": "commonInput",
-                  placeholder: "请输入简介",
-                  clearable: "",
-                  maxlength: 70,
-                  showWordLimit: "",
-                  modelValue: $setup.libraryForm.libraryText,
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.libraryForm.libraryText = $event)
-                }, null, 8, ["modelValue"]),
-                vue.createVNode(_component_wd_select_picker, {
-                  "custom-class": "custom_select",
-                  type: "radio",
-                  "z-index": 1e3,
-                  columns: $setup.libraryType,
-                  modelValue: $setup.libraryForm.libraryTypeValue,
-                  "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.libraryForm.libraryTypeValue = $event),
-                  "label-key": "value",
-                  "value-key": "value",
-                  "use-default-slot": ""
-                }, {
+        vue.withDirectives(vue.createElementVNode(
+          "view",
+          null,
+          [
+            vue.createElementVNode("view", { class: "created_library" }, [
+              vue.createVNode(_component_wd_navbar, {
+                title: "创建知识库",
+                fixed: "",
+                "custom-class": "custom",
+                "left-text": "返回",
+                "right-text": "确认",
+                "left-arrow": "",
+                zIndex: 10,
+                onClickLeft: $setup.backToLibraryList,
+                onClickRight: $setup.submitLibraryFormEvent
+              })
+            ]),
+            vue.createElementVNode("view", { class: "container" }, [
+              vue.createElementVNode("view", { class: "page-body" }, [
+                vue.createVNode(_component_wd_cell_group, null, {
                   default: vue.withCtx(() => [
                     vue.createVNode(_component_wd_input, {
                       "custom-class": "commonInputWidth",
                       "custom-input-class": "commonInput",
-                      placeholder: "请选择类型",
-                      readonly: "",
+                      placeholder: "请输入标题",
+                      clearable: "",
+                      maxlength: 70,
+                      showWordLimit: "",
+                      modelValue: $setup.libraryForm.libraryTitle,
+                      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.libraryForm.libraryTitle = $event)
+                    }, null, 8, ["modelValue"]),
+                    vue.createVNode(_component_wd_input, {
+                      "custom-class": "commonInputWidth",
+                      "custom-input-class": "commonInput",
+                      placeholder: "请输入简介",
+                      clearable: "",
+                      maxlength: 70,
+                      showWordLimit: "",
+                      modelValue: $setup.libraryForm.libraryText,
+                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.libraryForm.libraryText = $event)
+                    }, null, 8, ["modelValue"]),
+                    vue.createVNode(_component_wd_select_picker, {
+                      "custom-class": "custom_select",
+                      type: "radio",
+                      "z-index": 1e3,
+                      columns: $setup.libraryType,
                       modelValue: $setup.libraryForm.libraryTypeValue,
-                      "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.libraryForm.libraryTypeValue = $event)
-                    }, null, 8, ["modelValue"])
+                      "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.libraryForm.libraryTypeValue = $event),
+                      "label-key": "value",
+                      "value-key": "value",
+                      "use-default-slot": ""
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_wd_input, {
+                          "custom-class": "commonInputWidth",
+                          "custom-input-class": "commonInput",
+                          placeholder: "请选择类型",
+                          readonly: "",
+                          modelValue: $setup.libraryForm.libraryTypeValue,
+                          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.libraryForm.libraryTypeValue = $event)
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                      /* STABLE */
+                    }, 8, ["columns", "modelValue"])
                   ]),
                   _: 1
                   /* STABLE */
-                }, 8, ["columns", "modelValue"])
-              ]),
-              _: 1
-              /* STABLE */
-            }),
-            vue.createElementVNode("view", { class: "wrapper" }, [
-              vue.createVNode(_component_sp_editor, {
-                "toolbar-config": {
-                  keys: ["bold", "underline", "listOrdered", "listBullet", "image", "undo", "redo", "clear"],
-                  iconSize: "18px"
-                },
-                placeholder: "想要分享的内容",
-                onInput: $setup.inputContentHtml,
-                onUpinImage: $setup.upinImage,
-                onInit: $setup.initEditor
+                }),
+                vue.createElementVNode("view", { class: "wrapper" }, [
+                  vue.createVNode(_component_sp_editor, {
+                    "toolbar-config": {
+                      keys: ["bold", "underline", "listOrdered", "listBullet", "image", "undo", "redo", "clear"],
+                      iconSize: "18px"
+                    },
+                    placeholder: "想要分享的内容",
+                    onInput: $setup.inputContentHtml,
+                    onUpinImage: $setup.upinImage,
+                    onInit: $setup.initEditor
+                  })
+                ])
+              ])
+            ])
+          ],
+          512
+          /* NEED_PATCH */
+        ), [
+          [vue.vShow, $setup.isPreview]
+        ]),
+        vue.withDirectives(vue.createElementVNode(
+          "view",
+          { class: "preview_box" },
+          [
+            vue.createElementVNode(
+              "view",
+              { class: "preview_title" },
+              vue.toDisplayString($setup.libraryForm.libraryTitle),
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode("view", { class: "preview_info" }, [
+              vue.createElementVNode(
+                "text",
+                null,
+                "作者：" + vue.toDisplayString($setup.libraryForm.libraryAuthor),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode(
+                "text",
+                null,
+                "时间：" + vue.toDisplayString($setup.dayjs($setup.libraryForm.libraryTime).format("YYYY-MM-DD")),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode(
+                "text",
+                null,
+                "类型：" + vue.toDisplayString($setup.libraryForm.libraryTypeValue),
+                1
+                /* TEXT */
+              )
+            ]),
+            vue.createElementVNode("view", { class: "preview_line" }),
+            vue.createElementVNode("view", {
+              class: "preview_html",
+              innerHTML: $setup.libraryForm.libraryHtml
+            }, null, 8, ["innerHTML"]),
+            vue.createCommentVNode(" 底部tab "),
+            vue.createElementVNode("view", { class: "preview_tab" }, [
+              vue.createVNode(_component_wd_button, {
+                "custom-class": "custom-radius",
+                type: "warning",
+                icon: "time-filled",
+                onClick: $setup.backToEditLibrary
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createTextVNode(" 再修改一下 ")
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_wd_button, {
+                "custom-class": "custom-radius",
+                icon: "check-circle-filled",
+                onClick: $setup.addLibraryFormData
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createTextVNode(" 发布到知识库 ")
+                ]),
+                _: 1
+                /* STABLE */
               })
             ])
-          ])
+          ],
+          512
+          /* NEED_PATCH */
+        ), [
+          [vue.vShow, !$setup.isPreview]
         ])
       ],
       64
@@ -13813,6 +14124,9 @@ This will fail in production.`);
       const libraryData = vue.ref([]);
       const isLoading = vue.ref(true);
       vue.onMounted(() => {
+        uni.$on("refreshData", () => {
+          getLibraryListData();
+        });
         vue.nextTick(() => {
           getLibraryListData();
         });
@@ -14257,15 +14571,25 @@ This will fail in production.`);
   __definePage("pages/libraryList/libraryList", PagesLibraryListLibraryList);
   __definePage("pages/libraryDetails/libraryDetails", PagesLibraryDetailsLibraryDetails);
   const _sfc_main = {
-    // onLaunch: function() {
-    // 	__f__('log','at App.vue:4','App Launch')
-    // },
-    // onShow: function() {
-    // 	__f__('log','at App.vue:7','App Show')
-    // },
-    // onHide: function() {
-    // 	__f__('log','at App.vue:10','App Hide')
-    // }
+    __name: "App",
+    setup(__props, { expose: __expose }) {
+      __expose();
+      onLaunch(() => {
+      });
+      onShow(() => {
+      });
+      onHide(() => {
+      });
+      const __returned__ = { get onLaunch() {
+        return onLaunch;
+      }, get onShow() {
+        return onShow;
+      }, get onHide() {
+        return onHide;
+      } };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "E:/yunsoo_mobile/App.vue"]]);
   var _a, _b;

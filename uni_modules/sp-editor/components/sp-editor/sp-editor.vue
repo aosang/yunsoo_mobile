@@ -818,7 +818,7 @@ export default {
 }
 
 .editor-container {
-	padding: 24rpx;
+	padding: 24rpx 30rpx;
 	box-sizing: border-box;
 	width: 100%;
 	// height: 100%;

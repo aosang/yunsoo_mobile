@@ -1,84 +1,116 @@
 <template>
 	<Navigation />
 	<wd-toast />
-	<view class="created_library">
-		<wd-navbar 
-			title="创建知识库" 
-			fixed 
-			custom-class="custom" 
-			left-text="返回"
-			right-text="确认"
-			left-arrow
-			:zIndex="10"
-			@click-left="backToLibraryList"
-			@click-right="submitLibraryFormEvent"
-		>
-		</wd-navbar>
-	</view>
-	<view class="container">
-		<view class="page-body">
-			<wd-cell-group>
-			  <wd-input
-			  	custom-class="commonInputWidth"
-			  	custom-input-class="commonInput"
-			  	placeholder="请输入标题"  
-			  	clearable
-			  	:maxlength="70"
-			  	showWordLimit
-					v-model="libraryForm.libraryTitle"
-			  />
-				<wd-input
-					custom-class="commonInputWidth"
-					custom-input-class="commonInput"
-					placeholder="请输入简介"  
-					clearable
-					:maxlength="70"
-					showWordLimit
-					v-model="libraryForm.libraryText"
-				/>
-				<wd-select-picker
-					custom-class="custom_select"
-					type="radio"
-					:z-index="1000"
-					:columns="libraryType"
-					v-model="libraryForm.libraryTypeValue"
-					label-key="value"
-					value-key="value"
-					use-default-slot
-				>
+	<view v-show="isPreview">
+		<view class="created_library">
+			<wd-navbar 
+				title="创建知识库" 
+				fixed 
+				custom-class="custom" 
+				left-text="返回"
+				right-text="确认"
+				left-arrow
+				:zIndex="10"
+				@click-left="backToLibraryList"
+				@click-right="submitLibraryFormEvent"
+			>
+			</wd-navbar>
+		</view>
+		<view class="container">
+			<view class="page-body">
+				<wd-cell-group>
+				  <wd-input
+				  	custom-class="commonInputWidth"
+				  	custom-input-class="commonInput"
+				  	placeholder="请输入标题"  
+				  	clearable
+				  	:maxlength="70"
+				  	showWordLimit
+						v-model="libraryForm.libraryTitle"
+				  />
 					<wd-input
 						custom-class="commonInputWidth"
 						custom-input-class="commonInput"
-						placeholder="请选择类型"  
-						readonly
-						v-model="libraryForm.libraryTypeValue"
+						placeholder="请输入简介"  
+						clearable
+						:maxlength="70"
+						showWordLimit
+						v-model="libraryForm.libraryText"
 					/>
-				</wd-select-picker>
-			</wd-cell-group>
-			
-			<view class='wrapper'>
-				 <sp-editor
-				 :toolbar-config="{
-					 keys: ['bold', 'underline', 'listOrdered', 'listBullet', 'image', 'undo', 'redo', 'clear'],
-					 iconSize: '18px'
-					}"
-					placeholder="想要分享的内容"
-					@input="inputContentHtml"
-					@upinImage="upinImage"
-					@init="initEditor"
-				>
-				</sp-editor>
+					<wd-select-picker
+						custom-class="custom_select"
+						type="radio"
+						:z-index="1000"
+						:columns="libraryType"
+						v-model="libraryForm.libraryTypeValue"
+						label-key="value"
+						value-key="value"
+						use-default-slot
+					>
+						<wd-input
+							custom-class="commonInputWidth"
+							custom-input-class="commonInput"
+							placeholder="请选择类型"  
+							readonly
+							v-model="libraryForm.libraryTypeValue"
+						/>
+					</wd-select-picker>
+				</wd-cell-group>
+				
+				<view class='wrapper'>
+					 <sp-editor
+					 :toolbar-config="{
+						 keys: ['bold', 'underline', 'listOrdered', 'listBullet', 'image', 'undo', 'redo', 'clear'],
+						 iconSize: '18px'
+						}"
+						placeholder="想要分享的内容"
+						@input="inputContentHtml"
+						@upinImage="upinImage"
+						@init="initEditor"
+					>
+					</sp-editor>
+				</view>
 			</view>
 		</view>
 	</view>
+	<view class="preview_box" v-show="!isPreview">
+		<view class="preview_title">{{libraryForm.libraryTitle}}</view>
+		<view class="preview_info">
+			<text>作者：{{libraryForm.libraryAuthor}}</text>
+			<text>时间：{{dayjs(libraryForm.libraryTime).format('YYYY-MM-DD')}}</text>
+			<text>类型：{{libraryForm.libraryTypeValue}}</text>
+		</view>
+		<view class="preview_line"></view>
+		<view class="preview_html" v-html="libraryForm.libraryHtml"></view>
+		<!-- 底部tab -->
+		<view class="preview_tab">
+			<wd-button 
+				custom-class="custom-radius" 
+				type="warning"
+				icon="time-filled"
+				@click="backToEditLibrary"
+			>
+				再修改一下
+			</wd-button>
+			<wd-button 
+				custom-class="custom-radius"
+				icon="check-circle-filled"
+				@click="addLibraryFormData"
+			>
+				发布到知识库
+			</wd-button>
+		</view>
+	</view>
+	
 </template>
 
 <script setup>
+import dayjs from 'dayjs'
 import { onLoad } from '@dcloudio/uni-app'
-import { ref, onMounted, nextTick, reactive } from 'vue'
+import { ref, nextTick, reactive, onMounted } from 'vue'
 import Navigation from '@/components/navigation_header.vue'
-import { requestMethods } from '@/request/request'
 import { getTimenumber } from '@/request/formatTime'
+import { requestMethods } from '@/request/request'
 import { useToast } from '@/uni_modules/wot-design-uni'
 const toast = useToast()
 import { userInfoStore } from "@/stores/userInfo"
@@ -89,12 +121,15 @@ const formats = ref({})
 const editorCtx = ref(null)
 const imgUrl = ref('')
 const libraryType = ref([])
+const isPreview = ref(true)
 
 const libraryForm = reactive({
+	libraryId: '',
 	libraryTitle: '',
 	libraryText: '',
 	libraryTypeValue: '',
 	libraryTime: '',
+	libraryAuthor: '',
 	libraryHtml: ''
 })
 
@@ -106,56 +141,95 @@ onMounted(() => {
 
 // 获取知识库类型
 const getLibraryTypeSelectData = async () => {
-	let res = await requestMethods('/getLibraryType', 'GET')
-	libraryType.value = res.data
+	try {
+		let res = await requestMethods('/getLibraryType', 'GET')
+		if (res && res.data) {
+			libraryType.value = res.data
+		}
+	} catch (error) {
+		console.error('获取知识库类型失败:', error)
+		toast.error('获取知识库类型失败')
+	}
 }
 
 const inputContentHtml = (e) => {
-	libraryForm.libraryHtml = e.html
+	if (e && e.html) {
+		libraryForm.libraryHtml = e.html
+	}
 }
 
 // 上传图片
 const upinImage = (tempFiles, editorCtx) => {
+	if (!tempFiles || !tempFiles[0] || !editorCtx) {
+		toast.error('图片上传参数错误')
+		return
+	}
+	
 	uni.uploadFile({
 		url: 'http://192.168.8.5:3000/uploadLibraryImage',
 		filePath: tempFiles[0].path,
 		name: 'file',
 		header: {
-			'authorization': userStore.token? userStore.token : null
+			'authorization': userStore.token ? userStore.token : null
 		},
 		formData: {
 			'file': tempFiles
 		},
 		success: (upload) => {
-			let jsonData = JSON.parse(upload.data)
-			imgUrl.value = jsonData.data.url
-			editorCtx.insertImage({
-				src: imgUrl.value,
-				width: '90%', // 默认不建议铺满宽度100%，预留一点空隙以便用户编辑
-				success: function () {
-					uni.showToast({
-						icon: 'none',
-						title: '图片上传成功'
+			try {
+				let jsonData = JSON.parse(upload.data)
+				if (jsonData && jsonData.data && jsonData.data.url) {
+					imgUrl.value = jsonData.data.url
+					editorCtx.insertImage({
+						src: imgUrl.value,
+						width: '90%',
+						success: function () {
+							uni.showToast({
+								icon: 'none',
+								title: '图片上传成功'
+							})
+						},
+						fail: function (error) {
+							console.error('插入图片失败:', error)
+							toast.error('插入图片失败')
+						}
 					})
+				} else {
+					toast.error('图片上传响应数据格式错误')
 				}
-			})
+			} catch (error) {
+				console.error('解析上传响应失败:', error)
+				toast.error('图片上传失败')
+			}
+		},
+		fail: (error) => {
+			console.error('图片上传失败:', error)
+			toast.error('图片上传失败')
 		}
 	})
 }
 
 const initEditor = (editor) => {
-  editorIns.value = editor // 保存编辑器实例
-  // 保存编辑器实例后，可以在此处获取后端数据，并赋值给编辑器初始化内容
-  preRender()
+	if (editor) {
+		editorIns.value = editor
+		// 保存编辑器实例后，可以在此处获取后端数据，并赋值给编辑器初始化内容
+		preRender()
+	}
 }
 
 const preRender = () => {
-  setTimeout(() => {
-    // 异步获取后端数据后，初始化编辑器内容
-    editorIns.value.setContents({
-      html: ``
-    })
-  }, 1000)
+	if (editorIns.value && editorIns.value.setContents) {
+		setTimeout(() => {
+			// 异步获取后端数据后，初始化编辑器内容
+			try {
+				editorIns.value.setContents({
+					html: libraryForm.libraryHtml || ''
+				})
+			} catch (error) {
+				console.error('编辑器内容设置失败:', error)
+			}
+		}, 1000)
+	}
 }
 
 // 确认提交知识库表单
@@ -170,14 +244,42 @@ const submitLibraryFormEvent = () => {
 	}else if(!libraryHtml) {
 		toast.info('请填写知识库内容')
 	}else{
-		toast.info('验证通过')
+		isPreview.value = false
+		libraryForm.libraryTime = getTimenumber()[1]
+		libraryForm.libraryAuthor = userStore.userName
+		libraryForm.libraryId = userStore.userId
 	}
 }
 
-// const overMax = (e) => {
-//   // 若设置了最大字数限制，可在此处触发超出限制的回调
-//   console.log('==== overMax :', e)
-// }
+const backToEditLibrary = () => {
+	isPreview.value = true
+}
+
+const addLibraryFormData = async () => {
+	try {
+		let res = await requestMethods('/addLibrary', 'POST', libraryForm)
+		if(res.code === 200) {
+			toast.show({
+				iconName: 'success',
+				msg: '新增知识库成功',
+				duration: 800,
+				closed: () => {
+					uni.navigateTo({
+						url: '/pages/libraryList/libraryList' 
+					})
+					// 使用uni.$emit替代this.$emit
+					uni.$emit('refreshData')
+				}
+			})
+		}else {
+			toast.error('新增知识库失败')
+			console.log(res)
+		}
+	} catch (error) {
+		console.error('提交知识库失败:', error)
+		toast.error('提交知识库失败')
+	}
+}
 
 const backToLibraryList = () => {
 	uni.navigateBack()
@@ -277,5 +379,66 @@ const backToLibraryList = () => {
 	.active_style {
 		color: #808080;
 	}
-
+	
+	// 预览样式
+	.preview_box {
+		width: 100%;
+		padding: 0 24rpx;
+		margin-top: 120rpx;
+		box-sizing: border-box;
+		
+		.preview_title {
+			font-size: 32rpx;
+			font-weight: 650;
+			color: #555;
+		}
+		
+		.preview_info {
+			display: flex;
+			text {
+				font-size: 26rpx;
+				color: #515567;
+				margin: 12rpx 24rpx 12rpx 0;
+			}
+		}
+		
+		.preview_line {
+			width: 100%;
+			height: 2rpx;
+			background: #eee;
+			margin: 12rpx 0;
+		}
+		
+		.preview_html {
+			font-size: 28rpx;
+			color: #555;
+			
+			img {
+				width: 100%;
+				margin: 6rpx auto;
+			}
+		}
+	}
+	
+	.preview_tab{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		position: fixed;
+		bottom: 20rpx;
+		left: 0;
+		width: 100%;
+		height: 110rpx;
+		background: #eee;
+		border-top: 2rpx solid #cecece;
+		padding: 0 100rpx;
+		box-sizing: border-box;
+		
+		:deep() {
+			.custom-radius {
+				border-radius: 20rpx !important;
+			}
+		}
+	}
+	
 </style>
