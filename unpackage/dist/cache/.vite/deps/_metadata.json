@@ -1,15 +1,25 @@
 {
-  "hash": "6a7200b7",
-  "configHash": "2e6f9dac",
-  "lockfileHash": "4d980cb6",
-  "browserHash": "3375167f",
+  "hash": "6bb50595",
+  "configHash": "9983a593",
+  "lockfileHash": "10f1d802",
+  "browserHash": "bb34ccb5",
   "optimized": {
     "pinia-plugin-persist-uni": {
       "src": "../../../../../node_modules/pinia-plugin-persist-uni/dist/pinia-persist-uni.es.js",
       "file": "pinia-plugin-persist-uni.js",
-      "fileHash": "45df72ca",
+      "fileHash": "b7999e8f",
       "needsInterop": false
+    },
+    "dayjs": {
+      "src": "../../../../../node_modules/dayjs/dayjs.min.js",
+      "file": "dayjs.js",
+      "fileHash": "cc62b2fc",
+      "needsInterop": true
     }
   },
-  "chunks": {}
+  "chunks": {
+    "chunk-Y2F7D3TJ": {
+      "file": "chunk-Y2F7D3TJ.js"
+    }
+  }
 }

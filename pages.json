@@ -26,7 +26,8 @@
 			"path": "pages/test/test",
 			"style": {
 				"navigationBarTitleText": "测试页面",
-				"navigationBarTextStyle": "#000000"
+				"navigationBarTextStyle": "#ffffff",
+				"navigationBarBackgroundColor": "#2a6fff"
 			}
 		},
 		{
@@ -56,6 +57,12 @@
 		},
 		{
 			"path": "pages/libraryDetails/libraryDetails",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/createLibrary/createSetting",
 			"style": {
 				"navigationStyle": "custom"
 			}

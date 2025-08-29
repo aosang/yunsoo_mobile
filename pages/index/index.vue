@@ -16,7 +16,7 @@
 		<!-- nav -->
 		<view class="home_nav">
 			<wd-row>
-				<wd-col :span="6">
+				<wd-col :span="6" @click="goToTest">
 					<view class="home_nav_item home_nav_inventory">
 						<image 
 							src="/static/images/nav_icon/receive.svg" 
@@ -211,6 +211,12 @@
 	const goToLibrary = () => {
 		uni.navigateTo({
 			url: '/pages/libraryList/libraryList'
+		})
+	}
+	
+	const goToTest = () => {
+		uni.navigateTo({
+			url: '/pages/test/test'
 		})
 	}
 </script>

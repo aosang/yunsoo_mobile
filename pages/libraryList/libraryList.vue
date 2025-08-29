@@ -155,7 +155,7 @@
 	
 	const goToCreateLibrary = () => {
 		uni.navigateTo({
-			url: '/pages/createLibrary/createLibrary'
+			url: '/pages/createLibrary/createSetting'
 		})
 	}
 	

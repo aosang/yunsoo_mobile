@@ -8,7 +8,7 @@
 				fixed 
 				custom-class="custom" 
 				left-text="返回"
-				right-text="确认"
+				right-text="预览"
 				left-arrow
 				:zIndex="10"
 				@click-left="backToLibraryList"
@@ -18,7 +18,7 @@
 		</view>
 		<view class="container">
 			<view class="page-body">
-				<wd-cell-group>
+				<!-- <wd-cell-group>
 				  <wd-input
 				  	custom-class="commonInputWidth"
 				  	custom-input-class="commonInput"
@@ -55,7 +55,7 @@
 							v-model="libraryForm.libraryTypeValue"
 						/>
 					</wd-select-picker>
-				</wd-cell-group>
+				</wd-cell-group> -->
 				
 				<view class='wrapper'>
 					 <sp-editor
@@ -295,7 +295,7 @@ const backToLibraryList = () => {
 
 	.page-body {
 		height: calc(100vh - var(--window-top) - var(--status-bar-height));
-		margin-top: 188rpx;
+		margin-top: 172rpx;
 		
 		.commonInput {
 			width: 100%;
@@ -322,8 +322,12 @@ const backToLibraryList = () => {
 	}
 
 	.wrapper {
+		position: fixed;
+		top: 172rpx;
+		left: 0;
+		width: 100%;
 		height: 100%;
-		margin-top: 20rpx;
+		// margin-top: 20rpx;
 	}
 
 	.editor-wrapper {
@@ -355,8 +359,8 @@ const backToLibraryList = () => {
 		box-sizing: border-box;
 		padding: 24rpx 24rpx;
 		width: 100%;
-		min-height: 40vh;
-		height: 100%;
+		max-height: 1200rpx;
+		// height: 100%;
 		font-size: 28rpx;
 		line-height: 1.5;
 	}

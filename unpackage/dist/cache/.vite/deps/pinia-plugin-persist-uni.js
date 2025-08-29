@@ -1,4 +1,6 @@
-// ../../../../../../Users/aosang/Desktop/yunsoo_mobile/node_modules/pinia-plugin-persist-uni/dist/pinia-persist-uni.es.js
+import "./chunk-Y2F7D3TJ.js";
+
+// F:/yunsoo_mobile/node_modules/pinia-plugin-persist-uni/dist/pinia-persist-uni.es.js
 var _a;
 var _b;
 var isH5 = typeof uni !== "undefined" ? ["web", "h5", void 0].includes((_b = (_a = uni == null ? void 0 : uni.getSystemInfoSync()) == null ? void 0 : _a.uniPlatform) == null ? void 0 : _b.toLocaleLowerCase()) : true;

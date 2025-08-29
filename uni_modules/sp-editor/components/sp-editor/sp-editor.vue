@@ -1,20 +1,5 @@
 <template>
 	<view class="sp-editor" :style="{ '--icon-size': iconSize, '--icon-columns': iconColumns }">
-		<view class="sp-editor-wrapper" @longpress="eLongpress">
-			<editor
-				:id="editorId"
-				class="ql-editor editor-container"
-				:class="{ 'ql-image-overlay-none': readOnly }"
-				show-img-size
-				show-img-toolbar
-				show-img-resize
-				:placeholder="placeholder"
-				:read-only="readOnly"
-				@statuschange="onStatusChange"
-				@ready="onEditorReady"
-				@input="onEditorInput"
-			></editor>
-		</view>
 		<view class="sp-editor-toolbar" v-if="!readOnly" @tap="format">
 			<!-- 标题栏 -->
 			<fab-tool v-if="toolbarList.includes('header')" :visible="curFab == 'header'">
@@ -369,6 +354,22 @@
 		></color-picker>
 		<!-- 添加链接的操作弹窗 -->
 		<link-edit v-if="toolbarList.includes('link') && !readOnly" ref="linkEditRef" @confirm="confirmLink"></link-edit>
+		
+		<view class="sp-editor-wrapper" @longpress="eLongpress">
+			<editor
+				:id="editorId"
+				class="ql-editor editor-container"
+				:class="{ 'ql-image-overlay-none': readOnly }"
+				show-img-size
+				show-img-toolbar
+				show-img-resize
+				:placeholder="placeholder"
+				:read-only="readOnly"
+				@statuschange="onStatusChange"
+				@ready="onEditorReady"
+				@input="onEditorInput"
+			></editor>
+		</view>
 	</view>
 </template>
 
@@ -785,11 +786,11 @@ export default {
 }
 
 .sp-editor-toolbar {
-	position: fixed;
 	width: 100%;
 	height: 96rpx;
-	bottom: 0;
-	left: 0;
+	// position: fixed;
+	// top: 172rpx;
+	// left: 0;
 	box-sizing: border-box;
 	padding: calc(var(--icon-size) / 4) 0;
 	border-bottom: 1px solid #e4e4e4;
@@ -797,6 +798,7 @@ export default {
 	font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 	display: flex;
 	background: #fff;
+	z-index: 1000;
 	// grid-template-columns: repeat(var(--icon-columns), 1fr);
 }
 
@@ -824,6 +826,7 @@ export default {
 	// height: 100%;
 	font-size: 28rpx;
 	line-height: 1.5;
+	// margin-top: 96rpx;
 }
 
 .ql-image-overlay-none {
