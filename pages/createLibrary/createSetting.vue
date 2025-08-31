@@ -15,43 +15,44 @@
 		</wd-navbar>
 	</view>
 	<view class="created_input">
-		<wd-textarea
-			custom-textarea-container-class="commonInputWidth"
-			custom-textarea-class="commonInput"
-			placeholder="请输入标题"  
-			clearable
-			:maxlength="70"
-			showWordLimit
-			v-model="libraryForm.libraryTitle"
-		/>
-		  
-			<!-- <wd-input
-				custom-class="commonInputWidth"
-				custom-input-class="commonInput"
+		<view class="created_input_item">
+			<wd-textarea
+				custom-textarea-container-class="commonInputWidth"
+				custom-textarea-class="commonInput"
+				placeholder="请输入标题"  
+				clearable
+				:maxlength="50"
+				showWordLimit
+				v-model="libraryForm.libraryTitle"
+				auto-height
+				placeholder-class="placeholderInput"
+			/>
+		</view>
+		<view class="created_input_item">
+			<wd-textarea
+				custom-textarea-container-class="commonInputWidth"
+				custom-textarea-class="commonInput"
 				placeholder="请输入简介"  
 				clearable
-				:maxlength="70"
+				:maxlength="50"
 				showWordLimit
-				v-model="libraryForm.libraryText"
+				v-model="libraryForm.libraryTitle"
+				auto-height
+				placeholder-class="placeholderInput"
 			/>
-			<wd-select-picker
-				custom-class="custom_select"
-				type="radio"
-				:z-index="1000"
-				:columns="libraryType"
-				v-model="libraryForm.libraryTypeValue"
-				label-key="value"
-				value-key="value"
-				use-default-slot
-			>
-				<wd-input
-					custom-class="commonInputWidth"
-					custom-input-class="commonInput"
-					placeholder="请选择类型"  
-					readonly
-					v-model="libraryForm.libraryTypeValue"
-				/>
-			</wd-select-picker> -->
+		</view>
+		<view class="created_type">
+			<view class="created_type_title">选择文章类型</view>
+			<wd-radio-group v-model="value" cell shape="button">
+			  <wd-radio value="1">选项一</wd-radio>
+			  <wd-radio value="2">选项二</wd-radio>
+			  <wd-radio value="3">选项三</wd-radio>
+			  <wd-radio value="4">选项四</wd-radio>
+			  <wd-radio value="5">选项五</wd-radio>
+			  <wd-radio value="6">选项六</wd-radio>
+			  <wd-radio value="7">选项七</wd-radio>
+			</wd-radio-group>
+		</view>
 	</view>
 </template>
 
@@ -59,6 +60,7 @@
 import Navigation from '@/components/navigation_header.vue'
 import { ref, nextTick, reactive, onMounted } from 'vue'
 
+const value = ref(1)
 const libraryType = ref([])
 const libraryForm = reactive({
 	libraryId: '',
@@ -100,12 +102,42 @@ html, body {
 .created_input {
 	width: 100%;
 	margin-top: 172rpx;
-	// padding: 0 30rpx;
 	// box-sizing: border-box;
 	
-	.commonInput {
-		height: 20rpx;
+	.created_input_item {
+		margin-bottom: 10rpx;
+		
+		.placeholderInput {
+			font-size: 28rpx;
+		}
+	}
+	
+	:deep() {
+		.commonInput {
+			width: 100%;
+		}
+		
+		.commonInputWidth {
+			width: 680rpx;
+			margin: 0 auto;
+			box-sizing: border-box;
+			font-size: 28rpx !important;
+		}
+	}
+	
+	.created_type {
+		width: 100%;
+		padding: 0 30rpx;
+		background: #fff;
 		box-sizing: border-box;
+		
+		.created_type_title {
+			height: 72rpx;
+			line-height: 72rpx;
+			font-size: 28rpx;
+			font-size: #555;
+			border-bottom: 1px solid #eee;
+		}
 	}
 }
 </style>
