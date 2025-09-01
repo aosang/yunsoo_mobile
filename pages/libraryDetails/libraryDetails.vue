@@ -17,15 +17,15 @@
 			{{libraryForm.title}}
 		</view>
 		<view class="library_info">
-			<view class="library_time">
+			<text class="library_time">
 				{{dayjs(libraryForm.created_time).format('YYYY-MM-DD')}}
-			</view>
-			<view class="library_author">
-				作者：{{libraryForm.author}}
-			</view>
-			<view class="library_type">
-				类型：{{libraryForm.type}}
-			</view>
+			</text>
+			<text class="library_author">
+				{{libraryForm.author}}
+			</text>
+			<text class="library_type">
+				{{libraryForm.type}}
+			</text>
 		</view>
 		<view class="library_line"></view>
 		<view
@@ -92,39 +92,38 @@
 		width: 680rpx;
 		height: 2rpx;
 		background: #eee;
-		margin: 30rpx auto;
+		margin: 12rpx 0;
 	}
 	
 	.library_info {
 		display: flex;
-		font-size: 26rpx;
-		color: #333;
 		align-items: center;
-		margin-top: 12rpx;
+		line-height: 48rpx;
 		
-		.library_time {
-			margin-right: 30rpx;
-		}
-		
-		.library_author {
-			margin-right: 30rpx;
+		text {
+			display: block;
+			font-size: 26rpx;
+			color: #515567;
+			margin: 12rpx 30rpx 0 0;
 		}
 	}
 	
 	.library_title {
 		color: #555;
 		font-size: 32rpx;
-		font-weight: 700;
+		font-weight: 650;
 	}
 	
 	.library_html {
 		font-size: 28rpx;
 		line-height: 48rpx;
 		color: #333;
+		margin-top: 20rpx;
+		
 		img {
 			display: block !important;
 			width: 100% !important;
-			margin: 12rpx 0;
+			margin: 8rpx 0;
 		}
 	}
 }

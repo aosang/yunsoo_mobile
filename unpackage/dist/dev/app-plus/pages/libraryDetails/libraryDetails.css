@@ -1454,33 +1454,32 @@
   width: 21.25rem;
   height: 0.0625rem;
   background: #eee;
-  margin: 0.9375rem auto;
+  margin: 0.375rem 0;
 }
 .library_details .library_info {
   display: flex;
-  font-size: 0.8125rem;
-  color: #333;
   align-items: center;
-  margin-top: 0.375rem;
+  line-height: 1.5rem;
 }
-.library_details .library_info .library_time {
-  margin-right: 0.9375rem;
-}
-.library_details .library_info .library_author {
-  margin-right: 0.9375rem;
+.library_details .library_info uni-text {
+  display: block;
+  font-size: 0.8125rem;
+  color: #515567;
+  margin: 0.375rem 0.9375rem 0 0;
 }
 .library_details .library_title {
   color: #555;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 650;
 }
 .library_details .library_html {
   font-size: 0.875rem;
   line-height: 1.5rem;
   color: #333;
+  margin-top: 0.625rem;
 }
 .library_details .library_html img {
   display: block !important;
   width: 100% !important;
-  margin: 0.375rem 0;
+  margin: 0.25rem 0;
 }

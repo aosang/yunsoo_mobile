@@ -1,5 +1,6 @@
 <template>
 	<Navigation />
+	<wd-toast />
 	<view class="created_setting">
 		<wd-navbar 
 			title="发布设置" 
@@ -36,21 +37,27 @@
 				clearable
 				:maxlength="50"
 				showWordLimit
-				v-model="libraryForm.libraryTitle"
+				v-model="libraryForm.libraryText"
 				auto-height
 				placeholder-class="placeholderInput"
 			/>
 		</view>
 		<view class="created_type">
 			<view class="created_type_title">选择文章类型</view>
-			<wd-radio-group v-model="value" cell shape="button">
-			  <wd-radio value="1">选项一</wd-radio>
-			  <wd-radio value="2">选项二</wd-radio>
-			  <wd-radio value="3">选项三</wd-radio>
-			  <wd-radio value="4">选项四</wd-radio>
-			  <wd-radio value="5">选项五</wd-radio>
-			  <wd-radio value="6">选项六</wd-radio>
-			  <wd-radio value="7">选项七</wd-radio>
+			<wd-radio-group 
+				v-model="libraryTypeValue" 
+				cell 
+				shape="button"
+				@change="getSelectLibraryValue"
+			>
+				<wd-radio 
+					v-for="item in libraryType" 
+					:key="item.product_id"
+					:value="item.value"
+					checked-color="#2a6fff"
+				>
+					{{item.value}}
+				</wd-radio>
 			</wd-radio-group>
 		</view>
 	</view>
@@ -59,8 +66,16 @@
 <script setup>
 import Navigation from '@/components/navigation_header.vue'
 import { ref, nextTick, reactive, onMounted } from 'vue'
+import { requestMethods } from '@/request/request'
+import { useToast } from '@/uni_modules/wot-design-uni'
+import { getTimenumber } from '@/request/formatTime'
+const toast = useToast()
+import { libraryFormStore } from "@/stores/libraryForm.js"
+const libraryStore = libraryFormStore()
+import { userInfoStore } from "@/stores/userInfo"
+const userStore = userInfoStore()
 
-const value = ref(1)
+const libraryTypeValue = ref('')
 const libraryType = ref([])
 const libraryForm = reactive({
 	libraryId: '',
@@ -72,15 +87,52 @@ const libraryForm = reactive({
 	libraryHtml: ''
 })
 
+onMounted(() => {
+	nextTick(() => {
+		getLibraryTypeSelectData()
+	})
+})
+
+const getLibraryTypeSelectData = async () => {
+	try {
+		let res = await requestMethods('/getLibraryType', 'GET')
+		if (res && res.data) {
+			libraryType.value = res.data
+		}
+	} catch (error) {
+		console.error('获取知识库类型失败:', error)
+		toast.error('获取知识库类型失败')
+	}
+}
+
+const getSelectLibraryValue = (e) => {
+	libraryForm.libraryTypeValue = e.value
+}
+
+const goToLibraryEditorPage = () => {
+	let { libraryTitle, libraryText, libraryTypeValue} = libraryForm
+	if(!libraryTitle) {
+		toast.info('请填写知识库标题')
+	}else if(!libraryText) {
+		toast.info('请填写知识库简介')
+	}else if(!libraryTypeValue) {
+		toast.info('请选择知识库类型')
+	}else{
+		libraryForm.libraryTime = getTimenumber()[1]
+		libraryForm.libraryAuthor = userStore.userName
+		libraryForm.libraryId = userStore.userId
+		
+		libraryStore.setLibrary(libraryForm)
+		uni.navigateTo({
+			url: '/pages/createLibrary/createLibrary'
+		})
+	}
+}
+
 const backToLibraryList = () => {
 	uni.navigateBack()
 }
 
-const goToLibraryEditorPage = () => {
-	uni.navigateTo({
-		url: '/pages/createLibrary/createLibrary'
-	})
-}
 </script>
 
 <style lang="scss">
@@ -101,7 +153,7 @@ html, body {
 
 .created_input {
 	width: 100%;
-	margin-top: 172rpx;
+	margin-top: 180rpx;
 	// box-sizing: border-box;
 	
 	.created_input_item {
@@ -127,16 +179,16 @@ html, body {
 	
 	.created_type {
 		width: 100%;
-		padding: 0 30rpx;
 		background: #fff;
 		box-sizing: border-box;
 		
 		.created_type_title {
-			height: 72rpx;
-			line-height: 72rpx;
+			height: 80rpx;
+			line-height: 80rpx;
 			font-size: 28rpx;
 			font-size: #555;
 			border-bottom: 1px solid #eee;
+			padding: 0 30rpx;
 		}
 	}
 }

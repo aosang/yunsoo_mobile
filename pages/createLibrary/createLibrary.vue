@@ -1,10 +1,11 @@
 <template>
 	<Navigation />
 	<wd-toast />
+	<view></view>
 	<view v-show="isPreview">
 		<view class="created_library">
 			<wd-navbar 
-				title="创建知识库" 
+				title="编辑知识库内容" 
 				fixed 
 				custom-class="custom" 
 				left-text="返回"
@@ -18,45 +19,6 @@
 		</view>
 		<view class="container">
 			<view class="page-body">
-				<!-- <wd-cell-group>
-				  <wd-input
-				  	custom-class="commonInputWidth"
-				  	custom-input-class="commonInput"
-				  	placeholder="请输入标题"  
-				  	clearable
-				  	:maxlength="70"
-				  	showWordLimit
-						v-model="libraryForm.libraryTitle"
-				  />
-					<wd-input
-						custom-class="commonInputWidth"
-						custom-input-class="commonInput"
-						placeholder="请输入简介"  
-						clearable
-						:maxlength="70"
-						showWordLimit
-						v-model="libraryForm.libraryText"
-					/>
-					<wd-select-picker
-						custom-class="custom_select"
-						type="radio"
-						:z-index="1000"
-						:columns="libraryType"
-						v-model="libraryForm.libraryTypeValue"
-						label-key="value"
-						value-key="value"
-						use-default-slot
-					>
-						<wd-input
-							custom-class="commonInputWidth"
-							custom-input-class="commonInput"
-							placeholder="请选择类型"  
-							readonly
-							v-model="libraryForm.libraryTypeValue"
-						/>
-					</wd-select-picker>
-				</wd-cell-group> -->
-				
 				<view class='wrapper'>
 					 <sp-editor
 					 :toolbar-config="{
@@ -73,15 +35,16 @@
 			</view>
 		</view>
 	</view>
+	<!-- 预览 -->
 	<view class="preview_box" v-show="!isPreview">
-		<view class="preview_title">{{libraryForm.libraryTitle}}</view>
+		<view class="preview_title">{{libraryStore.libraryTitle}}</view>
 		<view class="preview_info">
-			<text>作者：{{libraryForm.libraryAuthor}}</text>
-			<text>时间：{{dayjs(libraryForm.libraryTime).format('YYYY-MM-DD')}}</text>
-			<text>类型：{{libraryForm.libraryTypeValue}}</text>
+			<text>{{libraryStore.libraryAuthor}}</text>
+			<text>{{dayjs(libraryStore.libraryTime).format('YYYY-MM-DD')}}</text>
+			<text>{{libraryStore.libraryTypeValue}}</text>
 		</view>
 		<view class="preview_line"></view>
-		<view class="preview_html" v-html="libraryForm.libraryHtml"></view>
+		<view class="preview_html" v-html="libraryStore.libraryHtml"></view>
 		<!-- 底部tab -->
 		<view class="preview_tab">
 			<wd-button 
@@ -107,95 +70,66 @@
 <script setup>
 import dayjs from 'dayjs'
 import { onLoad } from '@dcloudio/uni-app'
-import { ref, nextTick, reactive, onMounted } from 'vue'
+import { ref, nextTick, reactive, onMounted, toRaw } from 'vue'
 import Navigation from '@/components/navigation_header.vue'
 import { getTimenumber } from '@/request/formatTime'
-import { requestMethods } from '@/request/request'
+import { requestMethods, uploadMethods } from '@/request/request'
 import { useToast } from '@/uni_modules/wot-design-uni'
 const toast = useToast()
 import { userInfoStore } from "@/stores/userInfo"
 const userStore = userInfoStore()
+import { libraryFormStore } from "@/stores/libraryForm"
+const libraryStore = libraryFormStore()
 
 const editorIns = ref(null)
 const formats = ref({})
 const editorCtx = ref(null)
-const imgUrl = ref('')
 const libraryType = ref([])
 const isPreview = ref(true)
-
-const libraryForm = reactive({
-	libraryId: '',
-	libraryTitle: '',
-	libraryText: '',
-	libraryTypeValue: '',
-	libraryTime: '',
-	libraryAuthor: '',
-	libraryHtml: ''
-})
+const statusNumber = ref(1)
 
 onMounted(() => {
-	nextTick(() => {
-		getLibraryTypeSelectData()
-	})
+	// console.log(libraryStore.$state, null, 2)
 })
-
-// 获取知识库类型
-const getLibraryTypeSelectData = async () => {
-	try {
-		let res = await requestMethods('/getLibraryType', 'GET')
-		if (res && res.data) {
-			libraryType.value = res.data
-		}
-	} catch (error) {
-		console.error('获取知识库类型失败:', error)
-		toast.error('获取知识库类型失败')
-	}
-}
 
 const inputContentHtml = (e) => {
 	if (e && e.html) {
-		libraryForm.libraryHtml = e.html
+		libraryStore.libraryHtml = e.html
 	}
 }
 
 // 上传图片
-const upinImage = (tempFiles, editorCtx) => {
+const upinImage = async (tempFiles, editorCtx) => {
 	if (!tempFiles || !tempFiles[0] || !editorCtx) {
 		toast.error('图片上传参数错误')
 		return
 	}
-	// console.log(tempFiles);
-	uni.uploadFile({
-		
-		url: 'http://192.168.1.113:3000/uploadLibraryImage',
-		filePath: tempFiles[0].path,
-		name: 'file',
-		header: {
-			'authorization': userStore.token ? userStore.token : null
-		},
-		// formData: {
-		// 	'file': JSON.stringify(tempFiles)
-		// },
-		success: (upload) => {
-			// console.log(upload);
-			let jsonData = JSON.parse(upload.data)
-			imgUrl.value = jsonData.data.url
+	try {
+		const res = await uploadMethods('/uploadLibraryImage', tempFiles[0].path)
+		if (res.data.url) {
 			editorCtx.insertImage({
-				src: imgUrl.value,
+				src: res.data.url,
 				width: '90%',
-				success: function () {
+				success() {
 					uni.showToast({
 						icon: 'none',
 						title: '图片上传成功'
 					})
-				},
-				fail: function (error) {
-					console.error('插入图片失败:', error)
-					toast.error('插入图片失败')
 				}
 			})
+		} else {
+			uni.showToast({
+				icon: 'none',
+				title: '上传返回异常'
+			})
 		}
-	})
+	} catch (err) {
+		console.error('图片上传失败', err)
+		uni.showToast({
+			icon: 'none',
+			title: '图片上传失败'
+		})
+	}
 }
 
 const initEditor = (editor) => {
@@ -212,7 +146,8 @@ const preRender = () => {
 			// 异步获取后端数据后，初始化编辑器内容
 			try {
 				editorIns.value.setContents({
-					html: libraryForm.libraryHtml || ''
+					html: libraryStore.libraryHtml || ''
+					// html: ''
 				})
 			} catch (error) {
 				console.error('编辑器内容设置失败:', error)
@@ -223,20 +158,14 @@ const preRender = () => {
 
 // 确认提交知识库表单
 const submitLibraryFormEvent = () => {
-	let { libraryTitle, libraryText, libraryTypeValue, libraryHtml } = libraryForm
-	if(!libraryTitle) {
-		toast.info('请填写知识库标题')
-	}else if(!libraryText) {
-		toast.info('请填写知识库简介')
-	}else if(!libraryTypeValue) {
-		toast.info('请选择知识库类型')
-	}else if(!libraryHtml) {
+	if(!libraryStore.libraryHtml) {
 		toast.info('请填写知识库内容')
 	}else{
 		isPreview.value = false
-		libraryForm.libraryTime = getTimenumber()[1]
-		libraryForm.libraryAuthor = userStore.userName
-		libraryForm.libraryId = userStore.userId
+		uni.pageScrollTo({
+			duration: 0,
+			scrollTop: 0
+		})
 	}
 }
 
@@ -246,7 +175,7 @@ const backToEditLibrary = () => {
 
 const addLibraryFormData = async () => {
 	try {
-		let res = await requestMethods('/addLibrary', 'POST', libraryForm)
+		let res = await requestMethods('/addLibrary', 'POST', libraryStore)
 		if(res.code === 200) {
 			toast.show({
 				iconName: 'success',
@@ -254,15 +183,16 @@ const addLibraryFormData = async () => {
 				duration: 800,
 				closed: () => {
 					uni.navigateTo({
-						url: '/pages/libraryList/libraryList' 
+						url: '/pages/libraryList/libraryList?success=' + statusNumber.value,
+						success() {
+							uni.$emit('refreshData')
+							libraryStore.clearLibrary()
+						}
 					})
-					// 使用uni.$emit替代this.$emit
-					uni.$emit('refreshData')
 				}
 			})
 		}else {
 			toast.error('新增知识库失败')
-			console.log(res)
 		}
 	} catch (error) {
 		console.error('提交知识库失败:', error)
@@ -376,9 +306,11 @@ const backToLibraryList = () => {
 	// 预览样式
 	.preview_box {
 		width: 100%;
-		padding: 0 24rpx;
-		margin-top: 120rpx;
+		height: 100%;
+		padding: 30rpx;
+		margin-top: 88rpx;
 		box-sizing: border-box;
+		background: #fff;
 		
 		.preview_title {
 			font-size: 32rpx;
@@ -388,10 +320,13 @@ const backToLibraryList = () => {
 		
 		.preview_info {
 			display: flex;
+			align-items: center;
+			line-height: 48rpx;
 			text {
+				display: block;
 				font-size: 26rpx;
 				color: #515567;
-				margin: 12rpx 24rpx 12rpx 0;
+				margin: 12rpx 30rpx 0 0;
 			}
 		}
 		
@@ -426,6 +361,7 @@ const backToLibraryList = () => {
 		border-top: 2rpx solid #cecece;
 		padding: 0 100rpx;
 		box-sizing: border-box;
+		background: #fff;
 		
 		:deep() {
 			.custom-radius {

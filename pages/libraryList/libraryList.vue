@@ -7,13 +7,18 @@
 			title="知识库" 
 			fixed 
 			custom-class="custom" 
-			left-arrow 
-			left-text="返回" 
 			right-text="新增"
 			custom-style="color: #fff" 
 			@click-left="goToBackEvent"
-			@click-right="goToCreateLibrary"
+			@click-right="goToCreateLibrary(isSuccess)"
 		>
+			<template #left v-if="isSuccess === '1'">
+			  <wd-icon name="home" size="22" />
+			</template>
+			<template #left v-else>
+			  <wd-icon name="arrow-left" size="24"></wd-icon>
+				<text>返回</text>
+			</template>
 		</wd-navbar>
 		<view class="library_box">
 			<view class="library_loading" v-if="isLoading">
@@ -87,13 +92,17 @@
 	import { onMounted, nextTick, ref } from "vue"
 	import dayjs from 'dayjs'
 	import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-	import { onPullDownRefresh } from '@dcloudio/uni-app'
+	import { onPullDownRefresh, onLoad } from '@dcloudio/uni-app'
 	const message = useMessage()
 	const toast = useToast()
 	
 	const libraryData = ref([])
 	const isLoading = ref(true)
+	const isSuccess = ref(null)
 	
+	onLoad((option) => {
+		option.success? isSuccess.value = option.success : option.success = null
+	})
 	
 	// 获取知识库列表
 	onMounted(() => {
@@ -166,7 +175,13 @@
 	}
 
 	const goToBackEvent = () => {
-		uni.navigateBack()
+		if(isSuccess) {
+			uni.switchTab({
+				url: '/pages/index/index',
+			})
+		}else {
+			uni.navigateBack()
+		}
 	}
 </script>
 
@@ -188,7 +203,7 @@
 		}
 
 		.library_box {
-			width: 680rpx;
+			width: 700rpx;
 			margin: 200rpx auto 0 auto;
 			color: #000;
 			
