@@ -12,25 +12,34 @@
 		>
 		</wd-navbar>
 	</view>
+		
+	<!-- library_details -->
 	<view class="library_details">
-		<view class="library_title">
-			{{libraryForm.title}}
-		</view>
-		<view class="library_info">
-			<text class="library_time">
-				{{dayjs(libraryForm.created_time).format('YYYY-MM-DD')}}
-			</text>
-			<text class="library_author">
-				{{libraryForm.author}}
-			</text>
-			<text class="library_type">
-				{{libraryForm.type}}
-			</text>
-		</view>
-		<view class="library_line"></view>
-		<view
-			class="library_html"
-			v-html="libraryForm.content">
+		<wd-skeleton
+			:loading="isSkeleton"
+			:custom-style="{ marginTop: '20px' }" 
+			:row-col="imageGroup" 
+		/>
+		<view v-show="!isSkeleton">
+			<view class="library_title">
+				{{libraryForm.title}}
+			</view>
+			<view class="library_info">
+				<text class="library_time">
+					{{dayjs(libraryForm.created_time).format('YYYY-MM-DD')}}
+				</text>
+				<text class="library_author">
+					{{libraryForm.author}}
+				</text>
+				<text class="library_type">
+					{{libraryForm.type}}
+				</text>
+			</view>
+			<view class="library_line"></view>
+			<view
+				class="library_html"
+				v-html="libraryForm.content">
+			</view>
 		</view>
 	</view>
 </template>
@@ -39,9 +48,11 @@
 	import Navigation from '@/components/navigation_header.vue'
 	import { onLoad } from '@dcloudio/uni-app'
 	import { requestMethods } from '@/request/request'
-	import { reactive } from 'vue'
+	import { reactive, ref } from 'vue'
 	import dayjs from 'dayjs'
 	
+	const imageGroup = [1, 1, { width: '200px' }, { height: '170px' }, 1, 1, 1, 1, { width: '200px' }]
+	const isSkeleton = ref(true)
 	const libraryForm = reactive({
 		created_time: '',
 		author: '',
@@ -65,6 +76,7 @@
 			libraryForm.type = res.data[0].type
 			libraryForm.content = res.data[0].content
 		}
+		isSkeleton.value = false
 	}
 	
 	const backToLibraryList = () => {

@@ -37,31 +37,38 @@
 	</view>
 	<!-- 预览 -->
 	<view class="preview_box" v-show="!isPreview">
-		<view class="preview_title">{{libraryStore.libraryTitle}}</view>
-		<view class="preview_info">
-			<text>{{libraryStore.libraryAuthor}}</text>
-			<text>{{dayjs(libraryStore.libraryTime).format('YYYY-MM-DD')}}</text>
-			<text>{{libraryStore.libraryTypeValue}}</text>
-		</view>
-		<view class="preview_line"></view>
-		<view class="preview_html" v-html="libraryStore.libraryHtml"></view>
-		<!-- 底部tab -->
-		<view class="preview_tab">
-			<wd-button 
-				custom-class="custom-radius" 
-				type="warning"
-				icon="time-filled"
-				@click="backToEditLibrary"
-			>
-				再修改一下
-			</wd-button>
-			<wd-button 
-				custom-class="custom-radius"
-				icon="check-circle-filled"
-				@click="addLibraryFormData"
-			>
-				发布到知识库
-			</wd-button>
+		<wd-skeleton
+			:loading="isSkeleton"
+			:custom-style="{ marginTop: '20px' }" 
+			:row-col="imageGroup" 
+		/>
+		<view v-show="!isSkeleton">
+			<view class="preview_title">{{libraryStore.libraryTitle}}</view>
+			<view class="preview_info">
+				<text>{{libraryStore.libraryAuthor}}</text>
+				<text>{{dayjs(libraryStore.libraryTime).format('YYYY-MM-DD')}}</text>
+				<text>{{libraryStore.libraryTypeValue}}</text>
+			</view>
+			<view class="preview_line"></view>
+			<view class="preview_html" v-html="libraryStore.libraryHtml"></view>
+			<!-- 底部tab -->
+			<view class="preview_tab">
+				<wd-button 
+					custom-class="custom-radius" 
+					type="warning"
+					icon="time-filled"
+					@click="backToEditLibrary"
+				>
+					再修改一下
+				</wd-button>
+				<wd-button 
+					custom-class="custom-radius"
+					icon="check-circle-filled"
+					@click="addLibraryFormData"
+				>
+					发布到知识库
+				</wd-button>
+			</view>
 		</view>
 	</view>
 	
@@ -81,6 +88,8 @@ const userStore = userInfoStore()
 import { libraryFormStore } from "@/stores/libraryForm"
 const libraryStore = libraryFormStore()
 
+const imageGroup = [1, 1, { width: '200px' }, { height: '170px' }, 1, 1, 1, 1, { width: '200px' }]
+const isSkeleton = ref(true)
 const editorIns = ref(null)
 const formats = ref({})
 const editorCtx = ref(null)
@@ -161,6 +170,9 @@ const submitLibraryFormEvent = () => {
 	if(!libraryStore.libraryHtml) {
 		toast.info('请填写知识库内容')
 	}else{
+		setTimeout(() => {
+			isSkeleton.value = false
+		}, 1000)
 		isPreview.value = false
 		uni.pageScrollTo({
 			duration: 0,
@@ -308,7 +320,7 @@ const backToLibraryList = () => {
 		width: 100%;
 		height: 100%;
 		padding: 30rpx;
-		margin-top: 88rpx;
+		margin-top: 60rpx;
 		box-sizing: border-box;
 		background: #fff;
 		

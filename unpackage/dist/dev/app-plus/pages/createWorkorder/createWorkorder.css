@@ -5881,7 +5881,7 @@ to {
   color: var(--wot-cell-title-color, rgba(0, 0, 0, 0.85));
   margin-right: var(--wot-cell-padding, var(--wot-size-side-padding, 15px));
   box-sizing: border-box;
-  font-size: var(--wot-textarea-fs, var(--wot-cell-title-fs, 14px));
+  font-size: var(--wot-textarea-fs, 15px);
   flex-shrink: 0;
 }
 .wd-textarea__label.is-required[data-v-7d71e04e] {
@@ -5899,11 +5899,11 @@ to {
 .wd-textarea__label-inner[data-v-7d71e04e] {
   display: inline-block;
   line-height: var(--wot-cell-line-height, 24px);
-  font-size: var(--wot-textarea-fs, var(--wot-cell-title-fs, 14px));
+  font-size: var(--wot-textarea-fs, 15px);
 }
 .wd-textarea__prefix[data-v-7d71e04e] {
   margin-right: var(--wot-textarea-icon-margin, 8px);
-  font-size: var(--wot-textarea-fs, var(--wot-cell-title-fs, 14px));
+  font-size: var(--wot-textarea-fs, 15px);
   line-height: initial;
 }
 .wd-textarea__prefix[data-v-7d71e04e] .wd-textarea__icon {
@@ -5929,7 +5929,7 @@ to {
 .wd-textarea__inner[data-v-7d71e04e] {
   padding: 0;
   width: 100%;
-  font-size: var(--wot-textarea-fs, var(--wot-cell-title-fs, 14px));
+  font-size: var(--wot-textarea-fs, 15px);
   line-height: var(--wot-cell-line-height, 24px);
   color: var(--wot-textarea-color, #262626);
   outline: none;

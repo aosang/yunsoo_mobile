@@ -1,16 +1,98 @@
 <template>
 	<Navigation />
 	<wd-toast />
+	<!-- 筛选弹出框 -->
+	<wd-action-sheet 
+		v-model="filterShow" 
+		:z-index="1000"
+	>
+		<view class="action_title">
+			<view class="action_title_item">
+				<wd-search 
+					placeholder="关键字搜索" 
+					hide-cancel 
+					v-model="filterKey"
+					custom-input-class="searchInput"
+					custom-class="searchInputBox"
+				/>
+			</view>
+			<view class="action_title_item">
+				<view class="action_text">发布人</view>
+				<wd-radio-group
+					v-model="filterCreator" 
+					cell 
+					inline
+					shape="button"
+				>
+				  <wd-radio value="1">全部</wd-radio>
+				  <wd-radio value="2">只看自己</wd-radio>
+				</wd-radio-group>
+			</view>
+			<view class="action_title_item">
+				<view class="action_text">发布时间</view>
+				<wd-radio-group
+					v-model="filterTime" 
+					cell 
+					inline
+					shape="button"
+				>
+				  <wd-radio value="1">今天</wd-radio>
+				  <wd-radio value="2">本周</wd-radio>
+					<wd-radio value="3">本月</wd-radio>
+					<wd-radio value="4">今年</wd-radio>
+				</wd-radio-group>
+			</view>
+			
+			<view class="action_title_item">
+				<view class="action_text">发布类型</view>
+				<wd-radio-group
+					v-model="libraryTypeValue" 
+					cell 
+					shape="button"
+					@change="getSelectLibraryValue"
+				>
+					<wd-radio 
+						v-for="item in libraryType" 
+						:key="item.product_id"
+						:value="item.value"
+						checked-color="#2a6fff"
+					>
+						{{item.value}}
+					</wd-radio>
+				</wd-radio-group>
+			</view>
+			<!-- 按钮 -->
+			<view class="action_button">
+				<wd-button 
+					type="info"
+					custom-class="action_button_item"
+					@click="closeFilterShow"
+				>
+					取消
+				</wd-button>
+				<wd-button 
+					custom-class="action_button_item"
+					type="warning"
+				>
+					重置
+				</wd-button>
+				<wd-button 
+					custom-class="action_button_item"
+					@click="getFilterLibraryData"
+				>
+					确认
+				</wd-button>
+			</view>
+		</view>
+	</wd-action-sheet>
 	<wd-message-box :zIndex="1000" />
 	<view class="library_list">
 		<wd-navbar 
 			title="知识库" 
 			fixed 
 			custom-class="custom" 
-			right-text="新增"
 			custom-style="color: #fff" 
 			@click-left="goToBackEvent"
-			@click-right="goToCreateLibrary(isSuccess)"
 		>
 			<template #left v-if="isSuccess === '1'">
 			  <wd-icon name="home" size="22" />
@@ -18,6 +100,22 @@
 			<template #left v-else>
 			  <wd-icon name="arrow-left" size="24"></wd-icon>
 				<text>返回</text>
+			</template>
+			<!-- 右侧栏 -->
+			<template #right>
+				<wd-icon 
+					name="add" 
+					size="18"
+					@click="goToCreateLibrary(isSuccess)"
+				>
+				</wd-icon>
+				<view class="right_line"></view>
+				<wd-icon 
+					name="search" 
+					size="18"
+					@click="filterLibraryListData"
+				>
+				</wd-icon>
 			</template>
 		</wd-navbar>
 		<view class="library_box">
@@ -48,7 +146,7 @@
 						<view class="library_list_icon" v-show="item.type === '显示器'">
 							<image src="/static/images/library_icon/monitor.png" mode="widthFix"></image>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '鼠标/键盘'">
+						<view class="library_list_icon" v-show="item.type === '键盘/鼠标'">
 							<image src="/static/images/library_icon/mouse.png" mode="widthFix"></image>
 						</view>
 						<view class="library_list_icon" v-show="item.type === '打印机'">
@@ -97,8 +195,16 @@
 	const toast = useToast()
 	
 	const libraryData = ref([])
+	const libraryType = ref([])
 	const isLoading = ref(true)
 	const isSuccess = ref(null)
+	const filterShow = ref(false)
+	const libraryTypeValue = ref('')
+	
+	// 筛选
+	const filterCreator = ref('')
+	const filterTime = ref('')
+	const filterKey = ref('')
 	
 	onLoad((option) => {
 		option.success? isSuccess.value = option.success : option.success = null
@@ -111,6 +217,7 @@
 		})
 		nextTick(() => {
 			getLibraryListData()
+			getLibraryTypeSelectData()
 		})
 	})
 	
@@ -168,6 +275,43 @@
 		})
 	}
 	
+	const getLibraryTypeSelectData = async () => {
+		try {
+			let res = await requestMethods('/getLibraryType', 'GET')
+			if (res && res.data) {
+				libraryType.value = res.data
+			}
+		} catch (error) {
+			console.error('获取知识库类型失败:', error)
+			toast.error('获取知识库类型失败')
+		}
+	}
+	
+	// 筛选
+	const filterLibraryListData = () => {
+		filterShow.value = true
+		getLibraryTypeSelectData()
+	}
+	
+	// 筛选数据
+	const getFilterLibraryData = () => {
+		/**
+		 * @param {filterCreator} 按创建人查询
+		 * @param {filterTime} 按时间查询
+		 * @param {filterType} 按类型查询
+		 * @param {filterText} 按输入关键字查询
+		 * 以上四项也可同时查询
+		**/
+	}
+	
+	const getSelectLibraryValue = () => {
+		
+	}
+	
+	const closeFilterShow = () => {
+		filterShow.value = false
+	}
+	
 	const goToLibraryDetails = (lId) => {
 		uni.navigateTo({
 			url: `/pages/libraryDetails/libraryDetails?libraryId=${lId}`
@@ -200,6 +344,13 @@
 				background-color: #2a6fff;
 				margin-top: 88rpx;
 			}
+		}
+		
+		.right_line {
+			width: 2rpx;
+			height: 32rpx;
+			background: #fff;
+			margin: 0 20rpx;
 		}
 
 		.library_box {
@@ -315,4 +466,46 @@
 			}
 		}
 	}
+	
+	.action_title {
+		width: 100%;
+		padding-top: 16rpx;
+		.action_title_item {
+			width: 100%;
+			margin-bottom: 8rpx;
+			
+			:deep() {
+				.searchInput {
+					height: 72rpx;
+				}
+			}
+			
+			.action_text {
+				padding: 0 30rpx;
+				height: 80rpx;
+				line-height: 80rpx;
+				box-sizing: border-box;
+				color: #555;
+				font-size: 30rpx;
+				font-weight: 650;
+				border-bottom: 2rpx solid #eee;
+			}
+		}
+		
+		.action_button {
+			width: 100%;
+			height: 110rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-top: 2rpx solid #ccc;
+			:deep() {
+				.action_button_item {
+					width: 80rpx !important;
+					margin: 0 10rpx;
+				}
+			}
+		}
+	}
+	
 </style>

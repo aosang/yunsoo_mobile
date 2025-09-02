@@ -342,6 +342,7 @@ $-input-cell-padding-large: var(--wot-input-cell-padding-large, 12px) !default; 
 $-input-cell-height: var(--wot-input-cell-height, 24px) !default; // cell 高度
 $-input-cell-label-width: var(--wot-input-cell-label-width, 33%) !default; // cell 下 label 的宽度
 $-input-inner-height: var(--wot-input-inner-height, 34px) !default; // 非cell和textarea下的高度
+
 $-input-inner-height-no-border: var(--wot-input-inner-height-no-border, 24px) !default; // 无边框下的高度
 $-input-count-fs: var(--wot-input-count-fs, 14px) !default; // 计数字号
 $-input-count-fs-large: var(--wot-input-count-fs-large, 14px) !default; // 大尺寸计数字号
@@ -352,7 +353,7 @@ $-input-icon-size-large: var(--wot-input-icon-size-large, 18px) !default; // 大
 $-textarea-padding: var(--wot-textarea-padding, $-size-side-padding) !default; // textarea 左右padding距离
 $-textarea-border-color: var(--wot-textarea-border-color, #dadada) !default; // 无label边框颜色
 $-textarea-not-empty-border-color: var(--wot-textarea-not-empty-border-color, #262626) !default; // 输入框有值时 无label边框颜色
-$-textarea-fs: var(--wot-textarea-fs, $-cell-title-fs) !default; // 字号
+$-textarea-fs: var(--wot-textarea-fs, 15px) !default; // 字号
 $-textarea-fs-large: var(--wot-textarea-fs-large, $-cell-title-fs-large) !default; // 大尺寸字号
 $-textarea-icon-margin: var(--wot-textarea-icon-margin, 8px) !default; // 图标距离
 $-textarea-color: var(--wot-textarea-color, #262626) !default; // 文字颜色

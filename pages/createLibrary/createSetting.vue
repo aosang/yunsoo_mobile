@@ -160,7 +160,7 @@ html, body {
 		margin-bottom: 10rpx;
 		
 		.placeholderInput {
-			font-size: 28rpx;
+			font-size: 28rpx !important;
 		}
 	}
 	
