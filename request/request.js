@@ -3,7 +3,7 @@ const baseUrl = 'http://192.168.8.5:3000'
 // const baseUrl = 'http://5dzb8cgi.beesnat.com'
 import { userInfoStore } from "@/stores/userInfo"
 
-export const requestMethods = (url, method, data = {}) => {
+export const requestMethods = (url, method, data = {}, timeout = 20000) => {
 	const userStore = userInfoStore()
 	return new Promise((resolve, reject) => {
 		uni.request({
@@ -24,24 +24,32 @@ export const requestMethods = (url, method, data = {}) => {
 						title: data?.message || '请求失败',
 						icon: 'none'
 					})
-					uni.reLaunch({
-						url: '/pages/login/login'
-					})
+					console.log(data);
+					// uni.reLaunch({
+					// 	url: '/pages/login/login'
+					// })
 					reject(data)
 				}
 			},
 			fail: (err) => {
-				uni.showToast({
-					title: '网络请求失败',
-					icon: 'none'
-				})
+				if(err.errMsg.includes('timeout')) {
+					uni.showToast({
+						title: '请求超时',
+						icon: 'none'
+					})
+				}else {
+					uni.showToast({
+						title: '网络请求失败',
+						icon: 'none'
+					})
+				}
 				reject(err)
 			}
 		})
 	})
 }
 
-export const uploadMethods  = (url, filePath, formData = {}) => {
+export const uploadMethods  = (url, filePath, formData = {}, timeout = 20000) => {
 	const userStore = userInfoStore()
 	return new Promise((resolve, reject) => {
 		uni.uploadFile({
@@ -63,10 +71,17 @@ export const uploadMethods  = (url, filePath, formData = {}) => {
 				}
 			},
 			fail: (err) => {
-				uni.showToast({
-					title: '文件上传失败',
-					icon: 'none'
-				})
+				if(err.errMsg.includes('timeout')) {
+					uni.showToast({
+						title: '文件上传超时',
+						icon: 'none'
+					})
+				}else {
+					uni.showToast({
+						title: '文件上传失败',
+						icon: 'none'
+					})
+				}
 				reject(err)
 			}
 		})

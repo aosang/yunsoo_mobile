@@ -2090,7 +2090,7 @@ This will fail in production.`);
     }
   });
   const baseUrl$1 = "http://192.168.8.5:3000";
-  const requestMethods = (url, method, data = {}) => {
+  const requestMethods = (url, method, data = {}, timeout = 2e4) => {
     const userStore = userInfoStore();
     return new Promise((resolve, reject) => {
       uni.request({
@@ -2111,23 +2111,28 @@ This will fail in production.`);
               title: (data2 == null ? void 0 : data2.message) || "请求失败",
               icon: "none"
             });
-            uni.reLaunch({
-              url: "/pages/login/login"
-            });
+            formatAppLog("log", "at request/request.js:27", data2);
             reject(data2);
           }
         },
         fail: (err) => {
-          uni.showToast({
-            title: "网络请求失败",
-            icon: "none"
-          });
+          if (err.errMsg.includes("timeout")) {
+            uni.showToast({
+              title: "请求超时",
+              icon: "none"
+            });
+          } else {
+            uni.showToast({
+              title: "网络请求失败",
+              icon: "none"
+            });
+          }
           reject(err);
         }
       });
     });
   };
-  const uploadMethods = (url, filePath, formData = {}) => {
+  const uploadMethods = (url, filePath, formData = {}, timeout = 2e4) => {
     const userStore = userInfoStore();
     return new Promise((resolve, reject) => {
       uni.uploadFile({
@@ -2144,15 +2149,22 @@ This will fail in production.`);
             const data = JSON.parse(res.data);
             resolve(data);
           } catch (e) {
-            formatAppLog("error", "at request/request.js:61", "上传返回解析失败", res.data);
+            formatAppLog("error", "at request/request.js:69", "上传返回解析失败", res.data);
             reject(new Error("上传返回格式异常"));
           }
         },
         fail: (err) => {
-          uni.showToast({
-            title: "文件上传失败",
-            icon: "none"
-          });
+          if (err.errMsg.includes("timeout")) {
+            uni.showToast({
+              title: "文件上传超时",
+              icon: "none"
+            });
+          } else {
+            uni.showToast({
+              title: "文件上传失败",
+              icon: "none"
+            });
+          }
           reject(err);
         }
       });
@@ -14103,15 +14115,17 @@ This will fail in production.`);
       __expose();
       const message = useMessage();
       const toast = useToast();
+      const userStore = userInfoStore();
       const libraryData = vue.ref([]);
       const libraryType = vue.ref([]);
       const isLoading = vue.ref(true);
       const isSuccess = vue.ref(null);
       const filterShow = vue.ref(false);
-      const libraryTypeValue = vue.ref("");
       const filterCreator = vue.ref("");
       const filterTime = vue.ref("");
       const filterKey = vue.ref("");
+      const libraryTypeValue = vue.ref("");
+      const filterCreatorText = vue.ref("");
       onLoad((option) => {
         option.success ? isSuccess.value = option.success : option.success = null;
       });
@@ -14177,7 +14191,7 @@ This will fail in production.`);
             libraryType.value = res.data;
           }
         } catch (error) {
-          formatAppLog("error", "at pages/libraryList/libraryList.vue:285", "获取知识库类型失败:", error);
+          formatAppLog("error", "at pages/libraryList/libraryList.vue:292", "获取知识库类型失败:", error);
           toast.error("获取知识库类型失败");
         }
       };
@@ -14185,9 +14199,54 @@ This will fail in production.`);
         filterShow.value = true;
         getLibraryTypeSelectData();
       };
-      const getFilterLibraryData = () => {
+      const resetFilterSearch = () => {
+        filterCreator.value = "";
+        filterTime.value = "";
+        libraryTypeValue.value = "";
+        filterKey.value = "";
       };
-      const getSelectLibraryValue = () => {
+      const getFilterCreatorValue = (e) => {
+        filterCreator.value = e.value || "";
+        if (e.value === 1) {
+          filterCreatorText.value = "";
+        } else {
+          filterCreatorText.value = userStore.userName;
+        }
+      };
+      const getFilterTimeValue = (e) => {
+        filterTime.value = e.value || "";
+      };
+      const getSelectTypeValue = (e) => {
+        libraryTypeValue.value = e.value || "";
+      };
+      const getFilterKeyValue = (e) => {
+        filterKey.value = e.value || "";
+      };
+      const getFilterLibraryData = async () => {
+        filterShow.value = true;
+        let res = await requestMethods("/searchLibrary", "POST", {
+          searchAuthor: filterCreatorText.value || "",
+          searchTime: filterTime.value || "",
+          searchType: libraryTypeValue.value || "",
+          searchKeyword: filterKey.value || ""
+        });
+        filterShow.value = false;
+        try {
+          if (res.code === 200) {
+            libraryData.value = res.data;
+            libraryData.value.forEach((item) => {
+              item.created_time = dayjs(item.created_time).format("YYYY-MM-DD");
+            });
+            isLoading.value = false;
+            uni.stopPullDownRefresh();
+          } else {
+            toast.error("获取数据失败");
+            isLoading.value = false;
+            uni.stopPullDownRefresh();
+          }
+        } catch (err) {
+          formatAppLog("log", "at pages/libraryList/libraryList.vue:359", err);
+        }
       };
       const closeFilterShow = () => {
         filterShow.value = false;
@@ -14206,7 +14265,7 @@ This will fail in production.`);
           uni.navigateBack();
         }
       };
-      const __returned__ = { message, toast, libraryData, libraryType, isLoading, isSuccess, filterShow, libraryTypeValue, filterCreator, filterTime, filterKey, getLibraryListData, deleteLibraryListData, goToCreateLibrary, getLibraryTypeSelectData, filterLibraryListData, getFilterLibraryData, getSelectLibraryValue, closeFilterShow, goToLibraryDetails, goToBackEvent, get requestMethods() {
+      const __returned__ = { message, toast, userStore, libraryData, libraryType, isLoading, isSuccess, filterShow, filterCreator, filterTime, filterKey, libraryTypeValue, filterCreatorText, getLibraryListData, deleteLibraryListData, goToCreateLibrary, getLibraryTypeSelectData, filterLibraryListData, resetFilterSearch, getFilterCreatorValue, getFilterTimeValue, getSelectTypeValue, getFilterKeyValue, getFilterLibraryData, closeFilterShow, goToLibraryDetails, goToBackEvent, get requestMethods() {
         return requestMethods;
       }, Navigation, onMounted: vue.onMounted, nextTick: vue.nextTick, ref: vue.ref, get dayjs() {
         return dayjs;
@@ -14218,6 +14277,8 @@ This will fail in production.`);
         return onPullDownRefresh;
       }, get onLoad() {
         return onLoad;
+      }, get userInfoStore() {
+        return userInfoStore;
       } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
@@ -14257,7 +14318,8 @@ This will fail in production.`);
                   modelValue: $setup.filterKey,
                   "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.filterKey = $event),
                   "custom-input-class": "searchInput",
-                  "custom-class": "searchInputBox"
+                  "custom-class": "searchInputBox",
+                  onChange: $setup.getFilterKeyValue
                 }, null, 8, ["modelValue"])
               ]),
               vue.createElementVNode("view", { class: "action_title_item" }, [
@@ -14267,7 +14329,8 @@ This will fail in production.`);
                   "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.filterCreator = $event),
                   cell: "",
                   inline: "",
-                  shape: "button"
+                  shape: "button",
+                  onChange: $setup.getFilterCreatorValue
                 }, {
                   default: vue.withCtx(() => [
                     vue.createVNode(_component_wd_radio, { value: "1" }, {
@@ -14296,7 +14359,8 @@ This will fail in production.`);
                   "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.filterTime = $event),
                   cell: "",
                   inline: "",
-                  shape: "button"
+                  shape: "button",
+                  onChange: $setup.getFilterTimeValue
                 }, {
                   default: vue.withCtx(() => [
                     vue.createVNode(_component_wd_radio, { value: "1" }, {
@@ -14339,7 +14403,7 @@ This will fail in production.`);
                   "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.libraryTypeValue = $event),
                   cell: "",
                   shape: "button",
-                  onChange: $setup.getSelectLibraryValue
+                  onChange: $setup.getSelectTypeValue
                 }, {
                   default: vue.withCtx(() => [
                     (vue.openBlock(true), vue.createElementBlock(
@@ -14385,7 +14449,8 @@ This will fail in production.`);
                 }),
                 vue.createVNode(_component_wd_button, {
                   "custom-class": "action_button_item",
-                  type: "warning"
+                  type: "warning",
+                  onClick: $setup.resetFilterSearch
                 }, {
                   default: vue.withCtx(() => [
                     vue.createTextVNode(" 重置 ")

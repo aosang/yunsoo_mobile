@@ -14,6 +14,7 @@
 					v-model="filterKey"
 					custom-input-class="searchInput"
 					custom-class="searchInputBox"
+					 @change="getFilterKeyValue"
 				/>
 			</view>
 			<view class="action_title_item">
@@ -23,6 +24,7 @@
 					cell 
 					inline
 					shape="button"
+					@change="getFilterCreatorValue"
 				>
 				  <wd-radio value="1">全部</wd-radio>
 				  <wd-radio value="2">只看自己</wd-radio>
@@ -35,6 +37,7 @@
 					cell 
 					inline
 					shape="button"
+					@change="getFilterTimeValue"
 				>
 				  <wd-radio value="1">今天</wd-radio>
 				  <wd-radio value="2">本周</wd-radio>
@@ -49,7 +52,7 @@
 					v-model="libraryTypeValue" 
 					cell 
 					shape="button"
-					@change="getSelectLibraryValue"
+					@change="getSelectTypeValue"
 				>
 					<wd-radio 
 						v-for="item in libraryType" 
@@ -73,6 +76,7 @@
 				<wd-button 
 					custom-class="action_button_item"
 					type="warning"
+					@click="resetFilterSearch"
 				>
 					重置
 				</wd-button>
@@ -193,18 +197,21 @@
 	import { onPullDownRefresh, onLoad } from '@dcloudio/uni-app'
 	const message = useMessage()
 	const toast = useToast()
+	import { userInfoStore } from '@/stores/userInfo'
+	const userStore = userInfoStore()
 	
 	const libraryData = ref([])
 	const libraryType = ref([])
 	const isLoading = ref(true)
 	const isSuccess = ref(null)
 	const filterShow = ref(false)
-	const libraryTypeValue = ref('')
 	
 	// 筛选
 	const filterCreator = ref('')
 	const filterTime = ref('')
 	const filterKey = ref('')
+	const libraryTypeValue = ref('')
+	const filterCreatorText = ref('')
 	
 	onLoad((option) => {
 		option.success? isSuccess.value = option.success : option.success = null
@@ -293,21 +300,66 @@
 		getLibraryTypeSelectData()
 	}
 	
+	const resetFilterSearch = () => {
+		filterCreator.value = ''
+		filterTime.value = ''
+		libraryTypeValue.value = ''
+		filterKey.value = ''
+	}
+	
+	// 获取发布者
+	const getFilterCreatorValue = (e) => {
+		filterCreator.value = e.value || ''
+		if(e.value === 1) {
+			filterCreatorText.value = ''
+		}else {
+			filterCreatorText.value = userStore.userName
+		}
+	}
+	
+	// 获取时间
+	const getFilterTimeValue = (e) => {
+		filterTime.value = e.value || ''
+	}
+	
+	// 获取类型
+	const getSelectTypeValue = (e) => {
+		libraryTypeValue.value = e.value || ''
+	}
+	
+	// 获取关键字
+	const getFilterKeyValue = (e) => {
+		filterKey.value = e.value || ''
+	}
+	
 	// 筛选数据
-	const getFilterLibraryData = () => {
-		/**
-		 * @param {filterCreator} 按创建人查询
-		 * @param {filterTime} 按时间查询
-		 * @param {filterType} 按类型查询
-		 * @param {filterText} 按输入关键字查询
-		 * 以上四项也可同时查询
-		**/
+	const getFilterLibraryData = async () => {
+		filterShow.value = true
+		let res = await requestMethods('/searchLibrary', 'POST', {
+			searchAuthor: filterCreatorText.value || '',
+			searchTime: filterTime.value ||  '',
+			searchType: libraryTypeValue.value || '',
+			searchKeyword: filterKey.value || ''
+		})
+		filterShow.value = false
+		try {
+			if(res.code === 200) {
+				libraryData.value = res.data
+				libraryData.value.forEach(item => {
+					item.created_time = dayjs(item.created_time).format('YYYY-MM-DD')
+				})
+				isLoading.value = false
+				uni.stopPullDownRefresh()
+			}else {
+				toast.error('获取数据失败')
+				isLoading.value = false
+				uni.stopPullDownRefresh()
+			}
+		}catch(err) {
+			console.log(err);
+		}
 	}
-	
-	const getSelectLibraryValue = () => {
 		
-	}
-	
 	const closeFilterShow = () => {
 		filterShow.value = false
 	}
