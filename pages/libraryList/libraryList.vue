@@ -132,43 +132,64 @@
 			<block v-for="(item, index) in libraryData" :key="index">
 				<wd-swipe-action class="library_item" >
 					<view class="library_list_item" @click="goToLibraryDetails(item.created_id)">
-						<view class="library_list_icon" v-show="item.type === '笔记本'">
-							<image src="/static/images/library_icon/laptop.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '电脑'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/computer.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '服务器'">
-							<image src="/static/images/library_icon/service.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '笔记本'">
+							<view class="library_list_icon" >
+								<image src="/static/images/library_icon/laptop.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '电脑'">
-							<image src="/static/images/library_icon/computer.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '服务器'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/service.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '路由器'">
-							<image src="/static/images/library_icon/router.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '路由器'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/router.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '手机'">
-							<image src="/static/images/library_icon/mobile.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '手机'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/mobile.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '显示器'">
-							<image src="/static/images/library_icon/monitor.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '显示器'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/monitor.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '键盘/鼠标'">
-							<image src="/static/images/library_icon/mouse.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '键盘/鼠标'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/mouse.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '打印机'">
-							<image src="/static/images/library_icon/printer.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '打印机'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/printer.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '交换机'">
-							<image src="/static/images/library_icon/switch.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '交换机'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/switch.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_icon" v-show="item.type === '其它'">
-							<image src="/static/images/library_icon/others.png" mode="widthFix"></image>
+						<view class="library_list_left" v-show="item.type === '其它'">
+							<view class="library_list_icon">
+								<image src="/static/images/library_icon/others.png" mode="widthFix"></image>
+							</view>
 						</view>
-						<view class="library_list_line"></view>
+						
 						<view class="library_list_text">
 							<text class="library_list_title">{{item.title}}</text>
 							<text class="library_list_subtitle">{{item.description}}</text>
 							<view class="library_list_info">
-								<text class="library_list_time">{{item.created_time}}</text>
+								<text class="library_list_time">{{format(item.created_time, 'zh_CN')}}</text>
 								<text class="library_list_author">{{item.author}}</text>
+								<text class="library_list_type">{{item.type}}</text>
 							</view>
 						</view>
 					</view>
@@ -189,16 +210,18 @@
 </template>
 
 <script setup>
+	import { onMounted, nextTick, ref } from "vue"
+	import { onPullDownRefresh, onLoad } from '@dcloudio/uni-app'
+	import dayjs from 'dayjs'
+	import { format } from 'timeago.js'
 	import { requestMethods } from '@/request/request'
 	import Navigation from '@/components/navigation_header.vue'
-	import { onMounted, nextTick, ref } from "vue"
-	import dayjs from 'dayjs'
-	import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
-	import { onPullDownRefresh, onLoad } from '@dcloudio/uni-app'
-	const message = useMessage()
-	const toast = useToast()
 	import { userInfoStore } from '@/stores/userInfo'
+	import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+	
 	const userStore = userInfoStore()
+	const toast = useToast()
+	const message = useMessage()
 	
 	const libraryData = ref([])
 	const libraryType = ref([])
@@ -236,13 +259,10 @@
 		let res = await requestMethods('/Library', 'GET')
 		if(res.code === 200) {
 			libraryData.value = res.data
-			libraryData.value.forEach(item => {
-				item.created_time = dayjs(item.created_time).format('YYYY-MM-DD')
-			})
 			isLoading.value = false
 			uni.stopPullDownRefresh()
 		}else {
-			toast.error('获取数据失败')
+			toast.value?.error('获取数据失败')
 			isLoading.value = false
 			uni.stopPullDownRefresh()
 		}
@@ -250,7 +270,7 @@
 	
 	// 删除知识库
 	const deleteLibraryListData = (id) => {
-		message.confirm({
+		message.value?.confirm({
 			title: '提示',
 			msg: '要删除这个知识库吗',
 		})
@@ -259,7 +279,7 @@
 				libraryId: id
 			})
 			if(res.code === 200) {
-				toast.show({
+				toast.value?.show({
 					msg: '知识库已删除',
 					duration: 800,
 					iconName: 'success',
@@ -268,7 +288,7 @@
 					}
 				})
 			}else {
-				toast.error('删除失败')
+				toast.value?.error('删除失败')
 			}
 		})
 		.catch(() => {
@@ -290,7 +310,7 @@
 			}
 		} catch (error) {
 			console.error('获取知识库类型失败:', error)
-			toast.error('获取知识库类型失败')
+			toast.value?.error('获取知识库类型失败')
 		}
 	}
 	
@@ -351,7 +371,7 @@
 				isLoading.value = false
 				uni.stopPullDownRefresh()
 			}else {
-				toast.error('获取数据失败')
+				toast.value?.error('获取数据失败')
 				isLoading.value = false
 				uni.stopPullDownRefresh()
 			}
@@ -398,13 +418,6 @@
 			}
 		}
 		
-		.right_line {
-			width: 2rpx;
-			height: 32rpx;
-			background: #fff;
-			margin: 0 20rpx;
-		}
-
 		.library_box {
 			width: 700rpx;
 			margin: 200rpx auto 0 auto;
@@ -443,33 +456,37 @@
 					width: 100%;
 					background: #fff;
 					border-radius: 10rpx;
-					padding: 24rpx;
+					// padding: 24rpx;
 					box-sizing: border-box;
 					align-items: center;
-
-					.library_list_line {
-						width: 2rpx;
-						height: 90rpx;
-						background: #eee;
-						margin: 0 30rpx;
-					}
-
-					.library_list_icon {
+					justify-content: space-around;
+					
+					.library_list_left {
+						width: 18%;
 						display: flex;
-						justify-content: center;
 						align-items: center;
-						width: 80rpx;
-						height: 80rpx;
-						background: #4d80f0;
-						border-radius: 100%;
-
-						image {
-							width: 36rpx;
-							height: 36rpx;
+						border-right: 2rpx solid #eee;
+						justify-content: center;
+						
+						.library_list_icon {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							width: 80rpx;
+							height: 80rpx;
+							background: #4d80f0;
+							border-radius: 100%;
+						
+							image {
+								width: 36rpx;
+								height: 36rpx;
+							}
 						}
 					}
 
 					.library_list_text {
+						width: 76%;
+						padding: 24rpx 0;
 						.library_list_title {
 							display: block;
 							width: 400rpx;
@@ -495,15 +512,25 @@
 							display: flex;
 							margin-top: 10rpx;
 							align-items: center;
-							vertical-align: middle;
+							line-height: 52rpx;
 
 							.library_list_time {
 								font-size: 24rpx;
 								color: #555;
 								margin-right: 40rpx;
+								white-space: nowrap;
 							}
 
 							.library_list_author {
+								font-size: 24rpx;
+								color: #555;
+								width: 200rpx;
+								white-space: nowrap;
+								text-overflow: ellipsis;
+								overflow: hidden;
+							}
+							
+							.library_list_type {
 								font-size: 24rpx;
 								color: #555;
 								width: 200rpx;
@@ -560,4 +587,10 @@
 		}
 	}
 	
+	.right_line {
+		width: 2rpx;
+		height: 44rpx;
+		background: rgba(255, 255, 255, 0.55);
+		margin: 0 30rpx;
+	}
 </style>

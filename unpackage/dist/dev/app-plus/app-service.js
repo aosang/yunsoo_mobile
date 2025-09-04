@@ -14099,9 +14099,72 @@ This will fail in production.`);
     );
   }
   const PagesCreateLibraryCreateLibrary = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "F:/yunsoo_mobile/pages/createLibrary/createLibrary.vue"]]);
-  const _imports_0 = "/static/images/library_icon/laptop.png";
-  const _imports_1 = "/static/images/library_icon/service.png";
-  const _imports_2 = "/static/images/library_icon/computer.png";
+  var EN_US = ["second", "minute", "hour", "day", "week", "month", "year"];
+  function en_US(diff, idx) {
+    if (idx === 0)
+      return ["just now", "right now"];
+    var unit = EN_US[Math.floor(idx / 2)];
+    if (diff > 1)
+      unit += "s";
+    return [diff + " " + unit + " ago", "in " + diff + " " + unit];
+  }
+  var ZH_CN = ["秒", "分钟", "小时", "天", "周", "个月", "年"];
+  function zh_CN(diff, idx) {
+    if (idx === 0)
+      return ["刚刚", "片刻后"];
+    var unit = ZH_CN[~~(idx / 2)];
+    return [diff + " " + unit + "前", diff + " " + unit + "后"];
+  }
+  var Locales = {};
+  var register = function(locale, func) {
+    Locales[locale] = func;
+  };
+  var getLocale = function(locale) {
+    return Locales[locale] || Locales["en_US"];
+  };
+  var SEC_ARRAY = [
+    60,
+    60,
+    24,
+    7,
+    365 / 7 / 12,
+    12
+  ];
+  function toDate(input) {
+    if (input instanceof Date)
+      return input;
+    if (!isNaN(input) || /^\d+$/.test(input))
+      return new Date(parseInt(input));
+    input = (input || "").trim().replace(/\.\d+/, "").replace(/-/, "/").replace(/-/, "/").replace(/(\d)T(\d)/, "$1 $2").replace(/Z/, " UTC").replace(/([+-]\d\d):?(\d\d)/, " $1$2");
+    return new Date(input);
+  }
+  function formatDiff(diff, localeFunc) {
+    var agoIn = diff < 0 ? 1 : 0;
+    diff = Math.abs(diff);
+    var totalSec = diff;
+    var idx = 0;
+    for (; diff >= SEC_ARRAY[idx] && idx < SEC_ARRAY.length; idx++) {
+      diff /= SEC_ARRAY[idx];
+    }
+    diff = Math.floor(diff);
+    idx *= 2;
+    if (diff > (idx === 0 ? 9 : 1))
+      idx += 1;
+    return localeFunc(diff, idx, totalSec)[agoIn].replace("%s", diff.toString());
+  }
+  function diffSec(date, relativeDate) {
+    var relDate = relativeDate ? toDate(relativeDate) : /* @__PURE__ */ new Date();
+    return (+relDate - +toDate(date)) / 1e3;
+  }
+  var format = function(date, locale, opts) {
+    var sec = diffSec(date, opts && opts.relativeDate);
+    return formatDiff(sec, getLocale(locale));
+  };
+  register("en_US", en_US);
+  register("zh_CN", zh_CN);
+  const _imports_0 = "/static/images/library_icon/computer.png";
+  const _imports_1 = "/static/images/library_icon/laptop.png";
+  const _imports_2 = "/static/images/library_icon/service.png";
   const _imports_3 = "/static/images/library_icon/router.png";
   const _imports_4 = "/static/images/library_icon/mobile.png";
   const _imports_5 = "/static/images/library_icon/monitor.png";
@@ -14113,9 +14176,9 @@ This will fail in production.`);
     __name: "libraryList",
     setup(__props, { expose: __expose }) {
       __expose();
-      const message = useMessage();
-      const toast = useToast();
       const userStore = userInfoStore();
+      const toast = useToast();
+      const message = useMessage();
       const libraryData = vue.ref([]);
       const libraryType = vue.ref([]);
       const isLoading = vue.ref(true);
@@ -14142,30 +14205,30 @@ This will fail in production.`);
         getLibraryListData();
       });
       const getLibraryListData = async () => {
+        var _a2;
         let res = await requestMethods("/Library", "GET");
         if (res.code === 200) {
           libraryData.value = res.data;
-          libraryData.value.forEach((item) => {
-            item.created_time = dayjs(item.created_time).format("YYYY-MM-DD");
-          });
           isLoading.value = false;
           uni.stopPullDownRefresh();
         } else {
-          toast.error("获取数据失败");
+          (_a2 = toast.value) == null ? void 0 : _a2.error("获取数据失败");
           isLoading.value = false;
           uni.stopPullDownRefresh();
         }
       };
       const deleteLibraryListData = (id) => {
-        message.confirm({
+        var _a2;
+        (_a2 = message.value) == null ? void 0 : _a2.confirm({
           title: "提示",
           msg: "要删除这个知识库吗"
         }).then(async () => {
+          var _a3, _b2;
           let res = await requestMethods("/deleteLibrary", "POST", {
             libraryId: id
           });
           if (res.code === 200) {
-            toast.show({
+            (_a3 = toast.value) == null ? void 0 : _a3.show({
               msg: "知识库已删除",
               duration: 800,
               iconName: "success",
@@ -14174,7 +14237,7 @@ This will fail in production.`);
               }
             });
           } else {
-            toast.error("删除失败");
+            (_b2 = toast.value) == null ? void 0 : _b2.error("删除失败");
           }
         }).catch(() => {
         });
@@ -14185,14 +14248,15 @@ This will fail in production.`);
         });
       };
       const getLibraryTypeSelectData = async () => {
+        var _a2;
         try {
           let res = await requestMethods("/getLibraryType", "GET");
           if (res && res.data) {
             libraryType.value = res.data;
           }
         } catch (error) {
-          formatAppLog("error", "at pages/libraryList/libraryList.vue:292", "获取知识库类型失败:", error);
-          toast.error("获取知识库类型失败");
+          formatAppLog("error", "at pages/libraryList/libraryList.vue:312", "获取知识库类型失败:", error);
+          (_a2 = toast.value) == null ? void 0 : _a2.error("获取知识库类型失败");
         }
       };
       const filterLibraryListData = () => {
@@ -14223,6 +14287,7 @@ This will fail in production.`);
         filterKey.value = e.value || "";
       };
       const getFilterLibraryData = async () => {
+        var _a2;
         filterShow.value = true;
         let res = await requestMethods("/searchLibrary", "POST", {
           searchAuthor: filterCreatorText.value || "",
@@ -14240,12 +14305,12 @@ This will fail in production.`);
             isLoading.value = false;
             uni.stopPullDownRefresh();
           } else {
-            toast.error("获取数据失败");
+            (_a2 = toast.value) == null ? void 0 : _a2.error("获取数据失败");
             isLoading.value = false;
             uni.stopPullDownRefresh();
           }
         } catch (err) {
-          formatAppLog("log", "at pages/libraryList/libraryList.vue:359", err);
+          formatAppLog("log", "at pages/libraryList/libraryList.vue:379", err);
         }
       };
       const closeFilterShow = () => {
@@ -14265,20 +14330,22 @@ This will fail in production.`);
           uni.navigateBack();
         }
       };
-      const __returned__ = { message, toast, userStore, libraryData, libraryType, isLoading, isSuccess, filterShow, filterCreator, filterTime, filterKey, libraryTypeValue, filterCreatorText, getLibraryListData, deleteLibraryListData, goToCreateLibrary, getLibraryTypeSelectData, filterLibraryListData, resetFilterSearch, getFilterCreatorValue, getFilterTimeValue, getSelectTypeValue, getFilterKeyValue, getFilterLibraryData, closeFilterShow, goToLibraryDetails, goToBackEvent, get requestMethods() {
-        return requestMethods;
-      }, Navigation, onMounted: vue.onMounted, nextTick: vue.nextTick, ref: vue.ref, get dayjs() {
+      const __returned__ = { userStore, toast, message, libraryData, libraryType, isLoading, isSuccess, filterShow, filterCreator, filterTime, filterKey, libraryTypeValue, filterCreatorText, getLibraryListData, deleteLibraryListData, goToCreateLibrary, getLibraryTypeSelectData, filterLibraryListData, resetFilterSearch, getFilterCreatorValue, getFilterTimeValue, getSelectTypeValue, getFilterKeyValue, getFilterLibraryData, closeFilterShow, goToLibraryDetails, goToBackEvent, onMounted: vue.onMounted, nextTick: vue.nextTick, ref: vue.ref, get onPullDownRefresh() {
+        return onPullDownRefresh;
+      }, get onLoad() {
+        return onLoad;
+      }, get dayjs() {
         return dayjs;
+      }, get format() {
+        return format;
+      }, get requestMethods() {
+        return requestMethods;
+      }, Navigation, get userInfoStore() {
+        return userInfoStore;
       }, get useToast() {
         return useToast;
       }, get useMessage() {
         return useMessage;
-      }, get onPullDownRefresh() {
-        return onPullDownRefresh;
-      }, get onLoad() {
-        return onLoad;
-      }, get userInfoStore() {
-        return userInfoStore;
       } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
@@ -14568,40 +14635,14 @@ This will fail in production.`);
                       }, [
                         vue.withDirectives(vue.createElementVNode(
                           "view",
-                          { class: "library_list_icon" },
+                          { class: "library_list_left" },
                           [
-                            vue.createElementVNode("image", {
-                              src: _imports_0,
-                              mode: "widthFix"
-                            })
-                          ],
-                          512
-                          /* NEED_PATCH */
-                        ), [
-                          [vue.vShow, item.type === "笔记本"]
-                        ]),
-                        vue.withDirectives(vue.createElementVNode(
-                          "view",
-                          { class: "library_list_icon" },
-                          [
-                            vue.createElementVNode("image", {
-                              src: _imports_1,
-                              mode: "widthFix"
-                            })
-                          ],
-                          512
-                          /* NEED_PATCH */
-                        ), [
-                          [vue.vShow, item.type === "服务器"]
-                        ]),
-                        vue.withDirectives(vue.createElementVNode(
-                          "view",
-                          { class: "library_list_icon" },
-                          [
-                            vue.createElementVNode("image", {
-                              src: _imports_2,
-                              mode: "widthFix"
-                            })
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_0,
+                                mode: "widthFix"
+                              })
+                            ])
                           ],
                           512
                           /* NEED_PATCH */
@@ -14610,12 +14651,46 @@ This will fail in production.`);
                         ]),
                         vue.withDirectives(vue.createElementVNode(
                           "view",
-                          { class: "library_list_icon" },
+                          { class: "library_list_left" },
                           [
-                            vue.createElementVNode("image", {
-                              src: _imports_3,
-                              mode: "widthFix"
-                            })
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_1,
+                                mode: "widthFix"
+                              })
+                            ])
+                          ],
+                          512
+                          /* NEED_PATCH */
+                        ), [
+                          [vue.vShow, item.type === "笔记本"]
+                        ]),
+                        vue.withDirectives(vue.createElementVNode(
+                          "view",
+                          { class: "library_list_left" },
+                          [
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_2,
+                                mode: "widthFix"
+                              })
+                            ])
+                          ],
+                          512
+                          /* NEED_PATCH */
+                        ), [
+                          [vue.vShow, item.type === "服务器"]
+                        ]),
+                        vue.withDirectives(vue.createElementVNode(
+                          "view",
+                          { class: "library_list_left" },
+                          [
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_3,
+                                mode: "widthFix"
+                              })
+                            ])
                           ],
                           512
                           /* NEED_PATCH */
@@ -14624,12 +14699,14 @@ This will fail in production.`);
                         ]),
                         vue.withDirectives(vue.createElementVNode(
                           "view",
-                          { class: "library_list_icon" },
+                          { class: "library_list_left" },
                           [
-                            vue.createElementVNode("image", {
-                              src: _imports_4,
-                              mode: "widthFix"
-                            })
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_4,
+                                mode: "widthFix"
+                              })
+                            ])
                           ],
                           512
                           /* NEED_PATCH */
@@ -14638,12 +14715,14 @@ This will fail in production.`);
                         ]),
                         vue.withDirectives(vue.createElementVNode(
                           "view",
-                          { class: "library_list_icon" },
+                          { class: "library_list_left" },
                           [
-                            vue.createElementVNode("image", {
-                              src: _imports_5,
-                              mode: "widthFix"
-                            })
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_5,
+                                mode: "widthFix"
+                              })
+                            ])
                           ],
                           512
                           /* NEED_PATCH */
@@ -14652,12 +14731,14 @@ This will fail in production.`);
                         ]),
                         vue.withDirectives(vue.createElementVNode(
                           "view",
-                          { class: "library_list_icon" },
+                          { class: "library_list_left" },
                           [
-                            vue.createElementVNode("image", {
-                              src: _imports_6,
-                              mode: "widthFix"
-                            })
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_6,
+                                mode: "widthFix"
+                              })
+                            ])
                           ],
                           512
                           /* NEED_PATCH */
@@ -14666,12 +14747,14 @@ This will fail in production.`);
                         ]),
                         vue.withDirectives(vue.createElementVNode(
                           "view",
-                          { class: "library_list_icon" },
+                          { class: "library_list_left" },
                           [
-                            vue.createElementVNode("image", {
-                              src: _imports_7,
-                              mode: "widthFix"
-                            })
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_7,
+                                mode: "widthFix"
+                              })
+                            ])
                           ],
                           512
                           /* NEED_PATCH */
@@ -14680,12 +14763,14 @@ This will fail in production.`);
                         ]),
                         vue.withDirectives(vue.createElementVNode(
                           "view",
-                          { class: "library_list_icon" },
+                          { class: "library_list_left" },
                           [
-                            vue.createElementVNode("image", {
-                              src: _imports_8,
-                              mode: "widthFix"
-                            })
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_8,
+                                mode: "widthFix"
+                              })
+                            ])
                           ],
                           512
                           /* NEED_PATCH */
@@ -14694,19 +14779,20 @@ This will fail in production.`);
                         ]),
                         vue.withDirectives(vue.createElementVNode(
                           "view",
-                          { class: "library_list_icon" },
+                          { class: "library_list_left" },
                           [
-                            vue.createElementVNode("image", {
-                              src: _imports_9,
-                              mode: "widthFix"
-                            })
+                            vue.createElementVNode("view", { class: "library_list_icon" }, [
+                              vue.createElementVNode("image", {
+                                src: _imports_9,
+                                mode: "widthFix"
+                              })
+                            ])
                           ],
                           512
                           /* NEED_PATCH */
                         ), [
                           [vue.vShow, item.type === "其它"]
                         ]),
-                        vue.createElementVNode("view", { class: "library_list_line" }),
                         vue.createElementVNode("view", { class: "library_list_text" }, [
                           vue.createElementVNode(
                             "text",
@@ -14726,7 +14812,7 @@ This will fail in production.`);
                             vue.createElementVNode(
                               "text",
                               { class: "library_list_time" },
-                              vue.toDisplayString(item.created_time),
+                              vue.toDisplayString($setup.format(item.created_time, "zh_CN")),
                               1
                               /* TEXT */
                             ),
@@ -14734,6 +14820,13 @@ This will fail in production.`);
                               "text",
                               { class: "library_list_author" },
                               vue.toDisplayString(item.author),
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode(
+                              "text",
+                              { class: "library_list_type" },
+                              vue.toDisplayString(item.type),
                               1
                               /* TEXT */
                             )
