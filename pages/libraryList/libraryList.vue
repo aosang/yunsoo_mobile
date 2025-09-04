@@ -1,6 +1,7 @@
 <template>
 	<Navigation />
 	<wd-toast />
+	<wd-message-box />
 	<!-- 筛选弹出框 -->
 	<wd-action-sheet 
 		v-model="filterShow" 
@@ -123,6 +124,7 @@
 			</template>
 		</wd-navbar>
 		<view class="library_box">
+			<wd-notify />
 			<view class="library_loading" v-if="isLoading">
 				<wd-loading></wd-loading>
 			</view>
@@ -233,8 +235,8 @@
 	const filterCreator = ref('')
 	const filterTime = ref('')
 	const filterKey = ref('')
-	const libraryTypeValue = ref('')
-	const filterCreatorText = ref('')
+	const libraryTypeValue = ref()
+	const filterCreatorText = ref()
 	
 	onLoad((option) => {
 		option.success? isSuccess.value = option.success : option.success = null
@@ -242,9 +244,9 @@
 	
 	// 获取知识库列表
 	onMounted(() => {
-		uni.$on('refreshData', () => {
-			getLibraryListData()
-		})
+		// uni.$on('refreshData', () => {
+		// 	getLibraryListData()
+		// })
 		nextTick(() => {
 			getLibraryListData()
 			getLibraryTypeSelectData()
@@ -270,7 +272,7 @@
 	
 	// 删除知识库
 	const deleteLibraryListData = (id) => {
-		message.value?.confirm({
+		message.confirm({
 			title: '提示',
 			msg: '要删除这个知识库吗',
 		})
@@ -279,7 +281,7 @@
 				libraryId: id
 			})
 			if(res.code === 200) {
-				toast.value?.show({
+				toast.success({
 					msg: '知识库已删除',
 					duration: 800,
 					iconName: 'success',
@@ -288,7 +290,7 @@
 					}
 				})
 			}else {
-				toast.value?.error('删除失败')
+				toast.error('删除失败')
 			}
 		})
 		.catch(() => {
