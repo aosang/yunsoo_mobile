@@ -1,7 +1,7 @@
 <template>
 	<Navigation />
 	<wd-toast />
-	<wd-message-box />
+	<wd-message-box :zIndex="99" />
 	<!-- 筛选弹出框 -->
 	<wd-action-sheet 
 		v-model="filterShow" 
@@ -15,7 +15,7 @@
 					v-model="filterKey"
 					custom-input-class="searchInput"
 					custom-class="searchInputBox"
-					 @change="getFilterKeyValue"
+					@change="getFilterKeyValue"
 				/>
 			</view>
 			<view class="action_title_item">
@@ -90,7 +90,6 @@
 			</view>
 		</view>
 	</wd-action-sheet>
-	<wd-message-box :zIndex="1000" />
 	<view class="library_list">
 		<wd-navbar 
 			title="知识库" 
@@ -98,6 +97,7 @@
 			custom-class="custom" 
 			custom-style="color: #fff" 
 			@click-left="goToBackEvent"
+			:zIndex="10"
 		>
 			<template #left v-if="isSuccess === '1'">
 			  <wd-icon name="home" size="22" />

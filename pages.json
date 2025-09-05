@@ -66,6 +66,11 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		}, {
+			"path": "pages/device/device",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	
@@ -93,6 +98,11 @@
 			"iconPath": "static/images/iconimages/workorder.png",
 			"selectedIconPath": "static/images/iconimages/workorder_o.png",
 			"text": "工单"
+		}, {
+			"pagePath": "pages/device/device",
+			"iconPath": "static/images/iconimages/device.png",
+			"selectedIconPath": "static/images/iconimages/device_o.png",
+			"text": "设备"
 		}, {
 			"pagePath": "pages/profile/profile",
 			"iconPath": "static/images/iconimages/user.png",
