@@ -24,9 +24,9 @@ export const requestMethods = (url, method, data = {}, timeout = 20000) => {
 						title: data?.message || '请求失败',
 						icon: 'none'
 					})
-					uni.reLaunch({
-						url: '/pages/login/login'
-					})
+					// uni.reLaunch({
+					// 	url: '/pages/login/login'
+					// })
 					reject(data)
 				}
 			},
@@ -37,6 +37,7 @@ export const requestMethods = (url, method, data = {}, timeout = 20000) => {
 						icon: 'none'
 					})
 				}else {
+					console.log(err);
 					uni.showToast({
 						title: '网络请求失败',
 						icon: 'none'

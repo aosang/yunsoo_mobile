@@ -2111,9 +2111,6 @@ This will fail in production.`);
               title: (data2 == null ? void 0 : data2.message) || "请求失败",
               icon: "none"
             });
-            uni.reLaunch({
-              url: "/pages/login/login"
-            });
             reject(data2);
           }
         },
@@ -2124,6 +2121,7 @@ This will fail in production.`);
               icon: "none"
             });
           } else {
+            formatAppLog("log", "at request/request.js:40", err);
             uni.showToast({
               title: "网络请求失败",
               icon: "none"
@@ -2151,7 +2149,7 @@ This will fail in production.`);
             const data = JSON.parse(res.data);
             resolve(data);
           } catch (e) {
-            formatAppLog("error", "at request/request.js:68", "上传返回解析失败", res.data);
+            formatAppLog("error", "at request/request.js:69", "上传返回解析失败", res.data);
             reject(new Error("上传返回格式异常"));
           }
         },
@@ -5959,7 +5957,7 @@ This will fail in production.`);
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     );
   }
-  const __easycom_12 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-af66e359"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-swipe-action/wd-swipe-action.vue"]]);
+  const __easycom_2$5 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-af66e359"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-swipe-action/wd-swipe-action.vue"]]);
   const TABS_KEY = Symbol("wd-tabs");
   const tabsProps = {
     ...baseProps,
@@ -7457,7 +7455,7 @@ This will fail in production.`);
     const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
     const _component_wd_loading = resolveEasycom(vue.resolveDynamicComponent("wd-loading"), __easycom_10);
     const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_11);
-    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_12);
+    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_2$5);
     const _component_wd_tab = resolveEasycom(vue.resolveDynamicComponent("wd-tab"), __easycom_6$1);
     const _component_wd_tabs = resolveEasycom(vue.resolveDynamicComponent("wd-tabs"), __easycom_7);
     return vue.openBlock(), vue.createElementBlock(
@@ -14502,7 +14500,7 @@ This will fail in production.`);
     const _component_wd_notify = resolveEasycom(vue.resolveDynamicComponent("wd-notify"), __easycom_9);
     const _component_wd_loading = resolveEasycom(vue.resolveDynamicComponent("wd-loading"), __easycom_10);
     const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_11);
-    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_12);
+    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_2$5);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -15388,7 +15386,21 @@ This will fail in production.`);
     __name: "device",
     setup(__props, { expose: __expose }) {
       __expose();
-      const __returned__ = { Navigation };
+      const deviceData = vue.ref([]);
+      vue.onMounted(() => {
+        getDeviceListData();
+      });
+      const getDeviceListData = async () => {
+        let res = await requestMethods("/Device", "GET");
+        if (res.code === 200) {
+          deviceData.value = res.data;
+        }
+      };
+      const __returned__ = { deviceData, getDeviceListData, Navigation, onMounted: vue.onMounted, ref: vue.ref, get requestMethods() {
+        return requestMethods;
+      }, get dayjs() {
+        return dayjs;
+      } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
@@ -15396,6 +15408,7 @@ This will fail in production.`);
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
     const _component_wd_card = resolveEasycom(vue.resolveDynamicComponent("wd-card"), __easycom_1);
+    const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_2$5);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -15406,35 +15419,96 @@ This will fail in production.`);
             title: "设备管理",
             fixed: "",
             "custom-class": "custom",
-            "left-arrow": "",
-            "left-text": "返回",
             "custom-style": "color: #fff"
           })
         ]),
         vue.createElementVNode("view", { class: "device_box" }, [
-          vue.createVNode(_component_wd_card, {
-            type: "rectangle",
-            "custom-class": "device_card",
-            "custom-title-class": "device_title"
-          }, {
-            title: vue.withCtx(() => [
-              vue.createElementVNode("view", { class: "device_top" }, [
-                vue.createElementVNode("view", { class: "device_top_brand" }, [
-                  vue.createElementVNode("image", {
-                    src: "https://www.wangle.run/company_icon/aliyun.svg",
-                    mode: "widthFix"
-                  }),
-                  vue.createElementVNode("view", { class: "device_top_text" }, "阿里云服务器")
-                ]),
-                vue.createElementVNode("view", { class: "device_top_text" }, "2025/09/05 17:27")
-              ])
-            ]),
-            default: vue.withCtx(() => [
-              vue.createElementVNode("view", null, "ahaahaha")
-            ]),
-            _: 1
-            /* STABLE */
-          })
+          vue.createCommentVNode(' <view class="empty_data">\r\n			<wd-status-tip image="content" tip="暂无IT设备" />\r\n		</view> '),
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList($setup.deviceData, (device) => {
+              return vue.openBlock(), vue.createBlock(
+                _component_wd_swipe_action,
+                {
+                  key: device.id,
+                  class: "device_box_item"
+                },
+                {
+                  right: vue.withCtx(() => [
+                    vue.createElementVNode("view", { class: "device_action" }, [
+                      vue.createElementVNode("view", { class: "device_button" }, "删除")
+                    ])
+                  ]),
+                  default: vue.withCtx(() => [
+                    vue.createVNode(
+                      _component_wd_card,
+                      {
+                        type: "rectangle",
+                        "custom-class": "device_card",
+                        "custom-title-class": "device_title",
+                        "custom-content-class": "device_content"
+                      },
+                      {
+                        title: vue.withCtx(() => [
+                          vue.createElementVNode("view", { class: "device_top" }, [
+                            vue.createElementVNode("view", { class: "device_top_brand" }, [
+                              vue.createElementVNode("image", {
+                                src: "https://www.wangle.run/company_icon/aliyun.svg",
+                                mode: "widthFix"
+                              }),
+                              vue.createElementVNode(
+                                "view",
+                                { class: "device_top_text" },
+                                vue.toDisplayString(device.product_brand),
+                                1
+                                /* TEXT */
+                              )
+                            ]),
+                            vue.createElementVNode(
+                              "view",
+                              { class: "device_top_time" },
+                              "创建时间：" + vue.toDisplayString($setup.dayjs(device.product_time).format("YY/MM/DD hh:mm:ss")),
+                              1
+                              /* TEXT */
+                            )
+                          ])
+                        ]),
+                        default: vue.withCtx(() => [
+                          vue.createElementVNode("view", { class: "device_content_text" }, [
+                            vue.createElementVNode(
+                              "view",
+                              { class: "device_content_item" },
+                              "设备名称：" + vue.toDisplayString(device.value),
+                              1
+                              /* TEXT */
+                            ),
+                            vue.createElementVNode(
+                              "view",
+                              { class: "device_content_item" },
+                              "设备类型：" + vue.toDisplayString(device.product_type),
+                              1
+                              /* TEXT */
+                            )
+                          ])
+                        ]),
+                        _: 2
+                        /* DYNAMIC */
+                      },
+                      1024
+                      /* DYNAMIC_SLOTS */
+                    )
+                  ]),
+                  _: 2
+                  /* DYNAMIC */
+                },
+                1024
+                /* DYNAMIC_SLOTS */
+              );
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
         ])
       ],
       64
