@@ -277,7 +277,7 @@
 			msg: '要删除这个知识库吗',
 		})
 		.then(async () => {
-			let res = await requestMethods('/deleteLibrary', 'POST', {
+			let res = await requestMethods('/DeleteLibrary', 'POST', {
 				libraryId: id
 			})
 			if(res.code === 200) {

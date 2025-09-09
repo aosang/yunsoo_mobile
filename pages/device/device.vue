@@ -1,5 +1,7 @@
 <template>
 	<Navigation />
+	<wd-toast />
+	<wd-message-box />
 	<view class="device_list">
 		<wd-navbar
 			title="设备管理" 
@@ -7,14 +9,33 @@
 			custom-class="custom"
 			custom-style="color: #fff"
 		>
+			<!-- 右侧栏 -->
+			<template #right>
+				<wd-icon
+					name="add" 
+					size="18"
+					@click="submitDeviceFormEvent"
+				>
+				</wd-icon>
+				<view class="right_line"></view>
+				<wd-icon 
+					name="search" 
+					size="18"
+				>
+				</wd-icon>
+			</template>
 		</wd-navbar>
 	</view>
 	<view class="device_box">
-		<!-- <view class="empty_data">
+		<view class="device_loading" v-if="isLoading">
+			<wd-loading v-if="isLoading" />
+		</view>
+		
+		<view class="empty_data" v-if="!isLoading && deviceData.length === 0" >
 			<wd-status-tip image="content" tip="暂无IT设备" />
-		</view> -->
-		<block v-for="device in deviceData" :key="device.id">
-			<wd-swipe-action class="device_box_item">
+		</view>
+		<block v-for="device in deviceData" :key="device.id" v-else>
+			<wd-swipe-action class="device_box_item" >
 				<wd-card 
 					type="rectangle" 
 					custom-class="device_card"
@@ -23,11 +44,13 @@
 				>
 					<template #title>
 						<view class="device_top">
+							<view class="device_top_time">
+								创建时间：{{dayjs(device.product_time).format('YY/MM/DD hh:mm:ss')}}
+							</view>
 							<view class="device_top_brand">
-								<image src="https://www.wangle.run/company_icon/aliyun.svg" mode="widthFix" />
+								<image src="https://www.wangle.run/company_icon/public_image/assets_logo_transation.png" mode="widthFix" />
 								<view class="device_top_text">{{device.product_brand}}</view>
 							</view>
-							<view class="device_top_time">创建时间：{{dayjs(device.product_time).format('YY/MM/DD hh:mm:ss')}}</view>
 						</view>
 					</template>
 					<view class="device_content_text">
@@ -37,7 +60,12 @@
 				</wd-card>
 				<template #right>
 					<view class="device_action">
-						<view class="device_button">删除</view>
+						<view 
+							class="device_button" 
+							@click="deleteDevice(device.id)"
+						>
+							删除
+						</view>
 					</view>
 				</template>
 			</wd-swipe-action>
@@ -47,13 +75,26 @@
 
 <script setup>
 	import Navigation from '@/components/navigation_header.vue'
-	import { onMounted, ref } from 'vue'
+	import { onMounted, ref, nextTick } from 'vue'
 	import { requestMethods } from '@/request/request'
+	import { onPullDownRefresh } from '@dcloudio/uni-app'
 	import dayjs from 'dayjs'
+	import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
+	const toast = useToast()
+	const message = useMessage()
 	
 	const deviceData = ref([])
+	const isLoading = ref(true)
+	const imgLogo = ref('')
 	
 	onMounted(() => {
+		nextTick(() => {
+			getDeviceListData()
+			getBrandData()
+		})
+	})
+	
+	onPullDownRefresh(() => {
 		getDeviceListData()
 	})
 	
@@ -61,14 +102,58 @@
 		let res = await requestMethods('/Device', 'GET')
 		if(res.code === 200) {
 			deviceData.value = res.data
+			isLoading.value = false
+			uni.stopPullDownRefresh()
 		}
 	}
+	
+	const deleteDevice = async (delId) => {
+		message.confirm({
+			title: '提示',
+			msg: '确认要删除此设备吗',
+		})
+		.then(async () => {
+			let res = await requestMethods('/DeleteDevice', 'POST', {
+				deviceId: delId
+			})
+			if(res.code === 200) {
+				toast.show({
+					msg: '设备已删除',
+					duration: 800,
+					iconName: 'success',
+					closed: () => {
+						getDeviceListData()
+					}
+				})
+			}else {
+				toast.error('删除失败')
+			}
+		})
+		.catch(() => {
+			// console.log('取消')
+		})
+	}
+	
+	const submitDeviceFormEvent = () => {
+		uni.navigateTo({
+			url: '/pages/device/createDevice',
+		})
+	}
+	
 </script>
 
 <style lang="scss">
 html, body {
 	background: #eee;
 }
+
+.right_line {
+	width: 2rpx;
+	height: 44rpx;
+	background: rgba(255, 255, 255, 0.55);
+	margin: 0 30rpx;
+}
+
 .device_list {
 	width: 100%;
 	:deep() {
@@ -83,6 +168,13 @@ html, body {
 	width: 700rpx;
 	margin: 200rpx auto 0 auto;
 	box-sizing: border-box;
+	
+	.device_loading {
+		display: flex;
+		padding-top: 200rpx;
+		justify-content: center;
+		align-items: center;
+	}
 	
 	.device_box_item {
 		margin-bottom: 4rpx;
@@ -137,7 +229,7 @@ html, body {
 		}
 		
 		image {
-			width: 40rpx;
+			width: 32rpx;
 			margin-right: 12rpx;
 		}
 	}

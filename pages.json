@@ -69,6 +69,14 @@
 		}, {
 			"path": "pages/device/device",
 			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path" : "pages/device/createDevice",
+			"style" : 
+			{
 				"navigationStyle": "custom"
 			}
 		}

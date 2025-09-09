@@ -24,9 +24,6 @@
 			custom-class="custom-tabs"
 			@click="changeGetWorkorderList"
 		>
-			<view class="workorder_loading" v-if="isLoading">
-				<wd-loading v-if="isLoading" />
-			</view>
 			<block v-for="item in tabText" :key="item.id">
 				<wd-tab :title="item.text">
 					<view class="workorder_box">
@@ -106,7 +103,7 @@
 <script setup>
 	import Navigation from '@/components/navigation_header.vue'
 	import { nextTick, onMounted, reactive, ref, watch } from 'vue';
-	import { onPullDownRefresh, onShow } from '@dcloudio/uni-app'
+	import { onPullDownRefresh } from '@dcloudio/uni-app'
 	import { requestMethods } from '@/request/request.js'
 	import { useToast, useMessage } from '@/uni_modules/wot-design-uni'
 	const toast = useToast()
