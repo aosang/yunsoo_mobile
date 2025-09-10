@@ -490,7 +490,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__scopeId", "data-v-2afa91f2"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-col/wd-col.vue"]]);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__scopeId", "data-v-2afa91f2"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-col/wd-col.vue"]]);
   function isVNode(value) {
     return value ? value.__v_isVNode === true : false;
   }
@@ -2097,6 +2097,7 @@ This will fail in production.`);
         url: baseUrl$1 + url,
         method,
         data,
+        timeout,
         header: {
           "Content-Type": "application/x-www-form-urlencoded",
           "authorization": userStore.token ? userStore.token : null
@@ -2111,6 +2112,9 @@ This will fail in production.`);
               title: (data2 == null ? void 0 : data2.message) || "请求失败",
               icon: "none"
             });
+            uni.reLaunch({
+              url: "/pages/login/login"
+            });
             reject(data2);
           }
         },
@@ -2121,7 +2125,7 @@ This will fail in production.`);
               icon: "none"
             });
           } else {
-            formatAppLog("log", "at request/request.js:40", err);
+            formatAppLog("log", "at request/request.js:41", err);
             uni.showToast({
               title: "网络请求失败",
               icon: "none"
@@ -2140,6 +2144,7 @@ This will fail in production.`);
         filePath,
         name: "file",
         formData,
+        timeout,
         header: {
           "authorization": userStore.token ? userStore.token : null
         },
@@ -2149,7 +2154,7 @@ This will fail in production.`);
             const data = JSON.parse(res.data);
             resolve(data);
           } catch (e) {
-            formatAppLog("error", "at request/request.js:69", "上传返回解析失败", res.data);
+            formatAppLog("error", "at request/request.js:71", "上传返回解析失败", res.data);
             reject(new Error("上传返回格式异常"));
           }
         },
@@ -2591,7 +2596,7 @@ This will fail in production.`);
     }
   };
   function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_col = resolveEasycom(vue.resolveDynamicComponent("wd-col"), __easycom_0$3);
+    const _component_wd_col = resolveEasycom(vue.resolveDynamicComponent("wd-col"), __easycom_0$2);
     const _component_wd_row = resolveEasycom(vue.resolveDynamicComponent("wd-row"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -3724,7 +3729,7 @@ This will fail in production.`);
       /* STABLE_FRAGMENT */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-fce8c80a"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-toast/wd-toast.vue"]]);
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-fce8c80a"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-toast/wd-toast.vue"]]);
   const CELL_GROUP_KEY = Symbol("wd-cell-group");
   ({
     ...baseProps,
@@ -4288,7 +4293,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-4e0c9774"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-input/wd-input.vue"]]);
+  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-4e0c9774"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-input/wd-input.vue"]]);
   const buttonProps = {
     ...baseProps,
     /**
@@ -4612,8 +4617,8 @@ This will fail in production.`);
     }
   };
   function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
-    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_3$1);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
+    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_4$1);
     const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_5$3);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -5082,7 +5087,7 @@ This will fail in production.`);
           messageState.cancelButtonProps = option.cancelButtonProps;
         }
       }
-      const __returned__ = { props, translate, rootClass, bodyClass, messageOptionKey, messageOption, messageState, customConfirmProps, customCancelProps, toggleModal, handleConfirm, handleCancel, validate, resetErr, inputValChange, reset, wdPopup, wdButton: __easycom_5$3, wdInput: __easycom_3$1 };
+      const __returned__ = { props, translate, rootClass, bodyClass, messageOptionKey, messageOption, messageState, customConfirmProps, customCancelProps, toggleModal, handleConfirm, handleCancel, validate, resetErr, inputValChange, reset, wdPopup, wdButton: __easycom_5$3, wdInput: __easycom_4$1 };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
@@ -5446,7 +5451,7 @@ This will fail in production.`);
       /* STYLE */
     );
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-089e80c4"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-navbar/wd-navbar.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-089e80c4"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-navbar/wd-navbar.vue"]]);
   const imgProps = {
     ...baseProps,
     customImage: makeStringProp(""),
@@ -5572,7 +5577,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-cb0c5dbc"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-img/wd-img.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-cb0c5dbc"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-img/wd-img.vue"]]);
   const statusTipProps = {
     ...baseProps,
     /**
@@ -5648,7 +5653,7 @@ This will fail in production.`);
         }
         return `${objToStyle(style)}`;
       });
-      const __returned__ = { props, imgUrl, imgStyle, wdImg: __easycom_1$2 };
+      const __returned__ = { props, imgUrl, imgStyle, wdImg: __easycom_1$1 };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
@@ -7339,7 +7344,7 @@ This will fail in production.`);
       /* CLASS */
     ));
   }
-  const __easycom_6$2 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-4388d15d"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue"]]);
+  const __easycom_6$3 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-4388d15d"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-tabs/wd-tabs.vue"]]);
   const _sfc_main$s = {
     __name: "workorder",
     setup(__props, { expose: __expose }) {
@@ -7448,13 +7453,13 @@ This will fail in production.`);
     }
   };
   function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
     const _component_wd_message_box = resolveEasycom(vue.resolveDynamicComponent("wd-message-box"), __easycom_1$3);
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
     const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_5$2);
     const _component_wd_swipe_action = resolveEasycom(vue.resolveDynamicComponent("wd-swipe-action"), __easycom_7);
     const _component_wd_tab = resolveEasycom(vue.resolveDynamicComponent("wd-tab"), __easycom_5$1);
-    const _component_wd_tabs = resolveEasycom(vue.resolveDynamicComponent("wd-tabs"), __easycom_6$2);
+    const _component_wd_tabs = resolveEasycom(vue.resolveDynamicComponent("wd-tabs"), __easycom_6$3);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -7707,8 +7712,8 @@ This will fail in production.`);
     }
   };
   function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
-    const _component_wd_img = resolveEasycom(vue.resolveDynamicComponent("wd-img"), __easycom_1$2);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
+    const _component_wd_img = resolveEasycom(vue.resolveDynamicComponent("wd-img"), __easycom_1$1);
     const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_5$3);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -8152,7 +8157,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-e7a73070"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-notice-bar/wd-notice-bar.vue"]]);
+  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-e7a73070"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-notice-bar/wd-notice-bar.vue"]]);
   const dividerProps = {
     ...baseProps,
     /**
@@ -8236,7 +8241,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-86c73a37"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-divider/wd-divider.vue"]]);
+  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-86c73a37"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-divider/wd-divider.vue"]]);
   const searchProps = {
     ...baseProps,
     customInputClass: makeStringProp(""),
@@ -8841,7 +8846,7 @@ This will fail in production.`);
       }, 8, ["custom-style", "modelValue", "duration", "close-on-click-modal", "safe-area-inset-bottom", "lazy-render", "z-index"])
     ]);
   }
-  const __easycom_6$1 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-03619ba9"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-action-sheet/wd-action-sheet.vue"]]);
+  const __easycom_6$2 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-03619ba9"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-action-sheet/wd-action-sheet.vue"]]);
   const CHECKBOX_GROUP_KEY = Symbol("wd-checkbox-group");
   const checkboxGroupProps = {
     ...baseProps,
@@ -9424,7 +9429,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-1a9e9b05"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-radio-group/wd-radio-group.vue"]]);
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-1a9e9b05"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-radio-group/wd-radio-group.vue"]]);
   const selectPickerProps = {
     ...baseProps,
     /** 选择器左侧文案 */
@@ -9795,7 +9800,7 @@ This will fail in production.`);
         close,
         open: open2
       });
-      const __returned__ = { translate, props, emit, pickerShow, selectList, isConfirm, lastSelectList, filterVal, filterColumns, scrollTop, cell, showValue, form, errorMessage, isRequired, proxy, setScrollIntoView, noop: noop2, getSelectedItem, valueFormat, handleChange, close, open: open2, onConfirm, handleConfirm, getFilterText, handleFilterChange, formatFilterColumns, showConfirm, showClear, handleClear, showArrow, wdActionSheet: __easycom_6$1, wdCheckbox, wdCheckboxGroup, wdRadio: __easycom_3, wdRadioGroup: __easycom_4$1, wdButton: __easycom_5$3, wdLoading: __easycom_4$2, get isArray() {
+      const __returned__ = { translate, props, emit, pickerShow, selectList, isConfirm, lastSelectList, filterVal, filterColumns, scrollTop, cell, showValue, form, errorMessage, isRequired, proxy, setScrollIntoView, noop: noop2, getSelectedItem, valueFormat, handleChange, close, open: open2, onConfirm, handleConfirm, getFilterText, handleFilterChange, formatFilterColumns, showConfirm, showClear, handleClear, showArrow, wdActionSheet: __easycom_6$2, wdCheckbox, wdCheckboxGroup, wdRadio: __easycom_3, wdRadioGroup: __easycom_4, wdButton: __easycom_5$3, wdLoading: __easycom_4$2, get isArray() {
         return isArray;
       } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
@@ -10125,7 +10130,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-b8ce50f5"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-select-picker/wd-select-picker.vue"]]);
+  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-b8ce50f5"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-select-picker/wd-select-picker.vue"]]);
   const textareaProps = {
     ...baseProps,
     /**
@@ -10673,7 +10678,7 @@ This will fail in production.`);
       /* CLASS, STYLE */
     );
   }
-  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-7d71e04e"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-textarea/wd-textarea.vue"]]);
+  const __easycom_6$1 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-7d71e04e"], ["__file", "F:/yunsoo_mobile/uni_modules/wot-design-uni/components/wd-textarea/wd-textarea.vue"]]);
   var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
   function getDefaultExportFromCjs(x) {
     return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
@@ -11078,12 +11083,12 @@ This will fail in production.`);
     }
   });
   function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
-    const _component_wd_notice_bar = resolveEasycom(vue.resolveDynamicComponent("wd-notice-bar"), __easycom_1$1);
-    const _component_wd_divider = resolveEasycom(vue.resolveDynamicComponent("wd-divider"), __easycom_2$2);
-    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_4);
-    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_5);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
+    const _component_wd_notice_bar = resolveEasycom(vue.resolveDynamicComponent("wd-notice-bar"), __easycom_2$2);
+    const _component_wd_divider = resolveEasycom(vue.resolveDynamicComponent("wd-divider"), __easycom_3$1);
+    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_5);
+    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_6$1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -11406,10 +11411,10 @@ This will fail in production.`);
     }
   });
   function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
-    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_4);
-    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_5);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
+    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_5);
+    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_6$1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -13950,8 +13955,8 @@ This will fail in production.`);
     }
   };
   function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
     const _component_sp_editor = resolveEasycom(vue.resolveDynamicComponent("sp-editor"), __easycom_2);
     const _component_wd_skeleton = resolveEasycom(vue.resolveDynamicComponent("wd-skeleton"), __easycom_1);
     const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_5$3);
@@ -14479,15 +14484,15 @@ This will fail in production.`);
     }
   };
   function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
     const _component_wd_message_box = resolveEasycom(vue.resolveDynamicComponent("wd-message-box"), __easycom_1$3);
     const _component_wd_search = resolveEasycom(vue.resolveDynamicComponent("wd-search"), __easycom_2$1);
     const _component_wd_radio = resolveEasycom(vue.resolveDynamicComponent("wd-radio"), __easycom_3);
-    const _component_wd_radio_group = resolveEasycom(vue.resolveDynamicComponent("wd-radio-group"), __easycom_4$1);
+    const _component_wd_radio_group = resolveEasycom(vue.resolveDynamicComponent("wd-radio-group"), __easycom_4);
     const _component_wd_button = resolveEasycom(vue.resolveDynamicComponent("wd-button"), __easycom_5$3);
-    const _component_wd_action_sheet = resolveEasycom(vue.resolveDynamicComponent("wd-action-sheet"), __easycom_6$1);
+    const _component_wd_action_sheet = resolveEasycom(vue.resolveDynamicComponent("wd-action-sheet"), __easycom_6$2);
     const _component_wd_icon = resolveEasycom(vue.resolveDynamicComponent("wd-icon"), __easycom_2$3);
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
     const _component_wd_notify = resolveEasycom(vue.resolveDynamicComponent("wd-notify"), __easycom_9);
     const _component_wd_loading = resolveEasycom(vue.resolveDynamicComponent("wd-loading"), __easycom_4$2);
     const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_5$2);
@@ -15026,7 +15031,7 @@ This will fail in production.`);
     }
   };
   function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
     const _component_wd_skeleton = resolveEasycom(vue.resolveDynamicComponent("wd-skeleton"), __easycom_1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
@@ -15177,11 +15182,11 @@ This will fail in production.`);
     }
   };
   function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
-    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_5);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
+    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_6$1);
     const _component_wd_radio = resolveEasycom(vue.resolveDynamicComponent("wd-radio"), __easycom_3);
-    const _component_wd_radio_group = resolveEasycom(vue.resolveDynamicComponent("wd-radio-group"), __easycom_4$1);
+    const _component_wd_radio_group = resolveEasycom(vue.resolveDynamicComponent("wd-radio-group"), __easycom_4);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -15383,6 +15388,9 @@ This will fail in production.`);
       const isLoading = vue.ref(true);
       const imgLogo = vue.ref("");
       vue.onMounted(() => {
+        uni.$on("refreshData", () => {
+          getDeviceListData();
+        });
         vue.nextTick(() => {
           getDeviceListData();
           getBrandData();
@@ -15443,10 +15451,10 @@ This will fail in production.`);
     }
   };
   function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$2);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
     const _component_wd_message_box = resolveEasycom(vue.resolveDynamicComponent("wd-message-box"), __easycom_1$3);
     const _component_wd_icon = resolveEasycom(vue.resolveDynamicComponent("wd-icon"), __easycom_2$3);
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
     const _component_wd_loading = resolveEasycom(vue.resolveDynamicComponent("wd-loading"), __easycom_4$2);
     const _component_wd_status_tip = resolveEasycom(vue.resolveDynamicComponent("wd-status-tip"), __easycom_5$2);
     const _component_wd_card = resolveEasycom(vue.resolveDynamicComponent("wd-card"), __easycom_6);
@@ -15530,15 +15538,15 @@ This will fail in production.`);
                             vue.createElementVNode(
                               "view",
                               { class: "device_top_time" },
-                              " 创建时间：" + vue.toDisplayString($setup.dayjs(device.product_time).format("YY/MM/DD hh:mm:ss")),
+                              " 创建时间：" + vue.toDisplayString(device.product_time),
                               1
                               /* TEXT */
                             ),
                             vue.createElementVNode("view", { class: "device_top_brand" }, [
                               vue.createElementVNode("image", {
-                                src: "https://www.wangle.run/company_icon/public_image/assets_logo_transation.png",
+                                src: device.product_logo || "https://www.wangle.run/company_icon/public_image/assets_logo_transation.png",
                                 mode: "widthFix"
-                              }),
+                              }, null, 8, ["src"]),
                               vue.createElementVNode(
                                 "view",
                                 { class: "device_top_text" },
@@ -15554,7 +15562,7 @@ This will fail in production.`);
                             vue.createElementVNode(
                               "view",
                               { class: "device_content_item" },
-                              "设备名称：" + vue.toDisplayString(device.value),
+                              "设备名称：" + vue.toDisplayString(device.product_name),
                               1
                               /* TEXT */
                             ),
@@ -15595,35 +15603,121 @@ This will fail in production.`);
     __name: "createDevice",
     setup(__props, { expose: __expose }) {
       __expose();
+      const toast = useToast();
+      const userStore = userInfoStore();
+      const deviceType = vue.ref([]);
+      const deviceBrand = vue.ref([]);
+      const isBrand = vue.ref(false);
       const deviceForm = vue.reactive({
-        id: "",
+        device_time: "",
+        device_update: "",
+        device_user: "",
         device_name: "",
         device_type: "",
         device_brand: "",
         device_price: "",
         device_number: "",
-        device_remark: ""
+        device_remark: "",
+        device_logo: ""
       });
+      vue.onMounted(() => {
+        deviceForm.device_user = userStore.userName || "";
+        vue.nextTick(() => {
+          getDeviceTypeData();
+        });
+      });
+      const getDeviceTypeData = async () => {
+        let res = await requestMethods("/DeviceType", "GET");
+        if (res.code === 200) {
+          deviceType.value = res.data;
+        } else {
+          toast.error("获取数据失败");
+        }
+      };
+      const clearTypeData = () => {
+        isBrand.value = false;
+      };
+      const selectDeviceType = async (e) => {
+        let res = await requestMethods("/DeviceBrand", "GET", {
+          deviceTypeText: e.selectedItems.key
+        });
+        if (res.code === 200) {
+          isBrand.value = true;
+          deviceBrand.value = res.data[0].product_brand_cn;
+        } else {
+          toast.error("获取数据失败");
+        }
+      };
+      const selectDeviceBrand = async (e) => {
+        deviceForm.device_brand = e.value;
+        deviceForm.device_logo = e.selectedItems.logo_url;
+      };
+      const createDeviceSubmit = async () => {
+        let { device_name, device_type, device_brand, device_price, device_number } = deviceForm;
+        deviceForm.device_time = getTimenumber()[1];
+        deviceForm.device_update = getTimenumber()[1];
+        let deviceNum = /^[1-9]\d*$/;
+        let devicePrice = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+        if (!device_name) {
+          toast.error("请填写正确的设备名称");
+        } else if (!devicePrice.test(device_price) || !device_price) {
+          toast.error("请填写正确的价格");
+        } else if (!deviceNum.test(device_price) || !device_number) {
+          toast.error("请填写正确的设备数量");
+        } else if (!device_type) {
+          toast.error("请选择设备类型");
+        } else if (!device_brand) {
+          toast.error("请选择设备品牌");
+        } else {
+          let res = await requestMethods("/AddDevice", "POST", deviceForm);
+          if (res.code === 200) {
+            toast.show({
+              iconName: "success",
+              msg: "新增设备成功",
+              duration: 800,
+              closed: () => {
+                uni.switchTab({
+                  url: "/pages/device/device"
+                });
+                uni.$emit("refreshData");
+              }
+            });
+          } else {
+            toast.error("新增设备失败");
+            formatAppLog("log", "at pages/device/createDevice.vue:209", res);
+          }
+        }
+      };
       const backToDeviceList = () => {
         uni.navigateBack();
       };
-      const __returned__ = { deviceForm, backToDeviceList, reactive: vue.reactive, Navigation };
+      const __returned__ = { toast, userStore, deviceType, deviceBrand, isBrand, deviceForm, getDeviceTypeData, clearTypeData, selectDeviceType, selectDeviceBrand, createDeviceSubmit, backToDeviceList, reactive: vue.reactive, ref: vue.ref, onMounted: vue.onMounted, nextTick: vue.nextTick, Navigation, get useToast() {
+        return useToast;
+      }, get requestMethods() {
+        return requestMethods;
+      }, get getTimenumber() {
+        return getTimenumber;
+      }, get userInfoStore() {
+        return userInfoStore;
+      } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_0$1);
-    const _component_wd_notice_bar = resolveEasycom(vue.resolveDynamicComponent("wd-notice-bar"), __easycom_1$1);
-    const _component_wd_divider = resolveEasycom(vue.resolveDynamicComponent("wd-divider"), __easycom_2$2);
-    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_3$1);
-    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_4);
-    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_5);
+    const _component_wd_toast = resolveEasycom(vue.resolveDynamicComponent("wd-toast"), __easycom_0$1);
+    const _component_wd_navbar = resolveEasycom(vue.resolveDynamicComponent("wd-navbar"), __easycom_1$2);
+    const _component_wd_notice_bar = resolveEasycom(vue.resolveDynamicComponent("wd-notice-bar"), __easycom_2$2);
+    const _component_wd_divider = resolveEasycom(vue.resolveDynamicComponent("wd-divider"), __easycom_3$1);
+    const _component_wd_input = resolveEasycom(vue.resolveDynamicComponent("wd-input"), __easycom_4$1);
+    const _component_wd_select_picker = resolveEasycom(vue.resolveDynamicComponent("wd-select-picker"), __easycom_5);
+    const _component_wd_textarea = resolveEasycom(vue.resolveDynamicComponent("wd-textarea"), __easycom_6$1);
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
       [
         vue.createVNode($setup["Navigation"]),
+        vue.createVNode(_component_wd_toast),
         vue.createElementVNode("view", { class: "create_device" }, [
           vue.createVNode(_component_wd_navbar, {
             title: "新增设备",
@@ -15633,25 +15727,30 @@ This will fail in production.`);
             "left-arrow": "",
             "left-text": "返回",
             "right-text": "确认",
-            onClickLeft: $setup.backToDeviceList
+            onClickLeft: $setup.backToDeviceList,
+            onClickRight: $setup.createDeviceSubmit
           }),
           vue.createElementVNode("view", { class: "createDevice_form" }, [
             vue.createVNode(_component_wd_notice_bar, {
-              text: "除备注信息外，其它均为必填项",
+              text: "除备注信息外，其它均为必填项。设备数量大于0且不能为小数，设备价格大于0。",
               prefix: "warn-bold",
               scrollable: false,
-              class: "notice-bar"
+              class: "notice-bar",
+              wrapable: ""
             }),
             vue.createVNode(_component_wd_divider, { class: "device_user" }, {
               default: vue.withCtx(() => [
-                vue.createElementVNode("view", { style: { "display": "block" } }, "aosang2071")
+                vue.createElementVNode(
+                  "view",
+                  { style: { "display": "block" } },
+                  vue.toDisplayString($setup.deviceForm.device_user),
+                  1
+                  /* TEXT */
+                )
               ]),
               _: 1
               /* STABLE */
             }),
-            vue.createElementVNode("view", { class: "createDevice_form_item" }, [
-              vue.createElementVNode("view", { class: "createdDevice_time" }, "创建时间：2025-09-09 15:56")
-            ]),
             vue.createElementVNode("view", { class: "createDevice_form_item" }, [
               vue.createVNode(_component_wd_input, {
                 modelValue: $setup.deviceForm.device_name,
@@ -15696,15 +15795,36 @@ This will fail in production.`);
               vue.createVNode(_component_wd_select_picker, {
                 modelValue: $setup.deviceForm.device_type,
                 "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.deviceForm.device_type = $event),
-                placeholder: "选择设备类型"
-              }, null, 8, ["modelValue"])
+                placeholder: "选择设备类型",
+                type: "radio",
+                columns: $setup.deviceType,
+                "label-key": "value",
+                "value-key": "value",
+                clearable: "",
+                onConfirm: $setup.selectDeviceType,
+                onClear: $setup.clearTypeData
+              }, null, 8, ["modelValue", "columns"])
             ]),
-            vue.createElementVNode("view", { class: "createDevice_form_item createDevice_form_items" }, [
-              vue.createVNode(_component_wd_select_picker, {
-                modelValue: $setup.deviceForm.device_brand,
-                "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.deviceForm.device_brand = $event),
-                placeholder: "选择设备品牌"
-              }, null, 8, ["modelValue"])
+            vue.withDirectives(vue.createElementVNode(
+              "view",
+              { class: "createDevice_form_item createDevice_form_items" },
+              [
+                vue.createVNode(_component_wd_select_picker, {
+                  modelValue: $setup.deviceForm.device_brand,
+                  "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.deviceForm.device_brand = $event),
+                  placeholder: "选择设备品牌",
+                  type: "radio",
+                  columns: $setup.deviceBrand,
+                  "label-key": "value",
+                  "value-key": "value",
+                  clearable: "",
+                  onConfirm: $setup.selectDeviceBrand
+                }, null, 8, ["modelValue", "columns"])
+              ],
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vShow, $setup.isBrand]
             ]),
             vue.createElementVNode("view", { class: "device_textarea" }, [
               vue.createElementVNode("view", { class: "device_textarea_label" }, "备注信息"),
@@ -15716,7 +15836,8 @@ This will fail in production.`);
                 placeholder: "填写备注",
                 "custom-textarea-class": "custom-desc",
                 clearable: "",
-                "show-word-limit": ""
+                "show-word-limit": "",
+                placeholderClass: "device_text"
               }, null, 8, ["modelValue"])
             ])
           ])

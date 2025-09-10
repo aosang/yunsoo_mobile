@@ -45,16 +45,16 @@
 					<template #title>
 						<view class="device_top">
 							<view class="device_top_time">
-								创建时间：{{dayjs(device.product_time).format('YY/MM/DD hh:mm:ss')}}
+								创建时间：{{device.product_time}}
 							</view>
 							<view class="device_top_brand">
-								<image src="https://www.wangle.run/company_icon/public_image/assets_logo_transation.png" mode="widthFix" />
+								<image :src="device.product_logo || 'https://www.wangle.run/company_icon/public_image/assets_logo_transation.png'" mode="widthFix" />
 								<view class="device_top_text">{{device.product_brand}}</view>
 							</view>
 						</view>
 					</template>
 					<view class="device_content_text">
-						<view class="device_content_item">设备名称：{{device.value}}</view>
+						<view class="device_content_item">设备名称：{{device.product_name}}</view>
 						<view class="device_content_item">设备类型：{{device.product_type}}</view>
 					</view>
 				</wd-card>
@@ -88,6 +88,10 @@
 	const imgLogo = ref('')
 	
 	onMounted(() => {
+		uni.$on('refreshData', () => {
+			getDeviceListData()
+		})
+		
 		nextTick(() => {
 			getDeviceListData()
 			getBrandData()
@@ -229,7 +233,7 @@ html, body {
 		}
 		
 		image {
-			width: 32rpx;
+			width: 48rpx;
 			margin-right: 12rpx;
 		}
 	}

@@ -1,5 +1,6 @@
 <template>
 	<Navigation />
+	<wd-toast />
 	<view class="create_device">
 		<wd-navbar
 			title="新增设备"
@@ -10,22 +11,21 @@
 			left-text="返回"
 			right-text="确认"
 			@click-left="backToDeviceList"
+			@click-right="createDeviceSubmit"
 		>
 		</wd-navbar>
 		<view class="createDevice_form">
 			<wd-notice-bar
-				text="除备注信息外，其它均为必填项" 
+				text="除备注信息外，其它均为必填项。设备数量大于0且不能为小数，设备价格大于0。" 
 				prefix="warn-bold"
 				:scrollable="false"
 				class="notice-bar"
+				wrapable 
 			>
 			</wd-notice-bar>
 			<wd-divider class="device_user">
-				<view style="display: block">aosang2071</view>
+				<view style="display: block">{{ deviceForm.device_user }}</view>
 			</wd-divider>
-			<view class="createDevice_form_item">
-				<view class="createdDevice_time">创建时间：2025-09-09 15:56</view>
-			</view>
 			<view class="createDevice_form_item">
 				<wd-input
 					v-model="deviceForm.device_name"
@@ -70,13 +70,26 @@
 				<wd-select-picker
 					v-model="deviceForm.device_type"
 					placeholder="选择设备类型"
+					type="radio"
+					:columns="deviceType"
+					label-key="value"
+					value-key="value"
+					clearable
+					@confirm="selectDeviceType"
+					@clear="clearTypeData"
 				>
 				</wd-select-picker>
 			</view>
-			<view class="createDevice_form_item createDevice_form_items">
+			<view class="createDevice_form_item createDevice_form_items" v-show="isBrand">
 				<wd-select-picker
 					v-model="deviceForm.device_brand"
 					placeholder="选择设备品牌"
+					type="radio"
+					:columns="deviceBrand"
+					label-key="value"
+					value-key="value"
+					clearable
+					@confirm="selectDeviceBrand"
 				>
 				</wd-select-picker>
 			</view>
@@ -90,6 +103,7 @@
 					custom-textarea-class="custom-desc"
 					clearable 
 					show-word-limit
+					placeholderClass="device_text"
 				/>
 			</view>
 		</view>
@@ -97,18 +111,105 @@
 </template>
 
 <script setup>
-	import { reactive } from 'vue';
+	import { reactive, ref, onMounted, nextTick } from 'vue';
 	import Navigation from '@/components/navigation_header.vue'
+	import { useToast } from '@/uni_modules/wot-design-uni'
+	const toast = useToast()
+	import { requestMethods } from '@/request/request'
+	import { getTimenumber } from '@/request/formatTime'
+	import { userInfoStore } from '@/stores/userInfo'
+	const userStore = userInfoStore()
 	
+	const deviceType = ref([])
+	const deviceBrand = ref([])
+	const isBrand = ref(false)
 	const deviceForm = reactive({
-		id: '',
+		device_time: '',
+		device_update: '',
+		device_user: '',
 		device_name: '',
 		device_type: '',
 		device_brand: '',
 		device_price: '',
 		device_number: '',
-		device_remark: ''
+		device_remark: '',
+		device_logo: '',
 	})
+	
+	onMounted(() => {
+		deviceForm.device_user = userStore.userName || ''
+		nextTick(() => {
+			getDeviceTypeData()
+		})
+	})
+	
+	// 获取设备类型
+	const getDeviceTypeData = async () => {
+		let res = await requestMethods('/DeviceType', 'GET')
+		if(res.code === 200) {
+			deviceType.value = res.data
+		}else {
+			toast.error('获取数据失败')
+		}
+	}
+	
+	const clearTypeData = () => {
+		isBrand.value = false
+	}
+	
+	const selectDeviceType = async (e) => {
+		let res = await requestMethods('/DeviceBrand', 'GET', {
+			deviceTypeText: e.selectedItems.key
+		})
+		if(res.code === 200) {
+			isBrand.value = true
+			deviceBrand.value = res.data[0].product_brand_cn
+		}else {
+			toast.error('获取数据失败')
+		}
+	}
+	
+	const selectDeviceBrand = async (e) => {
+		deviceForm.device_brand = e.value
+		deviceForm.device_logo = e.selectedItems.logo_url
+	}
+	
+	const createDeviceSubmit = async () => {
+		let { device_name, device_type, device_brand, device_price, device_number } = deviceForm
+		deviceForm.device_time = getTimenumber()[1]
+		deviceForm.device_update = getTimenumber()[1]
+		let deviceNum = /^[1-9]\d*$/
+		let devicePrice = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/
+		if(!device_name) {
+			toast.error('请填写正确的设备名称')
+		}else if(!devicePrice.test(device_price) || !device_price) {
+			toast.error('请填写正确的价格')
+		}else if(!deviceNum.test(device_price) || !device_number) {
+			toast.error('请填写正确的设备数量')
+		}else if(!device_type) {
+			toast.error('请选择设备类型')
+		}else if(!device_brand) {
+			toast.error('请选择设备品牌')
+		}else{
+			let res = await requestMethods('/AddDevice', 'POST', deviceForm)
+			if(res.code === 200) {
+				toast.show({
+					iconName: 'success',
+					msg: '新增设备成功',
+					duration: 800,
+					closed: () => {
+						uni.switchTab({
+							url: '/pages/device/device' 
+						})
+						uni.$emit('refreshData')
+					}
+				})
+			}else {
+				toast.error('新增设备失败')
+				console.log(res)
+			}
+		}
+	}
 	
 	const backToDeviceList = () => {
 		uni.navigateBack()
@@ -134,7 +235,7 @@
 			margin-top: 180rpx;
 			
 			.notice-bar {
-				font-size: 28rpx;
+				font-size: 26rpx;
 			}
 			
 			.device_user {
@@ -142,7 +243,7 @@
 				font-weight: 600;
 				color: #2a6fff;
 				background: #fff;
-				height: 88rpx;
+				height: 96rpx;
 				margin: 0 0 20rpx 0;
 			}
 			
@@ -193,6 +294,10 @@
 				box-sizing: border-box;
 				font-size: 28rpx;
 			}
+		}
+		
+		.device_text {
+			color: #c3c3c3;
 		}
 	}
 </style>

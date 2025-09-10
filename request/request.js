@@ -10,6 +10,7 @@ export const requestMethods = (url, method, data = {}, timeout = 20000) => {
 			url: baseUrl + url,
 			method: method,
 			data: data,
+			timeout: timeout,
 			header: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'authorization': userStore.token? userStore.token : null
@@ -24,9 +25,9 @@ export const requestMethods = (url, method, data = {}, timeout = 20000) => {
 						title: data?.message || '请求失败',
 						icon: 'none'
 					})
-					// uni.reLaunch({
-					// 	url: '/pages/login/login'
-					// })
+					uni.reLaunch({
+						url: '/pages/login/login'
+					})
 					reject(data)
 				}
 			},
@@ -57,6 +58,7 @@ export const uploadMethods  = (url, filePath, formData = {}, timeout = 20000) =>
 			filePath,
 			name: 'file',
 			formData,
+			timeout: timeout,
 			header: {
 				'authorization': userStore.token? userStore.token : null
 			},
