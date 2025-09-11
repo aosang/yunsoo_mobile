@@ -79,6 +79,13 @@
 			{
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path" : "pages/device/deviceDetails",
+			"style" : 
+			{
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	

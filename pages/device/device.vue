@@ -8,6 +8,7 @@
 			fixed 
 			custom-class="custom"
 			custom-style="color: #fff"
+			:zIndex="10"
 		>
 			<!-- 右侧栏 -->
 			<template #right>
@@ -41,6 +42,7 @@
 					custom-class="device_card"
 					custom-title-class="device_title"
 					custom-content-class="device_content"
+					@click="goToDeviceDetails(device.id)"
 				>
 					<template #title>
 						<view class="device_top">
@@ -141,6 +143,12 @@
 	const submitDeviceFormEvent = () => {
 		uni.navigateTo({
 			url: '/pages/device/createDevice',
+		})
+	}
+	
+	const goToDeviceDetails = (id) => {
+		uni.navigateTo({
+			url: '/pages/device/deviceDetails?detailsId=' + id
 		})
 	}
 	
