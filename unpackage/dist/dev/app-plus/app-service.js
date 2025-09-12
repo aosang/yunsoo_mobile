@@ -15387,6 +15387,7 @@ This will fail in production.`);
       const deviceData = vue.ref([]);
       const isLoading = vue.ref(true);
       const imgLogo = vue.ref("");
+      const isAction = vue.ref("close");
       vue.onMounted(() => {
         uni.$on("refreshData", () => {
           getDeviceListData();
@@ -15435,12 +15436,21 @@ This will fail in production.`);
           url: "/pages/device/createDevice"
         });
       };
-      const goToDeviceDetails = (id) => {
-        uni.navigateTo({
-          url: "/pages/device/deviceDetails?detailsId=" + id
-        });
+      const siwperClickEvent = (event, id) => {
+        if (event.value === "inside") {
+          return;
+        } else {
+          deleteDevice(id);
+        }
       };
-      const __returned__ = { toast, message, deviceData, isLoading, imgLogo, getDeviceListData, deleteDevice, submitDeviceFormEvent, goToDeviceDetails, Navigation, onMounted: vue.onMounted, ref: vue.ref, nextTick: vue.nextTick, get requestMethods() {
+      const goToDeviceDetails = (id) => {
+        if (isAction.value === "close") {
+          uni.navigateTo({
+            url: "/pages/device/deviceDetails?detailsId=" + id
+          });
+        }
+      };
+      const __returned__ = { toast, message, deviceData, isLoading, imgLogo, isAction, getDeviceListData, deleteDevice, submitDeviceFormEvent, siwperClickEvent, goToDeviceDetails, Navigation, onMounted: vue.onMounted, ref: vue.ref, nextTick: vue.nextTick, get requestMethods() {
         return requestMethods;
       }, get onPullDownRefresh() {
         return onPullDownRefresh;
@@ -15514,81 +15524,78 @@ This will fail in production.`);
             vue.Fragment,
             { key: 2 },
             vue.renderList($setup.deviceData, (device) => {
-              return vue.openBlock(), vue.createBlock(
-                _component_wd_swipe_action,
-                {
-                  key: device.id,
-                  class: "device_box_item"
-                },
-                {
-                  right: vue.withCtx(() => [
-                    vue.createElementVNode("view", { class: "device_action" }, [
-                      vue.createElementVNode("view", {
-                        class: "device_button",
-                        onClick: ($event) => $setup.deleteDevice(device.id)
-                      }, " 删除 ", 8, ["onClick"])
-                    ])
-                  ]),
-                  default: vue.withCtx(() => [
-                    vue.createVNode(_component_wd_card, {
-                      type: "rectangle",
-                      "custom-class": "device_card",
-                      "custom-title-class": "device_title",
-                      "custom-content-class": "device_content",
-                      onClick: ($event) => $setup.goToDeviceDetails(device.id)
-                    }, {
-                      title: vue.withCtx(() => [
-                        vue.createElementVNode("view", { class: "device_top" }, [
+              return vue.openBlock(), vue.createBlock(_component_wd_swipe_action, {
+                key: device.id,
+                modelValue: $setup.isAction,
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.isAction = $event),
+                class: "device_box_item",
+                onClick: ($event) => $setup.siwperClickEvent($event, device.id)
+              }, {
+                right: vue.withCtx(() => [
+                  vue.createElementVNode("view", { class: "device_action" }, [
+                    vue.createElementVNode("view", {
+                      class: "device_button",
+                      onClick: ($event) => $setup.deleteDevice(device.id)
+                    }, " 删除 ", 8, ["onClick"])
+                  ])
+                ]),
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_wd_card, {
+                    type: "rectangle",
+                    "custom-class": "device_card",
+                    "custom-title-class": "device_title",
+                    "custom-content-class": "device_content",
+                    onClick: ($event) => $setup.goToDeviceDetails(device.id)
+                  }, {
+                    title: vue.withCtx(() => [
+                      vue.createElementVNode("view", { class: "device_top" }, [
+                        vue.createElementVNode(
+                          "view",
+                          { class: "device_top_time" },
+                          " 创建时间：" + vue.toDisplayString(device.product_time),
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createElementVNode("view", { class: "device_top_brand" }, [
+                          vue.createElementVNode("image", {
+                            src: device.product_logo || "https://www.wangle.run/company_icon/public_image/assets_logo_transation.png",
+                            mode: "widthFix"
+                          }, null, 8, ["src"]),
                           vue.createElementVNode(
                             "view",
-                            { class: "device_top_time" },
-                            " 创建时间：" + vue.toDisplayString(device.product_time),
-                            1
-                            /* TEXT */
-                          ),
-                          vue.createElementVNode("view", { class: "device_top_brand" }, [
-                            vue.createElementVNode("image", {
-                              src: device.product_logo || "https://www.wangle.run/company_icon/public_image/assets_logo_transation.png",
-                              mode: "widthFix"
-                            }, null, 8, ["src"]),
-                            vue.createElementVNode(
-                              "view",
-                              { class: "device_top_text" },
-                              vue.toDisplayString(device.product_brand),
-                              1
-                              /* TEXT */
-                            )
-                          ])
-                        ])
-                      ]),
-                      default: vue.withCtx(() => [
-                        vue.createElementVNode("view", { class: "device_content_text" }, [
-                          vue.createElementVNode(
-                            "view",
-                            { class: "device_content_item" },
-                            "设备名称：" + vue.toDisplayString(device.product_name),
-                            1
-                            /* TEXT */
-                          ),
-                          vue.createElementVNode(
-                            "view",
-                            { class: "device_content_item" },
-                            "设备类型：" + vue.toDisplayString(device.product_type),
+                            { class: "device_top_text" },
+                            vue.toDisplayString(device.product_brand),
                             1
                             /* TEXT */
                           )
                         ])
-                      ]),
-                      _: 2
-                      /* DYNAMIC */
-                    }, 1032, ["onClick"])
-                  ]),
-                  _: 2
-                  /* DYNAMIC */
-                },
-                1024
-                /* DYNAMIC_SLOTS */
-              );
+                      ])
+                    ]),
+                    default: vue.withCtx(() => [
+                      vue.createElementVNode("view", { class: "device_content_text" }, [
+                        vue.createElementVNode(
+                          "view",
+                          { class: "device_content_item" },
+                          "设备名称：" + vue.toDisplayString(device.product_name),
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createElementVNode(
+                          "view",
+                          { class: "device_content_item" },
+                          "设备类型：" + vue.toDisplayString(device.product_type),
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ]),
+                    _: 2
+                    /* DYNAMIC */
+                  }, 1032, ["onClick"])
+                ]),
+                _: 2
+                /* DYNAMIC */
+              }, 1032, ["modelValue", "onClick"]);
             }),
             128
             /* KEYED_FRAGMENT */
@@ -15618,6 +15625,7 @@ This will fail in production.`);
         device_brand: "",
         device_price: "",
         device_number: "",
+        device_total: "",
         device_remark: "",
         device_logo: ""
       });
@@ -15663,13 +15671,14 @@ This will fail in production.`);
           toast.error("请填写正确的设备名称");
         } else if (!devicePrice.test(device_price) || !device_price) {
           toast.error("请填写正确的价格");
-        } else if (!deviceNum.test(device_price) || !device_number) {
+        } else if (!deviceNum.test(device_number) || !device_number) {
           toast.error("请填写正确的设备数量");
         } else if (!device_type) {
           toast.error("请选择设备类型");
         } else if (!device_brand) {
           toast.error("请选择设备品牌");
         } else {
+          deviceForm.device_total = deviceForm.device_price * deviceForm.device_number;
           let res = await requestMethods("/AddDevice", "POST", deviceForm);
           if (res.code === 200) {
             toast.show({
@@ -15685,7 +15694,7 @@ This will fail in production.`);
             });
           } else {
             toast.error("新增设备失败");
-            formatAppLog("log", "at pages/device/createDevice.vue:209", res);
+            formatAppLog("log", "at pages/device/createDevice.vue:212", res);
           }
         }
       };
@@ -16161,6 +16170,7 @@ This will fail in production.`);
     __name: "deviceDetails",
     setup(__props, { expose: __expose }) {
       __expose();
+      const toast = useToast();
       const deviceId = vue.ref("");
       const deviceName = vue.ref("");
       const deviceType = vue.ref("");
@@ -16168,6 +16178,7 @@ This will fail in production.`);
       const deviceTime = vue.ref("");
       const deviceNum = vue.ref("");
       const deviceUnit = vue.ref("");
+      const deviceTotal = vue.ref("");
       const deviceLogo = vue.ref("");
       onLoad((option) => {
         deviceId.value = option.detailsId || "";
@@ -16186,15 +16197,22 @@ This will fail in production.`);
           deviceType.value = res.data[0].product_type || "";
           deviceBrand.value = res.data[0].product_brand || "";
           deviceLogo.value = res.data[0].product_logo || "";
+          deviceNum.value = res.data[0].product_number || "";
+          deviceUnit.value = res.data[0].product_unitprice;
+        } else {
+          toast.error("获取数据失败");
+          formatAppLog("log", "at pages/device/deviceDetails.vue:76", res.data);
         }
       };
       const backToDeviceList = () => {
         uni.navigateBack();
       };
-      const __returned__ = { deviceId, deviceName, deviceType, deviceBrand, deviceTime, deviceNum, deviceUnit, deviceLogo, getDeviceDetailsData, backToDeviceList, ref: vue.ref, onMounted: vue.onMounted, nextTick: vue.nextTick, get onLoad() {
+      const __returned__ = { toast, deviceId, deviceName, deviceType, deviceBrand, deviceTime, deviceNum, deviceUnit, deviceTotal, deviceLogo, getDeviceDetailsData, backToDeviceList, ref: vue.ref, onMounted: vue.onMounted, nextTick: vue.nextTick, get onLoad() {
         return onLoad;
       }, Navigation, get requestMethods() {
         return requestMethods;
+      }, get useToast() {
+        return useToast;
       } };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
@@ -16248,7 +16266,19 @@ This will fail in production.`);
                     ]),
                     _: 1
                     /* STABLE */
-                  })
+                  }),
+                  vue.createVNode(_component_wd_cell, {
+                    title: "设备单价",
+                    value: $setup.deviceUnit
+                  }, null, 8, ["value"]),
+                  vue.createVNode(_component_wd_cell, {
+                    title: "设备数量",
+                    value: $setup.deviceNum
+                  }, null, 8, ["value"]),
+                  vue.createVNode(_component_wd_cell, {
+                    title: "设备总价",
+                    value: $setup.deviceNum
+                  }, null, 8, ["value"])
                 ]),
                 _: 1
                 /* STABLE */

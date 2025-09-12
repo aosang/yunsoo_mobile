@@ -35,8 +35,15 @@
 		<view class="empty_data" v-if="!isLoading && deviceData.length === 0" >
 			<wd-status-tip image="content" tip="暂无IT设备" />
 		</view>
-		<block v-for="device in deviceData" :key="device.id" v-else>
-			<wd-swipe-action class="device_box_item" >
+		<block 
+			v-for="device in deviceData" 
+			:key="device.id" v-else
+		>
+			<wd-swipe-action
+				v-model="isAction"
+				class="device_box_item"
+				@click="siwperClickEvent($event, device.id)"
+			>
 				<wd-card 
 					type="rectangle" 
 					custom-class="device_card"
@@ -50,8 +57,13 @@
 								创建时间：{{device.product_time}}
 							</view>
 							<view class="device_top_brand">
-								<image :src="device.product_logo || 'https://www.wangle.run/company_icon/public_image/assets_logo_transation.png'" mode="widthFix" />
-								<view class="device_top_text">{{device.product_brand}}</view>
+								<image 
+									:src="device.product_logo || 'https://www.wangle.run/company_icon/public_image/assets_logo_transation.png'" 
+									mode="widthFix" 
+								/>
+								<view class="device_top_text">
+									{{device.product_brand}}
+								</view>
 							</view>
 						</view>
 					</template>
@@ -88,6 +100,7 @@
 	const deviceData = ref([])
 	const isLoading = ref(true)
 	const imgLogo = ref('')
+	const isAction = ref('close')
 	
 	onMounted(() => {
 		uni.$on('refreshData', () => {
@@ -146,10 +159,20 @@
 		})
 	}
 	
+	const siwperClickEvent = (event, id) => {
+		if(event.value === 'inside') {
+			return
+		}else {
+			deleteDevice(id)
+		}
+	}
+	
 	const goToDeviceDetails = (id) => {
-		uni.navigateTo({
-			url: '/pages/device/deviceDetails?detailsId=' + id
-		})
+		if(isAction.value === 'close') {
+			uni.navigateTo({
+				url: '/pages/device/deviceDetails?detailsId=' + id
+			})
+		}
 	}
 	
 </script>
@@ -241,7 +264,7 @@ html, body {
 		}
 		
 		image {
-			width: 48rpx;
+			width: 70rpx;
 			margin-right: 12rpx;
 		}
 	}

@@ -21,6 +21,9 @@
 							<view>{{deviceBrand}}</view>
 						</view>
 					</wd-cell>
+					<wd-cell title="设备单价" :value="deviceUnit"></wd-cell>
+					<wd-cell title="设备数量" :value="deviceNum"></wd-cell>
+					<wd-cell title="设备总价" :value="deviceNum"></wd-cell>
 				</wd-cell-group>
 			</view>
 		</view>
@@ -32,6 +35,8 @@
 	import { onLoad } from '@dcloudio/uni-app'
 	import Navigation from '@/components/navigation_header.vue'
 	import { requestMethods } from '@/request/request'
+	import { useToast } from '@/uni_modules/wot-design-uni'
+	const toast = useToast()
 
 	const deviceId = ref('')
 	const deviceName = ref('')
@@ -40,7 +45,10 @@
 	const deviceTime = ref('')
 	const deviceNum = ref('')
 	const deviceUnit = ref('')
+	const deviceTotal = ref('')
 	const deviceLogo = ref('')
+	
+	
 	
 	onLoad(option => {
 		deviceId.value = option.detailsId || ''
@@ -61,6 +69,11 @@
 			deviceType.value = res.data[0].product_type || ''
 			deviceBrand.value = res.data[0].product_brand || ''
 			deviceLogo.value = res.data[0].product_logo || ''
+			deviceNum.value = res.data[0].product_number || ''
+			deviceUnit.value = res.data[0].product_unitprice
+		}else {
+			toast.error('获取数据失败')
+			console.log(res.data)
 		}
 	}
 	

@@ -132,6 +132,7 @@
 		device_brand: '',
 		device_price: '',
 		device_number: '',
+		device_total: '',
 		device_remark: '',
 		device_logo: '',
 	})
@@ -184,13 +185,15 @@
 			toast.error('请填写正确的设备名称')
 		}else if(!devicePrice.test(device_price) || !device_price) {
 			toast.error('请填写正确的价格')
-		}else if(!deviceNum.test(device_price) || !device_number) {
+		}else if(!deviceNum.test(device_number) || !device_number) {
 			toast.error('请填写正确的设备数量')
 		}else if(!device_type) {
 			toast.error('请选择设备类型')
 		}else if(!device_brand) {
 			toast.error('请选择设备品牌')
 		}else{
+			deviceForm.device_total = deviceForm.device_price * deviceForm.device_number
+			
 			let res = await requestMethods('/AddDevice', 'POST', deviceForm)
 			if(res.code === 200) {
 				toast.show({
